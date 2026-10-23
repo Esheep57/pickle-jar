@@ -11,6 +11,7 @@
 ![Platform](https://img.shields.io/badge/平台-Windows%20%7C%20macOS%20%7C%20Linux-lightgrey)
 ![Local first](https://img.shields.io/badge/資料-只在你的電腦-2ea44f)
 ![License](https://img.shields.io/badge/License-GPL--3.0-blue)
+[![測試](https://github.com/Esheep57/pickle-jar/actions/workflows/tests.yml/badge.svg)](https://github.com/Esheep57/pickle-jar/actions/workflows/tests.yml)
 
 <img src="docs/media/demo.gif" alt="Pickle Jar 操作示範：收件匣、待確認、角色書架、角色頁、大圖、作品頁、創作者、本子、搜尋" width="900">
 
@@ -172,6 +173,8 @@ cd pickle-jar
 start.bat
 ```
 
+沒有裝 git 也可以：在這個頁面右上角按 **Code → Download ZIP**，解壓縮到想放的地方（例如 `D:\pickle-jar`，路徑裡最好不要有 OneDrive 這類同步資料夾），雙擊裡面的 `start.bat`。
+
 `start.bat` 做的事：
 
 1. 下載 [uv](https://docs.astral.sh/uv/)，在程式資料夾裡準備一份獨立的 Python 3.12（放在 `tools/`、`.venv/`，不影響電腦上其他的 Python）
@@ -302,10 +305,13 @@ pickle-jar/
 ## 開發
 
 ```sh
-python -m venv .venv && .venv/bin/pip install -r requirements-dev.txt
-python -m playwright install chromium
-python -m pytest -q            # 約 8–10 分鐘，約 240 項
+python -m venv .venv
+.venv/bin/pip install -r requirements-dev.txt        # Windows：.venv\Scripts\pip
+.venv/bin/python -m playwright install chromium
+.venv/bin/python -m pytest -q                        # 約 8–10 分鐘，約 240 項
 ```
+
+GitHub Actions 每次 push 都會跑全部測試（`.github/workflows/tests.yml`）。
 
 - 測試用很小的假 WD／PixAI 模型（`tests/fakemodel.py`）和假的 Danbooru／IQDB／Pixiv／X／e621／Rule34／E-Hentai（`tests/mock_online.py`），不需要網路或 GPU
 - **畫面測試是必跑的**：沒裝 Playwright 或 Chromium 時測試會**失敗**，不會靜靜跳過。真的不能裝的話，設 `LIB_ALLOW_NO_UI=1` 明確跳過
@@ -320,6 +326,7 @@ python -m pytest -q            # 約 8–10 分鐘，約 240 項
 - **樣式**：加在 `style.css` 對應功能的段落、改既有規則就改那一條，不要在檔尾加一段蓋掉前面的；新的 class 名稱先 grep
 - **同一件事只有一個實作**：同圖判斷 `same_image`、缺創作者 `_NO_ARTIST`、作品範圍 `_series_sql`、名字 `nameindex`、自動標籤 `candidates.add`
 - **圖片尺寸一律讀檔頭**（`media.image_size`），不要用解碼後的大小
+
 模組、資料表、處理流程、安全、踩過的坑：**[docs/DEVELOPMENT.md](docs/DEVELOPMENT.md)**。
 
 ---

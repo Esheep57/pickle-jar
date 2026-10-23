@@ -1,0 +1,9 @@
+# Windows 的批次檔要 CRLF（LF 結尾時 cmd 的 goto／標籤偶爾會跑錯）；shell 腳本一律 LF
+*.bat text eol=crlf
+*.sh  text eol=lf
+*.py  text eol=lf
+# 二進位
+*.woff2 binary
+*.gif   binary
+*.mp4   binary
+*.webp  binary
