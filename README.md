@@ -1,6 +1,9 @@
+<div align="center">
+
 # Pickle Jar
 
-**本機執行的插畫／圖片圖庫整理工具：自動標記、找出處、辨認角色和創作者，所有判斷由你確認才算數。**
+**本機執行的插畫／圖片圖庫整理工具**<br>
+自動標記、找出處、辨認角色和創作者——所有判斷由你確認才算數
 
 ![Python](https://img.shields.io/badge/Python-3.12-3776AB?logo=python&logoColor=white)
 ![FastAPI](https://img.shields.io/badge/FastAPI-0.141-009688?logo=fastapi&logoColor=white)
@@ -8,6 +11,12 @@
 ![Platform](https://img.shields.io/badge/平台-Windows%20%7C%20macOS%20%7C%20Linux-lightgrey)
 ![Local first](https://img.shields.io/badge/資料-只在你的電腦-2ea44f)
 ![License](https://img.shields.io/badge/License-GPL--3.0-blue)
+
+<img src="docs/media/demo.gif" alt="Pickle Jar 操作示範：收件匣、待確認、角色書架、角色頁、大圖、作品頁、創作者、本子、搜尋" width="900">
+
+<sub>38 秒操作示範（<a href="docs/media/demo.mp4">高畫質 MP4</a>）。畫面裡的圖都是用程式畫的示範圖，角色、作品、創作者都是虛構的。</sub>
+
+</div>
 
 > **English summary** — Pickle Jar is a local-first organizer for anime-style illustration libraries (thousands to tens of thousands of images on your own disk). It tags images on your machine with WD Tagger v3 / PixAI Tagger (ONNX, GPU optional), finds sources on Danbooru, Pixiv and others, and suggests characters, artists and series — but nothing counts until you confirm it. FastAPI + SQLite backend, vanilla ES-module frontend, Windows-first (macOS/Linux work). The UI and docs are in Traditional Chinese. Licensed under GPL-3.0.
 
@@ -21,8 +30,32 @@ Pickle Jar 管理的是存在你自己硬碟裡的幾千到幾萬張圖：手機
 
 ---
 
+## 畫面
+
+<table>
+<tr>
+<td width="50%"><img src="docs/media/inbox.webp" alt="收件匣"><br><b>收件匣</b>：一句話告訴你現在該做什麼，按 Enter 開始</td>
+<td width="50%"><img src="docs/media/review.webp" alt="待確認"><br><b>待確認</b>：「這是 ○○ 嗎？」Enter 是、⌫ 不是，附上依據</td>
+</tr>
+<tr>
+<td><img src="docs/media/characters.webp" alt="角色書架"><br><b>角色</b>：收藏排行、近期新增、依作品分組</td>
+<td><img src="docs/media/series.webp" alt="作品頁"><br><b>作品頁</b>：這部作品的角色和全部的圖</td>
+</tr>
+<tr>
+<td><img src="docs/media/viewer.webp" alt="大圖"><br><b>大圖工作台</b>：角色 — 創作者字幕、分類、出處、每一步的紀錄</td>
+<td><img src="docs/media/artists.webp" alt="創作者"><br><b>創作者</b>：每位作者一張拼貼卡，照張數排</td>
+</tr>
+<tr>
+<td><img src="docs/media/album.webp" alt="本子"><br><b>本子</b>：同人本、畫集、cos 圖包，整本加標籤、照頁序看</td>
+<td><img src="docs/media/search.webp" alt="指令面板"><br><b>Ctrl+K</b>：中日英文名、簡繁體都找得到</td>
+</tr>
+</table>
+
+---
+
 ## 目錄
 
+- [畫面](#畫面)
 - [主要功能](#主要功能)
 - [運作方式](#運作方式)
 - [系統需求](#系統需求)
