@@ -1,0 +1,6 @@
+{
+  "name": "pickle-jar-jscheck",
+  "private": true,
+  "description": "前端模組檢查：未定義的名字、重新指派 import 進來的名字",
+  "dependencies": { "acorn": "^8.14.0", "eslint-scope": "^8.2.0" }
+}

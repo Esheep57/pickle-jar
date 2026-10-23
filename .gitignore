@@ -1,0 +1,11 @@
+# 資料、模型、環境：不進版本控制（資料庫有自己的每日備份）
+/data/
+/models/
+.venv/
+tools/
+__pycache__/
+*.pyc
+.pytest_cache/
+.coverage
+scripts/node_modules/
+scripts/package-lock.json

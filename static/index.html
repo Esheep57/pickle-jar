@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pickle Jar</title>
+<link rel="stylesheet" href="/static/fonts/fonts.css">
+<link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+<div id="app">
+  <aside id="sidebar">
+    <div class="brand"><span class="logo">▦</span><span class="bname">Pickle Jar</span></div>
+    <nav id="nav">
+      <div class="navh">整理</div>
+      <a data-view="home"><span class="ic">⌂</span><span class="lb">收件匣</span></a>
+      <a data-view="review"><span class="ic">✓</span><span class="lb">待確認</span><b data-count="review"></b></a>
+      <a data-view="unrecognized"><span class="ic">?</span><span class="lb">未識別</span><b data-count="unrecognized"></b></a>
+      <div class="navh">瀏覽</div>
+      <a data-view="all"><span class="ic">▦</span><span class="lb">圖庫</span><b data-count="all" class="quiet"></b></a>
+      <a data-view="characters"><span class="ic">☺</span><span class="lb">角色</span><b data-count="characters" class="quiet"></b></a>
+      <a data-view="artists"><span class="ic">✎</span><span class="lb">創作者</span><b data-count="artists" class="quiet"></b></a>
+      <a data-view="albums"><span class="ic">▤</span><span class="lb">本子</span><b data-count="albums" class="quiet"></b></a>
+      <a id="upload-link" class="remote-only" href="/m"><span class="ic" data-icon="phone"></span><span class="lb">上傳</span></a>
+    </nav>
+    <div id="fav">
+      <div class="sec-title">收藏 <a class="sec-act" id="qt-edit" title="改成你常用的（最多 9 個，數字鍵 1–9）">編輯</a></div>
+      <div id="quick" class="taglist qchips"></div>
+      <div id="saved" class="taglist"></div>
+      <div id="pinned" class="taglist"></div>
+      <details id="recent-box"><summary class="sec-title">最近看過</summary><div id="recent" class="taglist"></div></details>
+    </div>
+    <div class="grow"></div>
+    <div id="status">
+      <div class="st-line"><span class="dot"></span><span id="st-text">本地圖庫</span></div>
+      <div class="bar"><i id="st-bar"></i></div>
+      <div class="st-sub" id="st-sub">僅此裝置</div>
+      <div class="st-sub hidden" id="st-online"></div>
+    </div>
+    <button id="nsfw-btn" class="sbline" title="切換 NSFW（H）"></button>
+    <button id="health" class="hidden" aria-label="有事要處理"><i></i></button>
+    <a id="system-btn" class="railbtn" data-view="system" title="自動流程、工具、背景工作"><span class="ic" data-icon="pulse"></span><span class="lb">系統</span></a>
+    <a id="settings-btn" class="railbtn" title="設定"><span class="ic" data-icon="settings"></span><span class="lb">設定</span><i class="sdot"></i></a>
+  </aside>
+
+  <main id="main">
+    <div id="jobline" class="hidden"><i></i></div>
+    <header id="topbar">
+      <button id="menu-btn" class="circ" title="側欄"><span data-icon="menu"></span></button>
+      <div id="pagetitle"></div>
+      <div id="topslot"></div>
+      <div id="crumb"></div>
+      <div id="qchip" class="hidden"></div>
+      <div id="jobpill" class="hidden"></div>
+      <button id="cmd-btn" class="pillbtn" title="搜尋圖片、前往角色、執行指令（Ctrl+K 或 /）"><span data-icon="search"></span><span class="cmd-lb">搜尋或跳到…</span> <kbd>Ctrl K</kbd></button>
+      <button id="undo-btn" class="circ" title="撤銷（Ctrl+Z）"><span data-icon="undo"></span></button>
+      <button id="help-btn" class="circ" title="快捷鍵"><span data-icon="help"></span></button>
+    </header>
+
+    <section id="head"></section>
+    <div id="toolbar"></div>
+    <div id="content"></div>
+    <footer id="footer"><span id="foot-l"></span><span id="foot-r">雙擊/Space 看大圖 · Ctrl K 搜尋 · <a id="foot-keys" title="所有快捷鍵">按 <kbd>?</kbd> 看全部快捷鍵</a></span></footer>
+  </main>
+</div>
+
+<div id="actionbar" class="hidden"></div>
+<div id="modal-root"></div>
+<div id="viewer" class="hidden"></div>
+<div id="toasts"></div>
+<div id="lasso" class="hidden"></div>
+<script type="module" src="/static/js/main.js"></script>
+</body>
+</html>

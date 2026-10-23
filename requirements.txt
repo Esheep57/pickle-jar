@@ -1,0 +1,18 @@
+# 固定版本（這組版本一起測過）。改了這個檔案，start.bat 會自動重新安裝。
+# ONNX Runtime 另外裝：Windows 預設 onnxruntime-directml（任何 DX12 顯卡），use-cuda.bat 可改成 CUDA 版。
+fastapi==0.141.1
+starlette==1.0.0
+uvicorn==0.46.0
+pydantic==2.13.3
+numpy==2.4.4
+pillow==12.2.0
+pillow-heif==1.8.0
+opencv-python-headless==4.13.0.92
+onnx==1.23.0
+watchdog==6.0.0
+send2trash==2.1.0
+httpx==0.28.1
+opencc-python-reimplemented==0.1.7
+qrcode==8.2
+# 其他網站的匯入（app/gdl.py）
+gallery-dl==1.32.16

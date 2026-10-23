@@ -1,0 +1,6 @@
+-r requirements.txt
+onnxruntime
+pytest
+# 畫面測試（tests/test_ui.py）：裝完還要下載瀏覽器一次：python -m playwright install chromium
+playwright==1.56.0
+python-multipart

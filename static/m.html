@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Pickle Jar</title>
+<style>
+  :root { --bg: #f6f7f5; --card: #fff; --ink: #1d211c; --mute: #707670; --line: #e3e6e1; --acc: #6fa35a; --acc2: #eaf3e4; --bad: #c0453a; }
+  @media (prefers-color-scheme: dark) { :root { --bg: #121412; --card: #1c1f1b; --ink: #eef1ec; --mute: #9aa197; --line: #2c302a; --acc2: #22301d; } }
+  * { box-sizing: border-box; }
+  body { margin: 0; font: 16px/1.5 system-ui, -apple-system, "PingFang TC", "Microsoft JhengHei", sans-serif; background: var(--bg); color: var(--ink); padding: 20px 16px calc(20px + env(safe-area-inset-bottom)); }
+  h1 { font-size: 22px; margin: 4px 0 16px; }
+  .card { background: var(--card); border: 1px solid var(--line); border-radius: 18px; padding: 18px; margin-bottom: 14px; }
+  input[type=tel] { width: 100%; font-size: 28px; letter-spacing: 8px; text-align: center; padding: 12px; border-radius: 12px; border: 1px solid var(--line); background: var(--bg); color: var(--ink); }
+  button, .pick { display: block; width: 100%; font-size: 17px; padding: 14px; border-radius: 14px; border: 0; background: var(--ink); color: var(--card); margin-top: 12px; text-align: center; font-weight: 600; }
+  .pick { background: var(--acc); color: #fff; }
+  a.pick { text-decoration: none; }
+  .pick.view { background: var(--ink); color: var(--card); }
+  .mute { color: var(--mute); font-size: 14px; }
+  .bad { color: var(--bad); }
+  .row { display: flex; align-items: center; gap: 10px; padding: 8px 0; border-bottom: 1px solid var(--line); font-size: 14px; }
+  .row:last-child { border: 0; }
+  .row .n { flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .bar { height: 4px; background: var(--line); border-radius: 2px; overflow: hidden; width: 70px; }
+  .bar i { display: block; height: 100%; background: var(--acc); width: 0; }
+  .ok { color: var(--acc); font-weight: 600; }
+  .hidden { display: none; }
+  .sum { background: var(--acc2); border-radius: 12px; padding: 10px 12px; margin-top: 12px; font-size: 14px; }
+</style>
+</head>
+<body>
+<h1>Pickle Jar</h1>
+<div class="card hidden" id="login">
+  <p>輸入電腦上顯示的 PIN（在圖庫的「手機上傳」視窗裡）。</p>
+  <input type="tel" id="pin" inputmode="numeric" maxlength="6" autocomplete="one-time-code" placeholder="••••••">
+  <button id="go">確定</button>
+  <p class="bad" id="err"></p>
+</div>
+<div class="hidden" id="up">
+  <div class="card">
+    <a class="pick view" href="/static/index.html#/all">看圖庫</a>
+    <p class="mute">圖庫、角色、作品集都看得到；確認、刪除這些整理的動作請在電腦上做。</p>
+  </div>
+  <div class="card">
+    <h2 style="font-size:17px;margin:0 0 4px">上傳到圖庫</h2>
+    <label class="pick">選擇照片／影片<input type="file" id="files" multiple accept="image/*,video/*,.heic,.heif" hidden></label>
+    <p class="mute" id="dest"></p>
+    <div class="sum hidden" id="sum"></div>
+  </div>
+  <div class="card hidden" id="listcard"><div id="list"></div></div>
+</div>
+<script>
+"use strict";
+const $ = s => document.querySelector(s);
+const esc = s => String(s).replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+async function me() {
+  const r = await fetch("/api/m/me").then(r => r.json()).catch(() => ({ ok: false }));
+  $("#login").classList.toggle("hidden", r.ok); $("#up").classList.toggle("hidden", !r.ok);
+  if (r.ok) $("#dest").textContent = "會存到電腦的：" + r.dir;
+  else $("#pin").focus();
+}
+$("#go").onclick = async () => {
+  const r = await fetch("/api/m/login", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ pin: $("#pin").value.trim() }) });
+  if (r.ok) { $("#err").textContent = ""; me(); } else { $("#err").textContent = (await r.json().catch(() => ({}))).detail || "失敗"; }
+};
+$("#pin").addEventListener("keydown", e => { if (e.key === "Enter") $("#go").click(); });
+function put(file, onprog) {
+  return new Promise((ok, bad) => {
+    const x = new XMLHttpRequest();
+    x.open("PUT", "/api/m/upload");
+    x.setRequestHeader("X-Filename", encodeURIComponent(file.name));
+    x.upload.onprogress = e => e.lengthComputable && onprog(e.loaded / e.total);
+    x.onload = () => x.status < 300 ? ok(JSON.parse(x.responseText)) : bad(new Error((JSON.parse(x.responseText || "{}").detail) || x.statusText));
+    x.onerror = () => bad(new Error("連線中斷"));
+    x.send(file);
+  });
+}
+$("#files").onchange = async e => {
+  const files = [...e.target.files]; if (!files.length) return;
+  $("#listcard").classList.remove("hidden");
+  const list = $("#list");
+  const rows = files.map(f => { const d = document.createElement("div"); d.className = "row"; d.innerHTML = `<span class="n">${esc(f.name)}</span><span class="bar"><i></i></span><span class="st mute">等待</span>`; list.prepend(d); return d; });
+  let ok = 0, fail = 0;
+  for (let i = 0; i < files.length; i++) {   // 一次一個，手機網路比較穩
+    const row = rows[i];
+    row.querySelector(".st").textContent = "上傳中";
+    try {
+      await put(files[i], p => row.querySelector("i").style.width = (p * 100).toFixed(0) + "%");
+      row.querySelector(".st").innerHTML = `<span class="ok">✓</span>`; ok++;
+    } catch (err) { row.querySelector(".st").innerHTML = `<span class="bad">${esc(err.message)}</span>`; fail++; }
+  }
+  const s = $("#sum"); s.classList.remove("hidden");
+  s.textContent = `完成 ${ok} 個${fail ? `，失敗 ${fail} 個` : ""}。電腦會自動掃描並標記。`;
+  e.target.value = "";
+};
+me();
+</script>
+</body>
+</html>

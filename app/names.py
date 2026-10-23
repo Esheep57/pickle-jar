@@ -1,0 +1,362 @@
+"""顯示名稱：從 Danbooru 別名挑出中文 / 日文名，並把簡體轉成繁體（台灣用字）。
+另外處理「造型／皮膚」：mika_(swimsuit)_(blue_archive) 是 mika_(blue_archive) 的一個造型。"""
+from __future__ import annotations
+
+import re
+from functools import lru_cache
+
+KANA = re.compile(r"[぀-ヿㇰ-ㇿｦ-ﾟ]")
+HANGUL = re.compile(r"[가-힯ᄀ-ᇿ]")
+HAN_ONLY = re.compile(r"^[㐀-鿿豈-﫿·・･\s\-－—（）()：:]+$")
+LATIN = re.compile(r"[A-Za-z]")
+HAN_CHAR = re.compile(r"[㐀-鿿豈-﫿]")
+
+
+@lru_cache(maxsize=1)
+def _cc():
+    try:
+        from opencc import OpenCC
+        return OpenCC("s2twp")
+    except Exception:  # 沒裝 opencc 就不轉換
+        return None
+
+
+# 人名、作品名裡本來就是繁體也通用的字，OpenCC 會轉錯（b72 實測：栗村愛理 → 慄村、明里 → 明裡、
+# 洛托姆 → 洛託姆、范／于／余 是姓）。轉換前後長度一樣時，這些字照原樣留著。
+NAME_KEEP = set("栗托台夸松郁岩")
+NAME_FIX = {"冢": "塚"}
+SURNAME_KEEP = set("范于余")          # 只在開頭（姓）留著：關于 → 關於
+_LI_PHRASE = set("心這这那哪家夜手城屋水眼夢梦")
+
+
+def _keep(i: int, a: str, s: str) -> bool:
+    if a in NAME_KEEP:
+        return True
+    if a in SURNAME_KEEP:
+        return i == 0
+    if a == "里":                       # 明里、繪里、里蘇特 留著；心里、這里、里面 → 裡
+        return not ((i > 0 and s[i - 1] in _LI_PHRASE) or s[i + 1:i + 2] in ("面", "頭", "头"))
+    return False
+
+
+def to_trad(s: str) -> str:
+    cc = _cc()
+    out = cc.convert(s) if cc and s else s
+    if out and len(out) == len(s):
+        out = "".join(a if _keep(i, a, s) else NAME_FIX.get(b, b) for i, (a, b) in enumerate(zip(s, out)))
+    elif "夸" in s:
+        out = out.replace("誇", "夸")
+    return out
+
+
+def pretty_raw(name: str) -> str:
+    """akiyama_mizuki → Akiyama Mizuki；mika_(blue_archive) → Mika"""
+    base = re.sub(r"_\([^()]*\)$", "", name) or name
+    return " ".join(w[:1].upper() + w[1:] for w in base.replace("_", " ").split())
+
+
+# 日本新字體（中文不用的寫法）：名字裡有這些字，多半是日文漢字名，不當中文名
+JP_ONLY = set("亜悪圧囲壱隠栄営駅円塩応殴桜穏仮価絵拡覚楽巻陥勧寛歓観関顔帰気戯犠拠挙暁駆勲恵掲渓経蛍軽鶏撃倹剣険圏検権顕験厳広鉱黒"
+              "済砕斎剤雑桟賛児実釈収渋獣縦粛処奨渉焼証乗剰壌嬢浄畳譲醸寝図粋酔髄瀬斉摂説専戦銭繊総荘捜挿巣層騒増蔵臓続対帯滞滝択沢"
+              "単団弾遅昼鋳庁徴聴鎮逓鉄転伝稲闘徳読届弐悩脳覇拝廃売発髪抜晩浜払仏塀変辺舗歩穂豊毎満黙訳薬誉揺様謡頼覧竜両緑隣涙塁"
+              "隷霊齢暦歴労録呪込畑峠匂働枠々")   # 「咲」不算：中文音譯名常用（千咲、妃咲、梓川咲太）
+# 「奥」也不算：簡體中文同一個字（奥提斯 = Outis），以前被當成日文，Limbus 的角色全部顯示日文
+# 看起來像標籤、不像名字的字眼（Pixiv 標籤常混在 Danbooru 別名裡）
+# 以前「夢」「百合」「腐」整個字擋掉，連喜多川海夢、博麗靈夢、百合園聖婭都一起擋了 → 只擋標籤用法（夢女、百合向…）
+JUNK = re.compile(r"同人|画师|畫師|绘师|繪師|周榜|榜|排行|合集|本子|R-?18|^腐|腐向|夢女|梦女|夢向|梦向|夢小説|イラ|FA$|FA\b|^百合$|百合向|百合CP|cp|CP|コラボ|版本|表情|差分|系列作")
+
+
+@lru_cache(maxsize=1)
+def _st():
+    try:
+        from opencc import OpenCC
+        return OpenCC("s2t"), OpenCC("t2s")
+    except Exception:
+        return None
+
+
+def _chinese_ok(n: str) -> bool:
+    """純漢字名是不是「中文」：沒有日文新字體，也不是簡繁混用（簡繁混用通常是日文）。"""
+    if any(ch in JP_ONLY for ch in n):
+        return False
+    st = _st()
+    if st:
+        s2t, t2s = st
+        if s2t.convert(n) != n and t2s.convert(n) != n:   # 同時有簡體字和繁體字 → 多半是日文
+            return False
+    return True
+
+
+def pick(other_names: list[str], lang: str, variant: bool = False) -> str | None:
+    return _pick(tuple(other_names or ()), lang, variant)
+
+
+@lru_cache(maxsize=50000)
+def _pick(other_names: tuple, lang: str, variant: bool) -> str | None:
+    """結果只跟輸入有關 → 快取（簡繁轉換很慢，書架一次要算上千個名字）。"""
+    names = [n.strip() for n in other_names if n and n.strip()]
+    if lang == "zh":
+        han = [n for n in names if HAN_ONLY.match(n) and HAN_CHAR.search(n) and _chinese_ok(n) and not JUNK.search(n)
+               and len(n) <= 16]
+        if not variant:  # 「甘雨(原神)」這種帶括號的往後排，先用「甘雨」
+            han = [n for n in han if not re.search(r"[（(]", n)] + [n for n in han if re.search(r"[（(]", n)]
+        return to_trad(han[0]) if han else None
+    if lang == "ja":
+        for n in names:
+            if (KANA.search(n) or (HAN_ONLY.match(n) and HAN_CHAR.search(n))) and not HANGUL.search(n) \
+                    and not JUNK.search(n) and not re.fullmatch(r"[・･·\s\-－—]+", n):
+                return n
+    return None
+
+
+@lru_cache(maxsize=1)
+def _pokemon() -> dict:
+    """寶可夢官方台灣譯名（PokeAPI 的資料，內建）：tag → [繁中, 日文]。"""
+    import json
+    from pathlib import Path
+    try:
+        return json.loads((Path(__file__).parent / "data" / "pokemon_zh.json").read_text("utf-8"))["names"]
+    except Exception:
+        return {}
+
+
+def pokemon_zh(name: str, other_names: list[str] | None) -> str | None:
+    """寶可夢的物種名（gardevoir → 沙奈朵）。只有確定是寶可夢才用：tag 是 xxx_(pokemon)，
+    或 Danbooru 別名裡有牠的日文名（避免 golem 這種一般詞被當成隆隆岩）。"""
+    base = name[:-len("_(pokemon)")] if name.endswith("_(pokemon)") else name
+    hit = _pokemon().get(base)
+    if not hit:
+        return None
+    if name.endswith("_(pokemon)") or (hit[1] and hit[1] in (other_names or [])):
+        return hit[0]
+    return None
+
+
+def candidates(other_names: list[str] | None) -> list[str]:
+    """可以當中文名的別名（繁體、去重，照 Danbooru 的順序）：讓你自己挑。"""
+    out = []
+    for n in other_names or []:
+        n = (n or "").strip()
+        if HAN_ONLY.match(n) and HAN_CHAR.search(n) and not JUNK.search(n) and len(n) <= 16 and _chinese_ok(n):
+            t = to_trad(n)
+            if t not in out:
+                out.append(t)
+    return out
+
+
+def _auto(name: str) -> str | None:
+    """Bangumi 找到的中文名、造型的「本體＋造型」（zhname.py）。"""
+    try:
+        from . import zhname
+        return zhname.auto_map().get(name or "")
+    except Exception:  # noqa
+        return None
+
+
+def _read_json(p) -> dict:
+    import json
+    from pathlib import Path
+    try:
+        return json.loads(Path(p).read_text("utf-8"))
+    except Exception:  # noqa  沒有檔案、壞掉
+        return {}
+
+
+def _pkg_path():
+    import os
+    from pathlib import Path
+    return os.environ.get("LIB_ZH_CURATED") or str(Path(__file__).parent / "data" / "zh_curated.json")
+
+
+def local_path():
+    """你（或 Claude）之後校對的結果：存在資料夾 data/ 裡（不會被程式更新蓋掉）。"""
+    from . import db
+    return db.DATA_DIR / "zh_curated_local.json"
+
+
+@lru_cache(maxsize=1)
+def _tables() -> tuple[dict, set]:
+    """(tag → 名字, 校對過的 tag)。兩份表：
+    - app/data/zh_curated.json：2026-10 把有確認圖的角色、作品全部看過一遍（改掉錯的、補上沒中文的、對的鎖住；
+      不確定的放 reviewed_none，照舊顯示自動挑的名字）
+    - data/zh_curated_local.json：之後的校對（中文名整理 ›「貼上校對結果」），蓋過上面那份
+    值是 null／空字串＝看過了、沒有可靠的中文名（不再列進「還沒校對」）。"""
+    names_, reviewed = {}, set()
+    for d in (_read_json(_pkg_path()), _read_json(local_path())):
+        for sec in ("character", "copyright", "names"):
+            for k, v in (d.get(sec) or {}).items():
+                v = (v.get("zh") if isinstance(v, dict) else v) or ""
+                reviewed.add(k)
+                if v.strip():
+                    names_[k] = v.strip()
+                else:
+                    names_.pop(k, None)
+        reviewed |= set(d.get("reviewed_none") or [])
+    return names_, reviewed
+
+
+def _curated() -> dict:
+    return _tables()[0]
+
+
+_curated.cache_clear = _tables.cache_clear      # 舊的呼叫方式（測試）
+
+
+def reviewed(name: str) -> bool:
+    return (name or "") in _tables()[1]
+
+
+def curated(name: str) -> str | None:
+    return _curated().get(name or "")
+
+
+def save_local(items: dict[str, str | None]) -> int:
+    """把校對結果寫進 data/zh_curated_local.json（tag → 名字；None／空＝看過、沒有可靠的中文名）。"""
+    import json
+    d = _read_json(local_path())
+    tbl = d.setdefault("names", {})
+    for k, v in items.items():
+        tbl[k] = (v or "").strip() or None
+    d["names"] = dict(sorted(tbl.items()))
+    p = local_path()
+    tmp = p.with_suffix(".tmp")
+    tmp.write_text(json.dumps(d, ensure_ascii=False, indent=0), "utf-8")
+    tmp.replace(p)
+    _tables.cache_clear()
+    try:
+        from . import nameindex
+        nameindex.invalidate()
+    except Exception:  # noqa
+        pass
+    return len(items)
+
+
+def display(name: str, other_names: list[str] | None, manual: str | None, lang: str, use_curated: bool = True) -> str:
+    """你取的名字 > 校對過的譯名表 > 寶可夢官方譯名 > Bangumi／Wikidata（或造型＝本體＋造型）> Danbooru 中文別名 > 英文。
+    中文模式沒有中文名時用英文、不用日文（使用者要求：日文看不懂，英文至少念得出來）。"""
+    if manual:
+        return manual
+    if lang == "zh":
+        cu = curated(name) if use_curated else None
+        if cu:
+            return cu
+        pk = pokemon_zh(name or "", other_names)
+        if pk:
+            return pk
+        au = _auto(name)
+        if au:
+            return au
+    if lang in ("zh", "ja"):
+        variant = bool(VARIANT.match(name or ""))
+        p = pick(other_names or [], lang, variant)
+        if p:
+            return p
+    return pretty_raw(name) if lang != "raw" else name
+
+
+# ---------- 作品 ----------
+_WIKI: dict = {"at": 0.0, "map": {}}
+
+
+def _wiki_auto(key: str) -> str | None:
+    """維基百科查到的作品台灣譯名（series_zh 表，wikiname.py）：整張表放記憶體，30 秒重讀一次。"""
+    import time as _t
+    if _t.time() - _WIKI["at"] > 30:
+        try:
+            from . import db
+            _WIKI["map"] = {r[0]: r[1] for r in db.conn().execute("SELECT name, zh FROM series_zh WHERE zh IS NOT NULL")}
+        except Exception:  # noqa  資料表還沒建
+            _WIKI["map"] = {}
+        _WIKI["at"] = _t.time()
+    return _WIKI["map"].get(key)
+@lru_cache(maxsize=1)
+def _series_zh() -> dict:
+    import json
+    from pathlib import Path
+    try:
+        return json.loads((Path(__file__).parent / "data" / "series_zh.json").read_text("utf-8"))
+    except Exception:
+        return {}
+
+
+def series_display(key: str, other_names: list[str] | None, manual: str | None, lang: str, auto: str | None = None,
+                   use_curated: bool = True) -> str:
+    """作品名稱：手動 > 校對過的譯名表 > 內建中文對照表（台灣譯名）> 維基百科查到的台灣譯名 > Bangumi > Danbooru 別名 > 羅馬拼音。
+    auto（維基）沒傳的呼叫端（以前有好幾個）：從快取拿，不然同一部作品在不同畫面名字不一樣。"""
+    if manual:
+        return manual
+    if lang == "zh":
+        cu = curated(key) if use_curated else None
+        if cu:
+            return cu
+        if auto is None:
+            auto = _wiki_auto(key)
+        zh = _series_zh().get(key) or auto
+        if zh:
+            return zh
+    return display(key, other_names, None, lang, use_curated)
+
+
+def _base(k: str) -> str:
+    return re.sub(r"_\(series\)$", "", k)
+
+
+# 可以當「母系列」的作品：Danbooru 的 xxx_(series) 標籤，加上這幾個沒有 _(series) 後綴的大系列
+FRANCHISES = {"bang_dream!", "love_live!", "idolmaster", "precure", "persona", "pokemon", "gundam", "digimon",
+              "touhou", "final_fantasy", "dragon_quest", "yu-gi-oh!", "honkai", "kantai_collection", "vocaloid"}
+# 這幾個系列的子作品名稱是「xxx_precure」這種放在後面的
+SUFFIX_FRANCHISES = {"precure", "idolmaster", "gundam"}
+
+
+@lru_cache(maxsize=64)
+def _parent_candidates(keys: frozenset) -> tuple:
+    """keys 裡可以當母系列的：(名稱, 去掉 _(series) 的前綴)。同一組 keys 只算一次。"""
+    out = []
+    for p in keys:
+        if p.endswith("_(series)") or p in FRANCHISES:
+            b = _base(p)
+            if len(b) >= 4:
+                out.append((p, b))
+    return tuple(out)
+
+
+def series_parent(key: str, keys: set[str]) -> str | None:
+    """同一個系列的子作品 → 母系列（只併到你圖庫裡本來就有的母系列）。保守：
+    母系列必須是 xxx_(series) 或上面列出的大系列，子作品要以母系列名開頭（fate/grand_order → fate_(series)、
+    bang_dream!_it's_mygo!!!!! → bang_dream!、honkai:_star_rail → honkai_(series)）；
+    只有光之美少女、偶像大師、鋼彈允許名字放在後面（hirogaru_sky!_precure、gakuen_idolmaster）。"""
+    # 先看 Danbooru 的 tag implication（limbus_company → project_moon）：取圖庫裡有的、最上層的母系列
+    try:
+        from . import seriesmap
+        up = [a for a in seriesmap.ancestors(key) if a in keys]
+        if up:
+            return up[-1]
+    except Exception:  # noqa  資料表還沒建好等：退回名字規則
+        pass
+    best = None
+    for p, b in _parent_candidates(keys if isinstance(keys, frozenset) else frozenset(keys)):
+        if p == key:
+            continue
+        ok = key.startswith((b + "_", b + "/", b + ":"))
+        if not ok and b in SUFFIX_FRANCHISES:
+            ok = key.endswith(("_" + b, "_" + b + "!"))
+        if ok and (best is None or len(p) < len(best)):   # 取最上層
+            best = p
+    return best
+
+
+VARIANT = re.compile(r"^(.+)_\(([^()]+)\)_\(([^()]+)\)$")
+SIMPLE_VARIANT = re.compile(r"^(.+)_\(([^()]+)\)$")
+
+
+def base_of(name: str, existing: set[str]) -> str | None:
+    """若 name 是某個已存在角色的造型，回傳本體名稱。"""
+    m = VARIANT.match(name)
+    if m:
+        base = f"{m.group(1)}_({m.group(3)})"
+        if base in existing:
+            return base
+    m = SIMPLE_VARIANT.match(name)
+    if m and m.group(1) in existing:  # hatsune_miku_(append) → hatsune_miku
+        return m.group(1)
+    return None
