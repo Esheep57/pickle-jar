@@ -23,7 +23,7 @@ try:     # 原生程式庫（ONNX Runtime、OpenCV）讓程式直接崩潰時，
     _fh.enable(file=open(db.DATA_DIR / "crash.log", "a", encoding="utf-8"), all_threads=True)
 except Exception:  # noqa
     pass
-from .api import steps as steps_api, sweep as sweep_api, albums as albums_api, ascii2d as ascii2d_api, upgrade as upgrade_api, work as work_api, gif as gif_api, dataset as dataset_api, imports, lan, library, net, review, saved, shelf, system, tags
+from .api import steps as steps_api, sweep as sweep_api, albums as albums_api, ascii2d as ascii2d_api, upgrade as upgrade_api, work as work_api, gif as gif_api, dataset as dataset_api, drivebackup as drivebackup_api, imports, lan, library, net, review, saved, shelf, system, tags
 from .matcher import matcher
 
 STATIC = Path(__file__).resolve().parent.parent / "static"
@@ -37,7 +37,7 @@ async def lifespan(_app):
 
 app = FastAPI(title="Pickle Jar", lifespan=lifespan)
 for r in (library.router, tags.router, review.router, shelf.router, saved.router, net.router, system.router, lan.router,
-          imports.router, albums_api.router, ascii2d_api.router, upgrade_api.router, work_api.router, sweep_api.router, steps_api.router, gif_api.router, dataset_api.router):
+          imports.router, albums_api.router, ascii2d_api.router, upgrade_api.router, work_api.router, sweep_api.router, steps_api.router, gif_api.router, dataset_api.router, drivebackup_api.router):
     app.include_router(r)
 
 LOCAL_HOSTS = {"127.0.0.1", "localhost", "[::1]", "::1"}

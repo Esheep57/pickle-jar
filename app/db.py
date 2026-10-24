@@ -32,6 +32,8 @@ DEFAULT_SETTINGS = {
     "skip_live_photo": True,          # 略過 iPhone 原況照片附帶的 .MOV（同資料夾有同名照片時）
     "backup_keep": 7,                 # 每天自動備份資料庫，保留幾份
     "backup_mirror_dir": "",          # 每日備份另存一份到這裡（另一顆硬碟、隨身碟、雲端資料夾）；硬碟壞掉時還有一份
+    "drive_backup_dir": "",           # 備份到外接硬碟（drivebackup.py）：上次選的位置
+    "drive_backup_last": {},          # 上次備份到外接硬碟的結果（收件匣提醒用）
     "hf_endpoint": "",                # 模型下載鏡像（例如 https://hf-mirror.com），空白 = 官方
     "lan_enabled": False,             # 允許手機在同一個 Wi-Fi 下上傳（需要 PIN）
     "lan_pin": "",
@@ -983,7 +985,10 @@ def _mirror(src: Path, keep: int):
 
 
 def backup_offsite() -> bool:
-    """有沒有一份備份不在資料庫那顆硬碟上（收件匣會提醒）。"""
+    """有沒有一份備份不在資料庫那顆硬碟上（收件匣會提醒）：備份另存的資料夾在別顆硬碟，或 30 天內備份過外接硬碟。"""
+    from . import drivebackup
+    if drivebackup.recent_ok(30):
+        return True
     d = (get_settings().get("backup_mirror_dir") or "").strip().strip('"')
     if not d or not os.path.isdir(d):
         return False

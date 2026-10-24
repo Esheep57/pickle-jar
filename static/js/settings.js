@@ -2,7 +2,7 @@
 import { $, $$, ask, S, api, closeModal, esc, modal, store, svg, toast } from "./core.js";
 import { applyTint, go, loadSidebar, openJobs, pollOnce } from "./shell.js";
 import { render } from "./grid.js";
-import { DAN_WHY, folderBrowser, importModal, openBackup, openDiag, openPhone } from "./pages.js";
+import { DAN_WHY, folderBrowser, importModal, openBackup, openDiag, openDriveBackup, openPhone } from "./pages.js";
 import { drawSteps } from "./steps.js";
 /* ============ 設定 ============
    左邊分類、右邊一次一類；上面可以搜尋（輸入「門檻」「帳號」就跳到那幾項）。
@@ -81,6 +81,7 @@ export async function openSettings(section, asPage) {
     data: `
       ${num("backup_keep", "自動備份保留", 1, "每天自動備份資料庫一次。", "份")}
       ${txt("backup_mirror_dir", "備份另存一份到", "例如 D:\\備份 或 OneDrive 裡的資料夾", "每天的備份再複製一份到另一顆硬碟或雲端資料夾（底下會建 pickle-jar-backups）。只放備份檔，程式本身不要搬進同步資料夾。")}
+      ${row("備份到外接硬碟", `<button class="btn sm" id="s-drive">備份到外接硬碟…</button>`, "圖片、程式、資料庫整份複製到另一顆硬碟；插上按一次，只複製新的。")}
       ${row("備份與還原", `<button class="btn sm" id="s-backup">備份與還原／匯出匯入…</button>`)}
       ${row("系統狀態", `<button class="btn sm" id="s-diag">診斷…</button>`, "模型、GPU、網路、準確率抽查。")}
       ${row("手機／平板", `<button class="btn sm" id="s-phone">設定…</button>`, "同一個 Wi-Fi 下用手機、平板看圖庫、把圖傳進來（要 PIN）。")}`,
@@ -144,6 +145,7 @@ export async function openSettings(section, asPage) {
   drawSteps($("#steps-root", m));
   $("#s-jobs", m).onclick = () => openJobs();
   $("#s-backup", m).onclick = openBackup;
+  $("#s-drive", m).onclick = openDriveBackup;
   $("#s-diag", m).onclick = openDiag;
   $("#s-phone", m).onclick = openPhone;
   $("#s-import", m).onclick = () => importModal();

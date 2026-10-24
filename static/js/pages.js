@@ -65,15 +65,18 @@ function homeAlerts(st, d) {
     <div class="mute">多半是資料夾暫時讀不到（iCloud 同步中、隨身碟、網路磁碟），所以先不標成「找不到檔案」。確定是你刪掉或搬走的再按確認。</div>
     <div class="ibact"><button class="btn sm" data-mh="confirm">確認，真的不見了</button><button class="btn sm" data-mh="dismiss">先不要，等下次掃描</button></div></div>`);
   if (!st.health && d.backup_offsite === false && Date.now() > +store.get("bkNagUntil", 0)) out.push(`<div class="ibalert"><b>備份只在這顆硬碟上</b>
-    <div class="mute">硬碟壞掉時，資料庫和 7 份備份會一起不見。到 設定 › 資料與備份 ›「備份另存一份到」選另一顆硬碟或雲端資料夾。</div>
-    <div class="ibact"><button class="btn sm" data-go-settings="backup_mirror_dir">去設定</button><button class="btn sm" data-bk-later>30 天後再提醒</button></div></div>`);
+    <div class="mute">硬碟壞掉時，圖片、資料庫和每天的備份會一起不見。插上外接硬碟，按「備份到外接硬碟」整份複製過去。</div>
+    <div class="ibact"><button class="btn sm" data-drive-bk>備份到外接硬碟</button><button class="btn sm" data-bk-later>30 天後再提醒</button></div></div>`);
+  else if (!st.health && d.drive_overdue && Date.now() > +store.get("bkDriveUntil", 0)) out.push(`<div class="ibalert"><b>上次備份到外接硬碟是 ${d.drive_overdue} 天前</b>
+    <div class="mute">插上硬碟按一次就好：只複製新的和改過的，通常幾分鐘。</div>
+    <div class="ibact"><button class="btn sm" data-drive-bk>備份到外接硬碟</button><button class="btn sm" data-bk-drive-later>7 天後再提醒</button></div></div>`);
   return out.join("");
 }
 // 健康燈（側欄左下）：備份、掃描暫停、工作失敗這類「要處理但不急著每次看」的事，平常只是一顆燈
 export function drawHealth(s) {
   const btn = $("#health"); if (!btn) return;
   S.healthSt = s;
-  const backup = s.backup_offsite === false && Date.now() > +store.get("bkNagUntil", 0);
+  const backup = (s.backup_offsite === false && Date.now() > +store.get("bkNagUntil", 0)) || (!!s.drive_overdue && Date.now() > +store.get("bkDriveUntil", 0));
   const n = (s.missing_hold ? 1 : 0) + (backup ? 1 : 0) + (s.error ? 1 : 0);
   btn.classList.toggle("hidden", !n);
   btn.classList.toggle("bad", !!(s.missing_hold || s.error));
@@ -85,13 +88,13 @@ export function openHealth() {
   let pop = $("#healthpop");
   if (pop) { pop.remove(); return; }
   pop = document.createElement("div"); pop.id = "healthpop";
-  const parts = homeAlerts({ ...s, health: false }, { backup_offsite: s.backup_offsite });
+  const parts = homeAlerts({ ...s, health: false }, { backup_offsite: s.backup_offsite, drive_overdue: s.drive_overdue });
   pop.innerHTML = (parts || "") + (s.error ? `<div class="ibalert warn"><b>上次背景工作失敗</b><div class="mute">${esc(s.error)}</div><div class="ibact"><button class="btn sm" data-hp-sys>看系統</button></div></div>` : "")
     + `<div class="hpfoot mute">${s.running ? `背景：${esc(s.phase || "")} ${fmtN(s.done || 0)}/${fmtN(s.total || 0)}` : "其他都正常"}</div>`;
   document.body.append(pop);
   bindHomeAlerts(pop);
   $("[data-hp-sys]", pop)?.addEventListener("click", () => { pop.remove(); go("system"); });
-  $$("[data-bk-later], [data-go-settings], [data-mh]", pop).forEach(b => b.addEventListener("click", () => setTimeout(() => { pop.remove(); drawHealth(S.healthSt || {}); }, 50)));
+  $$("[data-bk-later], [data-bk-drive-later], [data-drive-bk], [data-go-settings], [data-mh]", pop).forEach(b => b.addEventListener("click", () => setTimeout(() => { pop.remove(); drawHealth(S.healthSt || {}); }, 50)));
   setTimeout(() => document.addEventListener("mousedown", function off(e) { if (!e.target.closest("#healthpop, #health")) { pop.remove(); document.removeEventListener("mousedown", off); } }), 0);
 }
 function bindHomeAlerts(root = document) {
@@ -101,6 +104,8 @@ function bindHomeAlerts(root = document) {
   });
   $$("[data-go-settings]", root).forEach(b => b.onclick = () => openSettings("data"));
   $$("[data-bk-later]", root).forEach(b => b.onclick = () => { store.set("bkNagUntil", Date.now() + 30 * 864e5); b.closest(".ibalert")?.remove(); });
+  $$("[data-bk-drive-later]", root).forEach(b => b.onclick = () => { store.set("bkDriveUntil", Date.now() + 7 * 864e5); b.closest(".ibalert")?.remove(); });
+  $$("[data-drive-bk]", root).forEach(b => b.onclick = () => openDriveBackup());
 }
 // 系統：自動流程（每一步的開關和找到幾張）、工具、背景工作、備份與診斷（以前都擠在首頁）
 export async function renderSystem(gen) {
@@ -205,6 +210,7 @@ const TOOL_GROUPS = [
   ["維護", [
     ["jobs", "clock", "背景工作", "正在做什麼、排隊中、排程"],
     ["backup", "db", "備份與還原", "每天自動備份資料庫"],
+    ["drive", "db", "備份到外接硬碟", "圖片、程式、資料庫整份複製到另一顆硬碟"],
     ["oplog", "undo", "操作紀錄", "你做過什麼、最常做的動作；可以下載成 CSV"],
     ["diag", "pulse", "系統狀態", "GPU、模型、資料庫"]]],
 ];
@@ -229,7 +235,7 @@ const HOME_TOOL_FN = {
     <div class="mfoot"><button class="btn" data-close>取消</button><button class="btn" id="au-c">抽查角色</button><button class="btn primary" id="au-a">抽查創作者</button></div>`);
     $("#au-c", m).onclick = () => { closeModal(); auditModal("character"); }; $("#au-a", m).onclick = () => { closeModal(); auditModal("artist"); }; },
   upgrade: () => upgradeModal(), implies: () => impliesModal(), dataset: () => datasetModal(),
-  noanime: () => runSearch("is:icloud is:noanime"), dups: () => go("duplicates"), jobs: () => openJobs(), phone: () => openPhone(), backup: () => openBackup(), diag: () => openDiag(), oplog: () => oplogModal(),
+  noanime: () => runSearch("is:icloud is:noanime"), dups: () => go("duplicates"), jobs: () => openJobs(), phone: () => openPhone(), backup: () => openBackup(), drive: () => openDriveBackup(), diag: () => openDiag(), oplog: () => oplogModal(),
 };
 
 /* ============ 換成高清版（app/upgrade.py）============ */
@@ -511,12 +517,16 @@ export async function openBackup() {
   modal(`<h3>備份與還原</h3><div class="mbody">
     <p class="mute" style="margin-top:0">每天自動備份資料庫（標籤、確認/否決、設定），保留最近幾份（設定可改）。圖片本身不會被複製或修改。</p>
     <table class="diag">${list.map(b => `<tr><th>${esc(b.name)}</th><td>${fmtSize(b.size)} · ${fmtAgo(b.mtime)} <button class="btn sm" data-restore="${esc(b.name)}">還原到這份</button></td></tr>`).join("") || `<tr><td>還沒有備份</td></tr>`}</table>
+    <h5>備份到外接硬碟</h5>
+    <p class="mute">上面這些備份都在這顆硬碟上。圖片、程式、資料庫整份複製到外接硬碟，硬碟壞了也救得回來。</p>
+    <button class="btn" id="bk-drive">備份到外接硬碟…</button>
     <h5>匯出／匯入整理結果</h5>
     <p class="mute">匯出你手動做的確認、否決、NSFW、排除、合併與智慧相簿（JSON）。檔案用內容指紋對應，換電腦或重新整理資料夾後也能匯回。</p>
     <div style="display:flex;gap:8px;flex-wrap:wrap"><a class="btn" href="/api/export">匯出 JSON</a><label class="btn">匯入 JSON…<input type="file" id="bk-imp" accept=".json,application/json" hidden></label>
     <button class="btn" id="bk-xmp" title="在圖片旁邊寫 .xmp（Lightroom、digiKam、Eagle 等讀得到）">寫出 XMP 側車檔</button></div>
   </div><div class="mfoot"><button class="btn" id="bk-now" style="margin-right:auto">立即備份</button><button class="btn" data-close>關閉</button></div>`, m => {
     $("#bk-now", m).onclick = async () => { await api("/api/backups", {}); toast("已備份"); openBackup(); };
+    $("#bk-drive", m).onclick = () => { closeModal(); openDriveBackup(); };
     $$("[data-restore]", m).forEach(b => b.onclick = async () => {
       if (!await ask(`還原到 ${b.dataset.restore}？`, "目前的資料會先另存一份。還原會在下次啟動時套用。", "還原", true)) return;
       await api("/api/backups/restore", { name: b.dataset.restore }); toast("已排定：請關閉程式再重新啟動");
@@ -534,6 +544,91 @@ export async function openBackup() {
       const r = await api("/api/export/xmp", {}); toast(`已寫出 ${r.written} 個 XMP${r.skipped ? `，略過 ${r.skipped} 個（同名不同副檔名，或已有別的軟體的 XMP）` : ""}${r.failed ? `，失敗 ${r.failed}` : ""}`);
     };
   });
+}
+
+/* ============ 備份到外接硬碟（app/drivebackup.py）============ */
+const GB = n => fmtSize(n || 0);
+export async function openDriveBackup() {
+  let d;
+  try { d = await api("/api/drive-backup"); } catch (e) { return toast(e.message); }
+  const lt = d.last;
+  const drv = d.drives.filter(x => !x.same_disk || x.has_backup);
+  const pick = d.dest || drv.find(x => x.has_backup)?.path || "";
+  const known = drv.some(x => x.path === pick || pick.startsWith(x.path));
+  const m = modal(`<h3>備份到外接硬碟</h3><div class="mbody form">
+    <p class="mute" style="margin-top:0">把圖庫資料夾、程式和資料庫整份複製到另一顆硬碟。只複製新的和改過的；電腦上刪掉的、被改過的舊檔，在備份裡先留 ${d.hold_days} 天。做完拔掉收好，電腦壞了也救得回來。</p>
+    ${lt ? `<div class="note" style="margin:0 0 10px">上次備份 <b>${fmtAgo(lt.at)}</b>：複製 ${fmtN(lt.copied)} 個檔案（${GB(lt.copied_bytes)}）${lt.errors ? `，<span class="bad">${fmtN(lt.errors)} 個錯誤</span>` : ""} → ${esc(lt.base)}</div>` : ""}
+    <div class="field"><label>備份到</label><div>
+      ${drv.map(x => `<div><label class="chkl"><input type="radio" name="dbk-d" value="${esc(x.path)}" ${x.path === pick || (known && pick.startsWith(x.path)) ? "checked" : ""}> <b>${esc(x.path)}</b> ${esc(x.label || "")}　<span class="mute">剩 ${GB(x.free)}／共 ${GB(x.total)}${x.has_backup ? " · 有之前的備份" : ""}${x.same_disk ? " · 跟資料庫同一顆" : ""}</span></label></div>`).join("") || `<div class="mute">沒看到其他硬碟：插上外接硬碟後按「重新整理」</div>`}
+      <div><label class="chkl"><input type="radio" name="dbk-d" value="" ${pick && !known ? "checked" : ""}> 其他位置 <input type="text" id="dbk-dest" value="${pick && !known ? esc(pick) : ""}" placeholder="例如 E:\\" style="width:220px"> <button class="btn sm" id="dbk-browse">選資料夾…</button></label></div>
+      <div id="dbk-fs"></div></div></div>
+    <div class="field"><label>這次</label><div id="dbk-plan" class="mute">${pick ? "算一下…" : "選一顆硬碟"}</div></div>
+    <div class="bar" id="dbk-bar" style="display:none"><i></i></div>
+  </div><div class="mfoot"><button class="btn" id="dbk-refresh" style="margin-right:auto">重新整理</button><span class="mute" id="dbk-sum"></span><button class="btn" data-close>關閉</button><button class="btn" id="dbk-stop" style="display:none">停止</button><button class="btn primary" id="dbk-go" disabled>開始備份</button></div>`, null, "wide");
+  const dest = () => { const r = $("[name=dbk-d]:checked", m); return r ? (r.value || $("#dbk-dest", m).value.trim().replace(/^"|"$/g, "")) : ""; };
+  let seq = 0, running = false;
+  const showPlan = debounce(async () => {
+    if (running) return;
+    const my = ++seq, ds = dest();
+    $("#dbk-go", m).disabled = true;
+    if (!ds) { $("#dbk-plan", m).textContent = "選一顆硬碟"; return; }
+    $("#dbk-plan", m).textContent = "算一下…（第一次要掃過整個圖庫，大概幾秒到一分鐘）";
+    let p; try { p = await api("/api/drive-backup/plan", { dest: ds }); } catch (e) { if (my === seq) $("#dbk-plan", m).textContent = e.message; return; }
+    if (my !== seq || running || !document.body.contains(m)) return;
+    if (!p.ok) { $("#dbk-plan", m).innerHTML = p.errors.map(e => `<div class="bad">${esc(e)}</div>`).join(""); return; }
+    const rows = p.sources.map(x => `<tr><th>${esc(x.area === "圖片" ? x.label : x.area)}</th><td>${x.missing ? `<span class="bad">讀不到 ${esc(x.path)}</span>` : `${fmtN(x.files)} 個 · ${GB(x.bytes)}${x.copy ? ` · <b>要複製 ${fmtN(x.copy)} 個（${GB(x.copy_bytes)}）</b>` : " · 沒有變動"}<br><span class="mute">${esc(x.path)}</span>`}</td></tr>`).join("");
+    $("#dbk-plan", m).innerHTML = `<table class="diag">${rows}</table>
+      <div style="margin-top:6px">${p.first ? "第一次備份：" : ""}要複製 <b>${fmtN(p.copy)}</b> 個檔案（${GB(p.copy_bytes)}）＋資料庫 ${GB(p.db_bytes)}；硬碟剩 ${GB(p.free)}${p.enough ? "" : ` <span class="bad">— 空間不夠</span>`}</div>
+      ${p.gone ? `<div class="mute">電腦上已經不在的 ${fmtN(p.gone)} 個檔案：移到備份裡的「_刪除保留」，${d.hold_days} 天後才清</div>` : ""}
+      ${p.cloud ? `<div class="mute">${fmtN(p.cloud)} 個檔案只在 iCloud 雲端、還沒下載到電腦：這次不複製（不會觸發下載）</div>` : ""}
+      ${p.warnings.map(w => `<div class="bad">${esc(w)}</div>`).join("")}`;
+    $("#dbk-go", m).disabled = !p.enough;
+  }, 300);
+  const watch = () => {
+    running = true;
+    ["#dbk-go", "#dbk-refresh"].forEach(k => $(k, m).disabled = true);
+    $("#dbk-stop", m).style.display = ""; $("#dbk-bar", m).style.display = "";
+    follow(() => api("/api/drive-backup/job"), j => {
+      if (!document.body.contains(m)) {
+        if (j.state === "running") return;
+        toast(j.state === "done" ? `外接硬碟備份完成：複製 ${fmtN(j.result.copied)} 個檔案` : `外接硬碟備份${j.state === "stopped" ? "已停止" : "失敗：" + (j.error || "")}`);
+        pollOnce(); return false;
+      }
+      $("#dbk-bar i", m).style.width = `${j.state !== "running" ? 100 : j.bytes_total ? Math.round(j.bytes_done / j.bytes_total * 100) : 0}%`;
+      if (j.state === "running") {
+        $("#dbk-sum", m).textContent = j.phase === "複製" ? `複製中 ${fmtN(j.done)}／${fmtN(j.total)}（${GB(j.bytes_done)}／${GB(j.bytes_total)}）…關掉視窗也會繼續` : `${j.phase || "準備中"}…`;
+        return;
+      }
+      $("#dbk-stop", m).style.display = "none"; $("#dbk-refresh", m).disabled = false; running = false;
+      const r = j.result;
+      if (j.state === "done") {
+        $("#dbk-sum", m).textContent = ""; $("#dbk-go", m).style.display = "none";
+        $("#dbk-plan", m).innerHTML = `<div class="note" style="margin:0"><b>${r.ok ? "備份完成" : "備份完成，但有些地方要看一下"}</b>（${r.seconds} 秒）<br>
+          複製 ${fmtN(r.copied)} 個（${GB(r.copied_bytes)}）· 沒變 ${fmtN(r.unchanged)} 個${r.held ? ` · ${fmtN(r.held)} 個移到 _刪除保留` : ""}${r.replaced ? ` · ${fmtN(r.replaced)} 個改過的舊版先留著` : ""}<br>
+          抽查 ${fmtN(r.verified)} 個檔案${r.verify_bad ? `，<span class="bad">${r.verify_bad} 個不一樣</span>` : "，內容都一樣"} · 資料庫快照 ${esc(r.db?.name || "")}
+          ${r.cloud ? `<br><span class="mute">${fmtN(r.cloud)} 個只在 iCloud 雲端的檔案沒有複製</span>` : ""}
+          ${r.skipped_dirs.length ? `<br><span class="bad">讀不到、這次沒備份：${r.skipped_dirs.map(esc).join("、")}</span>` : ""}
+          ${r.guarded.length ? `<br><span class="bad">${r.guarded.map(g => esc(g.path)).join("、")} 一次少了很多檔案，像是暫時讀不到，這次沒有把備份裡的移走</span>` : ""}
+          ${r.error_list?.length ? `<details style="margin-top:6px"><summary class="bad">${fmtN(r.errors)} 個檔案沒有複製成功</summary>${r.error_list.map(e => `<div class="mute">${esc(e.path)}：${esc(e.error)}</div>`).join("")}</details>` : ""}
+          <br>拔硬碟前，先在 Windows 右下角的「安全地移除硬體」退出。</div>`;
+      } else {
+        $("#dbk-sum", m).textContent = j.state === "stopped" ? "已停止（已經複製的會留著，下次接著做）" : `失敗：${j.error || ""}`;
+        showPlan();
+      }
+      pollOnce();
+      return false;
+    }, { every: 800 });
+  };
+  m.addEventListener("change", e => { if (e.target.name === "dbk-d" || e.target.id === "dbk-dest") showPlan(); });
+  $("#dbk-dest", m).addEventListener("input", () => { $("[name=dbk-d][value='']", m).checked = true; showPlan(); });
+  $("#dbk-browse", m).onclick = () => folderBrowser($("#dbk-fs", m), p => { $("#dbk-dest", m).value = p; $("[name=dbk-d][value='']", m).checked = true; $("#dbk-fs", m).innerHTML = ""; showPlan(); });
+  $("#dbk-refresh", m).onclick = () => { closeModal(); openDriveBackup(); };
+  $("#dbk-stop", m).onclick = async () => { await api("/api/drive-backup/cancel", {}); $("#dbk-sum", m).textContent = "停止中…"; };
+  $("#dbk-go", m).onclick = async () => {
+    try { await api("/api/drive-backup/start", { dest: dest() }); } catch (e) { return toast(e.message); }
+    watch();
+  };
+  if (d.job.state === "running") watch(); else if (pick) showPlan();
 }
 
 /* ============ 首次設定精靈 ============ */

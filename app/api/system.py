@@ -43,7 +43,7 @@ def status():
     return {**st, "pending": c.execute("SELECT COUNT(*) FROM media WHERE status='pending'").fetchone()[0],
             "queued": j.q.qsize(), "matcher": matcher.stats, "watching": bool(j.observer),
             "online": {**online.get_jobs().state, "mode": danbooru.search_mode(), "queued": online.get_jobs().queued_count()}, "last_backup": b[0]["mtime"] if b else None,
-            "backup_offsite": db.backup_offsite()}
+            "backup_offsite": db.backup_offsite(), "drive_overdue": _drive_overdue()}
 
 
 @router.post("/api/scan/confirm-missing")
@@ -103,6 +103,11 @@ def start_job(req: JobReq):
     else:
         raise HTTPException(400)
     return {"ok": True}
+
+
+def _drive_overdue():
+    from .. import drivebackup
+    return drivebackup.overdue()
 
 
 SECRET_KEYS = ("danbooru_api_key", "pixiv_phpsessid", "lan_pin", "r34_api_key", "e621_api_key", "import_key")
@@ -448,7 +453,7 @@ def _home(nsfw: str = "hide", noalbum: bool = False):
     tips.sort(key=lambda t: rank.get(t["kind"], 5))
     return {"danbooru": {**danbooru.search_mode(), "online": s["online_enabled"], "iqdb": s["online_iqdb"]},
             "total": total, "week": week, "today": today, "cand": cand, "batch": {"n": batch_n, "names": batch_names}, "recent": recent, "chars": top, "miss": miss,
-            "unsourced": unsourced, "tips": tips, "last_backup": b[0]["mtime"] if b else None, "backup_offsite": db.backup_offsite(),
+            "unsourced": unsourced, "tips": tips, "last_backup": b[0]["mtime"] if b else None, "backup_offsite": db.backup_offsite(), "drive_overdue": _drive_overdue(),
             "research": online.research_status(),
             "job": {k: j.get(k) for k in ("running", "phase", "done", "total", "eta", "paused")},
             "setup_done": db.get_settings().get("setup_done")}

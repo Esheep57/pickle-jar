@@ -1664,3 +1664,51 @@ def test_srcurl_modal_from_viewer(base, client):
         with db.write_lock:
             db.conn().execute("DELETE FROM media_source WHERE media_id=?", (mid,))
             db.conn().execute("UPDATE media SET nsfw_manual=NULL WHERE id=?", (mid,))
+
+
+def test_b101_drive_backup_ui(base, client, tmp_path, monkeypatch):
+    """b101：系統 ›「備份到外接硬碟」：列出硬碟、算出要複製幾個、按開始做完；收件匣在太久沒備份時提醒。"""
+    from app import db, drivebackup as dbk
+    from tests.conftest import make_image
+    src, prog, ext = tmp_path / "src", tmp_path / "prog", tmp_path / "ext"
+    for p in (src, prog, ext):
+        p.mkdir()
+    for i in range(3):
+        make_image(src / f"u{i}.jpg", 4100 + i)
+    (prog / "run.py").write_text("x", "utf-8")
+    monkeypatch.setenv("LIB_DRIVES", str(ext))
+    monkeypatch.setattr(dbk, "sources", lambda man: [{"area": "圖片", "label": "示範", "path": str(src)},
+                                                     {"area": "程式", "label": "", "path": str(prog)}])
+    with pw.sync_playwright() as p:
+        b = _browser(p)
+        page = b.new_page(viewport={"width": 1400, "height": 900})
+        errors = []
+        page.on("pageerror", lambda e: errors.append(str(e)))
+        _open(page, base, "system")
+        page.click('[data-tool="drive"]')
+        page.wait_for_selector(".modal #dbk-dest")
+        assert "沒看到其他硬碟" in page.inner_text(".modal"), "跟資料庫同一顆硬碟的不列（測試的暫存資料夾就是）"
+        page.fill("#dbk-dest", str(ext))
+        page.wait_for_function("(document.querySelector('#dbk-plan')||{}).textContent?.includes('要複製')")
+        page.click("#dbk-go")
+        page.wait_for_function("(document.querySelector('#dbk-plan')||{}).textContent?.includes('備份完成')", timeout=30000)
+        assert (ext / dbk.BASE / "圖片" / "示範" / "u1.jpg").exists()
+        page.click(".modal [data-close]")
+        db.update_settings({"drive_backup_last": {"at": time.time() - 20 * 86400}})
+        page.evaluate("localStorage.removeItem('pj:bkDriveUntil')")
+        assert client.get("/api/status").json()["drive_overdue"] == 20
+        for _ in range(20):           # 狀態有讀取快取（剛做完背景工作時會晚幾秒）
+            page.evaluate("document.querySelector('#healthpop')?.remove()")
+            page.reload()
+            page.wait_for_function("document.querySelector('#health') && !document.querySelector('#health').classList.contains('hidden')", timeout=15000)
+            page.click("#health")
+            page.wait_for_selector("#healthpop")
+            if "20 天前" in page.inner_text("#healthpop"):
+                break
+            time.sleep(1)
+        assert "20 天前" in page.inner_text("#healthpop")
+        page.click("#healthpop [data-drive-bk]")
+        page.wait_for_selector(".modal #dbk-go")
+        assert not _problems(page, errors), _problems(page, errors)
+        b.close()
+    db.update_settings({"drive_backup_last": {}})

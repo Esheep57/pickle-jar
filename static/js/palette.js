@@ -6,7 +6,7 @@ import { namesModal } from "./shelf.js";
 import { undo } from "./actions.js";
 import { sweepModal } from "./sweep.js";
 import { datasetModal, impliesModal } from "./dataset.js";
-import { artistScanModal, ascii2dModal, auditModal, findModal, importModal, openBackup, openDiag, openPhone, upgradeModal } from "./pages.js";
+import { artistScanModal, ascii2dModal, auditModal, findModal, importModal, openBackup, openDiag, openDriveBackup, openPhone, upgradeModal } from "./pages.js";
 import { openSettings } from "./settings.js";
 /* ============ 指令面板（Ctrl+K / /）：搜尋圖片、前往角色/標籤、切換頁面、執行指令 ============ */
 const PAGES = [["home", "收件匣（首頁、整理中心）"], ["system", "系統（自動流程、工具）"], ["review", "待確認"], ["unrecognized", "未識別"], ["all", "圖庫"], ["characters", "角色"], ["artists", "創作者"],
@@ -48,6 +48,7 @@ const COMMANDS = [
   ["準確率抽查：角色", "audit 抽查 準確 角色", () => auditModal("character")],
   ["手機／平板（看圖庫、上傳，QR code）", "phone 手機 平板 ipad iphone 上傳 區網 wifi", () => openPhone()],
   ["備份與還原", "backup", () => openBackup()],
+  ["備份到外接硬碟", "backup drive hdd usb 外接 硬碟 備份", () => openDriveBackup()],
   ["匯出整理結果（JSON）", "export", () => { location.href = "/api/export"; }],
   ["切換 NSFW 顯示", "nsfw", () => cycleNsfw()],
   ["撤銷上一步", "undo", () => undo()],
