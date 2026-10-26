@@ -15,7 +15,7 @@
 
 <img src="docs/media/demo.gif" alt="Pickle Jar 操作示範：收件匣、待確認、角色書架、角色頁、大圖、作品頁、創作者、本子、搜尋" width="900">
 
-<sub>38 秒操作示範（<a href="docs/media/demo.mp4">高畫質 MP4</a>）。畫面裡的圖都是用程式畫的示範圖，角色、作品、創作者都是虛構的。</sub>
+<sub>38 秒操作示範（<a href="docs/media/demo.mp4">高畫質 MP4</a>）。示範用的圖是 AI 生成的原創角色，角色、作品、創作者都是虛構的。</sub>
 
 </div>
 
