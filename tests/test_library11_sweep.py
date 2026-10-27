@@ -24,24 +24,29 @@ def test_pixiv_and_x_sweep(client):
     from app import db, sweep
     c = db.conn()
     names = ids_by_name(client)
-    ids = sorted(names.values())
-    seed, target, xtarget = ids[0], ids[5], ids[7]
+    seed, target, xtarget = names["img_02.jpg"], names["img_05.jpg"], names["img_10.jpg"]   # 普通的圖（假網站不認得、沒有出處）
     paths = {r[0]: r[1] for r in c.execute("SELECT id, path FROM media")}
     with db.write_lock:
-        c.execute("DELETE FROM media_source WHERE media_id IN (?,?)", (target, xtarget))
+        # 記成「搜過、沒找到」：背景自動搜源不會先去搜這兩張（不然有時候搜源先找到出處，比對就沒對象了）
+        for m in (target, xtarget):
+            c.execute("INSERT OR REPLACE INTO media_source(media_id, status, method, fetched_at, data) VALUES(?,'notfound','iqdb',?,'{}')",
+                      (m, time.time()))
     art = _setup(c, db, seed)
-    was_online = db.get_settings()["online_enabled"]
+    was = db.get_settings()
+    was_online, was_auto = was["online_enabled"], was.get("online_auto_source", True)
     try:
         a = {x["key"]: x for x in sweep.artists("pixiv")}
         assert a["4242"]["artist"] == "sweep_painter_(tst)"
         assert "sweeppainter" in {x["key"] for x in sweep.artists("x")}
         httpx.post(BASE + "/_sweep", json={"801_p0": paths[target], "SWXMEDIA0001": paths[xtarget]})
-        client.post("/api/settings", json={"online_enabled": True})
+        client.post("/api/settings", json={"online_enabled": True, "online_auto_source": False})
         r = client.post("/api/sweep/pixiv", json={"keys": ["4242"]}).json()
         assert r["queued"] == 1
-        for _ in range(200):
+        for _ in range(600):
             time.sleep(0.2)
-            if c.execute("SELECT 1 FROM media_source WHERE media_id=? AND method='pixiv_scan'", (target,)).fetchone():
+            # 出處先記、畫師標籤後補：兩個都有了才往下
+            if c.execute("SELECT 1 FROM media_source WHERE media_id=? AND method='pixiv_scan'", (target,)).fetchone() and \
+                    c.execute("SELECT 1 FROM media_tags WHERE media_id=? AND tag_id=? AND source='pixiv_scan'", (target, art)).fetchone():
                 break
         src = c.execute("SELECT status, pixiv_id, post_url FROM media_source WHERE media_id=?", (target,)).fetchone()
         assert tuple(src) == ("found", 801, "https://www.pixiv.net/artworks/801")
@@ -65,7 +70,7 @@ def test_pixiv_and_x_sweep(client):
         items = [{"tweet_id": "1900000000000000001", "url": "https://pbs.twimg.com/media/SWXMEDIA0001?format=jpg&name=small"},
                  {"tweet_id": "1900000000000000002", "url": "https://pbs.twimg.com/media/SWXMEDIA0002?format=jpg&name=360x360"}]
         assert client.post("/api/sweep/ext/x/items", headers=H, json={"handle": "SweepPainter", "items": items, "final": True}).status_code == 200
-        for _ in range(200):
+        for _ in range(600):   # 比對要載模型、算特徵，慢的機器（CI）要等比較久
             time.sleep(0.2)
             if c.execute("SELECT 1 FROM media_source WHERE media_id=? AND method='x_scan'", (xtarget,)).fetchone():
                 break
@@ -87,5 +92,5 @@ def test_pixiv_and_x_sweep(client):
             c.execute("DELETE FROM sweep_artist")
             c.execute("DELETE FROM sweep_seen")
             c.execute("DELETE FROM sweep_xqueue")
-        client.post("/api/settings", json={"online_enabled": was_online})
+        client.post("/api/settings", json={"online_enabled": was_online, "online_auto_source": was_auto})
         wait_idle(client)

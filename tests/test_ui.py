@@ -1631,8 +1631,10 @@ def test_b93_grid_keeps_images_viewer_number_keys_and_events(base, client):
 def test_srcurl_modal_from_viewer(base, client):
     """b94：大圖 › 詳細 › 出處「貼網址」：貼上就比對；不像的不勾，自己勾「記成出處」再確認。"""
     from app import db
-    vis = [it["id"] for it in client.get("/api/media", params={"view": "all", "limit": 10, "nsfw": "hide", "noalbum": 1}).json()["items"]]
-    mid = vis[3]
+    from tests.conftest import ids_by_name
+    vis = {it["id"] for it in client.get("/api/media", params={"view": "all", "limit": 1000, "nsfw": "hide", "noalbum": 1}).json()["items"]}
+    names = ids_by_name(client)
+    mid = next(names[n] for n in ("img_04.jpg", "img_10.jpg", "img_11.jpg", "img_01.jpg") if names.get(n) in vis)   # 普通的圖，跟假推文的圖不像
     try:
         with pw.sync_playwright() as p:
             br = _browser(p)

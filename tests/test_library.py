@@ -1647,15 +1647,17 @@ def test_no_artist_tags(client):
     """表情包、梗圖、截圖：作者不可考，有這些標籤的圖不算缺創作者；設定可改；標籤拿掉就回來。"""
     from app import db, quicktags
     quicktags.sync_no_artist()
-    ids = sorted(ids_by_name(client).values())
-    mid = ids[12]
     c = db.conn()
-    with db.write_lock:
-        c.execute("DELETE FROM media_tags WHERE media_id=? AND tag_id IN (SELECT id FROM tags WHERE category='artist')", (mid,))
-        c.execute("UPDATE media SET artist_done=0, official=NULL, unrec_skip=0, excluded=0 WHERE id=?", (mid,))
-        c.execute("DELETE FROM media_tags WHERE media_id=? AND tag_id IN (SELECT id FROM tags WHERE no_artist=1)", (mid,))
-        c.commit()
     art = lambda: {i["id"] for i in client.get("/api/media", params={"view": "unrecognized", "miss": "artist", "nsfw": "show", "limit": 1000}).json()["items"]}
+    # 挑一張普通的圖（不靠「第幾張」：別的測試留下的狀態、掃描順序都會變）
+    for mid in [i for n, i in sorted(ids_by_name(client).items()) if n.startswith("img_")]:
+        with db.write_lock:
+            c.execute("DELETE FROM media_tags WHERE media_id=? AND tag_id IN (SELECT id FROM tags WHERE category='artist')", (mid,))
+            c.execute("UPDATE media SET artist_done=0, official=NULL, unrec_skip=0, excluded=0 WHERE id=?", (mid,))
+            c.execute("DELETE FROM media_tags WHERE media_id=? AND tag_id IN (SELECT id FROM tags WHERE no_artist=1)", (mid,))
+            c.commit()
+        if mid in art():
+            break
     assert mid in art()
     client.post("/api/quicktag", json={"ids": [mid], "name": "梗圖", "on": True})
     assert mid not in art()

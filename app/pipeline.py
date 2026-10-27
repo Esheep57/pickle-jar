@@ -267,17 +267,19 @@ def walk(root: str, exclude: list[str], skip_live: bool = True):
     while stack:
         d = stack.pop()
         try:
-            files = []
+            files, dirs = [], []
             with os.scandir(d) as it:
-                for e in it:
+                # 照名稱排序：不同電腦、檔案系統列出的順序不一樣（ext4、NTFS、網路磁碟），新圖的編號和處理順序才會固定
+                for e in sorted(it, key=lambda e: e.name):
                     if _excluded(e.name, exclude):
                         continue
                     if e.is_dir(follow_symlinks=False):
-                        stack.append(e.path)
+                        dirs.append(e.path)
                     elif e.is_file():
                         k = media.kind_of(Path(e.name))
                         if k:
                             files.append((e, k))
+            stack.extend(reversed(dirs))
             stills = {os.path.splitext(e.name)[0].lower() for e, k in files
                       if os.path.splitext(e.name)[1].lower() in LIVE_PHOTO_STILL} if skip_live else set()
             for e, k in files:
