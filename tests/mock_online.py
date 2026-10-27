@@ -291,6 +291,8 @@ if __name__ == "__main__":
 def wikipedia(request: Request):
     q = request.query_params
     if q.get("action") == "parse":
+        if q.get("variant") == "zh-cn":      # 同一個條目的大陆简体標題（簡體模式）
+            return {"parse": {"title": q["page"], "displaytitle": '<span lang="zh-Hans-CN"><span class="mw-page-title-main">世界计划 彩色舞台 feat. 初音未来</span></span>'}}
         return {"parse": {"title": q["page"], "displaytitle": '<span lang="zh-Hant-TW"><span class="mw-page-title-main">世界計畫 彩色舞台 feat. 初音未來</span></span>'}}
     t = q.get("titles", "")
     if t == "プロジェクトセカイ":
@@ -511,7 +513,16 @@ def _sweep_file(key: str):
     p = SWEEP.get(key)
     if p:
         return Response(open(p, "rb").read(), media_type="image/jpeg")
-    return Response(_png(sum(map(ord, key)) % 97 + 3, "JPEG"), media_type="image/jpeg")
+    # 對不到的作品：雜訊圖（以前用跟圖庫同一種「色塊＋圓」的圖，有時候被當成圖庫裡別張，比對數就不對）
+    import io
+    import random
+    import zlib
+    from PIL import Image
+    rnd = random.Random(zlib.crc32(f"sweep/{key}".encode()))
+    im = Image.frombytes("RGB", (40, 56), bytes(rnd.randrange(256) for _ in range(40 * 56 * 3))).resize((400, 560), Image.NEAREST)
+    b = io.BytesIO()
+    im.save(b, "JPEG", quality=90)
+    return Response(b.getvalue(), media_type="image/jpeg")
 
 
 @app.get("/pximg/c/{size}/img-master/img/{y}/{m}/{d}/{hh}/{mm}/{ss}/{name}")

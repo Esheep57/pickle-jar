@@ -7,7 +7,7 @@ import { undo } from "./actions.js";
 import { sweepModal } from "./sweep.js";
 import { datasetModal, impliesModal } from "./dataset.js";
 import { artistScanModal, ascii2dModal, auditModal, findModal, importModal, openBackup, openDiag, openDriveBackup, openPhone, upgradeModal } from "./pages.js";
-import { openSettings } from "./settings.js";
+import { openSettings, setZhMode } from "./settings.js";
 /* ============ 指令面板（Ctrl+K / /）：搜尋圖片、前往角色/標籤、切換頁面、執行指令 ============ */
 const PAGES = [["home", "收件匣（首頁、整理中心）"], ["system", "系統（自動流程、工具）"], ["review", "待確認"], ["unrecognized", "未識別"], ["all", "圖庫"], ["characters", "角色"], ["artists", "創作者"],
   ["videos", "影片"], ["duplicates", "重複"], ["tags", "作品與標籤"], ["nsfw", "NSFW"], ["excluded", "以前排除的"], ["errors", "讀取失敗"]];
@@ -16,6 +16,7 @@ const COMMANDS = [
   ["撤銷上一個動作", "undo 撤銷 復原 ctrl z", () => undo()],
   ["快捷鍵與搜尋語法", "help 說明 快捷鍵 ? keys", () => openShortcuts()],
   ["切換 NSFW：隱藏 → 模糊 → 顯示", "nsfw h 隱藏 模糊", () => cycleNsfw()],
+  ["切換繁體／简体（介面用語、角色作品譯名）", "简体 簡體 繁體 繁体 大陸 大陆 台灣 中文 chinese zh cn tw 譯名 用語", () => setZhMode(window.zhcn?.mode === "cn" ? "tw" : "cn")],
   ["透視：顯示格子上的所有資訊（按住 Alt）", "xray 透視 alt 角標", () => toggleXray()],
   ["診斷／系統狀態", "diag", () => openDiag()],
   ["背景工作（排程、排隊中、最近完成）", "jobs 排程 背景 佇列 queue", () => openJobs()],
@@ -89,9 +90,10 @@ export function openPalette(initial = "") {
     // 單一個字、而且剛好對到角色/標籤 → 先列標籤（跳過去）；多個條件或語法 → 先列「搜尋圖片」
     if (searchRow) { if (!multi && tags.length && !/[:|*]/.test(q)) out.splice(Math.min(3, out.length), 0, searchRow); else out.unshift(searchRow); }
     const ql = q.toLowerCase();
+    const cv = s => window.zhcn ? window.zhcn.conv(s) : s;   // 簡體模式：畫面上看到的是簡體，打簡體也要對得到
     if (!multi) {
-      PAGES.filter(([k, l]) => !q || l.includes(q) || k.includes(ql)).slice(0, q ? 3 : 12).forEach(([k, l]) => out.push({ kind: "page", label: l, sub: "頁面", run: () => { S.q = ""; go(k); } }));
-      COMMANDS.filter(([l, k]) => q && (l.includes(q) || k.includes(ql))).forEach(([l, , fn]) => out.push({ kind: "cmd", label: l, sub: "指令", run: fn }));
+      PAGES.filter(([k, l]) => !q || l.includes(q) || cv(l).includes(q) || k.includes(ql)).slice(0, q ? 3 : 12).forEach(([k, l]) => out.push({ kind: "page", label: l, sub: "頁面", run: () => { S.q = ""; go(k); } }));
+      COMMANDS.filter(([l, k]) => q && (l.includes(q) || k.includes(ql) || cv(l).includes(q) || cv(k).includes(ql))).forEach(([l, , fn]) => out.push({ kind: "cmd", label: l, sub: "指令", run: fn }));
     }
     if (!q) {
       try {

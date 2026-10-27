@@ -164,6 +164,8 @@ def _validate(patch: dict) -> dict:
             out[k] = _steps.validate_act(k, out[k])
         except ValueError as e:
             raise HTTPException(400, f"設定「{k}」不正確：{e}")
+    if "zh_mode" in out and out["zh_mode"] not in ("tw", "cn"):
+        raise HTTPException(400, "設定「zh_mode」要是 tw 或 cn")
     if out.get("lan_pin") and not re.fullmatch(r"\d{4,8}", out["lan_pin"]):
         raise HTTPException(400, "PIN 要是 4～8 位數字")
     return out
@@ -206,6 +208,13 @@ def post_settings(patch: dict):
         j.submit("scan")
     if new["neg_sim"] != old["neg_sim"]:
         j.submit("sweep")
+    if new.get("zh_mode") != old.get("zh_mode"):
+        from .. import nameindex
+        nameindex.invalidate()
+        db.user_wrote()                       # 書架等快取的名字跟著換
+        if new["zh_mode"] == "cn":
+            from .. import online
+            online.get_jobs().queue_series_cn()          # 以前查到台灣譯名的作品，補查大陸譯名
     if new.get("no_artist_tags") != old.get("no_artist_tags"):
         from .. import quicktags
         quicktags.sync_no_artist()

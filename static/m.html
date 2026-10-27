@@ -4,12 +4,16 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Pickle Jar</title>
+<!-- 簡體模式：在畫面畫出來之前就開始轉（static/js/zhcn.js） -->
+<script src="/static/js/zhcn-dict.js"></script>
+<script src="/static/js/zhcn.js"></script>
 <style>
   :root { --bg: #f6f7f5; --card: #fff; --ink: #1d211c; --mute: #707670; --line: #e3e6e1; --acc: #6fa35a; --acc2: #eaf3e4; --bad: #c0453a; }
   @media (prefers-color-scheme: dark) { :root { --bg: #121412; --card: #1c1f1b; --ink: #eef1ec; --mute: #9aa197; --line: #2c302a; --acc2: #22301d; } }
   * { box-sizing: border-box; }
   body { margin: 0; font: 16px/1.5 system-ui, -apple-system, "PingFang TC", "Microsoft JhengHei", sans-serif; background: var(--bg); color: var(--ink); padding: 20px 16px calc(20px + env(safe-area-inset-bottom)); }
   h1 { font-size: 22px; margin: 4px 0 16px; }
+  .zh-cn body { font-family: system-ui, -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif; }
   .card { background: var(--card); border: 1px solid var(--line); border-radius: 18px; padding: 18px; margin-bottom: 14px; }
   input[type=tel] { width: 100%; font-size: 28px; letter-spacing: 8px; text-align: center; padding: 12px; border-radius: 12px; border: 1px solid var(--line); background: var(--bg); color: var(--ink); }
   button, .pick { display: block; width: 100%; font-size: 17px; padding: 14px; border-radius: 14px; border: 0; background: var(--ink); color: var(--card); margin-top: 12px; text-align: center; font-weight: 600; }
@@ -55,6 +59,7 @@ const $ = s => document.querySelector(s);
 const esc = s => String(s).replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
 async function me() {
   const r = await fetch("/api/m/me").then(r => r.json()).catch(() => ({ ok: false }));
+  if (r.ok) fetch("/api/settings").then(x => x.json()).then(st => window.zhcn && window.zhcn.sync(st.zh_mode)).catch(() => { });   // 繁簡模式跟電腦一樣
   $("#login").classList.toggle("hidden", r.ok); $("#up").classList.toggle("hidden", !r.ok);
   if (r.ok) $("#dest").textContent = "會存到電腦的：" + r.dir;
   else $("#pin").focus();

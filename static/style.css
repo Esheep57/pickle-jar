@@ -60,6 +60,11 @@
   --pop-shadow: 0 1px 2px rgba(0,0,0,.08), 0 8px 24px rgba(0,0,0,.14);
   font-family: var(--font-sans);
 }
+/* 簡體模式（zhcn.js 在 <html> 加 .zh-cn）：用簡體字型（Windows 微軟雅黑、Mac 蘋方），沒有的字才回到繁中字型 */
+:root.zh-cn {
+  --font-sans: "Microsoft YaHei UI", "Microsoft YaHei", "PingFang SC", "Noto Sans SC", "Source Han Sans SC", "Noto Sans TC", system-ui, sans-serif;
+  --font-serif: "Noto Serif SC", "Source Han Serif SC", "SimSun", "Noto Serif TC", serif;
+}
 body.tint {
   --frame: #e9f1e4;
   --bg: #f6faf2;

@@ -49,6 +49,23 @@ def to_trad(s: str) -> str:
     return out
 
 
+# ---------- 簡體模式（設定 zh_mode＝cn）----------
+# 介面文字由前端換成大陸用語（static/js/zhcn.js）；這裡管角色／作品名稱：有大陸譯名的用大陸譯名
+#（Bangumi 原文、維基百科「大陆简体」標題、寶可夢官方簡中譯名），沒有的才把台灣譯名轉成簡體字。
+def mode() -> str:
+    """tw 繁體（台灣譯名）／ cn 简体（大陸譯名）。"""
+    from . import db
+    s = db._settings_cache if db._settings_cache is not None else db.get_settings()
+    return "cn" if s.get("zh_mode") == "cn" else "tw"
+
+
+@lru_cache(maxsize=50000)
+def to_simp(s: str) -> str:
+    """繁體 → 簡體字（只換字、不換用語：名字不要被「影片→视频」這種規則改到）。"""
+    st = _st()
+    return st[1].convert(s) if st and s else s
+
+
 def pretty_raw(name: str) -> str:
     """akiyama_mizuki → Akiyama Mizuki；mika_(blue_archive) → Mika"""
     base = re.sub(r"_\([^()]*\)$", "", name) or name
@@ -111,7 +128,7 @@ def _pick(other_names: tuple, lang: str, variant: bool) -> str | None:
 
 @lru_cache(maxsize=1)
 def _pokemon() -> dict:
-    """寶可夢官方台灣譯名（PokeAPI 的資料，內建）：tag → [繁中, 日文]。"""
+    """寶可夢官方台灣譯名（PokeAPI 的資料，內建）：tag → [台灣譯名, 日文, 大陸譯名]。"""
     import json
     from pathlib import Path
     try:
@@ -120,7 +137,7 @@ def _pokemon() -> dict:
         return {}
 
 
-def pokemon_zh(name: str, other_names: list[str] | None) -> str | None:
+def pokemon_zh(name: str, other_names: list[str] | None, cn: bool = False) -> str | None:
     """寶可夢的物種名（gardevoir → 沙奈朵）。只有確定是寶可夢才用：tag 是 xxx_(pokemon)，
     或 Danbooru 別名裡有牠的日文名（避免 golem 這種一般詞被當成隆隆岩）。"""
     base = name[:-len("_(pokemon)")] if name.endswith("_(pokemon)") else name
@@ -128,7 +145,7 @@ def pokemon_zh(name: str, other_names: list[str] | None) -> str | None:
     if not hit:
         return None
     if name.endswith("_(pokemon)") or (hit[1] and hit[1] in (other_names or [])):
-        return hit[0]
+        return (hit[2] if len(hit) > 2 else to_simp(hit[0])) if cn else hit[0]
     return None
 
 
@@ -231,9 +248,13 @@ def save_local(items: dict[str, str | None]) -> int:
     return len(items)
 
 
-def display(name: str, other_names: list[str] | None, manual: str | None, lang: str, use_curated: bool = True) -> str:
+def display(name: str, other_names: list[str] | None, manual: str | None, lang: str, use_curated: bool = True,
+            cn: bool | None = None) -> str:
     """你取的名字 > 校對過的譯名表 > 寶可夢官方譯名 > Bangumi／Wikidata（或造型＝本體＋造型）> Danbooru 中文別名 > 英文。
-    中文模式沒有中文名時用英文、不用日文（使用者要求：日文看不懂，英文至少念得出來）。"""
+    中文模式沒有中文名時用英文、不用日文（使用者要求：日文看不懂，英文至少念得出來）。
+    簡體模式（zh_mode＝cn）：同樣的順序，換成大陸譯名（_display_cn）。"""
+    if lang == "zh" and (mode() == "cn" if cn is None else cn):
+        return _display_cn(name, other_names, manual, use_curated)
     if manual:
         return manual
     if lang == "zh":
@@ -252,6 +273,32 @@ def display(name: str, other_names: list[str] | None, manual: str | None, lang: 
         if p:
             return p
     return pretty_raw(name) if lang != "raw" else name
+
+
+def _bgm_cn(name: str) -> str | None:
+    try:
+        from . import zhname
+        return zhname.auto_map_cn().get(name or "")
+    except Exception:  # noqa
+        return None
+
+
+def _display_cn(name: str, other_names: list[str] | None, manual: str | None, use_curated: bool = True) -> str:
+    """簡體模式的角色名：你取的名字（轉簡體字）> 校對過的譯名（Bangumi 原文跟它一樣就用原文，不然轉簡體字）
+    > 寶可夢官方簡中譯名 > Bangumi 原文（大陸譯名）> Danbooru 中文別名 > 英文。"""
+    if manual:
+        return to_simp(manual)
+    bgm = _bgm_cn(name)
+    cu = curated(name) if use_curated else None
+    if cu:
+        return bgm if bgm and to_trad(bgm) == cu else to_simp(cu)
+    pk = pokemon_zh(name or "", other_names, cn=True)
+    if pk:
+        return pk
+    if bgm:
+        return bgm
+    p = pick(other_names or [], "zh", bool(VARIANT.match(name or "")))
+    return to_simp(p) if p else pretty_raw(name)
 
 
 # ---------- 作品 ----------
@@ -280,9 +327,11 @@ def _series_zh() -> dict:
 
 
 def series_display(key: str, other_names: list[str] | None, manual: str | None, lang: str, auto: str | None = None,
-                   use_curated: bool = True) -> str:
+                   use_curated: bool = True, cn: bool | None = None) -> str:
     """作品名稱：手動 > 校對過的譯名表 > 內建中文對照表（台灣譯名）> 維基百科查到的台灣譯名 > Bangumi > Danbooru 別名 > 羅馬拼音。
     auto（維基）沒傳的呼叫端（以前有好幾個）：從快取拿，不然同一部作品在不同畫面名字不一樣。"""
+    if lang == "zh" and (mode() == "cn" if cn is None else cn):
+        return _series_cn(key, other_names, manual, use_curated)
     if manual:
         return manual
     if lang == "zh":
@@ -294,7 +343,46 @@ def series_display(key: str, other_names: list[str] | None, manual: str | None, 
         zh = _series_zh().get(key) or auto
         if zh:
             return zh
-    return display(key, other_names, None, lang, use_curated)
+    return display(key, other_names, None, lang, use_curated, cn=False)
+
+
+@lru_cache(maxsize=1)
+def _series_cn_table() -> dict:
+    """內建表、校對表裡的作品 → [台灣譯名, 維基百科的「大陆简体」標題]（app/data/series_cn.json）。"""
+    from pathlib import Path
+    return _read_json(Path(__file__).parent / "data" / "series_cn.json").get("names", {})
+
+
+_WIKI_CN: dict = {"at": 0.0, "map": {}}
+
+
+def _wiki_cn(key: str) -> str | None:
+    """維基百科查到的作品大陸譯名（series_zh.cn，wikiname.py）。"""
+    import time as _t
+    if _t.time() - _WIKI_CN["at"] > 30:
+        try:
+            from . import db
+            _WIKI_CN["map"] = {r[0]: r[1] for r in db.conn().execute("SELECT name, cn FROM series_zh WHERE cn IS NOT NULL")}
+        except Exception:  # noqa  資料表還沒建、還沒有 cn 欄
+            _WIKI_CN["map"] = {}
+        _WIKI_CN["at"] = _t.time()
+    return _WIKI_CN["map"].get(key)
+
+
+def _series_cn(key: str, other_names: list[str] | None, manual: str | None, use_curated: bool = True) -> str:
+    """簡體模式的作品名：你取的名字（轉簡體字）> 維基百科大陸標題（內建表、查到的）> 台灣譯名轉簡體字 > Bangumi 原文 > 角色規則。"""
+    if manual:
+        return to_simp(manual)
+    wiki_tw = _wiki_auto(key)
+    tw = (curated(key) if use_curated else None) or _series_zh().get(key) or wiki_tw
+    built = _series_cn_table().get(key)          # [當時的台灣譯名, 大陸譯名]：台灣譯名改過了（你重新校對）就不用
+    if built and built[0] == tw:
+        return built[1]
+    if tw and tw == wiki_tw and _wiki_cn(key):
+        return _wiki_cn(key)
+    if tw:
+        return to_simp(tw)
+    return _display_cn(key, other_names, None, use_curated)
 
 
 def _base(k: str) -> str:

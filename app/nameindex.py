@@ -45,7 +45,7 @@ def _signature(c) -> tuple:
         z = tuple(c.execute("SELECT COUNT(*), MAX(checked_at) FROM name_zh").fetchone())
     except Exception:  # noqa
         z = ()
-    return tuple(a) + tuple(b) + z + (db.get_settings().get("display_lang"),)
+    return tuple(a) + tuple(b) + z + (db.get_settings().get("display_lang"), db.get_settings().get("zh_mode"))
 
 
 def _build(c):
@@ -65,7 +65,10 @@ def _build(c):
         disp = (names.series_display(name, other, dn, lang, wiki.get(name)) if cat == "copyright"
                 else names.display(name, other, dn, lang))
         ks: set[str] = set()
-        for s in [name, disp, dn or "", names.series_display(name, other, dn, "zh", wiki.get(name)) if cat == "copyright" else "", *other]:
+        # 繁體、簡體模式的中文名都收：哪個模式都搜得到「寶可夢」「宝可梦」
+        zh_both = ([names.series_display(name, other, dn, "zh", wiki.get(name), cn=v) for v in (False, True)] if cat == "copyright"
+                   else [names.display(name, other, dn, "zh", cn=v) for v in (False, True)])
+        for s in [name, disp, dn or "", *zh_both, *other]:
             if s:
                 ks |= variants(s)
         for k in ks:

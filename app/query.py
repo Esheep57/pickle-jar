@@ -142,10 +142,13 @@ def zh_dict() -> dict[str, str]:
 
 @lru_cache(maxsize=1)
 def zh_reverse() -> dict[str, list[str]]:
+    from . import zhui
     rev: dict[str, list[str]] = {}
     for k, v in zh_dict().items():
         for part in re.split(r"[／/、]", v):
-            rev.setdefault(part.strip(), []).append(k)
+            part = part.strip()
+            for w in dict.fromkeys((part, zhui.conv(part))):    # 簡體模式畫面上看到的寫法也收（「影片」→「视频」）
+                rev.setdefault(w, []).append(k)
     return rev
 
 

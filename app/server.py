@@ -108,8 +108,8 @@ async def guard(request: Request, call_next):
     # 區網（手機、平板）：上傳頁 /m 隨時可以開；輸入 PIN 以後可以「看」圖庫（只讀），改東西一律在電腦上做
     if not lan.enabled():
         return JSONResponse({"detail": "沒有開放區網連線"}, 403)
-    if path == "/m" or path.startswith("/m/") or path.startswith("/api/m/"):
-        return await call_next(request)
+    if path == "/m" or path.startswith("/m/") or path.startswith("/api/m/") or path in ("/static/js/zhcn.js", "/static/js/zhcn-dict.js"):
+        return await call_next(request)         # 上傳頁（還沒輸入 PIN）也要用簡體轉換
     if not lan._authed(request):
         if request.method == "GET" and (path in ("/", "/index.html") or path.startswith("/static/")):
             return RedirectResponse("/m", 302)          # 先輸入 PIN
@@ -171,6 +171,9 @@ def _startup():
             siteartists.recheck()
         with errlog.bg("啟動：補查資料卡"):      # 還沒查過 Danbooru 資料卡的角色／作品
             online.get_jobs().queue_missing_taginfo()
+        with errlog.bg("啟動：作品大陸譯名"):    # 簡體模式：以前只查了台灣譯名的作品補查大陸標題
+            if db.get_settings().get("zh_mode") == "cn":
+                online.get_jobs().queue_series_cn()
         with errlog.bg("啟動：中文名（Bangumi）"):   # 還沒查過的角色／作品排進背景；造型用本體的名字
             from . import zhname
             zhname.queue_on_start()

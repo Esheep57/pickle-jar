@@ -1714,3 +1714,43 @@ def test_b101_drive_backup_ui(base, client, tmp_path, monkeypatch):
         assert not _problems(page, errors), _problems(page, errors)
         b.close()
     db.update_settings({"drive_backup_last": {}})
+
+
+def test_zh_mode_ui(base, client):
+    """簡體模式：設定切成简体 → 重新載入，介面變大陸用語＋簡體字（圖庫→图库、資料夾→文件夹），html lang＝zh-Hans；切回繁體復原。"""
+    with pw.sync_playwright() as p:
+        b = _browser(p)
+        page = b.new_page(viewport={"width": 1400, "height": 900})
+        errors = []
+        page.on("pageerror", lambda e: errors.append(str(e)))
+        _open(page, base, "settings")
+        page.click('button[data-sec="display"]')
+        page.wait_for_selector("#zh-seg")
+        page.click('#zh-seg button[data-z="cn"]')
+        page.wait_for_function("document.documentElement.lang === 'zh-Hans'", timeout=15000)
+        page.wait_for_selector("#nav")
+        page.wait_for_timeout(800)
+        nav = page.inner_text("#nav")
+        assert "图库" in nav and "圖庫" not in nav, nav
+        assert client.get("/api/settings").json()["zh_mode"] == "cn"
+        page.goto(base + "/static/index.html#/settings")
+        page.click('button[data-sec="folders"]')
+        page.wait_for_timeout(800)
+        body = page.inner_text("body")
+        assert "文件夹" in body and "資料夾" not in body
+        # 指令面板：打簡體找得到指令
+        page.keyboard.press("Control+k")
+        page.fill("#pal-q", "简体")
+        page.wait_for_timeout(500)
+        assert "繁体／简体" in page.inner_text(".palette")
+        page.keyboard.press("Escape")
+        # 切回繁體
+        page.click('button[data-sec="display"]')
+        page.click('#zh-seg button[data-z="tw"]')
+        page.wait_for_function("document.documentElement.lang !== 'zh-Hans'", timeout=15000)
+        page.wait_for_selector("#nav")
+        page.wait_for_timeout(500)
+        assert "圖庫" in page.inner_text("#nav")
+        assert client.get("/api/settings").json()["zh_mode"] == "tw"
+        assert not errors, errors
+        b.close()

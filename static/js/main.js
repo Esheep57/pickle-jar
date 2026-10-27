@@ -31,7 +31,7 @@ window.lib = { S, api, go, render, selectAll, setSel, clearSel, pickTag, openVie
 S.mtype = "";
 // 從手機／平板（區網）連進來：只看模式（整理的頁面、選取、編輯都藏起來；伺服器那邊也只給讀）
 try { const me = await api("/api/m/me"); if (me.remote) { S.remote = true; document.body.classList.add("remote"); } } catch { }
-api("/api/settings").then(s => { S.settings = s; }).catch(() => { });
+api("/api/settings").then(s => { S.settings = s; window.zhcn?.sync(s.zh_mode); }).catch(() => { });   // 繁簡模式跟伺服器不一樣：重新載入
 document.documentElement.style.setProperty("--size", S.size + "px");
 applyNsfwUI();
 loadSidebar();

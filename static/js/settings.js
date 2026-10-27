@@ -69,6 +69,7 @@ export async function openSettings(section, asPage) {
       ${num("gdl_max_posts", "整個帳號只抓最新幾篇", 10, "gallery-dl 匯入（Bluesky、DeviantArt…）貼的是整個帳號、標籤、收藏的網址時。0＝全部。再匯入同一個帳號只會抓新的。", "篇")}
       ${row("瀏覽器按鈕", `<button class="btn sm" id="s-import">安裝／說明…</button>`, "Tampermonkey 腳本：在 X、Pixiv、Danbooru、e621、Rule34 上直接按「⤓ 存到圖庫」。")}`,
     display: `
+      ${row("中文", `<span class="seg" id="zh-seg"><button data-z="tw" class="${s.zh_mode === "cn" ? "" : "on"}">繁體</button><button data-z="cn" class="${s.zh_mode === "cn" ? "on" : ""}">简体</button></span>`, "简体：介面用大陸用語（文件夹、视频、默认），角色和作品用大陸常用譯名（Bangumi、維基百科大陆简体、寶可夢官方簡中）。你自己取的名字只轉成簡體字。切換後重新載入頁面。")}
       ${txt("quick_tags", "快速標籤", "梗圖, 真人, 截圖", "你最常用的分類，用逗號分隔（最多 9 個，依序對應數字鍵 1–9）。按數字鍵加上／拿掉；選取列、大圖「詳細」裡也有按鈕。")}
       ${txt("no_artist_tags", "不用找作者的標籤", "梗圖, 表情包, 截圖", "有這些標籤的圖不算「缺創作者」（表情包、梗圖這種轉了好幾手、找不到作者的）。標籤拿掉就會回來。")}
       ${txt("no_char_tags", "不認角色的標籤", "梗圖, 截圖", "有這些標籤的圖不再認角色、不再把候選放進待確認（AI、搜源、你的圖庫都一樣），也不自動上傳以圖搜圖。加上標籤時，還沒決定的候選會拿掉（可以撤銷）；已經確認的角色不動。")}
@@ -77,7 +78,7 @@ export async function openSettings(section, asPage) {
       ${row("專注退場", `<span class="seg" id="zen-seg"><button data-z="1" class="${store.get("zen", true) !== false ? "on" : ""}">開</button><button data-z="0" class="${store.get("zen", true) === false ? "on" : ""}">關</button></span>`, "連續按鍵、滑鼠沒動時，側欄、標題、工具列淡出；動一下滑鼠就回來。只影響這個瀏覽器。")}
       ${sel("grid_mode", "格狀排列", [["justified", "依原比例（像相簿）"], ["square", "正方形"]], "圖庫右上也可以隨時切換。")}
       ${sel("general_lang", "一般描述標籤", [["zh", "中文對照（常見的）"], ["raw", "原始英文"]])}
-      ${sel("display_lang", "角色／作品名稱", [["zh", "中文（自動轉繁體）"], ["ja", "日文"], ["raw", "原始 tag"]], "你自己取的名字永遠優先。")}`,
+      ${sel("display_lang", "角色／作品名稱", [["zh", "中文（繁體／简体照上面的「中文」）"], ["ja", "日文"], ["raw", "原始 tag"]], "你自己取的名字永遠優先。")}`,
     data: `
       ${num("backup_keep", "自動備份保留", 1, "每天自動備份資料庫一次。", "份")}
       ${txt("backup_mirror_dir", "備份另存一份到", "例如 D:\\備份 或 OneDrive 裡的資料夾", "每天的備份再複製一份到另一顆硬碟或雲端資料夾（底下會建 pickle-jar-backups）。只放備份檔，程式本身不要搬進同步資料夾。")}
@@ -135,6 +136,7 @@ export async function openSettings(section, asPage) {
   let autoT; m.addEventListener("change", e => { if (!e.target.closest("[data-k], [data-nsfw]")) return; clearTimeout(autoT); autoT = setTimeout(() => saveAll(false), 400); });
   // 按鈕
   $$("#zen-seg button", m).forEach(b => b.onclick = () => { store.set("zen", b.dataset.z === "1"); $$("#zen-seg button", m).forEach(x => x.classList.toggle("on", x === b)); });
+  $$("#zh-seg button", m).forEach(b => b.onclick = () => setZhMode(b.dataset.z));
   $$("#tint-seg button", m).forEach(b => b.onclick = () => { store.set("tint", b.dataset.t === "1"); applyTint(); $$("#tint-seg button", m).forEach(x => x.classList.toggle("on", x === b)); });
   const job = (kind, msg) => async () => { await api("/api/jobs", { kind }); toast(msg); };
   $("#j-scan", m).onclick = job("scan", "開始掃描");
@@ -186,4 +188,11 @@ export async function openSettings(section, asPage) {
       if (close) { loadSidebar(); if (history.length > 1) history.back(); else go("all"); }
     } catch (e) { toast("儲存失敗：" + e.message); }
   }
+}
+
+// 繁體／简体（介面用語＋角色作品譯名）：存到伺服器設定，重新載入（已經轉過的字沒辦法轉回去）
+export async function setZhMode(mode) {
+  if ((S.settings?.zh_mode || "tw") === mode && window.zhcn?.mode === mode) return;
+  try { S.settings = await api("/api/settings", { zh_mode: mode }); } catch (e) { return toast(e.message); }
+  if (!window.zhcn?.sync(mode)) location.reload();
 }

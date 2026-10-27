@@ -564,6 +564,17 @@ class OnlineJobs:
             self.submit("seriesname", new)
         return len(new)
 
+    def queue_series_cn(self) -> int:
+        """簡體模式：以前只查了台灣譯名的作品，重查一次（同一個條目的大陸標題）。"""
+        if not db.get_settings()["online_enabled"]:
+            return 0
+        from . import wikiname
+        keys = [k for k in wikiname.need_cn() if ("zh:" + k) not in self._queued_tags]
+        self._queued_tags.update("zh:" + k for k in keys)
+        if keys:
+            self.submit("seriesname", keys)
+        return len(keys)
+
     def queue_series_parent(self, keys: list[str]):
         """作品的母系列：到 Danbooru 查 tag implication（見 seriesmap.py）。"""
         new = [k for k in keys if ("sp:" + k) not in self._queued_tags]

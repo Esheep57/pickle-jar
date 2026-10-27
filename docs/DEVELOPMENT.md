@@ -52,6 +52,7 @@
 | `nameindex.py` | 名字索引：原名／顯示名稱／別名／譯名，簡繁、大小寫、底線空白都對得到 |
 | `query.py` | 搜尋語法、`MISSING_RAW`（未識別各分頁條件）、`BUCKETS`、`where()`、`explain()` |
 | `names.py`／`seriesmap.py`／`seriesguess.py`／`wikiname.py` | 顯示名稱（繁體）、母系列、未知作品推測、維基譯名 |
+| 簡體模式（`zh_mode`） | 介面：`static/js/zhcn.js`（`<head>` 的一般 script，MutationObserver 把文字、title、placeholder 換成大陸用語＋簡體字；只改看得到的字）＋ `zhcn-dict.js`（`scripts/build_zhcn.py` 從 OpenCC 字典＋`OVERRIDE` 產生，會檢查轉兩次結果一樣）；伺服器搜尋用同一份字典（`zhui.py`）。名稱：`names._display_cn`／`_series_cn`（Bangumi 原文 `zhname.auto_map_cn`、`data/series_cn.json`、`series_zh.cn`（維基 zh-cn 標題）、`pokemon_zh.json` 第三欄），沒有的 `to_simp`；`nameindex` 兩種模式的名字都收 |
 | `dupverify.py` | 逐像素同圖驗證、局部截圖 |
 | `jobsview.py`／`errlog.py` | 背景工作面板、伺服器錯誤紀錄 |
 | `evaltagger.py`、`archive.py`、`ocr.py`、`media.py` | WD 驗證、iCloud 移出、OCR、圖片工具 |

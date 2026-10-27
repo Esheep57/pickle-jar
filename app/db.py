@@ -92,7 +92,8 @@ DEFAULT_SETTINGS = {
     "import_key": "",                 # 瀏覽器「存到圖庫」按鈕的配對金鑰（第一次用時自動產生）
     "r34_user_id": "",                # 選填：Rule34 帳號的 user ID + API key（原檔比對用）
     "r34_api_key": "",
-    "display_lang": "zh",             # 角色/作品顯示名稱：zh 中文（轉繁體）/ ja 日文 / raw 原始 tag
+    "display_lang": "zh",             # 角色/作品顯示名稱：zh 中文（繁簡照 zh_mode）/ ja 日文 / raw 原始 tag
+    "zh_mode": "tw",                  # 中文：tw 繁體（台灣用語、台灣譯名）/ cn 简体（大陸用語、大陸譯名）
     "general_lang": "zh",             # 一般描述 tag 顯示：zh 中文對照 / raw 原始
     "grid_mode": "justified",         # 格狀：justified 依原比例 / square 正方形
     "setup_done": False,              # 首次設定精靈是否完成

@@ -64,9 +64,30 @@ def auto_map() -> dict:
     return m
 
 
+_MAP_CN: dict | None = None
+
+
+def auto_map_cn() -> dict:
+    """簡體模式用：Bangumi 的原文（大陸譯名，本來就是簡體）；造型（本體＋造型）把顯示用的名字轉簡體字。"""
+    global _MAP_CN
+    m = _MAP_CN
+    if m is None:
+        with _MAP_LOCK:
+            if _MAP_CN is None:
+                try:
+                    rows = db.conn().execute("""SELECT name, status, zh, raw FROM name_zh
+                        WHERE status IN ('found','variant') AND zh IS NOT NULL""").fetchall()
+                except Exception:  # noqa
+                    return {}
+                _MAP_CN = {r[0]: names.to_simp(r[3] if r[1] == "found" and r[3] else r[2]) for r in rows}
+            m = _MAP_CN
+    return m
+
+
 def reload():
-    global _MAP
+    global _MAP, _MAP_CN
     _MAP = None
+    _MAP_CN = None
     try:
         from . import nameindex
         nameindex.invalidate()
@@ -322,8 +343,10 @@ def wd_lookup(tag: str, other_names: list[str], hints: set[str] | None = None) -
             if not (p31 & CHAR_P31 or _CHAR_DESC.search(desc)):
                 continue                  # 不是角色（歌手、法國小鎮、小行星…）
             zh, tw = _wd_label(ent)
+            lb = ent.get("labels") or {}
+            cn = next((v for v in ((lb.get(k) or {}).get("value") for k in ("zh-cn", "zh-hans", "zh")) if _ok_zh(v)), None)
             nd = norm(_simp(desc))
-            cands.append({"id": i, "zh": zh, "tw": tw, "series_ok": any(h in nd for h in long_hints),
+            cands.append({"id": i, "zh": zh, "tw": tw, "cn": cn, "series_ok": any(h in nd for h in long_hints),
                           "vtuber": bool(re.search(r"youtuber|vtuber", desc, re.I))})
         if not cands:
             continue
@@ -337,7 +360,8 @@ def wd_lookup(tag: str, other_names: list[str], hints: set[str] | None = None) -
             c = ok[0]
             if not c["zh"]:
                 return {"status": "none", "note": "Wikidata 有這個角色，但沒有中文名"}
-            return {"status": "found", "zh": c["zh"], "raw": c["zh"], "ref": f"wd:{c['id']}", "tw": c["tw"]}
+            # raw：大陸譯名（簡體模式用）；Wikidata 沒有簡體標籤就跟顯示用的一樣
+            return {"status": "found", "zh": c["zh"], "raw": c.get("cn") or c["zh"], "ref": f"wd:{c['id']}", "tw": c["tw"]}
     return {"status": "none"}
 
 
