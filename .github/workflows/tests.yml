@@ -23,11 +23,12 @@ jobs:
       - name: 安裝畫面測試用的瀏覽器
         run: python -m playwright install --with-deps chromium
       - name: 測試
-        # 用假模型、假網站，不需要網路和 GPU；沒過的測試寫進執行摘要（不用登入也看得到）
+        # 用假模型、假網站，不需要網路和 GPU；沒過的測試寫成註記（執行結果頁不用登入就看得到）
         shell: bash
         run: |
           set -o pipefail
-          python -m pytest -q -p no:warnings -rfE 2>&1 | tee pytest.log || {
-            { echo '### 沒有通過的測試'; echo '```'; grep -E '^(FAILED|ERROR) ' pytest.log | head -50; echo '```';
-              echo '<details><summary>最後 150 行</summary>'; echo; echo '```'; tail -150 pytest.log; echo '```'; echo '</details>'; } >> "$GITHUB_STEP_SUMMARY"
+          python -m pytest -q -p no:warnings -rfE --tb=short 2>&1 | tee pytest.log || {
+            grep -E '^(FAILED|ERROR) ' pytest.log | head -20 | while IFS= read -r l; do echo "::error title=沒通過::$l"; done
+            msg=$(grep -E '^E  |Error|assert' pytest.log | head -40 | sed 's/%/%25/g' | awk '{printf "%s%%0A", $0}')
+            echo "::error title=錯誤訊息::$msg"
             exit 1; }
