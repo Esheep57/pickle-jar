@@ -175,7 +175,13 @@ def tags(q: str = "", category: str | None = None, limit: int = 20):
                         out.append({**dict(r), "copyright": None, "alias": None, "zh": zh})
                         have.add(en)
         out.sort(key=lambda d: -(d["n"] or 0))
-    return out[:limit]
+    out = out[:limit]
+    # Danbooru 角色表（b109）：圖庫裡還沒有的角色接在後面
+    if qs and category in (None, "character") and len(out) < limit:
+        from .. import charcat
+        have = {d["name"] for d in out} | {r[0] for r in c.execute("SELECT name FROM tags WHERE category='character'")}
+        out += charcat.search(qs, limit=min(12, limit - len(out)), exclude=have)
+    return out
 
 
 
@@ -234,6 +240,10 @@ def tags_suggest(body: SuggestReq):
                 (SELECT COUNT(*) FROM media_tags x WHERE x.tag_id=t.id AND x.state=1) AS n
             FROM tags t JOIN tag_info ti ON ti.tag_id=t.id WHERE t.category='character' AND ti.copyright IN ({sp})
             ORDER BY n DESC LIMIT 40""", list(series)).fetchall()) if m["name"] not in skip and m["n"]][:16]
+    if series and cat in (None, "character") and len(mates) < 16:     # 角色表裡同作品、圖庫還沒有的（b109）
+        from .. import charcat
+        mates += charcat.mates(series, {x["name"] for x in cand + have + mates} | {r[0] for r in c.execute(
+            "SELECT name FROM tags WHERE category='character'")}, 16 - len(mates))
     pinned = pack(c.execute(f"""SELECT t.name, t.category, ti.copyright, ti.other_names, ti.display_name,
             (SELECT COUNT(*) FROM media_tags x WHERE x.tag_id=t.id AND x.state=1) AS n
         FROM tags t LEFT JOIN tag_info ti ON ti.tag_id=t.id WHERE t.pinned=1 {catw} ORDER BY n DESC LIMIT 10""", cp).fetchall())
@@ -367,12 +377,22 @@ def tags_apply(op: TagOp):
     name = op.tag.strip().replace(" ", "_")
     if not name or not op.ids:
         raise HTTPException(400)
+    is_new = not db.tag_id(name, create=False)
     with db.write_lock:
         rows, propagated, set_added = _apply(op.action, name, op.ids, op.category, op.from_tag)
         db.push_action(f"{LABELS.get(op.action, op.action)} {name}（{len(op.ids)} 張）"
                        + (f"＋相似 {propagated} 張" if propagated else ""), {"tag_rows": rows}, touched=op.ids)
         db.conn().commit()
     _schedule_rematch()
+    if is_new:          # 新標籤（例如從 Danbooru 角色表挑的）：名字索引馬上重建，選單、搜尋立刻找得到
+        from .. import nameindex
+        nameindex.invalidate()
+    if op.action in ("add", "confirm", "replace") and db.get_settings()["online_enabled"]:
+        # 從 Danbooru 角色表挑的新角色：資料卡馬上查（不用等定期補查）
+        r = db.conn().execute("""SELECT t.category FROM tags t LEFT JOIN tag_info ti ON ti.tag_id=t.id
+                                 WHERE t.name=? AND ti.tag_id IS NULL""", (name,)).fetchone()
+        if r and r[0] in ("character", "copyright", "artist"):
+            online.get_jobs().queue_tag_info([name])
     crowd = 0
     if op.action in ("add", "confirm", "replace") and len(op.ids) <= 2000:
         cat = db.conn().execute("SELECT category FROM tags WHERE name=?", (name,)).fetchone()

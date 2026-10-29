@@ -93,6 +93,8 @@ DEFAULT_SETTINGS = {
     "r34_user_id": "",                # 選填：Rule34 帳號的 user ID + API key（原檔比對用）
     "r34_api_key": "",
     "display_lang": "zh",             # 角色/作品顯示名稱：zh 中文（繁簡照 zh_mode）/ ja 日文 / raw 原始 tag
+    "series_independent": ["arknights:_endfield"],   # 作品頁獨立顯示、不併入母系列的子作品（角色不同批的，例如終末地；b110）
+    "charcat_zh": True,               # Danbooru 角色表：照作品熱度查角色的中文名（Bangumi，背景）
     "zh_mode": "tw",                  # 中文：tw 繁體（台灣用語、台灣譯名）/ cn 简体（大陸用語、大陸譯名）
     "general_lang": "zh",             # 一般描述 tag 顯示：zh 中文對照 / raw 原始
     "grid_mode": "justified",         # 格狀：justified 依原比例 / square 正方形
@@ -595,6 +597,35 @@ def _m20_converge(c):
     c.execute("INSERT OR REPLACE INTO settings(key, value) VALUES('_vacuum', 'true')")
 
 
+def _m21_bgm_groups(c):
+    """v21（b110.6）：Bangumi 的「組織」角色頁（少女與戰車的河馬隊、聖葛羅莉安娜女子學院…）被當成隊員的中文名。
+    zhname 之後會跳過組織（type 4）；這裡把已經套上的刪掉，讓背景重查。條件：同一個 Bangumi 頁對到 3 個以上的角色、名字像隊伍／學校。"""
+    try:
+        rows = c.execute("""SELECT ref FROM name_zh WHERE status='found' AND ref LIKE 'bgm:character/%'
+                            GROUP BY ref HAVING COUNT(DISTINCT name) >= 2""").fetchall()
+    except sqlite3.OperationalError:
+        return
+    import re as _re
+    bad = []
+    for (ref,) in rows:
+        zh = c.execute("SELECT zh FROM name_zh WHERE ref=? LIMIT 1", (ref,)).fetchone()[0] or ""
+        if _re.search(r"(隊|高中|學園|學院|高校)$", zh):
+            bad.append(ref)
+    for ref in bad:
+        c.execute("DELETE FROM name_zh WHERE ref=? AND status='found'", (ref,))
+
+
+def _m22_group_names(c):
+    """v22（b110.8）：角色的中文名是學校、隊伍名的（Bangumi 組織頁沒標 type 4 的）刪掉重查。"""
+    try:
+        rows = c.execute("SELECT name, zh FROM name_zh WHERE status='found' AND category='character'").fetchall()
+    except sqlite3.OperationalError:
+        return
+    import re as _re
+    bad = [r[0] for r in rows if _re.search(r"(高校|高中|學園|學院|隊|組)$", r[1] or "")]
+    c.executemany("DELETE FROM name_zh WHERE name=?", [(n,) for n in bad])
+
+
 def trim_ascii2d_raw(c, keep: int = 200) -> int:
     """ascii2d 結果頁的原始 HTML（ascii2d 改版時看的）只留最近 keep 列。"""
     try:
@@ -621,7 +652,7 @@ def vacuum_if_requested() -> bool:
 
 MIGRATIONS = [_m1_legacy, _m2_trash, _m3_job_queue, _m4_ascii2d, _m5_upgrade, _m6_name_zh, _m7_char_base, _m8_skip_by_tag, _m9_edited_at,
               _m10_edited_ascii2d, _m11_pixai, _m12_sweep, _m13_album_index, _m14_op_log,
-              _m15_ascii2d_picked, _m16_mediaclf, _m17_clip, _m18_implies, _m19_bg_tasks, _m20_converge]   # 新的遷移加在最後面，不要改前面的順序
+              _m15_ascii2d_picked, _m16_mediaclf, _m17_clip, _m18_implies, _m19_bg_tasks, _m20_converge, _m21_bgm_groups, _m22_group_names]   # 新的遷移加在最後面，不要改前面的順序
 
 
 # ---------- settings ----------

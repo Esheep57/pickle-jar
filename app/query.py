@@ -446,11 +446,31 @@ def _term(tok: str) -> tuple[str, list] | None:
 
 
 def _series_sql(keys: list[str]) -> tuple[str, list]:
-    from . import names
+    from . import family, names
     subs = list(dict.fromkeys(keys + [k for k in _copyrights() if k not in keys and any(names.series_parent(k, {v}) == v for v in keys)]))
-    ph = ",".join("?" * len(subs))
-    return (f"""m.id IN (SELECT x.media_id FROM media_tags x JOIN tags t ON t.id=x.tag_id LEFT JOIN tag_info ti ON ti.tag_id=t.id
-               WHERE x.state=1 AND (ti.copyright IN ({ph}) OR t.name IN ({ph})))""", [*subs, *subs])
+    groups = family.groups_cached()
+    # b110 獨立顯示的子作品（終末地）：子作品頁只放有子作品證據的圖（見 family.py）
+    own = [g for g in groups if g["child"] in subs]
+    rest = [k for k in subs if k not in {g["child"] for g in own}]
+    parts, p = [], []
+    if rest:
+        ph = ",".join("?" * len(rest))
+        parts.append(f"""m.id IN (SELECT x.media_id FROM media_tags x JOIN tags t ON t.id=x.tag_id LEFT JOIN tag_info ti ON ti.tag_id=t.id
+               WHERE x.state=1 AND (ti.copyright IN ({ph}) OR t.name IN ({ph})))""")
+        p += [*rest, *rest]
+    for g in own:
+        q, qp = family.child_evidence_sql(g)
+        parts.append(q)
+        p += qp
+    q = "(" + " OR ".join(parts) + ")" if parts else "0"
+    # 母系列頁：子作品的圖（有子作品證據）除非也有母系列自己的角色（同框）
+    for g in groups:
+        if g["parent"] in subs and g["child"] not in subs:
+            ce, cp = family.child_evidence_sql(g)
+            po, pp = family.parent_only_char_sql(g, subs)
+            q = f"({q} AND NOT ({ce} AND NOT {po}))"
+            p += [*cp, *pp]
+    return q, p
 
 
 _PLAIN = re.compile(r"^[^:\-*|()][^:*|]*$")

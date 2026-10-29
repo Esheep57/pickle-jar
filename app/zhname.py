@@ -168,8 +168,12 @@ def search_characters(keyword: str) -> list[dict]:
     k = norm(keyword)
     out = []
     for c in d.get("data") or []:
+        if c.get("type") == 4:
+            continue        # 組織（少女與戰車的「河馬隊」頁把隊員名字列成別名）不是角色（b110.6）
         if norm(c.get("name") or "") == k:
             cn = _info(c, "简体中文名")
+            if cn and names.GROUPISH.search(names.to_trad(cn)):
+                continue    # 學校、隊伍頁（有些組織頁沒標 type 4：黑森峰女子學園、鯊魚隊）
             out.append({"id": c.get("id"), "name": c.get("name"), "cn": cn if _ok_zh(cn) else None})
     return out
 
@@ -204,6 +208,11 @@ def series_hints(tag: str) -> set[str]:
             keys |= set(json.loads(r[1] or "[]")[:5])
         except (TypeError, ValueError):
             pass
+    if not r:           # 圖庫裡還沒有的角色：Danbooru 角色表的作品
+        from . import charcat
+        ci = charcat.info(tag)
+        if ci and ci["copyright"]:
+            keys.add(ci["copyright"])
     for (k,) in c.execute("""SELECT t2.name FROM media_tags a JOIN tags t1 ON t1.id=a.tag_id AND t1.name=?
                              JOIN media_tags b ON b.media_id=a.media_id AND b.state=1 JOIN tags t2 ON t2.id=b.tag_id AND t2.category='copyright'
                              WHERE a.state=1 GROUP BY t2.name ORDER BY COUNT(*) DESC LIMIT 4""", (tag,)):
@@ -418,7 +427,11 @@ LABELS = {"swimsuit": "泳裝", "bikini": "比基尼", "new_year": "新年", "bu
           "christmas": "聖誕", "halloween": "萬聖節", "idol": "偶像", "track": "運動服", "sportswear": "運動服", "cheer_squad": "啦啦隊",
           "cheerleader": "啦啦隊", "kimono": "和服", "pajamas": "睡衣", "pyjamas": "睡衣", "band": "樂團", "hot_spring": "溫泉",
           "young": "幼年", "adult": "成年", "wedding": "婚紗", "winter": "冬裝", "summer": "夏裝", "party": "派對", "race_queen": "賽車女郎",
-          "office": "上班", "camp": "露營", "riding": "騎乘", "armor": "鎧甲", "alter": "Alter", "append": "Append"}
+          "office": "上班", "camp": "露營", "riding": "騎乘", "armor": "鎧甲", "alter": "Alter", "append": "Append",
+          # FGO 靈基再臨、碧藍航線改造（b109.6）
+          "first_ascension": "第一再臨", "second_ascension": "第二再臨", "third_ascension": "第三再臨", "final_ascension": "最終再臨",
+          "fourth_ascension": "最終再臨", "retrofit": "改", "endfield": "終末地", "arknights:_endfield": "終末地", "human": "人類型態", "valentine": "情人節", "festival": "祭典",
+          "dancer": "舞者", "nurse": "護士", "police": "警察", "chinese_clothes": "中華服", "china_dress": "旗袍", "yukata": "浴衣"}
 _NTH = re.compile(r"^(\d+)(?:st|nd|rd|th)_costume$")
 _ZH_NUM = "一二三四五六七八九十"
 
@@ -448,10 +461,20 @@ def refresh_variants() -> int:
         m = names.VARIANT.match(name) or names.SIMPLE_VARIANT.match(name)
         q = m.group(2) if m else ""
         on, dn = info[base]
-        bd = names.display(base, on, dn, "zh")
+        bd = names.display(base, on, dn, "zh", cn=False)       # 存繁體（簡體模式顯示時再轉）
         if not names.HAN_CHAR.search(bd) or names.KANA.search(bd):
             continue            # 本體也沒有中文名：不用造型名蓋掉 Danbooru 給造型的名字
         out.append((name, "character", f"{bd}（{variant_label(q)}）"))
+    cat_out = _catalog_variants(existing)
+    if cat_out:
+        # 角色表的造型：Bangumi 用日文名查到的是本人（marnie_(summer_2021) → 瑪俐）→ 換成「瑪俐（Summer 2021）」；Bangumi 給了別的名字就留著
+        cur = {r[0]: (r[1], r[2]) for r in c.execute("SELECT name, status, zh FROM name_zh WHERE status IN ('found','kept')")}
+        fix = [(zh, time.time(), n) for n, _, zh in cat_out
+               if cur.get(n, (None,))[0] in ("found", "kept") and zh.startswith((cur[n][1] or "\0") + "（")]
+        if fix:
+            with db.write_lock:
+                c.executemany("UPDATE name_zh SET status='variant', zh=?, raw=NULL, ref=NULL, checked_at=? WHERE name=?", fix)
+    out += cat_out
     with db.write_lock:
         c.executemany("""INSERT INTO name_zh(name, category, status, zh, checked_at) VALUES(?,?,'variant',?,?)
                          ON CONFLICT(name) DO UPDATE SET status='variant', zh=excluded.zh, checked_at=excluded.checked_at
@@ -459,6 +482,45 @@ def refresh_variants() -> int:
                       [(n, cat, zh, time.time()) for n, cat, zh in out])
     reload()
     return len(out)
+
+
+_CV = {"at": 0.0}
+
+
+def _catalog_variants(lib: set[str], force: bool = False) -> list[tuple[str, str, str]]:
+    """Danbooru 角色表裡（圖庫還沒有）的造型（mika_(swimsuit)_(blue_archive)、hatsune_miku_(append)）：本體的中文名＋造型（b109.5）。
+    角色表有 10 萬個：背景查中文名時每 20 個就會呼叫一次 refresh_variants，這部分 10 分鐘最多算一次。"""
+    if not force and time.time() - _CV["at"] < 600:
+        return []
+    _CV["at"] = time.time()
+    from . import charcat
+    if not charcat._has_table("char_catalog"):
+        return []
+    c = db.conn()
+    cat = {r[0]: r[1] for r in c.execute("SELECT name, other_names FROM char_catalog")}
+    if not cat:
+        return []
+    libinfo = {r[0]: (r[1], r[2]) for r in c.execute("""SELECT t.name, ti.other_names, ti.display_name FROM tags t
+                                                        LEFT JOIN tag_info ti ON ti.tag_id=t.id WHERE t.category='character'""")}
+    existing = lib | set(cat)
+    out = []
+    for name in cat:
+        if name in lib:
+            continue
+        base = names.base_of(name, existing)
+        if not base:
+            continue
+        m = names.VARIANT.match(name) or names.SIMPLE_VARIANT.match(name)
+        q = m.group(2) if m else ""
+        if base in libinfo:
+            on, dn = json.loads(libinfo[base][0] or "[]"), libinfo[base][1]
+        else:
+            on, dn = json.loads(cat.get(base) or "[]"), None
+        bd = names.display(base, on, dn, "zh", cn=False)
+        if not names.HAN_CHAR.search(bd) or names.KANA.search(bd):
+            continue
+        out.append((name, "character", f"{bd}（{variant_label(q)}）"))
+    return out
 
 
 # ---------- 要查哪些 ----------
@@ -569,7 +631,8 @@ def recheck_local() -> int:
     c = db.conn()
     # b72：簡轉繁的規則改了（栗村 → 慄村、明里 → 明裡、洛托姆 → 洛託姆 這類轉錯）：Bangumi 的原文重轉一次
     fixed = []
-    for name, raw, zh in c.execute("SELECT name, raw, zh FROM name_zh WHERE ref LIKE 'bgm:%' AND raw IS NOT NULL").fetchall():
+    for name, raw, zh in c.execute("""SELECT name, raw, zh FROM name_zh
+                                      WHERE ref LIKE 'bgm:%' AND raw IS NOT NULL AND status IN ('found','kept')""").fetchall():   # 造型（variant）不動
         z = names.to_trad(raw)
         if z != zh:
             fixed.append((z, name))
@@ -614,10 +677,15 @@ def run(tags: list[str], state: dict, stop) -> None:
             break
         r = c.execute("""SELECT t.category, ti.other_names FROM tags t LEFT JOIN tag_info ti ON ti.tag_id=t.id WHERE t.name=?""",
                       (name,)).fetchone()
-        if not r:
-            state["done"] = (state.get("done") or 0) + 1
-            continue
-        cat, on = r[0], json.loads(r[1] or "[]")
+        if r:
+            cat, on = r[0], json.loads(r[1] or "[]")
+        else:           # 圖庫裡還沒有、Danbooru 角色表裡有的角色（b109：照作品熱度查中文名）
+            from . import charcat
+            ci = charcat.info(name)
+            if not ci:
+                state["done"] = (state.get("done") or 0) + 1
+                continue
+            cat, on = "character", ci["other_names"]
         try:
             res = lookup_series(name, on) if cat == "copyright" else lookup_best(name, on)
         except Exception as e:  # noqa  連不上：一天後再試

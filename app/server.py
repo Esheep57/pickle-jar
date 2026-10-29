@@ -23,7 +23,7 @@ try:     # 原生程式庫（ONNX Runtime、OpenCV）讓程式直接崩潰時，
     _fh.enable(file=open(db.DATA_DIR / "crash.log", "a", encoding="utf-8"), all_threads=True)
 except Exception:  # noqa
     pass
-from .api import steps as steps_api, sweep as sweep_api, albums as albums_api, ascii2d as ascii2d_api, upgrade as upgrade_api, work as work_api, gif as gif_api, dataset as dataset_api, drivebackup as drivebackup_api, imports, lan, library, net, review, saved, shelf, system, tags
+from .api import steps as steps_api, sweep as sweep_api, albums as albums_api, ascii2d as ascii2d_api, upgrade as upgrade_api, work as work_api, gif as gif_api, dataset as dataset_api, drivebackup as drivebackup_api, charcat as charcat_api, imports, lan, library, net, review, saved, shelf, system, tags
 from .matcher import matcher
 
 STATIC = Path(__file__).resolve().parent.parent / "static"
@@ -37,7 +37,7 @@ async def lifespan(_app):
 
 app = FastAPI(title="Pickle Jar", lifespan=lifespan)
 for r in (library.router, tags.router, review.router, shelf.router, saved.router, net.router, system.router, lan.router,
-          imports.router, albums_api.router, ascii2d_api.router, upgrade_api.router, work_api.router, sweep_api.router, steps_api.router, gif_api.router, dataset_api.router, drivebackup_api.router):
+          imports.router, albums_api.router, ascii2d_api.router, upgrade_api.router, work_api.router, sweep_api.router, steps_api.router, gif_api.router, dataset_api.router, drivebackup_api.router, charcat_api.router):
     app.include_router(r)
 
 LOCAL_HOSTS = {"127.0.0.1", "localhost", "[::1]", "::1"}
@@ -171,12 +171,24 @@ def _startup():
             siteartists.recheck()
         with errlog.bg("啟動：補查資料卡"):      # 還沒查過 Danbooru 資料卡的角色／作品
             online.get_jobs().queue_missing_taginfo()
+        with errlog.bg("啟動：子作品的再旅角色"):   # b110：獨立顯示的子作品，角色在 Danbooru 上的比例（原生／再旅）
+            from . import family
+            family.queue_shares()
         with errlog.bg("啟動：作品大陸譯名"):    # 簡體模式：以前只查了台灣譯名的作品補查大陸標題
             if db.get_settings().get("zh_mode") == "cn":
                 online.get_jobs().queue_series_cn()
+        with errlog.bg("啟動：Danbooru 角色表"):     # 下載過：超過 30 天自動更新；熱門角色的作品、中文名接著查
+            from . import charcat
+            if charcat.refresh_due() and db.get_settings()["online_enabled"]:
+                online.get_jobs().submit("charcat", {"min": charcat._meta("min_posts", 10)})
+            elif charcat.status()["count"]:
+                charcat.queue_followups()
         with errlog.bg("啟動：中文名（Bangumi）"):   # 還沒查過的角色／作品排進背景；造型用本體的名字
             from . import zhname
             zhname.queue_on_start()
+        with errlog.bg("啟動：同名角色加作品名"):   # b110.7：紫苑（轉生史萊姆／碧藍幻想）這種，背景算
+            from . import dupnames
+            dupnames.start()
         with errlog.bg("啟動：標籤蘊含"):
             from . import implies
             implies.schedule(delay=90)        # 還沒問過 Danbooru 的角色（第一次約 3,000 個、一次 40 個；之後只問新的）

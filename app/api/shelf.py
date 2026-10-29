@@ -7,7 +7,7 @@ import time
 from fastapi import APIRouter, HTTPException
 from pydantic import BaseModel
 
-from .. import db, names, query
+from .. import db, family, names, query
 from ..query import NSFW
 
 router = APIRouter()
@@ -24,6 +24,15 @@ def series_detail(key: str, nsfw: str = "hide", noalbum: bool = False):
         if par:
             return {"key": key, "parent": par}
     chars = [ch for ch in d["chars"] if (ch["series"] or "") == key]
+    # 再旅角色：另一邊的作品頁也列，張數只算這邊的（b110）
+    have = {ch["name"] for ch in chars}
+    for ch in d["chars"]:
+        sp = ch.get("split") or {}
+        if ch["name"] not in have and sp.get(key):
+            chars.append({**ch, "n": sp[key], "series": key})
+        elif ch["name"] in have and key in sp:
+            chars[[x["name"] for x in chars].index(ch["name"])] = {**ch, "n": sp[key]}
+    chars.sort(key=lambda x: -x["n"])
     c = db.conn()
     info = c.execute("""SELECT ti.url, ti.summary, ti.post_count FROM tags t JOIN tag_info ti ON ti.tag_id=t.id
                         WHERE t.name=?""", (key,)).fetchone()
@@ -62,7 +71,41 @@ def series_detail(key: str, nsfw: str = "hide", noalbum: bool = False):
             "custom_cover": g.get("custom_cover") if g else None,
             "url": info["url"] if info else None, "summary": info["summary"] if info else None,
             "post_count": info["post_count"] if info else None, "pinned": bool(pr and pr[0]),
-            "sub_display": {k: names.series_display(k, [], None, lang) for k in subs}}
+            "sub_display": {k: names.series_display(k, [], None, lang) for k in subs},
+            **_family(key, d, lang)}
+
+
+def _family(key: str, d: dict, lang: str) -> dict:
+    """（b110）獨立顯示的子作品跟母系列互相連得到：母系列頁列出「相關」的獨立子作品；子作品頁有「屬於 X」。"""
+    keys = {x["key"] for x in d["series"] if x["key"]} | {key}
+    ind = names.independent()
+    parent = names.series_parent(key, keys - {key}, ignore_independent=True) if key in ind else None
+    related = [k for k in ind if k != key and k in keys and names.series_parent(k, {key}, ignore_independent=True) == key]
+    disp = lambda k: next((x["display"] for x in d["series"] if x["key"] == k), names.series_display(k, [], None, lang))
+    can = names.series_parent(key, keys - {key}, ignore_independent=True) if key not in ind else parent
+    return {"independent": key in ind, "family_parent": parent and {"key": parent, "display": disp(parent)},
+            "can_split": bool(can), "split_parent": can and {"key": can, "display": disp(can)},
+            "related": [{"key": k, "display": disp(k)} for k in sorted(related)]}
+
+
+class IndepReq(BaseModel):
+    on: bool
+
+
+@router.post("/api/series/{key:path}/independent")
+def series_independent(key: str, body: IndepReq):
+    """作品頁的「獨立顯示」開關：存在設定 series_independent。"""
+    cur = list(db.get_settings().get("series_independent") or [])
+    if body.on and key not in cur:
+        cur.append(key)
+    if not body.on:
+        cur = [k for k in cur if k != key]
+    db.update_settings({"series_independent": cur})
+    db.user_wrote()                    # 書架、作品頁的快取跟著換
+    if body.on:
+        from .. import family
+        family.queue_shares()          # 哪些角色是原生、哪些是再旅（Danbooru 貼文的比例）
+    return {"ok": True, "independent": body.on}
 
 
 
@@ -106,7 +149,7 @@ def _shelf(nsfw: str = "hide", days: int = 7, noalbum: bool = False):
     nf = (f" AND {NSFW}=0" if nsfw == "hide" else "") + (ALB if noalbum else "")
     sfw_first = f"{NSFW.replace('m.', 'm.')} ASC, " if nsfw != "show" else ""   # 模糊模式：封面優先挑安全的圖
     since = time.time() - days * 86400
-    rows = c.execute(f"""SELECT t.id, t.name, t.cover, t.pinned, ti.copyright, ti.other_names, ti.display_name, ti.match_suggest,
+    rows = c.execute(f"""SELECT t.id, t.name, t.cover, t.pinned, ti.copyright, ti.copyrights, ti.other_names, ti.display_name, ti.match_suggest,
           SUM(mt.state=1) n, SUM(mt.state=1 AND m.added_at >= ?) recent, SUM(mt.state=0) cand,
           MAX(CASE WHEN mt.state=1 THEN COALESCE(m.mtime, m.added_at) END) last
         FROM tags t CROSS JOIN media_tags mt ON mt.tag_id=t.id AND mt.state>=0
@@ -135,16 +178,17 @@ def _shelf(nsfw: str = "hide", days: int = 7, noalbum: bool = False):
     for r in rows:
         chars[r["name"]] = {
             "name": r["name"], "n": r["n"] or 0, "recent": r["recent"] or 0, "cand": r["cand"] or 0, "last": r["last"],
-            "series": r["copyright"] or guess.get(r["name"]), "series_guess": not r["copyright"] and r["name"] in guess, "aliases": json.loads(r["other_names"] or "[]"), "pinned": r["pinned"],
+            "series": family.char_home(r["name"], r["copyright"], r["copyrights"]) or guess.get(r["name"]), "series_guess": not r["copyright"] and r["name"] in guess, "aliases": json.loads(r["other_names"] or "[]"), "pinned": r["pinned"],
             "display": names.display(r["name"], json.loads(r["other_names"] or "[]"), r["display_name"], lang),
             "cover": r["cover"] if r["cover"] and visible(r["cover"]) else covers.get(r["id"]), "skins": [], "_id": r["id"],
             "_alts": ([r["cover"]] if r["cover"] and visible(r["cover"]) else []) + alts.get(r["id"], []),
             "suggest": json.loads(r["match_suggest"]) if r["match_suggest"] else None,
         }
-    # 造型併入本體
+    # 造型併入本體——除了屬於「獨立顯示」子作品的版本（終末地的再旅版本 xxx_(endfield)_(arknights)：自己一個角色，歸子作品；b110）
+    nat = {n for g in family.groups_cached() for n in g["natives"]}
     for name in list(chars):
         b = names.base_of(name, existing)
-        if b and b in chars and name in chars:
+        if b and b in chars and name in chars and not (name in nat and b not in nat):
             v = chars.pop(name)
             bb = chars[b]
             bb["skins"].append({"name": name, "n": v["n"]})
@@ -182,6 +226,23 @@ def _shelf(nsfw: str = "hide", days: int = 7, noalbum: bool = False):
             if ch["series"] not in pmap:
                 pmap[ch["series"]] = names.series_parent(ch["series"], fk) or ch["series"]
             ch["series"] = pmap[ch["series"]]
+    # b110 再旅角色（同一個角色標籤兩款遊戲都用）：兩個作品頁都列、各算各的；書架放在圖比較多的那邊
+    groups = family.groups_cached()
+    gsets: dict[str, set] = {}
+    for g in groups:
+        duals = [chars[n] for n in g["duals"] if n in chars and chars[n]["n"] > 0]
+        if not duals:
+            continue
+        ce, cp = family.child_evidence_sql(g)
+        cset = gsets.setdefault(g["child"], {r[0] for r in c.execute(
+            f"SELECT m.id FROM media m WHERE m.status='done' AND COALESCE(m.excluded,0)=0{nf} AND {ce}", cp)})
+        for ch in duals:
+            ph = ",".join("?" * len(ch["_tids"]))
+            mine = {r[0] for r in c.execute(f"""SELECT DISTINCT mt.media_id FROM media_tags mt JOIN media m ON m.id=mt.media_id
+                AND m.status='done' AND COALESCE(m.excluded,0)=0{nf} WHERE mt.state=1 AND mt.tag_id IN ({ph})""", ch["_tids"])}
+            nc = len(mine & cset)
+            ch["split"] = {g["child"]: nc, g["parent"]: len(mine) - nc}
+            ch["series"] = g["child"] if nc > len(mine) - nc else g["parent"]
     # 作品：名稱與中文顯示
     series_names = {ch["series"] for ch in chars.values() if ch["series"]}
     sinfo = {}
@@ -237,6 +298,15 @@ def _shelf(nsfw: str = "hide", days: int = 7, noalbum: bool = False):
             got.setdefault(k, set()).add(mid)
             if (ts or 0) >= since:
                 rec.setdefault(k, set()).add(mid)
+        # b110 獨立顯示的子作品（終末地）跟它的母系列：張數照作品頁的圖庫算（family.py 的規則）
+        for g in groups:
+            for k in (g["child"], g["parent"]):
+                if k in series:
+                    sq, sp = query._series_sql([k])
+                    got[k] = {r[0] for r in c.execute(f"""SELECT m.id FROM media m WHERE m.status='done'
+                        AND COALESCE(m.excluded,0)=0{nf} AND {sq}""", sp)}
+                    rec[k] = {r[0] for r in c.execute(f"""SELECT m.id FROM media m WHERE m.status='done'
+                        AND COALESCE(m.excluded,0)=0{nf} AND m.added_at >= ? AND {sq}""", [since, *sp])}
         for k, g in series.items():
             if k in got:
                 g["n"], g["recent"] = len(got[k]), len(rec.get(k, ()))

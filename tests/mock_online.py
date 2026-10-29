@@ -20,8 +20,20 @@ def post(i, chars="akiyama_mizuki", cp="project_sekai"):
             "tag_string_general": "1girl pink_hair", "image_width": 1000, "image_height": 1400}
 
 
+# Danbooru 角色表（b109）：作品、角色照張數排、一頁 1000 筆（測試資料很少：第 2 頁開始是空的）
+CAT_CP = [("blue_archive", 500000), ("kantai_collection", 300000), ("vocaloid", 200000), ("cat_small_work", 12), ("cat_tiny_work", 3)]
+CAT_CH = [("cat_hero_(blue_archive)", 20000), ("cat_ship_(kancolle)", 9000), ("cat_popular", 5000), ("cat_obscure", 40), ("cat_rare", 5)]
+CAT_WIKI = {"cat_hero_(blue_archive)": ["聖園ミカ", "Mika"], "cat_popular": ["人気キャラ", "人氣角色"], "cat_obscure": []}
+
+
 @app.get("/tags.json")
 def tags(request: Request):
+    q = request.query_params
+    if q.get("search[category]") and q.get("search[order]") == "count":
+        if q.get("page", "1") != "1":
+            return []
+        rows = CAT_CP if q["search[category]"] == "3" else CAT_CH
+        return [{"name": n, "post_count": c} for n, c in rows]
     if request.query_params.get("search[name_comma]"):
         return dan_tags(request)
     n = request.query_params.get("search[name]")
@@ -32,6 +44,10 @@ def tags(request: Request):
 
 @app.get("/wiki_pages.json")
 def wiki_search(request: Request):
+    if request.query_params.get("search[tag][category]") == "4":       # 角色表：角色的維基別名
+        if request.query_params.get("page", "1") != "1":
+            return [{"title": "someone_else", "other_names": []}]       # 整頁都不是要的角色 → 停
+        return [{"title": k, "other_names": v} for k, v in CAT_WIKI.items()] + [{"title": "not_in_catalog", "other_names": ["x"]}]
     exact = request.query_params.get("search[other_names_include_any]")
     if exact is not None:        # 日文標籤 → Danbooru：其他名稱完全相同
         return [{"title": k, "other_names": v["other_names"], "is_deleted": False} for k, v in WIKI.items() if exact in v["other_names"]]
@@ -77,6 +93,8 @@ def artists(request: Request):
 @app.get("/posts.json")
 def posts(request: Request):
     t = request.query_params.get("tags", "")
+    if t == "cat_popular":           # 角色表：熱門角色抽樣貼文查作品
+        return [{"tag_string_copyright": "vocaloid"}] * 5 + [{"tag_string_copyright": "vocaloid project_diva"}]
     if t.startswith("md5:"):
         return [post(555)] if t[4:] == MD5 else []
     if t.startswith("id:"):          # 補抓一般標籤：一次很多篇
@@ -416,6 +434,8 @@ def tag_implications(request: Request):   # 作品的母系列
 FB_DL = "http://127.0.0.1:7931/fbdl"
 @app.get("/tag_aliases.json")
 def tag_aliases(request: Request):
+    if request.query_params.get("search[consequent_tag][category]") == "3":     # 角色表：指到作品的別名
+        return [] if request.query_params.get("page", "1") != "1" else [{"antecedent_name": "kancolle", "consequent_name": "kantai_collection"}]
     a = request.query_params.get("search[antecedent_name]")
     many = request.query_params.get("search[antecedent_name_comma]")
     if many:   # Rule34 用的舊名字
@@ -426,6 +446,7 @@ def tag_aliases(request: Request):
 
 # ---------- 假 Bangumi（zhname.py）：/bgm/v0/... ----------
 BGM_CHARS = {
+    "聖園ミカ": [{"id": 60, "name": "聖園ミカ", "infobox": [{"key": "简体中文名", "value": "圣园未花"}]}],
     "常闇トワ": [{"id": 1, "name": "常闇トワ", "infobox": [{"key": "简体中文名", "value": "常暗永远"}]}],
     "ビオラ": [{"id": 2, "name": "ビオラ", "infobox": [{"key": "简体中文名", "value": "薇奥拉"}]},
               {"id": 3, "name": "ビオラ", "infobox": [{"key": "简体中文名", "value": "维奥拉"}]}],

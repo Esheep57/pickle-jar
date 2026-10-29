@@ -24,7 +24,7 @@ SCHEMA = """CREATE TABLE IF NOT EXISTS job_queue(
 CREATE INDEX IF NOT EXISTS ix_job_queue ON job_queue(queue, prio, id);"""
 
 MANUAL, NORMAL, BACKGROUND = 0, 1, 2
-CHUNK = {"rerun": 10, "pixivsweep": 1, "zhname": 20, "upgradecheck": 20, "source": 10, "taginfo": 40, "seriesname": 40, "seriesparent": 40}
+CHUNK = {"rerun": 10, "pixivsweep": 1, "zhname": 20, "upgradecheck": 20, "source": 10, "taginfo": 40, "seriesname": 40, "seriesparent": 40, "charcat_cp": 40, "cpshare": 20}
 
 
 def _size(arg) -> int | None:

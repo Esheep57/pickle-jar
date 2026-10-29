@@ -1754,3 +1754,120 @@ def test_zh_mode_ui(base, client):
         assert client.get("/api/settings").json()["zh_mode"] == "tw"
         assert not errors, errors
         b.close()
+
+
+def test_charcat_picker_and_modal(base, client):
+    """b109：加標籤選單打字時，Danbooru 角色表的角色（圖庫裡還沒有）列在「Danbooru 角色表」那一段、標出 Danbooru 張數；
+    設定 › 資料與備份 打開「Danbooru 角色表」視窗看得到下載了幾個。"""
+    from app import charcat, db
+    charcat._ensure()
+    with db.write_lock:
+        db.conn().execute("""INSERT OR REPLACE INTO char_catalog(name, posts, other_names, copyright, cp_src, keys)
+                             VALUES('uitest_catalog_char_(tst)', 1234, '["測試角色表"]', NULL, NULL, 'uitest catalog char (tst)\nuitest catalog char\n測試角色表')""")
+    charcat._set_meta(updated_at=__import__("time").time(), min_posts=10)
+    mid = sorted(__import__("tests.conftest", fromlist=["ids_by_name"]).ids_by_name(client).values())[0]
+    try:
+        with pw.sync_playwright() as p:
+            b = _browser(p)
+            page = b.new_page(viewport={"width": 1400, "height": 900})
+            errors = []
+            page.on("pageerror", lambda e: errors.append(str(e)))
+            _open(page, base, "all")
+            page.evaluate(f"lib.pickTag({{title: 't', category: 'character', ids: [{mid}]}}, t => window.__picked = t.name)")
+            page.wait_for_selector(".picker2 .opts")
+            page.fill(".pk-inbox input", "測試角色")
+            page.wait_for_function("document.querySelector('.picker2 .opts').innerText.includes('Danbooru 角色表')")
+            txt = page.inner_text(".picker2 .opts")
+            assert "Danbooru 1,234" in txt and "測試角色表" in txt, txt
+            page.keyboard.press("Escape")
+            _open(page, base, "settings")
+            page.click('button[data-sec="data"]')
+            page.click("#s-charcat")
+            page.wait_for_selector("#cc-st")
+            page.wait_for_function("document.querySelector('#cc-st').innerText.includes('已下載')")
+            assert "已下載 1 個角色" in page.inner_text("#cc-st")
+            assert not errors, errors
+            b.close()
+    finally:
+        charcat.clear()
+
+
+def test_motion_modes(base, client):
+    """b109.3 開關大圖的效果：預設「簡潔」（不飛、沒有替身元素，關掉後那一格亮一下）；「完整」從格子飛出來；設定可以切。"""
+    with pw.sync_playwright() as p:
+        b = _browser(p)
+        page = b.new_page(viewport={"width": 1400, "height": 900})
+        errors = []
+        page.on("pageerror", lambda e: errors.append(str(e)))
+        _open(page, base, "all")
+        page.wait_for_selector("#content .cell[data-id] img")
+        assert page.evaluate("document.documentElement.classList.contains('motion-lite')")
+        cid = page.evaluate("document.querySelector('#content .cell[data-id]').dataset.id")
+        page.evaluate(f"lib.openViewer({cid})")
+        page.wait_for_selector("#viewer .zw img")
+        assert page.evaluate("document.querySelectorAll('.vghost').length") == 0 and not page.evaluate("document.querySelector('#viewer').classList.contains('flip')")
+        page.keyboard.press("Escape")
+        page.wait_for_timeout(50)
+        assert page.evaluate(f"document.querySelector('#content .cell[data-id=\"{cid}\"]').classList.contains('justseen')"), "關掉後剛看的那一格亮一下"
+        # 切成完整：從格子飛出來（有替身元素）
+        page.evaluate("localStorage.setItem('lib:motion', JSON.stringify('full'))")
+        page.reload(); page.wait_for_selector("#content .cell[data-id] img")
+        page.wait_for_timeout(300)
+        assert page.evaluate("document.documentElement.classList.contains('motion-full')")
+        page.evaluate(f"lib.openViewer({cid})")
+        page.wait_for_function("document.querySelectorAll('.vghost').length > 0 || !document.querySelector('#viewer').classList.contains('flip')", timeout=5000)
+        page.keyboard.press("Escape")
+        # 設定裡的開關
+        _open(page, base, "settings")
+        page.click('button[data-sec="display"]')
+        page.click('#motion-seg button[data-m="none"]')
+        assert page.evaluate("document.documentElement.classList.contains('motion-none')")
+        page.click('#motion-seg button[data-m="lite"]')
+        assert not errors, errors
+        b.close()
+
+
+def test_review_updates_in_place(base, client):
+    """b109.4 待確認（網格）按 ✓ 之後不重畫整頁：同時在別處被處理掉的候選（例如相似圖上一起拿掉的）原地收掉、分頁數字更新、
+    捲動位置不變；在大圖裡確認後關掉，也不重畫整頁。"""
+    from app import db
+    client.post("/api/settings", json={"knn_enabled": False})
+    vis = [it["id"] for it in client.get("/api/media", params={"view": "all", "limit": 50, "nsfw": "hide", "noalbum": 1}).json()["items"]]
+    tid = db.tag_id("inplace_(tst)", "character")
+    with db.write_lock:
+        for m in vis[:4]:
+            db.conn().execute("INSERT OR REPLACE INTO media_tags(media_id, tag_id, score, source, state, tier) VALUES(?,?,0.999,'model',0,4)", (m, tid))
+    try:
+        with pw.sync_playwright() as p:
+            br = _browser(p)
+            page = br.new_page(viewport={"width": 1400, "height": 900})
+            errors = []
+            page.on("pageerror", lambda e: errors.append(str(e)))
+            page.goto(base + "/static/index.html#/home", wait_until="domcontentloaded")
+            page.evaluate("""localStorage.setItem('lib:rmode','"grid"'); localStorage.setItem('lib:rtier','"all"'); localStorage.setItem('lib:rtag','"inplace_(tst)"')""")
+            page.goto(base + "/static/index.html#/review", wait_until="domcontentloaded")
+            page.wait_for_function("document.querySelectorAll('#grid .cell.rc[data-id]').length === 4")
+            page.evaluate("window.__grid = document.querySelector('#grid'); window.__gen = lib.S.gen")
+            all0 = int(page.inner_text('[data-rc="ai"]').replace(",", "") or 0)
+            first = page.evaluate("+document.querySelector('#grid .cell.rc[data-id]').dataset.mid")
+            other = [m for m in vis[:4] if m != first][0]
+            page.hover(f'#grid .cell.rc[data-mid="{first}"]')
+            page.click(f'#grid .cell.rc[data-mid="{first}"] .qa button[data-q="1"]')
+            # 同時：另一張的同一候選在別處被處理掉（像確認時相似圖一起拿掉）
+            client.post("/api/review/decide", json={"pairs": [[other, "inplace_(tst)"]], "accept": False})
+            page.wait_for_function("document.querySelectorAll('#grid .cell.rc[data-id]').length === 2", timeout=5000)
+            assert page.evaluate("window.__grid === document.querySelector('#grid') && window.__gen === lib.S.gen"), "沒有整頁重畫"
+            page.wait_for_function(f"+document.querySelector('[data-rc=\"ai\"]').textContent.replace(',', '') === {all0 - 2}", timeout=5000)
+            # 大圖裡確認、關掉：一樣不重畫整頁
+            third = page.evaluate("+document.querySelector('#grid .cell.rc[data-id]').dataset.mid")
+            page.evaluate(f"lib.openViewer({third})")
+            page.wait_for_selector("#viewer .zw img")
+            client.post("/api/review/decide", json={"pairs": [[third, "inplace_(tst)"]], "accept": True})
+            page.evaluate("import('/static/js/viewer.js').then(m => { m.markDirty(); m.closeViewer(); })")
+            page.wait_for_function("document.querySelectorAll('#grid .cell.rc[data-id]').length === 1", timeout=5000)
+            assert page.evaluate("window.__grid === document.querySelector('#grid') && window.__gen === lib.S.gen"), "關大圖沒有整頁重畫"
+            assert not errors, errors
+            br.close()
+    finally:
+        with db.write_lock:
+            db.conn().execute("DELETE FROM media_tags WHERE tag_id=?", (tid,))

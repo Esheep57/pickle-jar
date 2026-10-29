@@ -42,7 +42,8 @@ def _signature(c) -> tuple:
     a = c.execute("SELECT COUNT(*), MAX(id) FROM tags WHERE category!='general'").fetchone()
     b = c.execute("SELECT COUNT(*), MAX(fetched_at), SUM(LENGTH(COALESCE(display_name,''))) FROM tag_info").fetchone()
     try:        # Bangumi 中文名（zhname.py）：查到新的也要重建，搜得到「常闇永遠」
-        z = tuple(c.execute("SELECT COUNT(*), MAX(checked_at) FROM name_zh").fetchone())
+        # 只算圖庫裡有的標籤（b109 角色表在背景查一萬多個角色的中文名，每查到一個就重建太浪費）
+        z = tuple(c.execute("SELECT COUNT(*), MAX(z.checked_at) FROM name_zh z JOIN tags t ON t.name=z.name").fetchone())
     except Exception:  # noqa
         z = ()
     return tuple(a) + tuple(b) + z + (db.get_settings().get("display_lang"), db.get_settings().get("zh_mode"))

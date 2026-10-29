@@ -6,7 +6,7 @@ import { namesModal } from "./shelf.js";
 import { undo } from "./actions.js";
 import { sweepModal } from "./sweep.js";
 import { datasetModal, impliesModal } from "./dataset.js";
-import { artistScanModal, ascii2dModal, auditModal, findModal, importModal, openBackup, openDiag, openDriveBackup, openPhone, upgradeModal } from "./pages.js";
+import { artistScanModal, ascii2dModal, auditModal, findModal, importModal, openBackup, openCharcat, openDiag, openDriveBackup, openPhone, upgradeModal } from "./pages.js";
 import { openSettings, setZhMode } from "./settings.js";
 /* ============ 指令面板（Ctrl+K / /）：搜尋圖片、前往角色/標籤、切換頁面、執行指令 ============ */
 const PAGES = [["home", "收件匣（首頁、整理中心）"], ["system", "系統（自動流程、工具）"], ["review", "待確認"], ["unrecognized", "未識別"], ["all", "圖庫"], ["characters", "角色"], ["artists", "創作者"],
@@ -50,6 +50,7 @@ const COMMANDS = [
   ["手機／平板（看圖庫、上傳，QR code）", "phone 手機 平板 ipad iphone 上傳 區網 wifi", () => openPhone()],
   ["備份與還原", "backup", () => openBackup()],
   ["備份到外接硬碟", "backup drive hdd usb 外接 硬碟 備份", () => openDriveBackup()],
+  ["Danbooru 角色表（下載／更新：加標籤時挑圖庫裡還沒有的角色）", "danbooru 角色表 角色 下載 catalog character list", () => openCharcat()],
   ["匯出整理結果（JSON）", "export", () => { location.href = "/api/export"; }],
   ["切換 NSFW 顯示", "nsfw", () => cycleNsfw()],
   ["撤銷上一步", "undo", () => undo()],
@@ -73,7 +74,7 @@ export function openPalette(initial = "") {
     let multi = q.includes(" ");
     // 「blue archive」「hatsune miku」：整句剛好是一個名字 → 當一個名字（以前只查最後一個字 archive）
     if (multi && !/[:|*\-]/.test(q)) {
-      try { whole = (await api(`/api/tags?${new URLSearchParams({ q, limit: 6 })}`)).filter(t => IDENTITY.includes(t.category) || t.category === "custom" || (t.n || 0) > 0); } catch { }
+      try { whole = (await api(`/api/tags?${new URLSearchParams({ q, limit: 6 })}`)).filter(t => !t.catalog && (IDENTITY.includes(t.category) || t.category === "custom" || (t.n || 0) > 0)); } catch { }
       if (my !== seq) return;
     }
     if (last && !/^[a-z]+:/.test(last) && !whole.length) {

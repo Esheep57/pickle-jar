@@ -1,5 +1,5 @@
 // ES module（2026-10）：用到別的檔案的東西都要在這裡 import；瀏覽器會在載入時檢查名字對不對。
-import { $, $$, S, api, catName, closeModal, debounce, esc, modal, svg, toast } from "./core.js";
+import { $, $$, S, api, catName, closeModal, debounce, esc, fmtN, modal, svg, toast } from "./core.js";
 import { V } from "./viewer.js";
 /* ============ 加標籤（所有地方共用）============
    - 上面分類：角色／創作者／作品／自訂／一般（輸入 c: a: s: 也能切換）；只能選某一類時鎖住
@@ -34,6 +34,8 @@ export function pickTag({ title, category = "custom", navigate = false, only = n
     const on = have.has(t.name);
     return { t, html: `<span class="cat ${esc(t.category)}">${catName(t.category)}</span><span class="nm">${esc(disp || t.name)}</span>${disp ? `<span class="raw">${esc(t.name)}</span>` : ""}${t.copyright && !noSer ? `<span class="ser">${esc(t.copyright.replace(/_/g, " "))}</span>` : ""}${t.alias ? `<span class="ser">${esc(t.alias)}</span>` : ""}${extra}${on ? `<span class="hv" title="這幾張都已經有了">✓ 已有</span>` : ""}<span class="n">${t.n ?? ""}</span>` };
   };
+  // Danbooru 角色表的角色（圖庫裡還沒有）：標出來、張數是 Danbooru 上的
+  const catTag = t => `<span class="src" title="Danbooru 上 ${fmtN(t.posts)} 張；圖庫裡還沒有">Danbooru ${fmtN(t.posts)}</span>`;
   const SRCN = { model: "AI", knn: "你的圖庫", danbooru: "Danbooru", pixiv: "Pixiv", e621: "e621", rule34: "Rule34", signature: "簽名", tracemoe: "trace.moe", x: "X", ccip: "CCIP" };
   const draw = () => {
     const q = inp.value.trim();
@@ -49,13 +51,15 @@ export function pickTag({ title, category = "custom", navigate = false, only = n
       const fit = t => cat === "all" || t.category === cat;
       if (cat === "custom" || cat === "all") sect("快速標籤（數字鍵）", (S.quick || []).map(x => row({ name: x.name, category: "custom", n: x.n }, `<span class="src">${x.key}</span>`)));
       sect(`這${ids.length > 1 ? ` ${ids.length} 張` : "張"}的候選`, sug.candidates.filter(fit).map(t => row(t, `<span class="src">${esc((t.sources || "").split(",").map(x => SRCN[x] || x).join("・"))}${ids.length > 1 ? ` · ${t.on_n}/${ids.length} 張` : ""}</span>`)));
-      sect(`同作品的角色${sug.series.length ? `（${esc(sug.series.map(x => x.replace(/_/g, " ")).join("、"))}）` : ""}`, sug.mates.filter(fit).map(t => row(t, "", true)));
+      sect(`同作品的角色${sug.series.length ? `（${esc(sug.series.map(x => x.replace(/_/g, " ")).join("、"))}）` : ""}`, sug.mates.filter(fit).map(t => row(t, t.catalog ? catTag(t) : "", true)));
       const rec = pickRecent.get(cat === "all" ? "character" : cat).filter(t => !have.has(t.name));
       sect("最近用過", rec.map(t => row(t)));
       sect("置頂", sug.pinned.filter(fit).map(t => row(t)));
       if (!idx) html = `<div class="hint pk-empty">${cat === "general" ? "輸入以搜尋描述標籤（例如：雙馬尾、twintails）" : "輸入名字搜尋（中文、日文、英文都可以）"}</div>`;
     } else {
-      sect(q ? "搜尋結果" : "", (sug?.results || []).map(t => row(t)));
+      const res = sug?.results || [];
+      sect(q ? "搜尋結果" : "", res.filter(t => !t.catalog).map(t => row(t)));
+      sect("Danbooru 角色表（圖庫裡還沒有）", res.filter(t => t.catalog).map(t => row(t, catTag(t))));
       if (!navigate && qn && !(sug?.results || []).some(t => t.name === qn)) {
         const nc = cat === "all" || cat === "general" ? "custom" : cat;
         rows[idx] = { name: qn, category: nc, _new: true };

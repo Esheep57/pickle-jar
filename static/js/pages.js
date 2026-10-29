@@ -912,3 +912,46 @@ document.addEventListener("paste", e => {
   const t = e.clipboardData?.getData("text") || "";
   if ((t.match(IMPORT_RX) || []).length) { e.preventDefault(); importModal(t); }
 });
+
+/* ============ Danbooru 角色表（b109）============
+   下載 Danbooru 上的角色（預設至少 10 張圖）：加標籤時可以直接挑圖庫裡還沒有的角色。中文名照作品熱度在背景查。 */
+export async function openCharcat() {
+  let d;
+  try { d = await api("/api/charcat"); } catch (e) { return toast(e.message); }
+  const TIER_L = { 1: "至少 1 張圖（約 34 萬個，資料庫多 50 MB，約 15 分鐘）", 10: "至少 10 張圖（約 10 萬個，多 15 MB，約 5 分鐘）　推薦", 100: "至少 100 張圖（約 2.4 萬個，多 4 MB，1 分鐘內）" };
+  const cur = d.min_posts || 10;
+  const m = modal(`<h3>Danbooru 角色表</h3><div class="mbody form">
+    <p class="mute" style="margin-top:0">把 Danbooru 上的角色下載到這台電腦：加標籤時可以直接挑<b>圖庫裡還沒有的角色</b>（中文、日文、英文名都搜得到），同作品的角色也列得出來。不影響 AI 自動認角色。下載過的話每 30 天自動更新。</p>
+    <div id="cc-st" class="note" style="margin:0 0 10px"></div>
+    <div class="field"><label>下載哪些角色</label><div>${d.tiers.slice().reverse().map(t => `<div><label class="chkl"><input type="radio" name="cc-min" value="${t}" ${t === cur ? "checked" : ""}> ${TIER_L[t] || `至少 ${t} 張圖`}</label></div>`).join("")}</div></div>
+    <div class="field"><label>中文名</label><div><label class="chkl"><input type="checkbox" id="cc-zh" ${d.zh ? "checked" : ""}> 照作品熱度查中文名（Bangumi，背景慢慢查）</label>
+      <div class="mute">你圖庫裡有的作品和 Danbooru 前 200 熱門作品裡的角色（約兩萬個，每個約 1 秒）。其他角色先用 Danbooru 別名裡的中文。</div></div></div>
+    ${d.online ? "" : `<div class="bad">線上功能關著：先到 設定 › 自動標記與搜源 打開</div>`}
+  </div><div class="mfoot">${d.count ? `<button class="btn" id="cc-del" style="margin-right:auto">刪除角色表</button>` : ""}<button class="btn" data-close>關閉</button><button class="btn primary" id="cc-go" ${d.online ? "" : "disabled"}>${d.count ? "重新下載" : "下載"}</button></div>`, null, "wide");
+  const show = s => {
+    const st = $("#cc-st", m); if (!st) return false;
+    const busy = s.running || s.queued;
+    st.innerHTML = s.running ? `<b>下載中</b>：${esc(s.phase || "")}`
+      : s.queued ? "排隊中（線上工作做完前面的就開始）"
+      : s.count ? `已下載 <b>${fmtN(s.count)}</b> 個角色（至少 ${s.min_posts} 張圖）· ${fmtAgo(s.updated_at)}<br>
+          <span class="mute">知道作品的 ${fmtN(s.with_copyright)} 個${s.cp_pending ? ` · 熱門角色查作品還剩 ${fmtN(s.cp_pending)} 個` : ""}
+          · 中文名查到 ${fmtN(s.zh_done || 0)} 個${s.zh_pending ? `、還剩 ${fmtN(s.zh_pending)} 個` : ""}</span>`
+      : "還沒下載";
+    $("#cc-go", m).disabled = busy || !s.online;
+    return busy;
+  };
+  show(d);
+  let alive = true;
+  const poll = async () => { while (alive && document.body.contains(m)) { await new Promise(r => setTimeout(r, 2000)); try { if (!show(await api("/api/charcat"))) { /* 閒著也繼續更新背景查到的數字 */ } } catch { } } };
+  poll();
+  $("#cc-go", m).onclick = async () => {
+    const min = +($("[name=cc-min]:checked", m)?.value || 10);
+    try { await api("/api/charcat/download", { min, zh: $("#cc-zh", m).checked }); toast("開始下載 Danbooru 角色表"); show({ ...d, queued: true }); } catch (e) { toast(e.message); }
+  };
+  const del = $("#cc-del", m);
+  if (del) del.onclick = async () => {
+    if (!await ask("刪除角色表？", "圖庫裡的標籤不受影響，之後可以再下載。", "刪除", true)) return;
+    try { await api("/api/charcat/delete", {}); alive = false; closeModal(); toast("已刪除角色表"); } catch (e) { toast(e.message); }
+  };
+  $("#cc-zh", m).onchange = async e => { try { await api("/api/settings", { charcat_zh: e.target.checked }); } catch { } };
+}

@@ -39,6 +39,18 @@ def test_pixiv_and_x_sweep(client):
         assert a["4242"]["artist"] == "sweep_painter_(tst)"
         assert "sweeppainter" in {x["key"] for x in sweep.artists("x")}
         httpx.post(BASE + "/_sweep", json={"801_p0": paths[target], "SWXMEDIA0001": paths[xtarget]})
+        # 之前的測試留在線上佇列的工作（線上功能關著時排的）先清掉：不然比對要排在一大堆後面，等不到
+        from app import online
+        jobs = online.get_jobs()
+        for g in jobs.q.groups():
+            for r in jobs.q.cancel_group(g["grp"]):
+                jobs._forget(r["kind"], r["arg"] if isinstance(r["arg"], list) else [])
+        if jobs.state.get("running"):       # 正在做的那組（前面測試排的搜源、查資料卡）：停掉，等它收尾
+            jobs.stop_flag.set()
+            for _ in range(150):
+                if not jobs.state.get("running"):
+                    break
+                time.sleep(0.2)
         client.post("/api/settings", json={"online_enabled": True, "online_auto_source": False})
         r = client.post("/api/sweep/pixiv", json={"keys": ["4242"]}).json()
         assert r["queued"] == 1

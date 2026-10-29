@@ -298,12 +298,16 @@ export async function seriesHead(gen) {
           ${d.summary ? `<div class="shero-sum" title="${esc(d.summary)}">${esc(d.summary)}</div>` : ""}
           <div class="shero-pills"><span><b>${fmtN(chars.length)}</b> 位角色</span><span><b id="sr-n">${fmtN(d.n)}</b> 張</span>
             ${d.recent ? `<span class="acc">近 ${d.days} 天 +${fmtN(d.recent)}</span>` : ""}
-            ${d.subs.length ? `<span title="${esc(d.subs.join("、"))}">含 ${d.subs.map(k => esc(d.sub_display[k] || k)).slice(0, 3).join("、")}${d.subs.length > 3 ? "…" : ""}</span>` : ""}</div>
+            ${d.subs.length ? `<span title="${esc(d.subs.join("、"))}">含 ${d.subs.map(k => esc(d.sub_display[k] || k)).slice(0, 3).join("、")}${d.subs.length > 3 ? "…" : ""}</span>` : ""}
+            ${d.family_parent ? `<span>屬於 <a class="lnk" data-fam="${esc(d.family_parent.key)}">${esc(d.family_parent.display)} ›</a></span>` : ""}
+            ${(d.related || []).length ? `<span>相關：${d.related.map(r => `<a class="lnk" data-fam="${esc(r.key)}">${esc(r.display)} ›</a>`).join("、")}</span>` : ""}</div>
         </div>
         <div class="shero-act">
           <button class="btn ghostw" id="sr-pin">${d.pinned ? "★ 已置頂" : "☆ 置頂"}</button>
           ${pageMenu("sr-menu", [d.url ? `<a class="ghost" href="${esc(safeUrl(d.url))}" target="_blank" rel="noopener">在 Danbooru 打開 ↗</a>` : "",
             `<button class="ghost" id="sr-rename" title="自己取中文名">改名</button>`,
+            d.independent && d.split_parent ? `<button class="ghost" id="sr-merge" title="跟「${esc(d.split_parent.display)}」放在同一個作品頁（角色是同一批時）">併回「${esc(d.split_parent.display)}」</button>` : "",
+            ...d.subs.map(k => `<button class="ghost" data-split="${esc(k)}" title="自己一個作品頁、自己的角色（角色跟這部不是同一批時，例如終末地）">「${esc(d.sub_display[k] || k)}」獨立顯示</button>`),
             d.key ? `<button class="ghost" id="sr-cover" title="選一張當作品封面">${d.custom_cover ? "換封面（目前是自選的）" : "選封面"}</button>` : "",
             d.key ? `<button class="ghost danger" id="sr-del" title="從所有圖上拿掉這個作品標籤（可撤銷）">刪除作品…</button>` : ""])}
         </div>
@@ -321,6 +325,14 @@ export async function seriesHead(gen) {
       <button class="chip2 ${S.seriesMiss === "noartist" ? "on" : ""}" data-sm="noartist" title="這部作品的圖裡，還沒有創作者的（不含官方截圖、不用找作者的）">沒標作者 <i>${fmtN(d.miss.noartist)}</i></button></div>` : ""}
     <div class="cselbar" id="cselbar"></div>`;
   $("[data-back]", $("#crumb")).onclick = () => go("characters");
+  // b110：子作品獨立顯示／併回母系列；相關作品互相連
+  $$("[data-fam]", head).forEach(a => a.onclick = () => go("series", a.dataset.fam));
+  const setIndep = async (k, on, goto) => {
+    try { await api(`/api/series/${encodeURIComponent(k)}/independent`, { on }); } catch (e) { return toast(e.message); }
+    S.seriesData = null; toast(on ? "已經獨立顯示" : "已經併回母系列"); go("series", goto);
+  };
+  const smg = $("#sr-merge"); if (smg) smg.onclick = () => setIndep(d.key, false, d.split_parent.key);
+  $$("[data-split]", head).forEach(b => b.onclick = () => setIndep(b.dataset.split, true, b.dataset.split));
   const sdel = $("#sr-del"); if (sdel) sdel.onclick = () => tagDelete({ name: d.key, display: d.display, category: "copyright" }, {
     after: () => { S.seriesData = null; go("characters"); },
     note: chars.length ? `這部作品底下的 ${fmtN(chars.length)} 位角色不會刪；角色從 Danbooru 查到的作品資料還在，角色頁可能還會把他們歸在這部作品下。${d.subs.length ? `子作品（${d.subs.map(k => esc(d.sub_display[k] || k)).join("、")}）也不會刪。` : ""}` : "" });

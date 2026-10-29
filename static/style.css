@@ -1991,3 +1991,17 @@ html.fx img.ld { opacity: 1; }
 .gfdone { font-size: var(--fs2); }
 .gfsaved { margin-top: 6px; font-size: var(--fs1); }
 .gfwarn { color: var(--warn, #e0a040); }
+
+/* ============ 開關大圖的效果（b109.3；設定 › 顯示 › 動畫）============
+   簡潔（預設）：按下去那一格馬上縮一點、變暗（回應你的動作）；大圖直接出現，背景 0.08 秒變暗、圖從 98% 到 100%；
+   原圖載好前用縮圖頂著（viewer.js placeholder）；關掉後剛看的那一格亮一下框。
+   無：沒有任何過場（按下去的回饋還在，但沒有漸變）。完整：b105／b106 的飛行效果。 */
+.cell:active img { transform: scale(.97) !important; filter: brightness(.86) !important; transition: transform 60ms var(--ease-std), filter 60ms var(--ease-std) !important; }
+html.motion-none .cell:active img { transition: none !important; }
+html.motion-lite #viewer:not(.hidden) { animation: fadein 80ms linear; }
+html.motion-lite #viewer .stage .zw img { animation: zpop 80ms var(--ease-out); }
+@keyframes zpop { from { opacity: .4; transform: scale(.98); } to { opacity: 1; transform: none; } }
+html.motion-none #viewer:not(.hidden), html.motion-none #viewer .stage .zw img, html.motion-none #viewer .stage > video { animation: none !important; }
+.cell.justseen::after { box-shadow: inset 0 0 0 2px var(--acc) !important; opacity: 1 !important; animation: seenfade .7s ease-out forwards; }
+html.motion-none .cell.justseen::after { animation: none; }
+@keyframes seenfade { 0%, 40% { opacity: 1; } 100% { opacity: 0; } }

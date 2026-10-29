@@ -3,16 +3,26 @@ import { $, $$, IDENTITY, MTYPES, MTYPE_SHORT, OFFICIAL, S, SRC_LEGEND, TIER, ap
 import { go, loadNsfwIds, loadSidebar, quickTag } from "./shell.js";
 import { loadMore, refreshInPlace, render, runSearch, sourceHTML } from "./grid.js";
 import { archiveModal, confirmTrash, doAction, removeCells, shareCopy, undo } from "./actions.js";
-import { dropImages } from "./review.js";
+import { dropImages, syncReview } from "./review.js";
 import { pickTag } from "./picker.js";
 import { workModal } from "./work.js";
 import { gifModal, quickGif } from "./gif.js";
 import { srcUrlModal } from "./srcurl.js";
 /* ============ 大圖檢視 ============ */
 export let V = null;
+// 開關大圖的效果（設定 › 顯示 › 動畫；這個瀏覽器自己記）：full 淡入＋放大／lite 直接出現、縮圖先頂著再變清楚（預設）／none 什麼都不播
+export const motion = () => { const m = store.get("motion", "lite"); return matchMedia("(prefers-reduced-motion: reduce)").matches ? "none" : (["full", "lite", "none"].includes(m) ? m : "lite"); };
+export function applyMotion() { const m = motion(); document.documentElement.classList.remove("motion-full", "motion-lite", "motion-none"); document.documentElement.classList.add("motion-" + m); }
+applyMotion();
 export async function openViewer(id) {
   V = { id };
-  const vw = $("#viewer"); vw.classList.remove("hidden");
+  const vw = $("#viewer");
+  const wasHidden = vw.classList.contains("hidden");
+  // 簡潔／無：格子的縮圖拿來當原圖載好前的替身（原圖好了直接換上：看起來是馬上打開、一下子變清楚）
+  const cellImg = wasHidden && motion() !== "full" ? $(`#content .cell[data-id="${id}"] img`) : null;
+  const thumb = cellImg?.complete && cellImg.naturalWidth ? (cellImg.currentSrc || cellImg.src) : null;
+  if (thumb) { const pre = new Image(); pre.src = `/file/${id}?display=1`; pre.decode?.().catch(() => { }); }   // 原圖現在就開始載
+  vw.classList.remove("hidden");
   let d;
   try { d = await api(`/api/media/${id}`); }
   catch (e) { if (V && V.id === id) { closeViewer(); toast("打不開這張圖：" + e.message); } return; }
@@ -195,6 +205,7 @@ export async function openViewer(id) {
   $("#v-sys").onclick = () => api(`/api/media/${id}/open`, {}).catch(e => toast(e.message));
   const zb = $("#v-zoom"); if (zb) zb.onclick = toggleZoom;
   initZoom();
+  if (thumb) placeholder(thumb, d);
   $("#v-retag").onclick = async () => { await api("/api/jobs", { kind: "retag", ids: [id] }); toast("已排入重新標記"); };
   const vca = $("#v-crowd-add"); if (vca) vca.onclick = () => pickTag({ title: "這張還有誰？", category: "character", ids: [id] }, async t => {
     await api("/api/tags/apply", { ids: [id], action: "add", tag: t.name, category: t.category }); toast(`加上 ${t.name}`, { label: "撤銷", fn: undo }); openViewer(id); markDirty();
@@ -421,9 +432,32 @@ export function stepViewer(dir) {
   if (nx != null) openViewer(nx);
   if (dir > 0 && i + dir >= ids.length - 5) loadMore(S.gen);
 }
+/* 簡潔／無：原圖還沒好的話，縮圖放大頂在原圖的位置（同樣大小），原圖載好就拿掉。透明背景的 PNG：載好後一定把底圖拿掉。 */
+function placeholder(src, d) {
+  const img = $("#viewer .zw img"), st = $("#viewer .stage"), vw = $("#viewer");
+  if (!img || !st || !d.width || !d.height || (img.complete && img.naturalWidth)) return;
+  const sr = st.getBoundingClientRect(), cs = getComputedStyle(st);
+  const pt = parseFloat(cs.paddingTop) || 0, pb = parseFloat(cs.paddingBottom) || 0;
+  const idh = parseFloat(getComputedStyle(vw).getPropertyValue("--idh")) || 0;
+  const k = Math.min(sr.width / d.width, Math.min(sr.height - pt - pb, innerHeight - idh - 60) / d.height, 1);
+  Object.assign(img.style, { width: d.width * k + "px", height: d.height * k + "px", background: `url("${src}") center / 100% 100% no-repeat` });
+  const done = () => { img.style.width = img.style.height = img.style.background = ""; };
+  img.addEventListener("load", done, { once: true });
+  img.addEventListener("error", done, { once: true });
+  setTimeout(done, 8000);
+}
+/* 關大圖：剛剛看的那一格亮一下框，讓你知道剛看的是哪張 */
+function markCell(id) {
+  const cell = id != null && $(`#content .cell[data-id="${id}"]`);
+  if (!cell) return;
+  cell.classList.remove("justseen"); void cell.offsetWidth; cell.classList.add("justseen");
+  setTimeout(() => cell.classList.remove("justseen"), 700);
+}
 export function closeViewer() {
   const vw = $("#viewer"), last = V?.id; vw.classList.add("hidden"); vw.innerHTML = ""; V = null;
-  if (viewerDirty) { viewerDirty = false; refreshInPlace(last); loadSidebar(); }   // 原地更新、留在原本的位置（以前整頁重畫，回到最上面）
+  if (motion() !== "full") markCell(last);
+  // 待確認頁：不重畫整頁（以前回到最上面），跟伺服器對一次、原地收掉已經處理的
+  if (viewerDirty) { viewerDirty = false; if (S.view === "review") syncReview(); else refreshInPlace(last); loadSidebar(); }   // 原地更新、留在原本的位置
 }
 
 /* ============ 大圖縮放 / 拖曳 ============ */

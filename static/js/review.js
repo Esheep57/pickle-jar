@@ -158,6 +158,7 @@ export async function decideReview(idx, accept) {
   toast(`${accept ? "已確認" : "已否決"} ${pairs.length} 筆` + (r.propagated ? `，並移除 ${r.propagated} 張相似圖上的同一候選` : ""), { label: "撤銷", fn: undo });
   updateActionBar(); updateFooter(); loadSidebar();
   if (!$("#grid .cell")) render();
+  else syncReview();
 }
 
 
@@ -392,7 +393,15 @@ function startLive(gen) {
   LIVE.timer = setInterval(() => { if (!sseOk()) tick(); }, 4000);     // 事件流連著就等它推（b96）
 }
 const rkey = it => it.id + "|" + it.tag;
-async function softRefresh(gen) {
+// 確認／否決、在大圖裡改了標籤之後（b109.4）：不重畫整頁，跟伺服器對一次——
+// 相似圖上被一起拿掉的同一候選收掉、分頁的數字更新、下面補上新的；捲動位置不動。連按很快時只對最後一次。
+let syncT = 0;
+export function syncReview() {
+  clearTimeout(syncT);
+  const gen = S.gen;
+  syncT = setTimeout(() => { if (gen === S.gen && S.view === "review" && S.rmode !== "batch" && !LIVE.busy) softRefresh(gen, true); }, 350);
+}
+async function softRefresh(gen, quiet = false) {
   const n = Math.max(PAGE, S.items.length + 40);
   const p = reviewParams(); p.set("offset", 0); p.set("limit", n);
   let d; try { d = await api("/api/review?" + p); } catch { return false; }
@@ -415,9 +424,13 @@ async function softRefresh(gen) {
     if (!RF.who) drawFocus();
   } else {
     const have = new Set();
+    const shown = $$(".cell.rc[data-id]").length;
+    // quiet（確認之後對一次）：拿到的清單蓋得住畫面上的全部 → 不在清單裡的都是已經處理掉的（相似圖一起拿掉的、別處確認的）
+    const covers = complete || d.items.length >= shown;
     S.items.forEach((it, i) => {
       const el = it && $(`.cell[data-id="${i}"]`); if (!el) return;
-      if (complete && it.source === "knn" && !fresh.has(rkey(it)) && !S.selected.has(i)) { el.remove(); removed++; }
+      const gone = !fresh.has(rkey(it)) && !S.selected.has(i) && (quiet ? covers : complete && it.source === "knn");
+      if (gone) { el.remove(); removed++; }
       else have.add(rkey(it));
     });
     const add = d.items.filter(x => !have.has(rkey(x)));
@@ -425,8 +438,10 @@ async function softRefresh(gen) {
     S.items.push(...add); added = add.length;
     if (add.length) $("#grid")?.insertAdjacentHTML("beforeend", add.map((it, k) => reviewCell(it, start + k)).join(""));
     S.total = d.total; S.rOffset = d.items.length; S.done = complete;
-    if (added || removed) updateFooter();
+    if (added || removed || quiet) { updateFooter(); updateActionBar(); }
+    if (quiet && !$("#grid .cell")) { render(); return true; }
   }
+  if (quiet) return true;
   if (added || removed) toast(`你的圖庫推薦更新：${added ? `新增 ${added} 筆` : ""}${added && removed ? "、" : ""}${removed ? `收回 ${removed} 筆` : ""}`);
   return true;
 }

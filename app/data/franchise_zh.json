@@ -1,0 +1,10096 @@
+{
+"_source": "FGO：Atlas Academy（台服＝繁中官方、國服＝簡中官方，用從者編號對日服／美服的名字）；寶可夢人物：神奇寶貝百科 52poke（用日文名核對）。scripts/build_franchise_zh.py 產生；英文名沒有導向頁的（新角色）：52poke 站內搜尋，內文的日文名、英文名都對上才收（scripts/build_franchise_zh_search.py）；遊戲王：ygocdb（Master Duel 簡中官方名）；NIKKE：國服譯名；英雄聯盟：Data Dragon zh_TW／zh_CN；碧藍航線、原神：官方簡中；鬥陣特攻：台灣官網＋國服官網（ow.blizzard.cn）；角色表補名（b110.5）：聖火降魔錄＝FEH 台灣官方繁中、碧藍航線＝AzurLaneData 台服／國服、明日方舟＝ArknightsGameData 國服、少女前線／NIKKE＝deepghs game_characters；b110.6 校正：賽馬娘＝GameTora 台服官方名＋BWIKI 國服名；碧藍幻想＝Relink 繁中官網；自動查到的名字跟官方資料不一樣的改用官方（蔚藍檔案改台服譯名）",
+"_format": "tag → {tw 台灣官方譯名, cn 大陸官方譯名, src}",
+"names": {
+"aaron_(pokemon)": {
+"tw": "阿柳",
+"cn": "阿柳",
+"src": "52poke:阿柳"
+},
+"abigail_williams_(fate)": {
+"tw": "艾比蓋兒．威廉斯",
+"cn": "阿比盖尔·威廉姆斯",
+"src": "fgo:195"
+},
+"abigail_williams_(santa)_(fate)": {
+"tw": "艾比蓋兒．威廉斯〔Santa〕",
+"cn": "阿比盖尔·威廉姆斯〔圣诞〕",
+"src": "fgo:430"
+},
+"abigail_williams_(swimsuit_foreigner)_(first_ascension)_(fate)": {
+"tw": "艾比蓋兒．威廉斯",
+"cn": "阿比盖尔·威廉姆斯",
+"src": "fgo:195"
+},
+"abigail_williams_(swimsuit_foreigner)_(second_ascension)_(fate)": {
+"tw": "艾比蓋兒．威廉斯",
+"cn": "阿比盖尔·威廉姆斯",
+"src": "fgo:195"
+},
+"abigail_williams_(swimsuit_foreigner)_(third_ascension)_(fate)": {
+"tw": "艾比蓋兒．威廉斯",
+"cn": "阿比盖尔·威廉姆斯",
+"src": "fgo:195"
+},
+"ace_trainer_(pokemon)": {
+"tw": "精英訓練家",
+"cn": "精英训练家",
+"src": "52poke:精英训练家"
+},
+"acerola_(pokemon)": {
+"tw": "阿塞蘿拉",
+"cn": "阿塞萝拉",
+"src": "52poke:阿塞蘿拉"
+},
+"achilles_(fate)": {
+"tw": "阿基里斯",
+"cn": "阿喀琉斯",
+"src": "fgo:206"
+},
+"adaman_(pokemon)": {
+"tw": "剛石",
+"cn": "刚石",
+"src": "52poke-search:刚石"
+},
+"aesc_(rain_witch)_(fate)": {
+"tw": "雨之魔女托內莉可",
+"cn": "雨之魔女梣",
+"src": "fgo:385"
+},
+"aether_foundation_employee": {
+"tw": "以太基金會職員",
+"cn": "以太基金会职员",
+"src": "52poke-search:以太基金會職員"
+},
+"agatha_(pokemon)": {
+"tw": "菊子",
+"cn": "菊子",
+"src": "52poke-search:菊子"
+},
+"akari_(pokemon)": {
+"tw": "小照",
+"cn": "小照",
+"src": "52poke-search:小照"
+},
+"alain_(pokemon)": {
+"tw": "艾嵐",
+"cn": "艾岚",
+"src": "52poke:艾嵐"
+},
+"alder_(pokemon)": {
+"tw": "阿戴克",
+"cn": "阿戴克",
+"src": "52poke:阿戴克"
+},
+"alec_(pokemon)": {
+"tw": "曉星",
+"cn": "晓星",
+"src": "52poke-search:曉星"
+},
+"alessandro_di_cagliostro_(fate)": {
+"tw": "亞歷山德羅．卡廖斯特羅",
+"cn": "亚历山德罗·迪·卡利奥斯特罗",
+"src": "fgo:410"
+},
+"alexa_(pokemon)": {
+"tw": "三色菫",
+"cn": "三色菫",
+"src": "52poke:三色菫"
+},
+"alexander_(fate)": {
+"tw": "亞歷山大",
+"cn": "亚历山大",
+"src": "fgo:28"
+},
+"aliana_(pokemon)": {
+"tw": "阿可碧",
+"cn": "阿可碧",
+"src": "52poke:阿可碧"
+},
+"alice_(pokemon)": {
+"tw": "艾莉絲",
+"cn": "艾莉丝",
+"src": "52poke-search:艾莉丝"
+},
+"allister_(pokemon)": {
+"tw": "歐尼奧",
+"cn": "欧尼奥",
+"src": "52poke:歐尼奧"
+},
+"alolan_exeggutor": {
+"tw": "阿羅拉 椰蛋樹",
+"cn": "阿罗拉 椰蛋树",
+"src": "52poke-search:阿罗拉 椰蛋树"
+},
+"alolan_ninetales": {
+"tw": "阿羅拉 九尾",
+"cn": "阿罗拉 九尾",
+"src": "52poke-search:阿罗拉 九尾"
+},
+"alolan_raichu": {
+"tw": "阿羅拉 雷丘",
+"cn": "阿罗拉 雷丘",
+"src": "52poke-search:阿罗拉 雷丘"
+},
+"alolan_vulpix": {
+"tw": "阿羅拉 六尾",
+"cn": "阿罗拉 六尾",
+"src": "52poke-search:阿罗拉 六尾"
+},
+"alouette_(pokemon)": {
+"tw": "亞爾美露",
+"cn": "亚尔美露",
+"src": "52poke-search:亞爾美露"
+},
+"altera_(fate)": {
+"tw": "阿蒂拉",
+"cn": "阿蒂拉",
+"src": "fgo:8"
+},
+"altera_the_santa_(fate)": {
+"tw": "阿蒂拉．the．San〔ta〕",
+"cn": "阿蒂拉·the·San〔ta〕",
+"src": "fgo:197"
+},
+"amakusa_shirou_(fate)": {
+"tw": "天草四郎",
+"cn": "天草四郎",
+"src": "fgo:93"
+},
+"amarys_(pokemon)": {
+"tw": "納莉",
+"cn": "纳莉",
+"src": "52poke:納莉"
+},
+"amethio_(pokemon)": {
+"tw": "艾梅吉歐",
+"cn": "艾梅吉欧",
+"src": "52poke-search:艾梅吉歐"
+},
+"anabel_(pokemon)": {
+"tw": "莉拉",
+"cn": "莉拉",
+"src": "52poke-search:莉拉"
+},
+"anastasia_(fate)": {
+"tw": "安娜塔西亞",
+"cn": "阿纳斯塔西娅",
+"src": "fgo:201"
+},
+"andromeda_(fate)": {
+"tw": "安朵美達",
+"cn": "安德洛墨达",
+"src": "fgo:406"
+},
+"angie_(pokemon)": {
+"tw": "小葵",
+"cn": "小葵",
+"src": "52poke-search:小葵"
+},
+"angra_mainyu_(fate)": {
+"tw": "安格拉曼紐",
+"cn": "安哥拉曼纽",
+"src": "fgo:107"
+},
+"ann_(pokemon)": {
+"tw": "小安",
+"cn": "小安",
+"src": "52poke-search:小安"
+},
+"anne_bonny_(fate)": {
+"tw": "安妮．伯妮 & 瑪莉．瑞德",
+"cn": "安妮·伯妮＆玛莉·瑞德",
+"src": "fgo:66"
+},
+"anne_bonny_(swimsuit_archer)_(first_ascension)_(fate)": {
+"tw": "安妮．伯妮 & 瑪莉．瑞德",
+"cn": "安妮·伯妮＆玛莉·瑞德",
+"src": "fgo:66"
+},
+"anne_bonny_(swimsuit_archer)_(second_ascension)_(fate)": {
+"tw": "安妮．伯妮 & 瑪莉．瑞德",
+"cn": "安妮·伯妮＆玛莉·瑞德",
+"src": "fgo:66"
+},
+"anne_bonny_(swimsuit_archer)_(third_ascension)_(fate)": {
+"tw": "安妮．伯妮 & 瑪莉．瑞德",
+"cn": "安妮·伯妮＆玛莉·瑞德",
+"src": "fgo:66"
+},
+"ansha_(pokemon)": {
+"tw": "安馨兒",
+"cn": "安馨儿",
+"src": "52poke-search:安馨兒"
+},
+"antonio_salieri_(fate)": {
+"tw": "安東尼奧．薩里耶利",
+"cn": "安东尼奥·萨列里",
+"src": "fgo:204"
+},
+"arash_(fate)": {
+"tw": "阿拉什",
+"cn": "阿拉什",
+"src": "fgo:16"
+},
+"archer_(fate)": {
+"tw": "Emiya",
+"cn": "卫宫",
+"src": "fgo:11"
+},
+"archer_(pokemon)": {
+"tw": "阿波羅",
+"cn": "阿波罗",
+"src": "52poke:阿波罗"
+},
+"archetype_earth": {
+"tw": "Archetype：Earth",
+"cn": "Archetype：Earth",
+"src": "fgo:351"
+},
+"archie_(pokemon)": {
+"tw": "水梧桐",
+"cn": "水梧桐",
+"src": "52poke:水梧桐"
+},
+"arezu_(pokemon)": {
+"tw": "火夏",
+"cn": "火夏",
+"src": "52poke-search:火夏"
+},
+"argenta_(pokemon)": {
+"tw": "青葙",
+"cn": "青葙",
+"src": "52poke:青葙"
+},
+"ariana_(pokemon)": {
+"tw": "雅典娜",
+"cn": "雅典娜",
+"src": "52poke:雅典娜"
+},
+"arjuna_(fate)": {
+"tw": "阿周那",
+"cn": "阿周那",
+"src": "fgo:84"
+},
+"aroma_lady_(pokemon)": {
+"tw": "香氛姐姐",
+"cn": "香氛姐姐",
+"src": "52poke:香氛姐姐"
+},
+"arthur_pendragon_(fate)": {
+"tw": "亞瑟．潘德拉剛〔Prototype〕",
+"cn": "亚瑟·潘德拉贡〔Prototype〕",
+"src": "fgo:160"
+},
+"artist_(pokemon)": {
+"tw": "藝術家",
+"cn": "艺术家",
+"src": "52poke:艺术家"
+},
+"artoria_caster_(fate)": {
+"tw": "阿爾托莉亞．Caster",
+"cn": "阿尔托莉雅·卡斯特",
+"src": "fgo:284"
+},
+"artoria_caster_(swimsuit_berserker)_(first_ascension)_(fate)": {
+"tw": "阿爾托莉亞．Caster",
+"cn": "阿尔托莉雅·卡斯特",
+"src": "fgo:284"
+},
+"artoria_caster_(swimsuit_berserker)_(second_ascension)_(fate)": {
+"tw": "阿爾托莉亞．Caster",
+"cn": "阿尔托莉雅·卡斯特",
+"src": "fgo:284"
+},
+"artoria_caster_(swimsuit_berserker)_(third_ascension)_(fate)": {
+"tw": "阿爾托莉亞．Caster",
+"cn": "阿尔托莉雅·卡斯特",
+"src": "fgo:284"
+},
+"artoria_pendragon_(fate)": {
+"tw": "阿爾托莉亞．潘德拉剛",
+"cn": "阿尔托莉雅·潘德拉贡",
+"src": "fgo:2"
+},
+"artoria_pendragon_(lancer)_(fate)": {
+"tw": "阿爾托莉亞．潘德拉剛",
+"cn": "阿尔托莉雅·潘德拉贡",
+"src": "fgo:119"
+},
+"artoria_pendragon_(swimsuit_ruler)_(fate)": {
+"tw": "阿爾托莉亞．潘德拉剛",
+"cn": "阿尔托莉雅·潘德拉贡",
+"src": "fgo:2"
+},
+"arven_(pokemon)": {
+"tw": "派帕",
+"cn": "派帕",
+"src": "52poke:派帕"
+},
+"asclepius_(fate)": {
+"tw": "阿斯克勒庇俄斯",
+"cn": "阿斯克勒庇俄斯",
+"src": "fgo:249"
+},
+"asclepius_(fate/strange_fake)": {
+"tw": "阿斯克勒庇俄斯",
+"cn": "阿斯克勒庇俄斯",
+"src": "fgo:249"
+},
+"ash_ketchum": {
+"tw": "小智",
+"cn": "小智",
+"src": "52poke-search:小智"
+},
+"ashiya_douman_(fate)": {
+"tw": "蘆屋道滿",
+"cn": "芦屋道满",
+"src": "fgo:297"
+},
+"ashoka_(fate)": {
+"tw": "阿育王",
+"cn": "阿育王",
+"src": "fgo:439"
+},
+"ashwatthama_(fate)": {
+"tw": "馬嘶",
+"cn": "马嘶",
+"src": "fgo:248"
+},
+"asterios_(fate)": {
+"tw": "阿斯忒里翁",
+"cn": "阿斯忒里俄斯",
+"src": "fgo:53"
+},
+"astolfo_(fate)": {
+"tw": "阿斯托爾福",
+"cn": "阿斯托尔福",
+"src": "fgo:94"
+},
+"astolfo_(saber)_(fate)": {
+"tw": "阿斯托爾福",
+"cn": "阿斯托尔福",
+"src": "fgo:270"
+},
+"astraea_(fate)": {
+"tw": "阿斯特蕾亞",
+"cn": "阿斯特赖亚",
+"src": "fgo:242"
+},
+"astrid_(pokemon)": {
+"tw": "絢香",
+"cn": "绚香",
+"src": "52poke-search:絢香"
+},
+"atalanta_(fate)": {
+"tw": "阿塔蘭塔",
+"cn": "阿塔兰忒",
+"src": "fgo:14"
+},
+"atalanta_alter_(fate)": {
+"tw": "阿塔蘭塔",
+"cn": "阿塔兰忒",
+"src": "fgo:14"
+},
+"atticus_(pokemon)": {
+"tw": "秋明",
+"cn": "秋明",
+"src": "52poke:秋明"
+},
+"avery_(pokemon)": {
+"tw": "賽寶利",
+"cn": "赛宝利",
+"src": "52poke-search:赛宝利"
+},
+"avicebron_(fate)": {
+"tw": "阿維斯布隆",
+"cn": "阿维斯布隆",
+"src": "fgo:203"
+},
+"az_(pokemon)": {
+"tw": "ＡＺ",
+"cn": "ＡＺ",
+"src": "52poke-search:ＡＺ"
+},
+"baobhan_sith_(fate)": {
+"tw": "妖精騎士崔斯坦",
+"cn": "妖精骑士崔斯坦",
+"src": "fgo:311"
+},
+"baobhan_sith_(swimsuit_pretender)_(first_ascension)_(fate)": {
+"tw": "凱特．庫．米可科爾",
+"cn": "凯特·库·米可科尔",
+"src": "fgo:392"
+},
+"barghest_(fate)": {
+"tw": "妖精騎士高文",
+"cn": "妖精骑士高文",
+"src": "fgo:310"
+},
+"barghest_(swimsuit_archer)_(first_ascension)_(fate)": {
+"tw": "ＵＤＫ－巴格斯特",
+"cn": "ＵＤＫ－巴格斯特",
+"src": "fgo:391"
+},
+"barry_(pokemon)": {
+"tw": "阿馴",
+"cn": "阿驯",
+"src": "52poke:阿驯"
+},
+"bartholomew_roberts_(fate)": {
+"tw": "巴索羅繆．羅伯茨",
+"cn": "巴沙洛缪·罗伯茨",
+"src": "fgo:257"
+},
+"battle_girl_(pokemon)": {
+"tw": "對戰少女",
+"cn": "对战少女",
+"src": "52poke:对战少女"
+},
+"bb_(fate)": {
+"tw": "BB",
+"cn": "BB",
+"src": "fgo:166"
+},
+"bb_(fate/extra)": {
+"tw": "BB",
+"cn": "BB",
+"src": "fgo:166"
+},
+"bb_(swimsuit_mooncancer)_(first_ascension)_(fate)": {
+"tw": "BB",
+"cn": "BB",
+"src": "fgo:166"
+},
+"bb_(swimsuit_mooncancer)_(second_ascension)_(fate)": {
+"tw": "BB",
+"cn": "BB",
+"src": "fgo:166"
+},
+"bb_(swimsuit_mooncancer)_(third_ascension)_(fate)": {
+"tw": "BB",
+"cn": "BB",
+"src": "fgo:166"
+},
+"bb_dubai_(fate)": {
+"tw": "ＢＢ杜拜",
+"cn": "ＢＢ迪拜",
+"src": "fgo:421"
+},
+"bea_(pokemon)": {
+"tw": "彩豆",
+"cn": "彩豆",
+"src": "52poke:彩豆"
+},
+"beauty_(pokemon)": {
+"tw": "大姐姐",
+"cn": "大姐姐",
+"src": "52poke:大姐姐"
+},
+"bede_(pokemon)": {
+"tw": "彼特",
+"cn": "彼特",
+"src": "52poke:彼特"
+},
+"bedivere_(fate)": {
+"tw": "貝德維爾",
+"cn": "贝德维尔",
+"src": "fgo:126"
+},
+"bellelba_(pokemon)": {
+"tw": "娜姿",
+"cn": "娜姿",
+"src": "52poke-search:娜姿"
+},
+"benga_(pokemon)": {
+"tw": "蕃石郎",
+"cn": "蕃石郎",
+"src": "52poke-search:蕃石郎"
+},
+"beni_(pokemon)": {
+"tw": "石月",
+"cn": "石月",
+"src": "52poke-search:石月"
+},
+"beowulf_(fate)": {
+"tw": "貝奧武夫",
+"cn": "贝奥武夫",
+"src": "fgo:89"
+},
+"bertha_(pokemon)": {
+"tw": "菊野",
+"cn": "菊野",
+"src": "52poke:菊野"
+},
+"bettie_(pokemon)": {
+"tw": "小結",
+"cn": "小结",
+"src": "52poke-search:小結"
+},
+"bhima_(fate)": {
+"tw": "怖軍",
+"cn": "怖军",
+"src": "fgo:381"
+},
+"bianca_(pokemon)": {
+"tw": "白露",
+"cn": "白露",
+"src": "52poke:白露"
+},
+"bianca_(pokemon_heroes)": {
+"tw": "卡儂",
+"cn": "卡侬",
+"src": "52poke-search:卡儂"
+},
+"bill_(pokemon)": {
+"tw": "正輝",
+"cn": "正辉",
+"src": "52poke:正辉"
+},
+"billy_the_kid_(fate)": {
+"tw": "比利小子",
+"cn": "比利小子",
+"src": "fgo:105"
+},
+"bird_keeper_(pokemon)": {
+"tw": "養鳥人",
+"cn": "养鸟人",
+"src": "52poke:养鸟人"
+},
+"black_belt_(pokemon)": {
+"tw": "空手道王",
+"cn": "空手道王",
+"src": "52poke-search:空手道王"
+},
+"blaine_(pokemon)": {
+"tw": "夏伯",
+"cn": "夏伯",
+"src": "52poke-search:夏伯"
+},
+"blanche_(pokemon)": {
+"tw": "布蘭雪",
+"cn": "布兰雪",
+"src": "52poke:布蘭雪"
+},
+"bonnie_(pokemon)": {
+"tw": "柚麗嘉",
+"cn": "柚丽嘉",
+"src": "52poke-search:柚丽嘉"
+},
+"boudica_(fate)": {
+"tw": "布狄卡",
+"cn": "布狄卡",
+"src": "fgo:26"
+},
+"bradamante_(fate)": {
+"tw": "布拉達曼特",
+"cn": "布拉达曼特",
+"src": "fgo:232"
+},
+"brassius_(pokemon)": {
+"tw": "寇沙",
+"cn": "寇沙",
+"src": "52poke:寇沙"
+},
+"brawly_(pokemon)": {
+"tw": "藤樹",
+"cn": "藤树",
+"src": "52poke:藤樹"
+},
+"brendan_(pokemon)": {
+"tw": "小悠",
+"cn": "小悠",
+"src": "52poke:小悠"
+},
+"briar_(pokemon)": {
+"tw": "白蕾雅",
+"cn": "白蕾雅",
+"src": "52poke:白蕾雅"
+},
+"brigette_(pokemon)": {
+"tw": "梓美",
+"cn": "梓美",
+"src": "52poke:梓美"
+},
+"britomart_(fate)": {
+"tw": "布里托瑪特",
+"cn": "布里托玛特",
+"src": "fgo:368"
+},
+"brock_(pokemon)": {
+"tw": "小剛",
+"cn": "小刚",
+"src": "52poke:小剛"
+},
+"browt": {
+"tw": "葉眉鳥",
+"cn": "叶眉鸟",
+"src": "52poke:叶眉鸟"
+},
+"bruno_(pokemon)": {
+"tw": "希巴",
+"cn": "希巴",
+"src": "52poke:希巴"
+},
+"brycen_(pokemon)": {
+"tw": "哈奇庫",
+"cn": "哈奇库",
+"src": "52poke:哈奇庫"
+},
+"brynhild_(fate)": {
+"tw": "布倫希爾德",
+"cn": "布伦希尔德",
+"src": "fgo:88"
+},
+"brynhild_(swimsuit_berserker)_(first_ascension)_(fate)": {
+"tw": "布倫希爾德",
+"cn": "布伦希尔德",
+"src": "fgo:88"
+},
+"brynhild_(swimsuit_berserker)_(second_ascension)_(fate)": {
+"tw": "布倫希爾德",
+"cn": "布伦希尔德",
+"src": "fgo:88"
+},
+"brynhild_(swimsuit_berserker)_(third_ascension)_(fate)": {
+"tw": "布倫希爾德",
+"cn": "布伦希尔德",
+"src": "fgo:88"
+},
+"bryony_(pokemon)": {
+"tw": "芭菈",
+"cn": "芭菈",
+"src": "52poke:芭菈"
+},
+"budding_expeditioner_(pokemon)": {
+"tw": "新手調查員",
+"cn": "新手调查员",
+"src": "52poke-search:新手调查员"
+},
+"bug_catcher_(pokemon)": {
+"tw": "捕蟲少年",
+"cn": "捕虫少年",
+"src": "52poke:捕虫少年"
+},
+"bugsy_(pokemon)": {
+"tw": "阿筆",
+"cn": "阿笔",
+"src": "52poke:阿筆"
+},
+"burgh_(pokemon)": {
+"tw": "亞堤",
+"cn": "亚堤",
+"src": "52poke:亞堤"
+},
+"burgundy_(pokemon)": {
+"tw": "赤霞珠",
+"cn": "赤霞珠",
+"src": "52poke:赤霞珠"
+},
+"butch_(pokemon)": {
+"tw": "小三郎",
+"cn": "小三郎",
+"src": "52poke:小三郎"
+},
+"byron_(pokemon)": {
+"tw": "東瓜",
+"cn": "东瓜",
+"src": "52poke:東瓜"
+},
+"cabbie_(pokemon)": {
+"tw": "計程車司機",
+"cn": "计程车司机",
+"src": "52poke-search:計程車司機"
+},
+"caenis_(fate)": {
+"tw": "凱妮絲",
+"cn": "凯妮斯",
+"src": "fgo:279"
+},
+"caenis_(swimsuit_rider)_(fate)": {
+"tw": "凱妮絲",
+"cn": "凯妮斯",
+"src": "fgo:279"
+},
+"cail_(pokemon)": {
+"tw": "馬薩",
+"cn": "马萨",
+"src": "52poke-search:馬薩"
+},
+"caitlin_(pokemon)": {
+"tw": "嘉德麗雅",
+"cn": "嘉德丽雅",
+"src": "52poke:嘉德麗雅"
+},
+"calamity_jane_(fate)": {
+"tw": "災星簡",
+"cn": "灾星简",
+"src": "fgo:269"
+},
+"calem_(pokemon)": {
+"tw": "卡魯穆",
+"cn": "卡鲁穆",
+"src": "52poke:卡魯穆"
+},
+"caligula_(fate)": {
+"tw": "卡利古拉",
+"cn": "卡利古拉",
+"src": "fgo:54"
+},
+"callahan_(pokemon)": {
+"tw": "卡戛其",
+"cn": "卡戛其",
+"src": "52poke-search:卡戛其"
+},
+"camper_(pokemon)": {
+"tw": "露營少年",
+"cn": "露营少年",
+"src": "52poke:露营少年"
+},
+"canari_(pokemon)": {
+"tw": "卡娜莉",
+"cn": "卡娜莉",
+"src": "52poke-search:卡娜莉"
+},
+"candela_(pokemon)": {
+"tw": "坎迪拉",
+"cn": "坎迪拉",
+"src": "52poke:坎迪拉"
+},
+"candice_(pokemon)": {
+"tw": "小菘",
+"cn": "小菘",
+"src": "52poke:小菘"
+},
+"captain_nemo_(fate)": {
+"tw": "尼莫",
+"cn": "尼莫",
+"src": "fgo:296"
+},
+"captain_nemo_(santa)_(fate)": {
+"tw": "尼莫〔Santa〕",
+"cn": "尼莫〔圣诞〕",
+"src": "fgo:401"
+},
+"caraway_(pokemon)": {
+"tw": "葛莉茴",
+"cn": "葛莉茴",
+"src": "52poke-search:葛莉茴"
+},
+"carmilla_(fate)": {
+"tw": "卡米拉",
+"cn": "卡米拉",
+"src": "fgo:46"
+},
+"carmilla_(swimsuit_rider)_(first_ascension)_(fate)": {
+"tw": "卡米拉",
+"cn": "卡米拉",
+"src": "fgo:46"
+},
+"carmilla_(swimsuit_rider)_(third_ascension)_(fate)": {
+"tw": "卡米拉",
+"cn": "卡米拉",
+"src": "fgo:46"
+},
+"carmine_(pokemon)": {
+"tw": "丹瑜",
+"cn": "丹瑜",
+"src": "52poke:丹瑜"
+},
+"casey_(pokemon)": {
+"tw": "奈奈",
+"cn": "奈奈",
+"src": "52poke:奈奈"
+},
+"cassidy_(pokemon)": {
+"tw": "亞馬多",
+"cn": "亚马多",
+"src": "52poke:亚马多"
+},
+"castor_(fate)": {
+"tw": "狄奧斯庫洛伊",
+"cn": "狄俄斯库里",
+"src": "fgo:278"
+},
+"celosia_(pokemon)": {
+"tw": "克蕾兒",
+"cn": "克蕾儿",
+"src": "52poke:克蕾兒"
+},
+"chacha_(fate)": {
+"tw": "茶茶",
+"cn": "茶茶",
+"src": "fgo:162"
+},
+"chalce_(pokemon)": {
+"tw": "艾嘉特",
+"cn": "艾嘉特",
+"src": "52poke-search:艾嘉特"
+},
+"channeler_(pokemon)": {
+"tw": "祈禱師",
+"cn": "祈祷师",
+"src": "52poke:祈祷师"
+},
+"charlemagne_(fate)": {
+"tw": "查理曼",
+"cn": "查理曼",
+"src": "fgo:343"
+},
+"charles-henri_sanson_(fate)": {
+"tw": "夏爾．亨利．桑松",
+"cn": "夏尔·亨利·桑松",
+"src": "fgo:43"
+},
+"charles_babbage_(fate)": {
+"tw": "查爾斯．巴貝奇",
+"cn": "查尔斯·巴贝奇",
+"src": "fgo:80"
+},
+"charlotte_corday_(fate)": {
+"tw": "夏洛特．科黛",
+"cn": "夏洛特·科黛",
+"src": "fgo:259"
+},
+"charlotte_corday_(swimsuit_caster)_(first_ascension)_(fate)": {
+"tw": "夏洛特．科黛",
+"cn": "夏洛特·科黛",
+"src": "fgo:259"
+},
+"charlotte_corday_(swimsuit_caster)_(third_ascension)_(fate)": {
+"tw": "夏洛特．科黛",
+"cn": "夏洛特·科黛",
+"src": "fgo:259"
+},
+"charon_(pokemon)": {
+"tw": "冥王",
+"cn": "冥王",
+"src": "52poke:冥王"
+},
+"chase_(pokemon)": {
+"tw": "小驅",
+"cn": "小驱",
+"src": "52poke-search:小驅"
+},
+"chen_gong_(fate)": {
+"tw": "陳宮",
+"cn": "陈宫",
+"src": "fgo:258"
+},
+"cheren_(pokemon)": {
+"tw": "黑連",
+"cn": "黑连",
+"src": "52poke:黑連"
+},
+"cheryl_(pokemon)": {
+"tw": "芽米",
+"cn": "芽米",
+"src": "52poke:芽米"
+},
+"chevalier_d'eon_(fate)": {
+"tw": "騎士德翁",
+"cn": "骑士迪昂",
+"src": "fgo:10"
+},
+"child_gilgamesh_(fate)": {
+"tw": "子吉爾",
+"cn": "幼吉尔",
+"src": "fgo:95"
+},
+"chili_(pokemon)": {
+"tw": "伯特",
+"cn": "伯特",
+"src": "52poke:伯特"
+},
+"chiron_(fate)": {
+"tw": "凱隆",
+"cn": "喀戎",
+"src": "fgo:207"
+},
+"chloe_(pokemon)": {
+"tw": "小春",
+"cn": "小春",
+"src": "52poke-search:小春"
+},
+"chloe_von_einzbern": {
+"tw": "克洛伊．馮．愛因茲貝倫",
+"cn": "克洛伊·冯·爱因兹贝伦",
+"src": "fgo:137"
+},
+"christopher_columbus_(fate)": {
+"tw": "克里斯多福．哥倫布",
+"cn": "克里斯托弗·哥伦布",
+"src": "fgo:172"
+},
+"chuchu_(pokemon)": {
+"tw": "秋秋",
+"cn": "秋秋",
+"src": "52poke-search:秋秋"
+},
+"chuck_(pokemon)": {
+"tw": "阿四",
+"cn": "阿四",
+"src": "52poke-search:阿四"
+},
+"cilan_(pokemon)": {
+"tw": "天桐",
+"cn": "天桐",
+"src": "52poke:天桐"
+},
+"circe_(fate)": {
+"tw": "喀耳刻",
+"cn": "喀耳刻",
+"src": "fgo:192"
+},
+"clair_(pokemon)": {
+"tw": "小椿",
+"cn": "小椿",
+"src": "52poke:小椿"
+},
+"clay_(pokemon)": {
+"tw": "菊老大",
+"cn": "菊老大",
+"src": "52poke:菊老大"
+},
+"clemont_(pokemon)": {
+"tw": "希特隆",
+"cn": "希特隆",
+"src": "52poke:希特隆"
+},
+"cleopatra_(fate)": {
+"tw": "克麗奧佩脫拉",
+"cn": "克娄巴特拉",
+"src": "fgo:139"
+},
+"clive_(pokemon)": {
+"tw": "聶凱",
+"cn": "聂凯",
+"src": "52poke-search:聂凯"
+},
+"clover_(pokemon)": {
+"tw": "阿竹",
+"cn": "阿竹",
+"src": "52poke-search:阿竹"
+},
+"cnoc_na_riabh_(swimsuit_foreigner)_(fate)": {
+"tw": "諾克娜蕾雅．雅蘭杜",
+"cn": "诺克娜蕾·雅兰杜",
+"src": "fgo:389"
+},
+"coach_trainer_(pokemon)": {
+"tw": "教練訓練家",
+"cn": "教练训练家",
+"src": "52poke:教練訓練家"
+},
+"cogita_(pokemon)": {
+"tw": "吾思",
+"cn": "吾思",
+"src": "52poke:吾思"
+},
+"collector_(pokemon)": {
+"tw": "寶可夢收藏家",
+"cn": "宝可梦收藏家",
+"src": "52poke:宝可梦收藏家"
+},
+"colress_(pokemon)": {
+"tw": "阿克羅瑪",
+"cn": "阿克罗玛",
+"src": "52poke:阿克羅瑪"
+},
+"constantine_xi_(fate)": {
+"tw": "君士坦丁十一世",
+"cn": "君士坦丁十一世",
+"src": "fgo:342"
+},
+"conway_(pokemon)": {
+"tw": "考平",
+"cn": "考平",
+"src": "52poke:考平"
+},
+"copycat_(pokemon)": {
+"tw": "模仿少女",
+"cn": "模仿少女",
+"src": "52poke-search:模仿少女"
+},
+"coral_(pokemon)": {
+"tw": "姍瑚",
+"cn": "姗瑚",
+"src": "52poke-search:姍瑚"
+},
+"corbeau_(pokemon)": {
+"tw": "烏羽",
+"cn": "乌羽",
+"src": "52poke-search:烏羽"
+},
+"courtney_(pokemon)": {
+"tw": "火雁",
+"cn": "火雁",
+"src": "52poke:火雁"
+},
+"cowgirl_(pokemon)": {
+"tw": "牛仔女孩",
+"cn": "牛仔女孩",
+"src": "52poke:牛仔女孩"
+},
+"cress_(pokemon)": {
+"tw": "寇恩",
+"cn": "寇恩",
+"src": "52poke:寇恩"
+},
+"crispin_(pokemon)": {
+"tw": "赤松",
+"cn": "赤松",
+"src": "52poke:赤松"
+},
+"cu_chulainn_(caster)_(fate)": {
+"tw": "庫．夫林",
+"cn": "库·丘林",
+"src": "fgo:38"
+},
+"cu_chulainn_(fate)": {
+"tw": "庫．夫林",
+"cn": "库·丘林",
+"src": "fgo:17"
+},
+"cu_chulainn_(fate/prototype)": {
+"tw": "庫．夫林〔Prototype〕",
+"cn": "库·丘林〔Prototype〕",
+"src": "fgo:20"
+},
+"cu_chulainn_(lancer)_(fate)": {
+"tw": "庫．夫林",
+"cn": "库·丘林",
+"src": "fgo:17"
+},
+"curtis_(pokemon)": {
+"tw": "阿鐵",
+"cn": "阿铁",
+"src": "52poke:阿铁"
+},
+"cyllene_(pokemon)": {
+"tw": "星月",
+"cn": "星月",
+"src": "52poke-search:星月"
+},
+"cynthia_(pokemon)": {
+"tw": "竹蘭",
+"cn": "竹兰",
+"src": "52poke:竹蘭"
+},
+"cyrano_(pokemon)": {
+"tw": "席藍",
+"cn": "席蓝",
+"src": "52poke:席藍"
+},
+"cyrus_(pokemon)": {
+"tw": "赤日",
+"cn": "赤日",
+"src": "52poke:赤日"
+},
+"dahlia_(pokemon)": {
+"tw": "大麗",
+"cn": "大丽",
+"src": "52poke:大麗"
+},
+"daikokuten_(fate)": {
+"tw": "大黑天",
+"cn": "大黑天",
+"src": "fgo:340"
+},
+"dana_(pokemon)": {
+"tw": "晝珠",
+"cn": "昼珠",
+"src": "52poke-search:昼珠"
+},
+"dancer_(pokemon)": {
+"tw": "舞者",
+"cn": "舞者",
+"src": "52poke:舞者"
+},
+"danika_(pokemon)": {
+"tw": "朝日",
+"cn": "朝日",
+"src": "52poke-search:朝日"
+},
+"dante_alighieri_(fate)": {
+"tw": "但丁·阿利吉耶里",
+"cn": "但丁·阿利吉耶里",
+"src": "fgo:437"
+},
+"darach_(pokemon)": {
+"tw": "石蘭",
+"cn": "石兰",
+"src": "52poke:石蘭"
+},
+"darius_iii_(fate)": {
+"tw": "大流士三世",
+"cn": "大流士三世",
+"src": "fgo:55"
+},
+"david_(fate)": {
+"tw": "大衛",
+"cn": "大卫",
+"src": "fgo:63"
+},
+"dawn_(pokemon)": {
+"tw": "小光",
+"cn": "小光",
+"src": "52poke:小光"
+},
+"delinquent_(pokemon)": {
+"tw": "可怕的姐姐",
+"cn": "可怕的姐姐",
+"src": "52poke-search:可怕的姐姐"
+},
+"dendra_(pokemon)": {
+"tw": "凰檗",
+"cn": "凰檗",
+"src": "52poke:凰檗"
+},
+"dexio_(pokemon)": {
+"tw": "德克希歐",
+"cn": "德克希欧",
+"src": "52poke-search:德克希歐"
+},
+"diana_(pokemon_horizons)": {
+"tw": "黛安娜",
+"cn": "黛安娜",
+"src": "52poke-search:黛安娜"
+},
+"diane_(pokemon)": {
+"tw": "黛安",
+"cn": "黛安",
+"src": "52poke-search:黛安"
+},
+"diantha_(pokemon)": {
+"tw": "卡露妮",
+"cn": "卡露妮",
+"src": "52poke:卡露妮"
+},
+"diarmuid_ua_duibhne_(fate)": {
+"tw": "迪爾姆德．奧德利暗",
+"cn": "迪尔姆德·奥迪那",
+"src": "fgo:71"
+},
+"diarmuid_ua_duibhne_(lancer)_(fate)": {
+"tw": "迪爾姆德．奧德利暗",
+"cn": "迪尔姆德·奥迪那",
+"src": "fgo:71"
+},
+"diarmuid_ua_duibhne_(saber)_(fate)": {
+"tw": "迪爾姆德．奧德利暗",
+"cn": "迪尔姆德·奥迪那",
+"src": "fgo:223"
+},
+"dobrynya_nikitich_(fate)": {
+"tw": "多布雷尼亞．尼基季奇",
+"cn": "多布雷尼亚·尼基季奇",
+"src": "fgo:332"
+},
+"dobrynya_nikitich_(swimsuit_lancer)_(first_ascension)_(fate)": {
+"tw": "多布雷尼亞．尼基季奇",
+"cn": "多布雷尼亚·尼基季奇",
+"src": "fgo:332"
+},
+"dobrynya_nikitich_(swimsuit_lancer)_(second_ascension)_(fate)": {
+"tw": "多布雷尼亞．尼基季奇",
+"cn": "多布雷尼亚·尼基季奇",
+"src": "fgo:332"
+},
+"doctor_(pokemon)": {
+"tw": "醫生",
+"cn": "医生",
+"src": "52poke:医生"
+},
+"don_quixote_(fate)": {
+"tw": "唐吉訶德",
+"cn": "堂·吉诃德",
+"src": "fgo:347"
+},
+"dot_(pokemon)": {
+"tw": "小點",
+"cn": "小点",
+"src": "52poke:小點"
+},
+"dragon_tamer_(pokemon)": {
+"tw": "馴龍師",
+"cn": "驯龙师",
+"src": "52poke:驯龙师"
+},
+"drake_(pokemon)": {
+"tw": "源治",
+"cn": "源治",
+"src": "52poke:源治"
+},
+"drasna_(pokemon)": {
+"tw": "朵拉塞娜",
+"cn": "朵拉塞娜",
+"src": "52poke:朵拉塞娜"
+},
+"drayden_(pokemon)": {
+"tw": "夏卡",
+"cn": "夏卡",
+"src": "52poke:夏卡"
+},
+"drayton_(pokemon)": {
+"tw": "杜若",
+"cn": "杜若",
+"src": "52poke:杜若"
+},
+"drew_(pokemon)": {
+"tw": "小瞬",
+"cn": "小瞬",
+"src": "52poke:小瞬"
+},
+"dulse_(pokemon)": {
+"tw": "達爾斯",
+"cn": "达尔斯",
+"src": "52poke-search:達爾斯"
+},
+"durga_(fate)": {
+"tw": "杜爾迦",
+"cn": "杜尔伽",
+"src": "fgo:383"
+},
+"duryodhana_(fate)": {
+"tw": "難敵",
+"cn": "难敌",
+"src": "fgo:382"
+},
+"edward_teach_(fate)": {
+"tw": "愛德華．蒂奇",
+"cn": "爱迪·萨奇",
+"src": "fgo:25"
+},
+"elaine_(pokemon)": {
+"tw": "步美",
+"cn": "步美",
+"src": "52poke-search:步美"
+},
+"elesa_(pokemon)": {
+"tw": "小菊兒",
+"cn": "小菊儿",
+"src": "52poke:小菊兒"
+},
+"elio_(pokemon)": {
+"tw": "小陽",
+"cn": "小阳",
+"src": "52poke:小陽"
+},
+"eliza_the_nine-tattooed_dragon_(fate)": {
+"tw": "九紋龍伊莉莎",
+"cn": "九纹龙伊丽莎",
+"src": "fgo:367"
+},
+"elizabeth_bathory_(cinderella)_(fate)": {
+"tw": "伊莉莎白．巴托里〔Cinderella〕",
+"cn": "伊丽莎白·巴托里〔灰姑娘〕",
+"src": "fgo:326"
+},
+"elizabeth_bathory_(halloween_caster)_(fate)": {
+"tw": "伊莉莎白．巴托里〔萬聖節〕",
+"cn": "伊丽莎白·巴托里〔万圣节〕",
+"src": "fgo:61"
+},
+"elizabeth_of_the_end_(fate)": {
+"tw": "終結的伊麗莎白",
+"cn": "终结的伊丽莎白",
+"src": "fgo:458"
+},
+"emerald_(pokemon)": {
+"tw": "米拉特",
+"cn": "米拉特",
+"src": "52poke:米拉特"
+},
+"emiya_kiritsugu_(assassin)": {
+"tw": "Emiya",
+"cn": "卫宫",
+"src": "fgo:11"
+},
+"emma_(pokemon)": {
+"tw": "瑪琪艾兒",
+"cn": "玛琪艾儿",
+"src": "52poke:瑪琪艾兒"
+},
+"emmet_(pokemon)": {
+"tw": "南廈",
+"cn": "南厦",
+"src": "52poke-search:南廈"
+},
+"enkidu_(fate)": {
+"tw": "恩奇都",
+"cn": "恩奇都",
+"src": "fgo:143"
+},
+"ereshkigal_(fate)": {
+"tw": "埃列什基伽勒",
+"cn": "埃列什基伽勒",
+"src": "fgo:196"
+},
+"ereshkigal_(swimsuit_beast)_(fate)": {
+"tw": "埃列什基伽勒",
+"cn": "埃列什基伽勒",
+"src": "fgo:196"
+},
+"eri_(pokemon)": {
+"tw": "枇琶",
+"cn": "枇琶",
+"src": "52poke:枇琶"
+},
+"eric_bloodaxe_(fate)": {
+"tw": "血斧埃里克",
+"cn": "血斧埃里克",
+"src": "fgo:57"
+},
+"erika_(pokemon)": {
+"tw": "莉佳",
+"cn": "莉佳",
+"src": "52poke:莉佳"
+},
+"ethan_(pokemon)": {
+"tw": "阿響",
+"cn": "阿响",
+"src": "52poke:阿響"
+},
+"europa_(fate)": {
+"tw": "歐羅巴",
+"cn": "欧罗巴",
+"src": "fgo:274"
+},
+"euryale_(fate)": {
+"tw": "尤瑞艾莉",
+"cn": "尤瑞艾莉",
+"src": "fgo:15"
+},
+"eusine_(pokemon)": {
+"tw": "水京",
+"cn": "水京",
+"src": "52poke-search:水京"
+},
+"evelyn_(pokemon)": {
+"tw": "夕絲",
+"cn": "夕丝",
+"src": "52poke-search:夕丝"
+},
+"faba_(pokemon)": {
+"tw": "扎奧博",
+"cn": "扎奥博",
+"src": "52poke:扎奧博"
+},
+"fairy_tale_girl_(pokemon)": {
+"tw": "童話少女",
+"cn": "童话少女",
+"src": "52poke-search:童話少女"
+},
+"falkner_(pokemon)": {
+"tw": "阿速",
+"cn": "阿速",
+"src": "52poke:阿速"
+},
+"fantina_(pokemon)": {
+"tw": "梅麗莎",
+"cn": "梅丽莎",
+"src": "52poke:梅麗莎"
+},
+"female_assassin_(fate/zero)": {
+"tw": "百貌的哈桑",
+"cn": "百貌哈桑",
+"src": "fgo:110"
+},
+"fennel_(pokemon)": {
+"tw": "真菰",
+"cn": "真菰",
+"src": "52poke:真菰"
+},
+"fergus_mac_roich_(fate)": {
+"tw": "弗格斯．馬克．羅伊",
+"cn": "弗格斯·马克·罗伊",
+"src": "fgo:72"
+},
+"fionn_mac_cumhaill_(fate/grand_order)": {
+"tw": "芬恩．麥克庫爾",
+"cn": "芬恩·麦克库尔",
+"src": "fgo:87"
+},
+"fionn_mac_cumhaill_(fate/zero)": {
+"tw": "芬恩．麥克庫爾",
+"cn": "芬恩·麦克库尔",
+"src": "fgo:87"
+},
+"flannery_(pokemon)": {
+"tw": "亞莎",
+"cn": "亚莎",
+"src": "52poke:亞莎"
+},
+"flint_(pokemon)": {
+"tw": "大葉",
+"cn": "大叶",
+"src": "52poke-search:大葉"
+},
+"florence_nightingale_(fate)": {
+"tw": "南丁格爾",
+"cn": "南丁格尔",
+"src": "fgo:97"
+},
+"florence_nightingale_(santa)_(fate)": {
+"tw": "南丁格爾〔Santa〕",
+"cn": "南丁格尔〔圣诞〕",
+"src": "fgo:271"
+},
+"florian_(pokemon)": {
+"tw": "小春",
+"cn": "小春",
+"src": "52poke-search:小春"
+},
+"francis_drake_(fate)": {
+"tw": "弗朗西斯．德雷克",
+"cn": "弗朗西斯·德雷克",
+"src": "fgo:65"
+},
+"frankenstein's_monster_(fate)": {
+"tw": "弗蘭肯斯坦",
+"cn": "弗兰肯斯坦",
+"src": "fgo:82"
+},
+"frankenstein's_monster_(swimsuit_saber)_(fate)": {
+"tw": "弗蘭肯斯坦",
+"cn": "弗兰肯斯坦",
+"src": "fgo:82"
+},
+"friede_(pokemon)": {
+"tw": "弗里德",
+"cn": "弗里德",
+"src": "52poke-search:弗里德"
+},
+"furisode_girl_(pokemon)": {
+"tw": "長袖和服少女",
+"cn": "长袖和服少女",
+"src": "52poke-search:長袖和服少女"
+},
+"fuuma_kotarou_(fate)": {
+"tw": "風魔小太郎",
+"cn": "风魔小太郎",
+"src": "fgo:117"
+},
+"gaeric_(pokemon)": {
+"tw": "濱廉",
+"cn": "滨廉",
+"src": "52poke-search:濱廉"
+},
+"gaius_julius_caesar_(fate)": {
+"tw": "蓋烏斯．尤利烏斯．凱撒",
+"cn": "盖乌斯·尤利乌斯·恺撒",
+"src": "fgo:7"
+},
+"galarian_ponyta": {
+"tw": "伽勒爾 小火馬",
+"cn": "伽勒尔 小火马",
+"src": "52poke-search:伽勒尔 小火马"
+},
+"galarian_rapidash": {
+"tw": "伽勒爾 烈焰馬",
+"cn": "伽勒尔 烈焰马",
+"src": "52poke-search:伽勒尔 烈焰马"
+},
+"galatea_(fate)": {
+"tw": "伽拉忒亞",
+"cn": "伽拉忒亚",
+"src": "fgo:306"
+},
+"ganesha_(fate)": {
+"tw": "偉大的石像神",
+"cn": "伟大的石像神",
+"src": "fgo:244"
+},
+"gardenia_(pokemon)": {
+"tw": "菜種",
+"cn": "菜种",
+"src": "52poke:菜種"
+},
+"gareth_(fate)": {
+"tw": "加雷斯",
+"cn": "加雷斯",
+"src": "fgo:256"
+},
+"gareth_(swimsuit_saber)_(first_ascension)_(fate)": {
+"tw": "加雷斯",
+"cn": "加雷斯",
+"src": "fgo:256"
+},
+"gareth_(swimsuit_saber)_(second_ascension)_(fate)": {
+"tw": "加雷斯",
+"cn": "加雷斯",
+"src": "fgo:256"
+},
+"gareth_(swimsuit_saber)_(third_ascension)_(fate)": {
+"tw": "加雷斯",
+"cn": "加雷斯",
+"src": "fgo:256"
+},
+"gawain_(fate)": {
+"tw": "高文",
+"cn": "高文",
+"src": "fgo:123"
+},
+"gecqua": {
+"tw": "妙澪兒",
+"cn": "妙澪儿",
+"src": "52poke:妙澪儿"
+},
+"geeta_(pokemon)": {
+"tw": "也慈",
+"cn": "也慈",
+"src": "52poke:也慈"
+},
+"geirskogul_(fate)": {
+"tw": "瓦爾基麗",
+"cn": "瓦尔基里",
+"src": "fgo:214"
+},
+"gentleman_(pokemon)": {
+"tw": "紳士",
+"cn": "绅士",
+"src": "52poke:绅士"
+},
+"georgia_(pokemon)": {
+"tw": "藍葛雷",
+"cn": "蓝葛雷",
+"src": "52poke:藍葛雷"
+},
+"georgios_(fate)": {
+"tw": "聖喬治",
+"cn": "乔尔乔斯",
+"src": "fgo:24"
+},
+"geronimo_(fate)": {
+"tw": "傑羅尼莫",
+"cn": "杰罗尼莫",
+"src": "fgo:104"
+},
+"ghetsis_(pokemon)": {
+"tw": "魁奇思",
+"cn": "魁奇思",
+"src": "52poke:魁奇思"
+},
+"giacomo_(pokemon)": {
+"tw": "皮拿",
+"cn": "皮拿",
+"src": "52poke:皮拿"
+},
+"giallo_(pokemon)": {
+"tw": "傑洛",
+"cn": "杰洛",
+"src": "52poke-search:傑洛"
+},
+"gibeon_(pokemon)": {
+"tw": "吉丙",
+"cn": "吉丙",
+"src": "52poke-search:吉丙"
+},
+"gilgamesh_(caster)_(fate)": {
+"tw": "吉爾伽美什",
+"cn": "吉尔伽美什",
+"src": "fgo:145"
+},
+"gilgamesh_(fate)": {
+"tw": "吉爾伽美什",
+"cn": "吉尔伽美什",
+"src": "fgo:12"
+},
+"gilgamesh_(fate/prototype)": {
+"tw": "吉爾伽美什",
+"cn": "吉尔伽美什",
+"src": "fgo:12"
+},
+"gilgamesh_(ruler)_(fate)": {
+"tw": "吉爾伽美什",
+"cn": "吉尔伽美什",
+"src": "fgo:12"
+},
+"gilles_de_rais_(caster)_(fate)": {
+"tw": "吉爾．德．萊斯",
+"cn": "吉尔·德·雷",
+"src": "fgo:32"
+},
+"gilles_de_rais_(fate)": {
+"tw": "吉爾．德．萊斯",
+"cn": "吉尔·德·雷",
+"src": "fgo:9"
+},
+"gilles_de_rais_(saber)_(fate)": {
+"tw": "吉爾．德．萊斯",
+"cn": "吉尔·德·雷",
+"src": "fgo:9"
+},
+"ginter_(pokemon)": {
+"tw": "銀仁",
+"cn": "银仁",
+"src": "52poke-search:銀仁"
+},
+"giovanni_(pokemon)": {
+"tw": "坂木",
+"cn": "坂木",
+"src": "52poke:坂木"
+},
+"glacia_(pokemon)": {
+"tw": "波妮",
+"cn": "波妮",
+"src": "52poke:波妮"
+},
+"gladion_(pokemon)": {
+"tw": "格拉吉歐",
+"cn": "格拉吉欧",
+"src": "52poke:格拉吉歐"
+},
+"gloria_(pokemon)": {
+"tw": "小優",
+"cn": "小优",
+"src": "52poke:小優"
+},
+"goh_(pokemon)": {
+"tw": "小豪",
+"cn": "小豪",
+"src": "52poke-search:小豪"
+},
+"gordie_(pokemon)": {
+"tw": "瑪瓜",
+"cn": "玛瓜",
+"src": "52poke:瑪瓜"
+},
+"gorgon_(fate)": {
+"tw": "戈爾貢",
+"cn": "戈耳工",
+"src": "fgo:147"
+},
+"grant_(pokemon)": {
+"tw": "查克洛",
+"cn": "查克洛",
+"src": "52poke:查克洛"
+},
+"gray_(fate)": {
+"tw": "格蕾",
+"cn": "格蕾",
+"src": "fgo:243"
+},
+"great_stone_statue_god_(fate)": {
+"tw": "偉大的石像神",
+"cn": "伟大的石像神",
+"src": "fgo:244"
+},
+"greta_(pokemon)": {
+"tw": "黃瓜香",
+"cn": "黄瓜香",
+"src": "52poke-search:黃瓜香"
+},
+"grigori_rasputin_(fate)": {
+"tw": "格里戈里．拉斯普丁",
+"cn": "格里戈里·拉斯普京",
+"src": "fgo:369"
+},
+"grimsley_(pokemon)": {
+"tw": "越橘",
+"cn": "越橘",
+"src": "52poke:越橘"
+},
+"griselle_(pokemon)": {
+"tw": "古麗茲",
+"cn": "古丽兹",
+"src": "52poke-search:古麗茲"
+},
+"grisham_(pokemon)": {
+"tw": "古歷",
+"cn": "古历",
+"src": "52poke-search:古歷"
+},
+"grusha_(pokemon)": {
+"tw": "古魯夏",
+"cn": "古鲁夏",
+"src": "52poke:古魯夏"
+},
+"guitarist_(pokemon)": {
+"tw": "吉他手",
+"cn": "吉他手",
+"src": "52poke:吉他手"
+},
+"guzma_(pokemon)": {
+"tw": "古茲馬",
+"cn": "古兹马",
+"src": "52poke-search:古兹马"
+},
+"gwynn_(pokemon)": {
+"tw": "沐淨",
+"cn": "沐净",
+"src": "52poke-search:沐淨"
+},
+"gym_trainer_(pokemon)": {
+"tw": "道館訓練家",
+"cn": "道馆训练家",
+"src": "52poke-search:道館訓練家"
+},
+"hala_(pokemon)": {
+"tw": "哈拉",
+"cn": "哈拉",
+"src": "52poke:哈拉"
+},
+"hamber_(pokemon)": {
+"tw": "漢貝爾",
+"cn": "汉贝尔",
+"src": "52poke-search:漢貝爾"
+},
+"hans_christian_andersen_(fate)": {
+"tw": "漢斯．克里斯蒂安．安徒生",
+"cn": "汉斯·克里斯蒂安·安徒生",
+"src": "fgo:33"
+},
+"hapu_(pokemon)": {
+"tw": "哈普烏",
+"cn": "哈普乌",
+"src": "52poke:哈普烏"
+},
+"harada_sanosuke_(fate)": {
+"tw": "原田左之助",
+"cn": "原田左之助",
+"src": "fgo:455"
+},
+"harley_(pokemon)": {
+"tw": "哈利",
+"cn": "哈利",
+"src": "52poke:哈利"
+},
+"harmony_(pokemon)": {
+"tw": "生彩",
+"cn": "生彩",
+"src": "52poke-search:生彩"
+},
+"harper_(pokemon)": {
+"tw": "詩婷和詩涵",
+"cn": "诗婷和诗涵",
+"src": "52poke-search:詩婷和詩涵"
+},
+"harriet_(pokemon)": {
+"tw": "翡翠",
+"cn": "翡翠",
+"src": "52poke-search:翡翠"
+},
+"hassan_of_serenity_(fate)": {
+"tw": "靜謐的哈桑",
+"cn": "静谧哈桑",
+"src": "fgo:124"
+},
+"hassan_of_the_cursed_arm_(fate)": {
+"tw": "咒腕的哈桑",
+"cn": "咒腕哈桑",
+"src": "fgo:40"
+},
+"hassan_of_the_shining_star_(fate)": {
+"tw": "耀星的哈桑",
+"cn": "耀星哈桑",
+"src": "fgo:408"
+},
+"hassel_(pokemon)": {
+"tw": "八朔",
+"cn": "八朔",
+"src": "52poke:八朔"
+},
+"hau_(pokemon)": {
+"tw": "哈烏",
+"cn": "哈乌",
+"src": "52poke:哈烏"
+},
+"hector_(fate)": {
+"tw": "赫克特",
+"cn": "赫克托耳",
+"src": "fgo:64"
+},
+"helena_blavatsky_(christmas)_(fate)": {
+"tw": "海倫娜．布拉瓦茨基",
+"cn": "海伦娜·布拉瓦茨基",
+"src": "fgo:100"
+},
+"helena_blavatsky_(fate)": {
+"tw": "海倫娜．布拉瓦茨基",
+"cn": "海伦娜·布拉瓦茨基",
+"src": "fgo:100"
+},
+"helena_blavatsky_(swimsuit_archer)_(first_ascension)_(fate)": {
+"tw": "海倫娜．布拉瓦茨基",
+"cn": "海伦娜·布拉瓦茨基",
+"src": "fgo:100"
+},
+"helena_blavatsky_(swimsuit_archer)_(second_ascension)_(fate)": {
+"tw": "海倫娜．布拉瓦茨基",
+"cn": "海伦娜·布拉瓦茨基",
+"src": "fgo:100"
+},
+"helena_blavatsky_(swimsuit_archer)_(third_ascension)_(fate)": {
+"tw": "海倫娜．布拉瓦茨基",
+"cn": "海伦娜·布拉瓦茨基",
+"src": "fgo:100"
+},
+"hephaestion_(fate)": {
+"tw": "赫費斯提翁",
+"cn": "赫费斯提翁",
+"src": "fgo:335"
+},
+"heracles_(fate)": {
+"tw": "赫拉克勒斯",
+"cn": "赫拉克勒斯",
+"src": "fgo:47"
+},
+"hessian_(fate)": {
+"tw": "海森．羅伯",
+"cn": "黑森·罗伯",
+"src": "fgo:158"
+},
+"hex_maniac_(pokemon)": {
+"tw": "靈異迷",
+"cn": "灵异迷",
+"src": "52poke:灵异迷"
+},
+"hex_maniac_(pokemon_legends:_z-a)": {
+"tw": "靈異迷",
+"cn": "灵异迷",
+"src": "52poke:灵异迷"
+},
+"hex_maniac_(pokemon_xy)": {
+"tw": "靈異迷",
+"cn": "灵异迷",
+"src": "52poke:灵异迷"
+},
+"hideko_(pokemon)": {
+"tw": "黍子",
+"cn": "黍子",
+"src": "52poke-search:黍子"
+},
+"hijikata_toshizou_(fate)": {
+"tw": "土方歲三",
+"cn": "土方岁三",
+"src": "fgo:161"
+},
+"hiker_(pokemon)": {
+"tw": "登山男",
+"cn": "登山男",
+"src": "52poke:登山男"
+},
+"hilbert_(pokemon)": {
+"tw": "鬥也",
+"cn": "斗也",
+"src": "52poke:鬥也"
+},
+"hilda_(pokemon)": {
+"tw": "鬥子",
+"cn": "斗子",
+"src": "52poke:鬥子"
+},
+"hildr_(fate)": {
+"tw": "希露德",
+"cn": "希露德",
+"src": "fgo:360"
+},
+"himiko_(fate)": {
+"tw": "卑彌呼",
+"cn": "卑弥呼",
+"src": "fgo:292"
+},
+"hisuian_growlithe": {
+"tw": "洗翠 卡蒂狗",
+"cn": "洗翠 卡蒂狗",
+"src": "52poke-search:洗翠 卡蒂狗"
+},
+"hisuian_typhlosion": {
+"tw": "洗翠 火暴獸",
+"cn": "洗翠 火暴兽",
+"src": "52poke-search:洗翠 火暴兽"
+},
+"hisuian_zoroark": {
+"tw": "洗翠 索羅亞克",
+"cn": "洗翠 索罗亚克",
+"src": "52poke-search:洗翠 索罗亚克"
+},
+"hisuian_zorua": {
+"tw": "洗翠 索羅亞",
+"cn": "洗翠 索罗亚",
+"src": "52poke-search:洗翠 索罗亚"
+},
+"hobbes_(pokemon)": {
+"tw": "詹姆斯",
+"cn": "詹姆斯",
+"src": "52poke-search:詹姆斯"
+},
+"hodge_(pokemon)": {
+"tw": "芳士",
+"cn": "芳士",
+"src": "52poke-search:芳士"
+},
+"honey_(pokemon)": {
+"tw": "蜜葉",
+"cn": "蜜叶",
+"src": "52poke-search:蜜叶"
+},
+"hop_(pokemon)": {
+"tw": "赫普",
+"cn": "赫普",
+"src": "52poke:赫普"
+},
+"horace_(pokemon)": {
+"tw": "時央",
+"cn": "时央",
+"src": "52poke-search:時央"
+},
+"houzouin_inshun_(fate)": {
+"tw": "寶藏院胤舜",
+"cn": "宝藏院胤舜",
+"src": "fgo:186"
+},
+"huang_feihu_(fate)": {
+"tw": "黃飛虎",
+"cn": "黄飞虎",
+"src": "fgo:366"
+},
+"hugh_(pokemon)": {
+"tw": "阿修",
+"cn": "阿修",
+"src": "52poke:阿修"
+},
+"ibaraki_douji_(fate)": {
+"tw": "茨木童子",
+"cn": "茨木童子",
+"src": "fgo:116"
+},
+"ibaraki_douji_(swimsuit_lancer)_(first_ascension)_(fate)": {
+"tw": "茨木童子",
+"cn": "茨木童子",
+"src": "fgo:116"
+},
+"ibaraki_douji_(swimsuit_lancer)_(second_ascension)_(fate)": {
+"tw": "茨木童子",
+"cn": "茨木童子",
+"src": "fgo:116"
+},
+"ibaraki_douji_(swimsuit_lancer)_(third_ascension)_(fate)": {
+"tw": "茨木童子",
+"cn": "茨木童子",
+"src": "fgo:116"
+},
+"ibuki_douji_(fate)": {
+"tw": "伊吹童子",
+"cn": "伊吹童子",
+"src": "fgo:299"
+},
+"ibuki_douji_(swimsuit_berserker)_(fate)": {
+"tw": "伊吹童子",
+"cn": "伊吹童子",
+"src": "fgo:299"
+},
+"ilima_(pokemon)": {
+"tw": "伊利馬",
+"cn": "伊利马",
+"src": "52poke:伊利馬"
+},
+"illyasviel_von_einzbern": {
+"tw": "伊莉雅絲菲爾．馮．愛因茲貝倫",
+"cn": "伊莉雅丝菲尔·冯·爱因兹贝伦",
+"src": "fgo:136"
+},
+"indra_(fate)": {
+"tw": "因陀羅",
+"cn": "因陀罗",
+"src": "fgo:442"
+},
+"ingo_(pokemon)": {
+"tw": "北尚",
+"cn": "北尚",
+"src": "52poke-search:北尚"
+},
+"iono_(pokemon)": {
+"tw": "奇樹",
+"cn": "奇树",
+"src": "52poke:奇樹"
+},
+"irida_(pokemon)": {
+"tw": "珠貝",
+"cn": "珠贝",
+"src": "52poke-search:珠貝"
+},
+"iris_(pokemon)": {
+"tw": "艾莉絲",
+"cn": "艾莉丝",
+"src": "52poke:艾莉絲"
+},
+"irisviel_von_einzbern": {
+"tw": "愛麗絲菲爾〔天之衣〕",
+"cn": "爱丽丝菲尔〔天之衣〕",
+"src": "fgo:111"
+},
+"iscan_(pokemon)": {
+"tw": "阿芒",
+"cn": "阿芒",
+"src": "52poke-search:阿芒"
+},
+"ishtar_(fate)": {
+"tw": "伊絲塔",
+"cn": "伊什塔尔",
+"src": "fgo:142"
+},
+"ishtar_(swimsuit_rider)_(fate)": {
+"tw": "伊絲塔",
+"cn": "伊什塔尔",
+"src": "fgo:142"
+},
+"iskandar_(fate)": {
+"tw": "伊斯坎達爾",
+"cn": "伊斯坎达尔",
+"src": "fgo:108"
+},
+"ivan_the_terrible_(fate)": {
+"tw": "伊凡雷帝",
+"cn": "伊凡雷帝",
+"src": "fgo:205"
+},
+"ivor_(pokemon)": {
+"tw": "皙白",
+"cn": "皙白",
+"src": "52poke-search:皙白"
+},
+"iyo_(fate)": {
+"tw": "臺與",
+"cn": "壹与",
+"src": "fgo:364"
+},
+"izumo_no_okuni_(fate)": {
+"tw": "出雲阿國",
+"cn": "出云阿国",
+"src": "fgo:327"
+},
+"j_(pokemon)": {
+"tw": "J",
+"cn": "J",
+"src": "52poke:J"
+},
+"jacinthe_(pokemon)": {
+"tw": "由紫",
+"cn": "由紫",
+"src": "52poke-search:由紫"
+},
+"jack_the_ripper_(fate/apocrypha)": {
+"tw": "開膛手傑克",
+"cn": "雾都弃子",
+"src": "fgo:75"
+},
+"jack_the_ripper_(fate/strange_fake)": {
+"tw": "開膛手傑克",
+"cn": "雾都弃子",
+"src": "fgo:75"
+},
+"jacques_de_molay_(foreigner)_(fate)": {
+"tw": "雅克．德．莫萊",
+"cn": "雅克·德·莫莱",
+"src": "fgo:324"
+},
+"jaguarman_(fate)": {
+"tw": "豹人",
+"cn": "豹人",
+"src": "fgo:148"
+},
+"james_(pokemon)": {
+"tw": "小次郎",
+"cn": "小次郎",
+"src": "52poke:小次郎"
+},
+"james_moriarty_(archer)_(fate)": {
+"tw": "詹姆斯．莫里亞蒂",
+"cn": "詹姆斯·莫里亚蒂",
+"src": "fgo:156"
+},
+"james_moriarty_(ruler)_(fate)": {
+"tw": "詹姆斯．莫里亞蒂",
+"cn": "詹姆斯·莫里亚蒂",
+"src": "fgo:346"
+},
+"jamie_(pokemon)": {
+"tw": "小亮",
+"cn": "小亮",
+"src": "52poke-search:小亮"
+},
+"janine_(pokemon)": {
+"tw": "阿杏",
+"cn": "阿杏",
+"src": "52poke:阿杏"
+},
+"jasmine_(pokemon)": {
+"tw": "阿蜜",
+"cn": "阿蜜",
+"src": "52poke:阿蜜"
+},
+"jason_(fate)": {
+"tw": "伊阿宋",
+"cn": "伊阿宋",
+"src": "fgo:254"
+},
+"jeanne_d'arc_(fate)": {
+"tw": "貞德",
+"cn": "贞德",
+"src": "fgo:59"
+},
+"jeanne_d'arc_(swimsuit_archer)_(first_ascension)_(fate)": {
+"tw": "貞德",
+"cn": "贞德",
+"src": "fgo:59"
+},
+"jeanne_d'arc_(swimsuit_archer)_(second_ascension)_(fate)": {
+"tw": "貞德",
+"cn": "贞德",
+"src": "fgo:59"
+},
+"jeanne_d'arc_alter_(fate)": {
+"tw": "貞德〔Alter〕",
+"cn": "贞德〔Alter〕",
+"src": "fgo:106"
+},
+"jeanne_d'arc_alter_santa_lily_(fate)": {
+"tw": "貞德．Alter．Santa．Lily",
+"cn": "贞德·Alter·Santa·Lily",
+"src": "fgo:141"
+},
+"jekyll_and_hyde_(fate)": {
+"tw": "亨利．傑基爾＆海德",
+"cn": "亨利·杰基尔＆海德",
+"src": "fgo:81"
+},
+"jessie_(pokemon)": {
+"tw": "武藏",
+"cn": "武藏",
+"src": "52poke:武藏"
+},
+"jett_(pokemon)": {
+"tw": "捷朵",
+"cn": "捷朵",
+"src": "52poke-search:捷朵"
+},
+"jimmy_(pokemon)": {
+"tw": "健太",
+"cn": "健太",
+"src": "52poke-search:健太"
+},
+"jing_ke_(fate)": {
+"tw": "荊軻",
+"cn": "匕见",
+"src": "fgo:42"
+},
+"johanna_(fate)": {
+"tw": "女教皇瓊安",
+"cn": "女教皇若安",
+"src": "fgo:374"
+},
+"johanna_(pokemon)": {
+"tw": "彩子",
+"cn": "彩子",
+"src": "52poke:彩子"
+},
+"john_(pokemon)": {
+"tw": "約翰",
+"cn": "约翰",
+"src": "52poke-search:約翰"
+},
+"jovi_(pokemon)": {
+"tw": "滿奈",
+"cn": "满奈",
+"src": "52poke-search:滿奈"
+},
+"juan_(pokemon)": {
+"tw": "亞當",
+"cn": "亚当",
+"src": "52poke:亚当"
+},
+"juliana_(pokemon)": {
+"tw": "小青",
+"cn": "小青",
+"src": "52poke-search:小青"
+},
+"jupiter_(pokemon)": {
+"tw": "歲星",
+"cn": "岁星",
+"src": "52poke:歲星"
+},
+"kabu_(pokemon)": {
+"tw": "卡蕪",
+"cn": "卡芜",
+"src": "52poke:卡蕪"
+},
+"kahili_(pokemon)": {
+"tw": "卡希麗",
+"cn": "卡希丽",
+"src": "52poke:卡希麗"
+},
+"kama_(fate)": {
+"tw": "迦摩",
+"cn": "迦摩",
+"src": "fgo:239"
+},
+"kama_(mistake)_(second_ascension)_(fate)": {
+"tw": "迦摩",
+"cn": "迦摩",
+"src": "fgo:239"
+},
+"kama_(mistake)_(third_ascension)_(fate)": {
+"tw": "迦摩",
+"cn": "迦摩",
+"src": "fgo:239"
+},
+"kamado_(pokemon)": {
+"tw": "馬加木",
+"cn": "马加木",
+"src": "52poke-search:馬加木"
+},
+"karen_(pokemon)": {
+"tw": "梨花",
+"cn": "梨花",
+"src": "52poke-search:梨花"
+},
+"karna_(fate)": {
+"tw": "迦爾納",
+"cn": "迦尔纳",
+"src": "fgo:85"
+},
+"karna_(fate/apocrypha)": {
+"tw": "迦爾納",
+"cn": "迦尔纳",
+"src": "fgo:85"
+},
+"karna_(fate/extra)": {
+"tw": "迦爾納",
+"cn": "迦尔纳",
+"src": "fgo:85"
+},
+"kashin_koji_(fate)": {
+"tw": "果心居士",
+"cn": "果心居士",
+"src": "fgo:380"
+},
+"kate_(pokemon)": {
+"tw": "仁美",
+"cn": "仁美",
+"src": "52poke:仁美"
+},
+"katou_danzou_(fate)": {
+"tw": "加藤段藏",
+"cn": "加藤段藏",
+"src": "fgo:188"
+},
+"katsushika_hokusai_(fate)": {
+"tw": "葛飾北齋",
+"cn": "葛饰北斋",
+"src": "fgo:198"
+},
+"katsushika_hokusai_(swimsuit_saber)_(fate)": {
+"tw": "葛飾北齋",
+"cn": "葛饰北斋",
+"src": "fgo:198"
+},
+"katy_(pokemon)": {
+"tw": "阿楓",
+"cn": "阿枫",
+"src": "52poke:阿楓"
+},
+"kawakami_gensai_(fate)": {
+"tw": "河上彥齋",
+"cn": "河上彦斋",
+"src": "fgo:453"
+},
+"kazuradrop_(fate)": {
+"tw": "Kazuradrop",
+"cn": "Kazuradrop",
+"src": "fgo:426"
+},
+"kazuradrop_(fate/extra)": {
+"tw": "Kazuradrop",
+"cn": "Kazuradrop",
+"src": "fgo:426"
+},
+"kellyn_(pokemon)": {
+"tw": "創一",
+"cn": "创一",
+"src": "52poke:創一"
+},
+"kiawe_(pokemon)": {
+"tw": "卡奇",
+"cn": "卡奇",
+"src": "52poke:卡奇"
+},
+"kieran_(pokemon)": {
+"tw": "烏栗",
+"cn": "乌栗",
+"src": "52poke:烏栗"
+},
+"kiichi_hogen_(fate)": {
+"tw": "鬼一法眼",
+"cn": "鬼一法眼",
+"src": "fgo:304"
+},
+"kijo_kouyou_(fate)": {
+"tw": "鬼女紅葉",
+"cn": "鬼女红叶",
+"src": "fgo:282"
+},
+"kimia_(pokemon)": {
+"tw": "姬美雅",
+"cn": "姬美雅",
+"src": "52poke-search:姬美雅"
+},
+"kimono_girl_(pokemon)": {
+"tw": "和服女孩",
+"cn": "和服女孩",
+"src": "52poke-search:和服女孩"
+},
+"kishinami_hakuno_(female)": {
+"tw": "岸波白野",
+"cn": "岸波白野",
+"src": "fgo:424"
+},
+"kishinami_hakuno_(male)": {
+"tw": "岸波白野",
+"cn": "岸波白野",
+"src": "fgo:424"
+},
+"kitt_(pokemon)": {
+"tw": "露可拉",
+"cn": "露可拉",
+"src": "52poke-search:露可拉"
+},
+"kiyohime_(fate)": {
+"tw": "清姬",
+"cn": "清姬",
+"src": "fgo:56"
+},
+"kiyohime_(swimsuit_lancer)_(first_ascension)_(fate)": {
+"tw": "清姬",
+"cn": "清姬",
+"src": "fgo:56"
+},
+"kiyohime_(swimsuit_lancer)_(second_ascension)_(fate)": {
+"tw": "清姬",
+"cn": "清姬",
+"src": "fgo:56"
+},
+"kiyohime_(swimsuit_lancer)_(third_ascension)_(fate)": {
+"tw": "清姬",
+"cn": "清姬",
+"src": "fgo:56"
+},
+"klara_(pokemon)": {
+"tw": "克拉拉",
+"cn": "克拉拉",
+"src": "52poke-search:克拉拉"
+},
+"kofu_(pokemon)": {
+"tw": "海岱",
+"cn": "海岱",
+"src": "52poke:海岱"
+},
+"koga_(pokemon)": {
+"tw": "阿桔",
+"cn": "阿桔",
+"src": "52poke:阿桔"
+},
+"koko_(pokemon)": {
+"tw": "可可",
+"cn": "可可",
+"src": "52poke-search:可可"
+},
+"kondou_isami_(fate)": {
+"tw": "近藤勇",
+"cn": "近藤勇",
+"src": "fgo:456"
+},
+"korrina_(pokemon)": {
+"tw": "可爾妮",
+"cn": "可尔妮",
+"src": "52poke:可爾妮"
+},
+"koyanskaya_(assassin)_(first_ascension)_(fate)": {
+"tw": "光之高揚斯卡婭",
+"cn": "光之高扬斯卡娅",
+"src": "fgo:314"
+},
+"koyanskaya_(assassin)_(second_ascension)_(fate)": {
+"tw": "光之高揚斯卡婭",
+"cn": "光之高扬斯卡娅",
+"src": "fgo:314"
+},
+"koyanskaya_(assassin)_(third_ascension)_(fate)": {
+"tw": "光之高揚斯卡婭",
+"cn": "光之高扬斯卡娅",
+"src": "fgo:314"
+},
+"koyanskaya_(foreigner)_(first_ascension)_(fate)": {
+"tw": "暗之高揚斯卡婭",
+"cn": "暗之高扬斯卡娅",
+"src": "fgo:334"
+},
+"koyanskaya_(foreigner)_(second_ascension)_(fate)": {
+"tw": "暗之高揚斯卡婭",
+"cn": "暗之高扬斯卡娅",
+"src": "fgo:334"
+},
+"kris_(pokemon)": {
+"tw": "克麗絲",
+"cn": "克丽丝",
+"src": "52poke:克丽丝"
+},
+"kukulkan_(fate)": {
+"tw": "庫庫爾坎",
+"cn": "库库尔坎",
+"src": "fgo:373"
+},
+"kurohime_(fate)": {
+"tw": "黑姬",
+"cn": "黑姬",
+"src": "fgo:434"
+},
+"kyokutei_bakin_(fate)": {
+"tw": "曲亭馬琴",
+"cn": "曲亭马琴",
+"src": "fgo:349"
+},
+"lacey_(pokemon)": {
+"tw": "紫竽",
+"cn": "紫竽",
+"src": "52poke:紫竽"
+},
+"lady_(pokemon)": {
+"tw": "千金小姐",
+"cn": "千金小姐",
+"src": "52poke:千金小姐"
+},
+"lady_avalon_(fate)": {
+"tw": "Lady阿瓦隆",
+"cn": "阿瓦隆女士",
+"src": "fgo:353"
+},
+"lady_avalon_(second_ascension)_(fate)": {
+"tw": "Lady阿瓦隆",
+"cn": "阿瓦隆女士",
+"src": "fgo:353"
+},
+"lady_avalon_(third_ascension)_(fate)": {
+"tw": "Lady阿瓦隆",
+"cn": "阿瓦隆女士",
+"src": "fgo:353"
+},
+"lakshmibai_(fate)": {
+"tw": "拉克西米．芭伊",
+"cn": "拉克什米·芭伊",
+"src": "fgo:245"
+},
+"lana_(pokemon)": {
+"tw": "水蓮",
+"cn": "水莲",
+"src": "52poke:水蓮"
+},
+"lance_(pokemon)": {
+"tw": "阿渡",
+"cn": "阿渡",
+"src": "52poke:阿渡"
+},
+"lancelot_(fate/grand_order)": {
+"tw": "蘭斯洛特",
+"cn": "兰斯洛特",
+"src": "fgo:48"
+},
+"lancelot_(fate/zero)": {
+"tw": "蘭斯洛特",
+"cn": "兰斯洛特",
+"src": "fgo:48"
+},
+"larry_(pokemon)": {
+"tw": "青木",
+"cn": "青木",
+"src": "52poke:青木"
+},
+"lass_(pokemon)": {
+"tw": "迷你裙",
+"cn": "迷你裙",
+"src": "52poke:迷你裙"
+},
+"leaf_(pokemon)": {
+"tw": "葉子",
+"cn": "叶子",
+"src": "52poke:葉子"
+},
+"league_staff_(pokemon)": {
+"tw": "聯盟職員",
+"cn": "联盟职员",
+"src": "52poke-search:联盟职员"
+},
+"leah_(pokemon)": {
+"tw": "莉亞",
+"cn": "莉亚",
+"src": "52poke-search:莉亞"
+},
+"lear_(pokemon)": {
+"tw": "鎯琊",
+"cn": "𨱍琊",
+"src": "52poke-search:鎯琊"
+},
+"lebanne_(pokemon)": {
+"tw": "春紫",
+"cn": "春紫",
+"src": "52poke-search:春紫"
+},
+"lenora_(pokemon)": {
+"tw": "蘆薈",
+"cn": "芦荟",
+"src": "52poke:蘆薈"
+},
+"leon_(pokemon)": {
+"tw": "丹帝",
+"cn": "丹帝",
+"src": "52poke:丹帝"
+},
+"leonardo_da_vinci_(fate)": {
+"tw": "李奧納多．達．文西",
+"cn": "莱昂纳多·达·芬奇",
+"src": "fgo:127"
+},
+"leonidas_(fate)": {
+"tw": "列奧尼達一世",
+"cn": "列奥尼达一世",
+"src": "fgo:21"
+},
+"li_shuwen_(fate)": {
+"tw": "李書文",
+"cn": "李书文",
+"src": "fgo:102"
+},
+"li_shuwen_(old)_(fate)": {
+"tw": "李書文",
+"cn": "李书文",
+"src": "fgo:102"
+},
+"li_shuwen_(young)_(fate)": {
+"tw": "李書文",
+"cn": "李书文",
+"src": "fgo:102"
+},
+"lian_(pokemon)": {
+"tw": "菊伊",
+"cn": "菊伊",
+"src": "52poke-search:菊伊"
+},
+"lida_(pokemon)": {
+"tw": "玳蘿",
+"cn": "玳萝",
+"src": "52poke-search:玳蘿"
+},
+"liko_(pokemon)": {
+"tw": "莉可",
+"cn": "莉可",
+"src": "52poke:莉可"
+},
+"lillie_(pokemon)": {
+"tw": "莉莉艾",
+"cn": "莉莉艾",
+"src": "52poke:莉莉艾"
+},
+"lion_king_(lancer)_(fate)": {
+"tw": "阿爾托莉亞．潘德拉剛",
+"cn": "阿尔托莉雅·潘德拉贡",
+"src": "fgo:119"
+},
+"lisia_(pokemon)": {
+"tw": "琉琪亞",
+"cn": "琉琪亚",
+"src": "52poke-search:琉琪亚"
+},
+"lobo_(fate)": {
+"tw": "海森．羅伯",
+"cn": "黑森·罗伯",
+"src": "fgo:158"
+},
+"locusta_(fate)": {
+"tw": "洛庫斯塔",
+"cn": "洛库斯塔",
+"src": "fgo:378"
+},
+"looker_(pokemon)": {
+"tw": "帥哥",
+"cn": "帅哥",
+"src": "52poke:帥哥"
+},
+"lord_el-melloi_ii": {
+"tw": "諸葛孔明〔埃爾梅羅Ⅱ世〕",
+"cn": "诸葛孔明〔埃尔梅罗Ⅱ世〕",
+"src": "fgo:37"
+},
+"lorelei_(pokemon)": {
+"tw": "科拿",
+"cn": "科拿",
+"src": "52poke:科拿"
+},
+"louhi_(fate)": {
+"tw": "婁希",
+"cn": "娄希",
+"src": "fgo:429"
+},
+"lovrina_(pokemon)": {
+"tw": "愛麗娜",
+"cn": "爱丽娜",
+"src": "52poke-search:愛麗娜"
+},
+"lu_bu_(fate)": {
+"tw": "呂布奉先",
+"cn": "虎狼",
+"src": "fgo:49"
+},
+"lucas_(pokemon)": {
+"tw": "明輝",
+"cn": "明辉",
+"src": "52poke:明輝"
+},
+"lucian_(pokemon)": {
+"tw": "悟松",
+"cn": "悟松",
+"src": "52poke:悟松"
+},
+"lucius_(pokemon)": {
+"tw": "露西昂司",
+"cn": "露西昂司",
+"src": "52poke-search:露西昂司"
+},
+"lucy_(pokemon)": {
+"tw": "小薊",
+"cn": "小蓟",
+"src": "52poke-search:小薊"
+},
+"ludlow_(pokemon)": {
+"tw": "藍道",
+"cn": "蓝道",
+"src": "52poke-search:藍道"
+},
+"lunick_(pokemon)": {
+"tw": "風月",
+"cn": "风月",
+"src": "52poke:風月"
+},
+"lusamine_(pokemon)": {
+"tw": "露莎米奈",
+"cn": "露莎米奈",
+"src": "52poke:露莎米奈"
+},
+"lyra_(pokemon)": {
+"tw": "琴音",
+"cn": "琴音",
+"src": "52poke:琴音"
+},
+"lysandre_(pokemon)": {
+"tw": "弗拉達利",
+"cn": "弗拉达利",
+"src": "52poke:弗拉達利"
+},
+"mable_(pokemon)": {
+"tw": "茉蜜姬",
+"cn": "茉蜜姬",
+"src": "52poke:茉蜜姬"
+},
+"mai_(pokemon)": {
+"tw": "阿米",
+"cn": "阿米",
+"src": "52poke-search:阿米"
+},
+"mairin_(pokemon)": {
+"tw": "瑪農",
+"cn": "玛农",
+"src": "52poke-search:瑪農"
+},
+"mallow_(pokemon)": {
+"tw": "瑪奧",
+"cn": "玛奥",
+"src": "52poke:瑪奧"
+},
+"malva_(pokemon)": {
+"tw": "帕琦拉",
+"cn": "帕琦拉",
+"src": "52poke:帕琦拉"
+},
+"mandricardo_(fate)": {
+"tw": "曼迪卡爾多",
+"cn": "曼迪卡尔多",
+"src": "fgo:273"
+},
+"mani_(pokemon)": {
+"tw": "瑪迷",
+"cn": "玛迷",
+"src": "52poke-search:玛迷"
+},
+"margo_(pokemon)": {
+"tw": "拉茹果",
+"cn": "拉茹果",
+"src": "52poke-search:拉茹果"
+},
+"marie_antoinette_(fate)": {
+"tw": "瑪莉．安東尼",
+"cn": "玛丽·安托瓦内特",
+"src": "fgo:29"
+},
+"marie_antoinette_(swimsuit_caster)_(first_ascension)_(fate)": {
+"tw": "瑪莉．安東尼",
+"cn": "玛丽·安托瓦内特",
+"src": "fgo:29"
+},
+"marie_antoinette_(swimsuit_caster)_(second_ascension)_(fate)": {
+"tw": "瑪莉．安東尼",
+"cn": "玛丽·安托瓦内特",
+"src": "fgo:29"
+},
+"marie_antoinette_(swimsuit_caster)_(third_ascension)_(fate)": {
+"tw": "瑪莉．安東尼",
+"cn": "玛丽·安托瓦内特",
+"src": "fgo:29"
+},
+"marie_antoinette_alter_(fate)": {
+"tw": "瑪莉．安東尼〔Alter〕",
+"cn": "玛丽·安托瓦内特〔Alter〕",
+"src": "fgo:407"
+},
+"marley_(pokemon)": {
+"tw": "米依",
+"cn": "米依",
+"src": "52poke:米依"
+},
+"marlon_(pokemon)": {
+"tw": "西子伊",
+"cn": "西子伊",
+"src": "52poke:西子伊"
+},
+"marnie_(pokemon)": {
+"tw": "瑪俐",
+"cn": "玛俐",
+"src": "52poke:瑪俐"
+},
+"mars_(pokemon)": {
+"tw": "夥星",
+"cn": "伙星",
+"src": "52poke:夥星"
+},
+"marshal_(pokemon)": {
+"tw": "連武",
+"cn": "连武",
+"src": "52poke:連武"
+},
+"martha_(fate)": {
+"tw": "瑪爾大",
+"cn": "玛尔达",
+"src": "fgo:30"
+},
+"martha_(swimsuit_ruler)_(fate)": {
+"tw": "瑪爾大",
+"cn": "玛尔达",
+"src": "fgo:30"
+},
+"mary_anning_(fate)": {
+"tw": "瑪麗．安寧",
+"cn": "玛丽·安宁",
+"src": "fgo:341"
+},
+"mary_read_(fate)": {
+"tw": "安妮．伯妮 & 瑪莉．瑞德",
+"cn": "安妮·伯妮＆玛莉·瑞德",
+"src": "fgo:66"
+},
+"mary_read_(swimsuit_archer)_(first_ascension)_(fate)": {
+"tw": "安妮．伯妮 & 瑪莉．瑞德",
+"cn": "安妮·伯妮＆玛莉·瑞德",
+"src": "fgo:66"
+},
+"mary_read_(swimsuit_archer)_(second_ascension)_(fate)": {
+"tw": "安妮．伯妮 & 瑪莉．瑞德",
+"cn": "安妮·伯妮＆玛莉·瑞德",
+"src": "fgo:66"
+},
+"mary_read_(swimsuit_archer)_(third_ascension)_(fate)": {
+"tw": "安妮．伯妮 & 瑪莉．瑞德",
+"cn": "安妮·伯妮＆玛莉·瑞德",
+"src": "fgo:66"
+},
+"mash_kyrielight": {
+"tw": "瑪修．基利艾拉特",
+"cn": "玛修·基列莱特",
+"src": "fgo:1"
+},
+"mata_hari_(fate)": {
+"tw": "瑪塔．哈里",
+"cn": "玛塔·哈丽",
+"src": "fgo:45"
+},
+"matt_(pokemon)": {
+"tw": "阿潮",
+"cn": "阿潮",
+"src": "52poke:阿潮"
+},
+"max_(pokemon)": {
+"tw": "小勝（豐緣）",
+"cn": "小胜（丰缘）",
+"src": "52poke:小勝（豐緣）"
+},
+"maxie_(pokemon)": {
+"tw": "赤焰松",
+"cn": "赤焰松",
+"src": "52poke:赤焰松"
+},
+"may_(pokemon)": {
+"tw": "小遙",
+"cn": "小遥",
+"src": "52poke:小遥"
+},
+"maylene_(pokemon)": {
+"tw": "阿李",
+"cn": "阿李",
+"src": "52poke:阿李"
+},
+"mecha_eli-chan_(fate)": {
+"tw": "機械伊莉醬",
+"cn": "机械伊丽亲",
+"src": "fgo:190"
+},
+"mecha_eli-chan_mk.ii_(fate)": {
+"tw": "機械伊莉醬Ⅱ號機",
+"cn": "机械伊丽亲Ⅱ号机",
+"src": "fgo:191"
+},
+"medb_(fate)": {
+"tw": "女王梅芙",
+"cn": "女王梅芙",
+"src": "fgo:99"
+},
+"medea_(caster)_(fate)": {
+"tw": "美狄亞",
+"cn": "美狄亚",
+"src": "fgo:31"
+},
+"medea_(fate)": {
+"tw": "美狄亞",
+"cn": "美狄亚",
+"src": "fgo:31"
+},
+"medea_lily_(fate)": {
+"tw": "美狄亞〔Lily〕",
+"cn": "美狄亚〔Lily〕",
+"src": "fgo:67"
+},
+"medusa_(lancer)_(fate)": {
+"tw": "美杜莎",
+"cn": "美杜莎",
+"src": "fgo:146"
+},
+"medusa_(rider)_(fate)": {
+"tw": "美杜莎",
+"cn": "歌果",
+"src": "fgo:23"
+},
+"medusa_(saber)_(fate)": {
+"tw": "美杜莎",
+"cn": "美杜莎",
+"src": "fgo:384"
+},
+"mela_(pokemon)": {
+"tw": "梅洛可",
+"cn": "梅洛可",
+"src": "52poke:梅洛可"
+},
+"melli_(pokemon)": {
+"tw": "木春",
+"cn": "木春",
+"src": "52poke-search:木春"
+},
+"melody_(pokemon)": {
+"tw": "芙蘆拉",
+"cn": "芙芦拉",
+"src": "52poke-search:芙蘆拉"
+},
+"melony_(pokemon)": {
+"tw": "美蓉",
+"cn": "美蓉",
+"src": "52poke:美蓉"
+},
+"meltryllis_(fate)": {
+"tw": "Meltryllis",
+"cn": "Meltryllis",
+"src": "fgo:163"
+},
+"melusine_(swimsuit_ruler)_(fate)": {
+"tw": "美露莘",
+"cn": "梅柳齐娜",
+"src": "fgo:390"
+},
+"mephistopheles_(fate)": {
+"tw": "梅菲斯托費勒斯",
+"cn": "梅菲斯托费勒斯",
+"src": "fgo:35"
+},
+"merlin_(fate)": {
+"tw": "梅林",
+"cn": "梅林",
+"src": "fgo:150"
+},
+"merlin_(fate/prototype)": {
+"tw": "梅林",
+"cn": "梅林",
+"src": "fgo:150"
+},
+"metatron_jeanne_(fate)": {
+"tw": "梅塔特隆·貞德",
+"cn": "梅塔特隆·贞德",
+"src": "fgo:438"
+},
+"meyer_(pokemon)": {
+"tw": "利莫內",
+"cn": "利莫内",
+"src": "52poke-search:利莫內"
+},
+"michael_(pokemon)": {
+"tw": "龍人",
+"cn": "龙人",
+"src": "52poke-search:龍人"
+},
+"miette_(pokemon)": {
+"tw": "米茹菲",
+"cn": "米茹菲",
+"src": "52poke-search:米茹菲"
+},
+"milo_(pokemon)": {
+"tw": "亞洛",
+"cn": "亚洛",
+"src": "52poke:亞洛"
+},
+"mimo_(pokemon)": {
+"tw": "星兒",
+"cn": "星儿",
+"src": "52poke-search:星兒"
+},
+"mina_(pokemon)": {
+"tw": "茉莉",
+"cn": "茉莉",
+"src": "52poke:茉莉"
+},
+"minamoto_no_raikou_(fate)": {
+"tw": "源賴光",
+"cn": "源赖光",
+"src": "fgo:114"
+},
+"minamoto_no_raikou_(swimsuit_lancer)_(fate)": {
+"tw": "源賴光",
+"cn": "源赖光",
+"src": "fgo:114"
+},
+"minamoto_no_tametomo_(fate)": {
+"tw": "源為朝",
+"cn": "源为朝",
+"src": "fgo:350"
+},
+"mint_(pokemon)": {
+"tw": "薄荷",
+"cn": "薄荷",
+"src": "52poke:薄荷"
+},
+"mira_(pokemon)": {
+"tw": "麥兒",
+"cn": "麦儿",
+"src": "52poke:麥兒"
+},
+"miriam_(pokemon)": {
+"tw": "米莫莎",
+"cn": "米莫莎",
+"src": "52poke:米莫莎"
+},
+"miror_b._(pokemon)": {
+"tw": "迪斯裘",
+"cn": "迪斯裘",
+"src": "52poke-search:迪斯裘"
+},
+"miss_crane_(fate)": {
+"tw": "Ms.克蘭",
+"cn": "克莱恩小姐",
+"src": "fgo:307"
+},
+"misty_(pokemon)": {
+"tw": "小霞",
+"cn": "小霞",
+"src": "52poke:小霞"
+},
+"mitsumi_(pokemon)": {
+"tw": "小美",
+"cn": "小美",
+"src": "52poke:小美"
+},
+"miyamoto_iori_(fate)": {
+"tw": "宮本伊織",
+"cn": "宫本伊织",
+"src": "fgo:405"
+},
+"miyamoto_musashi_(fate)": {
+"tw": "宮本武藏",
+"cn": "宫本武藏",
+"src": "fgo:153"
+},
+"miyamoto_musashi_(swimsuit_berserker)_(fate)": {
+"tw": "宮本武藏",
+"cn": "宫本武藏",
+"src": "fgo:153"
+},
+"miyamoto_musashi_(swimsuit_berserker)_(first_ascension)_(fate)": {
+"tw": "宮本武藏",
+"cn": "宫本武藏",
+"src": "fgo:153"
+},
+"miyamoto_musashi_(swimsuit_berserker)_(second_ascension)_(fate)": {
+"tw": "宮本武藏",
+"cn": "宫本武藏",
+"src": "fgo:153"
+},
+"miyamoto_musashi_(swimsuit_berserker)_(third_ascension)_(fate)": {
+"tw": "宮本武藏",
+"cn": "宫本武藏",
+"src": "fgo:153"
+},
+"miyamoto_musashi_(woman_of_niten_ichiryuu)_(fate)": {
+"tw": "宮本武藏",
+"cn": "宫本武藏",
+"src": "fgo:153"
+},
+"mochizuki_chiyome_(fate)": {
+"tw": "望月千代女",
+"cn": "望月千代女",
+"src": "fgo:185"
+},
+"mohn_(pokemon)": {
+"tw": "莫恩",
+"cn": "莫恩",
+"src": "52poke-search:莫恩"
+},
+"mollie_(pokemon)": {
+"tw": "莫麗",
+"cn": "莫丽",
+"src": "52poke-search:莫丽"
+},
+"mordred_(fate)": {
+"tw": "莫德雷德",
+"cn": "莫德雷德",
+"src": "fgo:76"
+},
+"mordred_(fate/apocrypha)": {
+"tw": "莫德雷德",
+"cn": "莫德雷德",
+"src": "fgo:76"
+},
+"mordred_(fate/prototype)": {
+"tw": "莫德雷德",
+"cn": "莫德雷德",
+"src": "fgo:76"
+},
+"mordred_(fate/stay_night)": {
+"tw": "莫德雷德",
+"cn": "莫德雷德",
+"src": "fgo:76"
+},
+"mordred_(swimsuit_rider)_(fate)": {
+"tw": "莫德雷德",
+"cn": "莫德雷德",
+"src": "fgo:76"
+},
+"morgan_(pokemon)": {
+"tw": "朝蜜",
+"cn": "朝蜜",
+"src": "52poke-search:朝蜜"
+},
+"morgan_le_fay_(fate)": {
+"tw": "摩根",
+"cn": "摩根",
+"src": "fgo:309"
+},
+"mori_nagayoshi_(fate)": {
+"tw": "森長可",
+"cn": "森长可",
+"src": "fgo:251"
+},
+"morty_(pokemon)": {
+"tw": "松葉",
+"cn": "松叶",
+"src": "52poke:松葉"
+},
+"murasaki_shikibu_(fate)": {
+"tw": "紫式部",
+"cn": "紫式部",
+"src": "fgo:237"
+},
+"murasaki_shikibu_(swimsuit_rider)_(first_ascension)_(fate)": {
+"tw": "紫式部",
+"cn": "紫式部",
+"src": "fgo:237"
+},
+"murasaki_shikibu_(swimsuit_rider)_(third_ascension)_(fate)": {
+"tw": "紫式部",
+"cn": "紫式部",
+"src": "fgo:237"
+},
+"murdock_(pokemon)": {
+"tw": "馬德克",
+"cn": "马德克",
+"src": "52poke-search:馬德克"
+},
+"musashibou_benkei_(fate)": {
+"tw": "武藏坊弁慶",
+"cn": "武藏坊弁庆",
+"src": "fgo:19"
+},
+"mustard_(pokemon)": {
+"tw": "黃芥末醬（道具）",
+"cn": "黄芥末酱（道具）",
+"src": "52poke:黄芥末酱（道具）"
+},
+"mysterious_executor_c.i.e.l_(fate)": {
+"tw": "謎之代理人C.I.E.L",
+"cn": "谜之代行者C.I.E.L",
+"src": "fgo:418"
+},
+"mysterious_heroine_x_(fate)": {
+"tw": "謎之女主角X",
+"cn": "谜之女主角X",
+"src": "fgo:86"
+},
+"mysterious_heroine_x_alter_(fate)": {
+"tw": "謎之女主角X〔Alter〕",
+"cn": "谜之女主角X〔Alter〕",
+"src": "fgo:155"
+},
+"mysterious_heroine_xx_(fate)": {
+"tw": "謎之女主角XX",
+"cn": "谜之女主角XX",
+"src": "fgo:222"
+},
+"mysterious_heroine_xx_alter_(fate)": {
+"tw": "謎之女主角XX〔Alter〕",
+"cn": "谜之女主角XX〔Alter〕",
+"src": "fgo:423"
+},
+"mysterious_idol_x_alter_(fate)": {
+"tw": "謎之偶像X〔Alter〕",
+"cn": "谜之偶像X〔Alter〕",
+"src": "fgo:308"
+},
+"mysterious_ranmaru_x_(fate)": {
+"tw": "謎之蘭丸X",
+"cn": "谜之兰丸X",
+"src": "fgo:328"
+},
+"n_(pokemon)": {
+"tw": "Ｎ",
+"cn": "Ｎ",
+"src": "52poke:Ｎ"
+},
+"nagakura_shinpachi_(fate)": {
+"tw": "永倉新八",
+"cn": "永仓新八",
+"src": "fgo:398"
+},
+"nanu_(pokemon)": {
+"tw": "默丹",
+"cn": "默丹",
+"src": "52poke:默丹"
+},
+"napoleon_bonaparte_(fate)": {
+"tw": "拿破崙",
+"cn": "拿破仑",
+"src": "fgo:212"
+},
+"nate_(pokemon)": {
+"tw": "共平",
+"cn": "共平",
+"src": "52poke:共平"
+},
+"naveen_(pokemon)": {
+"tw": "琵魯",
+"cn": "琵鲁",
+"src": "52poke-search:琵魯"
+},
+"nemo_(fate)": {
+"tw": "尼莫",
+"cn": "尼莫",
+"src": "fgo:296"
+},
+"nemona_(pokemon)": {
+"tw": "妮莫",
+"cn": "妮莫",
+"src": "52poke:妮莫"
+},
+"nero_claudius_(bride)_(fate)": {
+"tw": "尼祿．克勞狄烏斯〔Bride〕",
+"cn": "尼禄·克劳狄乌斯〔新娘〕",
+"src": "fgo:90"
+},
+"nero_claudius_(fate)": {
+"tw": "尼祿．克勞狄烏斯",
+"cn": "尼禄·克劳狄乌斯",
+"src": "fgo:5"
+},
+"nero_claudius_(fate/extra)": {
+"tw": "尼祿．克勞狄烏斯",
+"cn": "尼禄·克劳狄乌斯",
+"src": "fgo:5"
+},
+"nero_claudius_(swimsuit_caster)_(fate)": {
+"tw": "尼祿．克勞狄烏斯",
+"cn": "尼禄·克劳狄乌斯",
+"src": "fgo:5"
+},
+"nessa_(pokemon)": {
+"tw": "露璃娜",
+"cn": "露璃娜",
+"src": "52poke:露璃娜"
+},
+"nezha_(fate)": {
+"tw": "哪吒",
+"cn": "莲偶",
+"src": "fgo:193"
+},
+"nikola_tesla_(fate)": {
+"tw": "尼古拉．特斯拉",
+"cn": "尼古拉·特斯拉",
+"src": "fgo:77"
+},
+"nina_(pokemon)": {
+"tw": "諾雅",
+"cn": "诺雅",
+"src": "52poke-search:诺雅"
+},
+"nita_(pokemon)": {
+"tw": "夜妮",
+"cn": "夜妮",
+"src": "52poke-search:夜妮"
+},
+"nitocris_(fate)": {
+"tw": "尼托克里絲",
+"cn": "尼托克丽丝",
+"src": "fgo:120"
+},
+"nitocris_(swimsuit_assassin)_(fate)": {
+"tw": "尼托克里絲",
+"cn": "尼托克丽丝",
+"src": "fgo:120"
+},
+"nitocris_(swimsuit_assassin)_(first_ascension)_(fate)": {
+"tw": "尼托克里絲",
+"cn": "尼托克丽丝",
+"src": "fgo:120"
+},
+"nitocris_(swimsuit_assassin)_(second_ascension)_(fate)": {
+"tw": "尼托克里絲",
+"cn": "尼托克丽丝",
+"src": "fgo:120"
+},
+"nitocris_(swimsuit_assassin)_(third_ascension)_(fate)": {
+"tw": "尼托克里絲",
+"cn": "尼托克丽丝",
+"src": "fgo:120"
+},
+"noah_(fate)": {
+"tw": "尼莫／諾亞",
+"cn": "尼莫／诺亚",
+"src": "fgo:452"
+},
+"noland_(pokemon)": {
+"tw": "達拉",
+"cn": "达拉",
+"src": "52poke-search:達拉"
+},
+"norman_(pokemon)": {
+"tw": "千里",
+"cn": "千里",
+"src": "52poke:千里"
+},
+"nurse_joy": {
+"tw": "喬伊",
+"cn": "乔伊",
+"src": "52poke:乔伊"
+},
+"nursery_rhyme_(fate)": {
+"tw": "童謠",
+"cn": "童谣",
+"src": "fgo:74"
+},
+"oakley_(pokemon)": {
+"tw": "莉安",
+"cn": "莉安",
+"src": "52poke-search:莉安"
+},
+"oberon_(fate)": {
+"tw": "奧伯隆",
+"cn": "奥伯龙",
+"src": "fgo:316"
+},
+"oda_nobukatsu_(fate)": {
+"tw": "織田信勝",
+"cn": "织田信胜",
+"src": "fgo:294"
+},
+"oda_nobukatsu_(second_ascension)_(fate)": {
+"tw": "織田信勝",
+"cn": "织田信胜",
+"src": "fgo:294"
+},
+"oda_nobunaga_(fate)": {
+"tw": "織田信長",
+"cn": "织田信长",
+"src": "fgo:69"
+},
+"oda_nobunaga_(swimsuit_berserker)_(fate)": {
+"tw": "織田信長",
+"cn": "织田信长",
+"src": "fgo:69"
+},
+"odysseus_(fate)": {
+"tw": "奧德修斯",
+"cn": "奥德修斯",
+"src": "fgo:277"
+},
+"office_worker_(pokemon)": {
+"tw": "ＯＬ",
+"cn": "ＯＬ",
+"src": "52poke-search:ＯＬ"
+},
+"okada_izou_(fate)": {
+"tw": "岡田以藏",
+"cn": "冈田以藏",
+"src": "fgo:210"
+},
+"okita_souji_(fate)": {
+"tw": "沖田總司",
+"cn": "冲田总司",
+"src": "fgo:68"
+},
+"okita_souji_(koha-ace)": {
+"tw": "沖田總司",
+"cn": "冲田总司",
+"src": "fgo:68"
+},
+"okita_souji_alter_(fate)": {
+"tw": "沖田總司",
+"cn": "冲田总司",
+"src": "fgo:68"
+},
+"oleana_(pokemon)": {
+"tw": "奧利薇",
+"cn": "奥利薇",
+"src": "52poke:奧利薇"
+},
+"olivia_(pokemon)": {
+"tw": "麗姿",
+"cn": "丽姿",
+"src": "52poke-search:丽姿"
+},
+"olympia_(pokemon)": {
+"tw": "葛吉花",
+"cn": "葛吉花",
+"src": "52poke:葛吉花"
+},
+"onia_(pokemon)": {
+"tw": "可妮亞",
+"cn": "可妮亚",
+"src": "52poke-search:可妮亞"
+},
+"opal_(pokemon)": {
+"tw": "波普菈",
+"cn": "波普菈",
+"src": "52poke:波普菈"
+},
+"orion_(bear)_(fate)": {
+"tw": "俄里翁",
+"cn": "俄里翁",
+"src": "fgo:60"
+},
+"orla_(pokemon)": {
+"tw": "奧莉歐",
+"cn": "奥莉欧",
+"src": "52poke-search:奧莉歐"
+},
+"ortega_(pokemon)": {
+"tw": "奧爾迪加",
+"cn": "奥尔迪加",
+"src": "52poke:奧爾迪加"
+},
+"ortlinde_(fate)": {
+"tw": "奧特琳德",
+"cn": "奥特琳德",
+"src": "fgo:361"
+},
+"osakabehime_(fate)": {
+"tw": "刑部姬",
+"cn": "刑部姬",
+"src": "fgo:189"
+},
+"osakabehime_(swimsuit_archer)_(fate)": {
+"tw": "刑部姬",
+"cn": "刑部姬",
+"src": "fgo:189"
+},
+"ozymandias_(fate)": {
+"tw": "奧茲曼迪亞斯",
+"cn": "奥斯曼狄斯",
+"src": "fgo:118"
+},
+"paldean_wooper": {
+"tw": "帕底亞 烏波",
+"cn": "帕底亚 乌波",
+"src": "52poke-search:帕底亚 乌波"
+},
+"palina_(pokemon)": {
+"tw": "瓜娜",
+"cn": "瓜娜",
+"src": "52poke-search:瓜娜"
+},
+"palmer_(pokemon)": {
+"tw": "桄榔",
+"cn": "桄榔",
+"src": "52poke:桄榔"
+},
+"paracelsus_von_hohenheim_(fate)": {
+"tw": "馮．霍恩海姆．帕拉塞爾斯",
+"cn": "冯·霍恩海姆·帕拉塞尔苏斯",
+"src": "fgo:79"
+},
+"parasol_lady_(pokemon)": {
+"tw": "陽傘姐姐",
+"cn": "阳伞姐姐",
+"src": "52poke:阳伞姐姐"
+},
+"paris_(fate)": {
+"tw": "帕里斯",
+"cn": "帕里斯",
+"src": "fgo:255"
+},
+"parvati_(fate)": {
+"tw": "帕爾瓦蒂",
+"cn": "帕尔瓦蒂",
+"src": "fgo:183"
+},
+"paul_(pokemon)": {
+"tw": "真司",
+"cn": "真司",
+"src": "52poke:真司"
+},
+"paul_bunyan_(fate)": {
+"tw": "保羅．班揚",
+"cn": "保罗·班扬",
+"src": "fgo:174"
+},
+"paulo_(pokemon)": {
+"tw": "梧桐",
+"cn": "梧桐",
+"src": "52poke-search:梧桐"
+},
+"paxton_(pokemon)": {
+"tw": "共熙",
+"cn": "共熙",
+"src": "52poke-search:共熙"
+},
+"peakychu": {
+"tw": "淺淺丘",
+"cn": "浅浅丘",
+"src": "52poke-search:淺淺丘"
+},
+"penny_(pokemon)": {
+"tw": "牡丹",
+"cn": "牡丹",
+"src": "52poke:牡丹"
+},
+"penthesilea_(fate)": {
+"tw": "彭忒西勒亞",
+"cn": "彭忒西勒亚",
+"src": "fgo:171"
+},
+"peonia_(pokemon)": {
+"tw": "夏科婭",
+"cn": "夏科娅",
+"src": "52poke-search:夏科娅"
+},
+"peony_(pokemon)": {
+"tw": "皮歐尼",
+"cn": "皮欧尼",
+"src": "52poke-search:皮歐尼"
+},
+"percival_(fate)": {
+"tw": "帕西瓦爾",
+"cn": "珀西瓦尔",
+"src": "fgo:313"
+},
+"perrin_(pokemon)": {
+"tw": "沙儷",
+"cn": "沙俪",
+"src": "52poke:沙儷"
+},
+"petrel_(pokemon)": {
+"tw": "拉姆達",
+"cn": "拉姆达",
+"src": "52poke:拉姆達"
+},
+"phantas-moon": {
+"tw": "Phantasmoon",
+"cn": "Phantasmoon",
+"src": "fgo:431"
+},
+"phantom_of_the_opera_(fate)": {
+"tw": "歌劇魅影",
+"cn": "剧院魅影",
+"src": "fgo:44"
+},
+"philippe_(pokemon)": {
+"tw": "吉普索",
+"cn": "吉普索",
+"src": "52poke-search:吉普索"
+},
+"phoebe_(pokemon)": {
+"tw": "芙蓉",
+"cn": "芙蓉",
+"src": "52poke:芙蓉"
+},
+"phyco_(pokemon)": {
+"tw": "西奧尼拉",
+"cn": "西奥尼拉",
+"src": "52poke-search:西奧尼拉"
+},
+"pibu_(pokemon)": {
+"tw": "皮秋",
+"cn": "皮秋",
+"src": "52poke-search:皮秋"
+},
+"picnicker_(pokemon)": {
+"tw": "野餐女孩",
+"cn": "野餐女孩",
+"src": "52poke:野餐女孩"
+},
+"pierce_(pokemon)": {
+"tw": "富林多",
+"cn": "富林多",
+"src": "52poke:富林多"
+},
+"piers_(pokemon)": {
+"tw": "聶梓",
+"cn": "聂梓",
+"src": "52poke:聶梓"
+},
+"pika_(pokemon)": {
+"tw": "皮卡",
+"cn": "皮卡",
+"src": "52poke-search:皮卡"
+},
+"plumeria_(pokemon)": {
+"tw": "布林美麗",
+"cn": "布尔美丽",
+"src": "52poke-search:布尔美丽"
+},
+"pollux_(fate)": {
+"tw": "狄奧斯庫洛伊",
+"cn": "狄俄斯库里",
+"src": "fgo:278"
+},
+"pombon": {
+"tw": "博姆耿",
+"cn": "博姆耿",
+"src": "52poke:博姆耿"
+},
+"poppy_(pokemon)": {
+"tw": "波琵",
+"cn": "波琵",
+"src": "52poke:波琵"
+},
+"preschooler_(pokemon)": {
+"tw": "幼兒園小朋友",
+"cn": "幼儿园小朋友",
+"src": "52poke:幼儿园小朋友"
+},
+"prince_of_lan_ling_(fate)": {
+"tw": "蘭陵王",
+"cn": "兰陵王",
+"src": "fgo:227"
+},
+"professor_kukui": {
+"tw": "庫庫伊博士",
+"cn": "库库伊博士",
+"src": "52poke-search:库库伊博士"
+},
+"professor_sycamore": {
+"tw": "布拉塔諾博士",
+"cn": "布拉塔诺博士",
+"src": "52poke-search:布拉塔诺博士"
+},
+"proton_(pokemon)": {
+"tw": "蘭斯",
+"cn": "兰斯",
+"src": "52poke:蘭斯"
+},
+"pryce_(pokemon)": {
+"tw": "柳伯",
+"cn": "柳伯",
+"src": "52poke-search:柳伯"
+},
+"ptolemy_(fate)": {
+"tw": "托勒密",
+"cn": "托勒密",
+"src": "fgo:394"
+},
+"punk_girl_(pokemon)": {
+"tw": "壞女孩",
+"cn": "坏女孩",
+"src": "52poke-search:壞女孩"
+},
+"punk_guy_(pokemon)": {
+"tw": "壞男孩",
+"cn": "坏男孩",
+"src": "52poke-search:壞男孩"
+},
+"puppy-loving_girl_(pokemon)": {
+"tw": "超愛小狗的女孩",
+"cn": "超爱小狗的女孩",
+"src": "52poke-search:超爱小狗的女孩"
+},
+"qin_liangyu_(fate)": {
+"tw": "秦良玉",
+"cn": "忠贞",
+"src": "fgo:228"
+},
+"queen_draco_(fate)": {
+"tw": "所多瑪之獸／德拉科",
+"cn": "所多玛之兽／德拉科",
+"src": "fgo:377"
+},
+"queen_of_sheba_(fate)": {
+"tw": "示巴女王",
+"cn": "示巴女王",
+"src": "fgo:194"
+},
+"quetzalcoatl_(fate)": {
+"tw": "魁札爾．科亞特爾",
+"cn": "魁札尔·科亚特尔",
+"src": "fgo:144"
+},
+"quetzalcoatl_(samba/santa)_(fate)": {
+"tw": "魁札爾．科亞特爾〔森巴／聖誕〕",
+"cn": "魁札尔·科亚特尔〔桑巴／圣诞〕",
+"src": "fgo:233"
+},
+"quillon_(pokemon)": {
+"tw": "阿劍",
+"cn": "阿剑",
+"src": "52poke-search:阿剑"
+},
+"rachel_(pokemon)": {
+"tw": "棘兒",
+"cn": "棘儿",
+"src": "52poke-search:棘兒"
+},
+"raifort_(pokemon)": {
+"tw": "蕾荷",
+"cn": "蕾荷",
+"src": "52poke:蕾荷"
+},
+"raihan_(pokemon)": {
+"tw": "奇巴納",
+"cn": "奇巴纳",
+"src": "52poke:奇巴納"
+},
+"rama_(fate)": {
+"tw": "羅摩",
+"cn": "罗摩",
+"src": "fgo:101"
+},
+"ramos_(pokemon)": {
+"tw": "福爺",
+"cn": "福爷",
+"src": "52poke:福爺"
+},
+"red_hare_(fate)": {
+"tw": "赤兔馬",
+"cn": "丹驹",
+"src": "fgo:231"
+},
+"reggie_(pokemon)": {
+"tw": "雷司",
+"cn": "雷司",
+"src": "52poke-search:雷司"
+},
+"reines_el-melloi_archisorte": {
+"tw": "司馬懿〔萊涅絲〕",
+"cn": "莱妮丝",
+"src": "fgo:241"
+},
+"ren_(pokemon)": {
+"tw": "蓮司",
+"cn": "莲司",
+"src": "52poke:蓮司"
+},
+"rich_boy_(pokemon)": {
+"tw": "富家少爺",
+"cn": "富家少爷",
+"src": "52poke:富家少爷"
+},
+"richard_i_(fate)": {
+"tw": "理查Ⅰ世",
+"cn": "理查一世",
+"src": "fgo:432"
+},
+"rika_(pokemon)": {
+"tw": "辛俐",
+"cn": "辛俐",
+"src": "52poke:辛俐"
+},
+"riley_(pokemon)": {
+"tw": "亞玄",
+"cn": "亚玄",
+"src": "52poke:亞玄"
+},
+"rindr_(fate)": {
+"tw": "瓦爾基麗",
+"cn": "瓦尔基里",
+"src": "fgo:214"
+},
+"risa_(pokemon)": {
+"tw": "利莎",
+"cn": "利莎",
+"src": "52poke:利莎"
+},
+"rita_(pokemon)": {
+"tw": "莉塔",
+"cn": "莉塔",
+"src": "52poke-search:莉塔"
+},
+"ritchie_(pokemon)": {
+"tw": "阿弘",
+"cn": "阿弘",
+"src": "52poke:阿弘"
+},
+"river_(pokemon)": {
+"tw": "小霓",
+"cn": "小霓",
+"src": "52poke-search:小霓"
+},
+"roark_(pokemon)": {
+"tw": "瓢太",
+"cn": "瓢太",
+"src": "52poke:瓢太"
+},
+"robin_hood_(fate)": {
+"tw": "羅賓漢",
+"cn": "罗宾汉",
+"src": "fgo:13"
+},
+"roland_(fate)": {
+"tw": "羅蘭",
+"cn": "罗兰",
+"src": "fgo:344"
+},
+"romulus-quirinus_(fate)": {
+"tw": "羅慕路斯=奎里努斯",
+"cn": "罗穆路斯·奎里努斯",
+"src": "fgo:280"
+},
+"romulus_(fate)": {
+"tw": "羅慕路斯",
+"cn": "罗穆路斯",
+"src": "fgo:22"
+},
+"rosa_(pokemon)": {
+"tw": "鳴依",
+"cn": "鸣依",
+"src": "52poke:鳴依"
+},
+"rose_(pokemon)": {
+"tw": "洛茲",
+"cn": "洛兹",
+"src": "52poke:洛茲"
+},
+"rotom_dex": {
+"tw": "洛托姆圖鑑",
+"cn": "洛托姆图鉴",
+"src": "52poke-search:洛托姆图鉴"
+},
+"rotom_phone": {
+"tw": "手機洛托姆",
+"cn": "手机洛托姆",
+"src": "52poke:手机洛托姆"
+},
+"roughneck_(pokemon)": {
+"tw": "光頭男",
+"cn": "光头男",
+"src": "52poke:光头男"
+},
+"roxanne_(pokemon)": {
+"tw": "杜娟",
+"cn": "杜娟",
+"src": "52poke:杜娟"
+},
+"roxie_(pokemon)": {
+"tw": "霍米加",
+"cn": "霍米加",
+"src": "52poke:霍米加"
+},
+"roy_(pokemon)": {
+"tw": "羅伊",
+"cn": "罗伊",
+"src": "52poke:羅伊"
+},
+"rui_(pokemon)": {
+"tw": "米蕾",
+"cn": "米蕾",
+"src": "52poke-search:米蕾"
+},
+"ryme_(pokemon)": {
+"tw": "萊姆",
+"cn": "莱姆",
+"src": "52poke:萊姆"
+},
+"rystal_(pokemon)": {
+"tw": "麗斯塔爾",
+"cn": "丽斯塔尔",
+"src": "52poke-search:麗斯塔爾"
+},
+"ryuki_(pokemon)": {
+"tw": "龍葵",
+"cn": "龙葵",
+"src": "52poke-search:龍葵"
+},
+"saber_(fate)": {
+"tw": "阿爾托莉亞．潘德拉剛",
+"cn": "阿尔托莉雅·潘德拉贡",
+"src": "fgo:2"
+},
+"saber_(swimsuit_archer)_(first_ascension)_(fate)": {
+"tw": "阿爾托莉亞．潘德拉剛",
+"cn": "阿尔托莉雅·潘德拉贡",
+"src": "fgo:2"
+},
+"saber_(swimsuit_archer)_(second_ascension)_(fate)": {
+"tw": "阿爾托莉亞．潘德拉剛",
+"cn": "阿尔托莉雅·潘德拉贡",
+"src": "fgo:2"
+},
+"saber_(swimsuit_archer)_(third_ascension)_(fate)": {
+"tw": "阿爾托莉亞．潘德拉剛",
+"cn": "阿尔托莉雅·潘德拉贡",
+"src": "fgo:2"
+},
+"sabi_(pokemon)": {
+"tw": "山葵",
+"cn": "山葵",
+"src": "52poke-search:山葵"
+},
+"sabrina_(pokemon)": {
+"tw": "娜姿",
+"cn": "娜姿",
+"src": "52poke:娜姿"
+},
+"saguaro_(pokemon)": {
+"tw": "薩瓦羅",
+"cn": "萨瓦罗",
+"src": "52poke:薩瓦羅"
+},
+"saika_magoichi_(fate)": {
+"tw": "雜賀孫一",
+"cn": "杂贺孙一",
+"src": "fgo:399"
+},
+"sailor_(pokemon)": {
+"tw": "水手",
+"cn": "水手",
+"src": "52poke:水手"
+},
+"saitou_hajime_(fate)": {
+"tw": "齋藤一",
+"cn": "斋藤一",
+"src": "fgo:293"
+},
+"sakamoto_ryouma_(fate)": {
+"tw": "坂本龍馬",
+"cn": "坂本龙马",
+"src": "fgo:211"
+},
+"sakamoto_ryouma_(lancer)_(first_ascension)_(fate)": {
+"tw": "坂本龍馬",
+"cn": "坂本龙马",
+"src": "fgo:329"
+},
+"sakamoto_ryouma_(lancer)_(second_ascension)_(fate)": {
+"tw": "坂本龍馬",
+"cn": "坂本龙马",
+"src": "fgo:329"
+},
+"sakamoto_ryouma_(lancer)_(third_ascension)_(fate)": {
+"tw": "坂本龍馬",
+"cn": "坂本龙马",
+"src": "fgo:329"
+},
+"sakata_kintoki_(fate)": {
+"tw": "坂田金時",
+"cn": "坂田金时",
+"src": "fgo:51"
+},
+"sakata_kintoki_(rider)_(fate)": {
+"tw": "坂田金時",
+"cn": "坂田金时",
+"src": "fgo:115"
+},
+"salome_(fate)": {
+"tw": "莎樂美",
+"cn": "莎乐美",
+"src": "fgo:260"
+},
+"salvatore_(pokemon)": {
+"tw": "賽吉",
+"cn": "赛吉",
+"src": "52poke:賽吉"
+},
+"sanqua_(pokemon)": {
+"tw": "茶花",
+"cn": "茶花",
+"src": "52poke-search:茶花"
+},
+"sasaki_kojirou_(fate)": {
+"tw": "佐佐木小次郎",
+"cn": "佐佐木小次郎",
+"src": "fgo:39"
+},
+"sashay_(pokemon)": {
+"tw": "絲黛",
+"cn": "丝黛",
+"src": "52poke-search:絲黛"
+},
+"saturn_(pokemon)": {
+"tw": "鎮星",
+"cn": "镇星",
+"src": "52poke:鎮星"
+},
+"sawyer_(pokemon)": {
+"tw": "翔太",
+"cn": "翔太",
+"src": "52poke:翔太"
+},
+"scathach-skadi_(fate)": {
+"tw": "斯卡薩哈=斯卡蒂",
+"cn": "斯卡哈·斯卡蒂",
+"src": "fgo:215"
+},
+"scathach-skadi_(swimsuit_ruler)_(final_ascension)_(fate)": {
+"tw": "斯卡薩哈=斯卡蒂",
+"cn": "斯卡哈·斯卡蒂",
+"src": "fgo:215"
+},
+"scathach-skadi_(swimsuit_ruler)_(first_ascension)_(fate)": {
+"tw": "斯卡薩哈=斯卡蒂",
+"cn": "斯卡哈·斯卡蒂",
+"src": "fgo:215"
+},
+"scathach-skadi_(swimsuit_ruler)_(second_ascension)_(fate)": {
+"tw": "斯卡薩哈=斯卡蒂",
+"cn": "斯卡哈·斯卡蒂",
+"src": "fgo:215"
+},
+"scathach-skadi_(swimsuit_ruler)_(third_ascension)_(fate)": {
+"tw": "斯卡薩哈=斯卡蒂",
+"cn": "斯卡哈·斯卡蒂",
+"src": "fgo:215"
+},
+"scathach_(fate)": {
+"tw": "斯卡薩哈",
+"cn": "斯卡哈",
+"src": "fgo:70"
+},
+"scathach_(piercing_bunny)_(fate)": {
+"tw": "斯卡薩哈",
+"cn": "斯卡哈",
+"src": "fgo:70"
+},
+"scathach_(swimsuit_assassin)_(fate)": {
+"tw": "斯卡薩哈",
+"cn": "斯卡哈",
+"src": "fgo:70"
+},
+"scheherazade_(fate)": {
+"tw": "雪赫拉莎德",
+"cn": "山鲁佐德",
+"src": "fgo:169"
+},
+"school_kid_(pokemon)": {
+"tw": "補習班學生",
+"cn": "补习班学生",
+"src": "52poke:补习班学生"
+},
+"schoolgirl_(pokemon)": {
+"tw": "女學生",
+"cn": "女学生",
+"src": "52poke-search:女學生"
+},
+"scientist_(pokemon)": {
+"tw": "流浪研究員",
+"cn": "流浪研究员",
+"src": "52poke-search:流浪研究员"
+},
+"scottie_(pokemon)": {
+"tw": "阿齊",
+"cn": "阿齐",
+"src": "52poke-search:阿齊"
+},
+"sei_shounagon_(fate)": {
+"tw": "清少納言",
+"cn": "清少纳言",
+"src": "fgo:276"
+},
+"sei_shounagon_(swimsuit_berserker)_(first_ascension)_(fate)": {
+"tw": "清少納言",
+"cn": "清少纳言",
+"src": "fgo:276"
+},
+"sei_shounagon_(swimsuit_berserker)_(second_ascension)_(fate)": {
+"tw": "清少納言",
+"cn": "清少纳言",
+"src": "fgo:276"
+},
+"sei_shounagon_(swimsuit_berserker)_(third_ascension)_(fate)": {
+"tw": "清少納言",
+"cn": "清少纳言",
+"src": "fgo:276"
+},
+"selene_(pokemon)": {
+"tw": "美月",
+"cn": "美月",
+"src": "52poke:美月"
+},
+"semiramis_(fate)": {
+"tw": "塞彌拉彌斯",
+"cn": "塞弥拉弥斯",
+"src": "fgo:199"
+},
+"sen_no_rikyu_(fate)": {
+"tw": "千利休",
+"cn": "千利休",
+"src": "fgo:362"
+},
+"senji_muramasa_(fate)": {
+"tw": "千子村正",
+"cn": "千子村正",
+"src": "fgo:302"
+},
+"serena_(pokemon)": {
+"tw": "莎莉娜",
+"cn": "莎莉娜",
+"src": "52poke:莎莉娜"
+},
+"sessyoin_kiara": {
+"tw": "殺生院祈荒",
+"cn": "瞑生院祈荒",
+"src": "fgo:167"
+},
+"sessyoin_kiara_(lily)": {
+"tw": "殺生院祈荒",
+"cn": "瞑生院祈荒",
+"src": "fgo:167"
+},
+"sessyoin_kiara_(swimsuit_mooncancer)_(second_ascension)": {
+"tw": "殺生院祈荒",
+"cn": "瞑生院祈荒",
+"src": "fgo:167"
+},
+"setanta_(fate)": {
+"tw": "瑟坦特",
+"cn": "瑟坦特",
+"src": "fgo:379"
+},
+"shauna_(pokemon)": {
+"tw": "莎娜",
+"cn": "莎娜",
+"src": "52poke-search:莎娜"
+},
+"shauntal_(pokemon)": {
+"tw": "婉龍",
+"cn": "婉龙",
+"src": "52poke:婉龍"
+},
+"sheena_(pokemon)": {
+"tw": "希娜",
+"cn": "希娜",
+"src": "52poke-search:希娜"
+},
+"shelly_(pokemon)": {
+"tw": "阿泉",
+"cn": "阿泉",
+"src": "52poke:阿泉"
+},
+"sherlock_holmes_(fate)": {
+"tw": "夏洛克．福爾摩斯",
+"cn": "夏洛克·福尔摩斯",
+"src": "fgo:173"
+},
+"shi_huang_di_(fate)": {
+"tw": "始皇帝",
+"cn": "祖政",
+"src": "fgo:229"
+},
+"shielbert_(pokemon)": {
+"tw": "西爾迪",
+"cn": "西尔迪",
+"src": "52poke:西爾迪"
+},
+"shuten_douji_(fate)": {
+"tw": "酒吞童子",
+"cn": "酒吞童子",
+"src": "fgo:112"
+},
+"shuten_douji_(halloween_caster)_(fate)": {
+"tw": "酒吞童子",
+"cn": "酒吞童子",
+"src": "fgo:112"
+},
+"sidian_(pokemon)": {
+"tw": "昂尼斯",
+"cn": "昂尼斯",
+"src": "52poke-search:昂尼斯"
+},
+"sidney_(pokemon)": {
+"tw": "花月",
+"cn": "花月",
+"src": "52poke:花月"
+},
+"siebold_(pokemon)": {
+"tw": "志米",
+"cn": "志米",
+"src": "52poke:志米"
+},
+"sieg_(fate)": {
+"tw": "齊格",
+"cn": "齐格",
+"src": "fgo:208"
+},
+"siegfried_(fate)": {
+"tw": "齊格飛",
+"cn": "齐格飞",
+"src": "fgo:6"
+},
+"sierra_(pokemon)": {
+"tw": "希爾拉",
+"cn": "希尔拉",
+"src": "52poke-search:希爾拉"
+},
+"sightseer_(pokemon)": {
+"tw": "遊客",
+"cn": "游客",
+"src": "52poke-search:游客"
+},
+"sigurd_(fate)": {
+"tw": "齊格魯德",
+"cn": "齐格鲁德",
+"src": "fgo:213"
+},
+"sima_(pokemon)": {
+"tw": "阿瑪拉",
+"cn": "阿玛拉",
+"src": "52poke-search:阿瑪拉"
+},
+"sina_(pokemon)": {
+"tw": "吉娜",
+"cn": "吉娜",
+"src": "52poke-search:吉娜"
+},
+"sitonai_(fate)": {
+"tw": "志度內",
+"cn": "志度内",
+"src": "fgo:224"
+},
+"sky_trainer_(pokemon)": {
+"tw": "天空訓練家",
+"cn": "天空训练家",
+"src": "52poke-search:天空训练家"
+},
+"skyla_(pokemon)": {
+"tw": "風露",
+"cn": "风露",
+"src": "52poke:風露"
+},
+"solana_(pokemon)": {
+"tw": "日向",
+"cn": "日向",
+"src": "52poke:日向"
+},
+"solidad_(pokemon)": {
+"tw": "紗織",
+"cn": "纱织",
+"src": "52poke:紗織"
+},
+"soliera_(pokemon)": {
+"tw": "米翎",
+"cn": "米翎",
+"src": "52poke-search:米翎"
+},
+"sonia_(pokemon)": {
+"tw": "索妮亞",
+"cn": "索妮亚",
+"src": "52poke:索妮亞"
+},
+"sophocles_(pokemon)": {
+"tw": "馬瑪內",
+"cn": "马玛内",
+"src": "52poke:馬瑪內"
+},
+"sordward_(pokemon)": {
+"tw": "索德",
+"cn": "索德",
+"src": "52poke:索德"
+},
+"sorrel_(pokemon)": {
+"tw": "宗次",
+"cn": "宗次",
+"src": "52poke-search:宗次"
+},
+"space_ereshkigal_(fate)": {
+"tw": "埃列什基伽勒",
+"cn": "埃列什基伽勒",
+"src": "fgo:196"
+},
+"space_ishtar_(fate)": {
+"tw": "太空伊絲塔",
+"cn": "太空伊什塔尔",
+"src": "fgo:268"
+},
+"spark_(pokemon)": {
+"tw": "電光（招式）",
+"cn": "电光（招式）",
+"src": "52poke:电光（招式）"
+},
+"spartacus_(fate)": {
+"tw": "斯巴達克斯",
+"cn": "斯巴达克斯",
+"src": "fgo:50"
+},
+"spinel_(pokemon)": {
+"tw": "斯琵奈爾",
+"cn": "斯琵奈尔",
+"src": "52poke-search:斯琵奈爾"
+},
+"stephan_(pokemon)": {
+"tw": "肯尼洋",
+"cn": "肯尼洋",
+"src": "52poke-search:肯尼洋"
+},
+"steven_stone": {
+"tw": "大吾",
+"cn": "大吾",
+"src": "52poke:大吾"
+},
+"stheno_(fate)": {
+"tw": "絲忒諾",
+"cn": "斯忒诺",
+"src": "fgo:41"
+},
+"street_thug_(pokemon)": {
+"tw": "可怕的大叔",
+"cn": "可怕的大叔",
+"src": "52poke:可怕的大叔"
+},
+"sugitani_zenjubou_(fate)": {
+"tw": "杉谷善住坊",
+"cn": "杉谷善住坊",
+"src": "fgo:395"
+},
+"summer_(pokemon)": {
+"tw": "南美",
+"cn": "南美",
+"src": "52poke-search:南美"
+},
+"super_bunyan_(fate)": {
+"tw": "超級班揚",
+"cn": "超级班扬",
+"src": "fgo:339"
+},
+"super_orion_(fate)": {
+"tw": "超人俄里翁",
+"cn": "超人俄里翁",
+"src": "fgo:272"
+},
+"suzuka_gozen_(fate)": {
+"tw": "鈴鹿御前",
+"cn": "铃鹿御前",
+"src": "fgo:165"
+},
+"suzuka_gozen_(santa)_(fate)": {
+"tw": "鈴鹿御前",
+"cn": "铃鹿御前",
+"src": "fgo:165"
+},
+"swimmer_(pokemon)": {
+"tw": "泳褲小夥子",
+"cn": "泳裤小伙子",
+"src": "52poke:泳裤小伙子"
+},
+"tabitha_(pokemon)": {
+"tw": "火村",
+"cn": "火村",
+"src": "52poke:火村"
+},
+"taigong_wang_(fate)": {
+"tw": "太公望",
+"cn": "太公望",
+"src": "fgo:331"
+},
+"taira_no_kagekiyo_(fate)": {
+"tw": "平景清",
+"cn": "平景清",
+"src": "fgo:303"
+},
+"taisui_xingjun_(fate)": {
+"tw": "太歲星君",
+"cn": "太岁星君",
+"src": "fgo:338"
+},
+"takasugi_shinsaku_(fate)": {
+"tw": "高杉晉作",
+"cn": "高杉晋作",
+"src": "fgo:375"
+},
+"takeda_shingen_(fate)": {
+"tw": "武田晴信",
+"cn": "武田晴信",
+"src": "fgo:397"
+},
+"tamamo_cat_(fate)": {
+"tw": "玉藻貓",
+"cn": "玉藻猫",
+"src": "fgo:58"
+},
+"tamamo_no_mae_(fate)": {
+"tw": "玉藻前",
+"cn": "玉藻前",
+"src": "fgo:62"
+},
+"tamamo_no_mae_(swimsuit_lancer)_(fate)": {
+"tw": "玉藻前",
+"cn": "玉藻前",
+"src": "fgo:62"
+},
+"tarragon_(pokemon)": {
+"tw": "塔拉剛",
+"cn": "塔拉刚",
+"src": "52poke-search:塔拉剛"
+},
+"tatora_(pokemon)": {
+"tw": "托托菈",
+"cn": "托托菈",
+"src": "52poke-search:托托菈"
+},
+"taunie_(pokemon)": {
+"tw": "塔霓",
+"cn": "塔霓",
+"src": "52poke-search:塔霓"
+},
+"tawara_touta_(fate)": {
+"tw": "俵藤太",
+"cn": "俵藤太",
+"src": "fgo:125"
+},
+"tenochtitlan_(swimsuit_mooncancer)_(first_ascension)_(fate)": {
+"tw": "特諾奇提特蘭",
+"cn": "特诺奇蒂特兰",
+"src": "fgo:422"
+},
+"tenochtitlan_(swimsuit_mooncancer)_(second_ascension)_(fate)": {
+"tw": "特諾奇提特蘭",
+"cn": "特诺奇蒂特兰",
+"src": "fgo:422"
+},
+"tenochtitlan_(swimsuit_mooncancer)_(third_ascension)_(fate)": {
+"tw": "特諾奇提特蘭",
+"cn": "特诺奇蒂特兰",
+"src": "fgo:422"
+},
+"tezcatlipoca_(fate)": {
+"tw": "特斯卡特利波卡",
+"cn": "特斯卡特利波卡",
+"src": "fgo:371"
+},
+"the_count_of_monte_cristo_(fate)": {
+"tw": "巖窟王　基督山",
+"cn": "岩窟王　基督山",
+"src": "fgo:409"
+},
+"theseus_(fate)": {
+"tw": "忒修斯",
+"cn": "忒修斯",
+"src": "fgo:396"
+},
+"thomas_edison_(fate)": {
+"tw": "湯瑪斯．愛迪生",
+"cn": "托马斯·爱迪生",
+"src": "fgo:103"
+},
+"thorton_(pokemon)": {
+"tw": "捩木",
+"cn": "捩木",
+"src": "52poke:捩木"
+},
+"thrud_(fate)": {
+"tw": "斯露德",
+"cn": "斯露德",
+"src": "fgo:359"
+},
+"tierno_(pokemon)": {
+"tw": "提耶魯諾",
+"cn": "提耶鲁诺",
+"src": "52poke:提耶魯諾"
+},
+"tiffany_(pokemon)": {
+"tw": "未來",
+"cn": "未来",
+"src": "52poke-search:未來"
+},
+"tina_(pokemon)": {
+"tw": "俐卡",
+"cn": "俐卡",
+"src": "52poke-search:俐卡"
+},
+"tommy_(pokemon)": {
+"tw": "湯米",
+"cn": "汤米",
+"src": "52poke-search:汤米"
+},
+"tomoe_gozen_(fate)": {
+"tw": "巴御前",
+"cn": "巴御前",
+"src": "fgo:184"
+},
+"tomoe_gozen_(swimsuit_saber)_(first_ascension)_(fate)": {
+"tw": "巴御前",
+"cn": "巴御前",
+"src": "fgo:184"
+},
+"tomoe_gozen_(swimsuit_saber)_(second_ascension)_(fate)": {
+"tw": "巴御前",
+"cn": "巴御前",
+"src": "fgo:184"
+},
+"tomoe_gozen_(swimsuit_saber)_(third_ascension)_(fate)": {
+"tw": "巴御前",
+"cn": "巴御前",
+"src": "fgo:184"
+},
+"toren_(pokemon)": {
+"tw": "托里托",
+"cn": "托里托",
+"src": "52poke-search:托里托"
+},
+"toudou_heisuke_(fate)": {
+"tw": "藤堂平助",
+"cn": "藤堂平助",
+"src": "fgo:454"
+},
+"tourist_(pokemon)": {
+"tw": "團體遊客",
+"cn": "团体游客",
+"src": "52poke-search:团体游客"
+},
+"toxtricity_(amped)": {
+"tw": "顫弦蠑螈",
+"cn": "颤弦蝾螈",
+"src": "52poke:颤弦蝾螈"
+},
+"trace_(pokemon)": {
+"tw": "小進",
+"cn": "小进",
+"src": "52poke-search:小進"
+},
+"trevor_(pokemon)": {
+"tw": "多羅巴",
+"cn": "多罗巴",
+"src": "52poke:多羅巴"
+},
+"tricia_(pokemon)": {
+"tw": "藍菫",
+"cn": "蓝菫",
+"src": "52poke-search:藍菫"
+},
+"trip_(pokemon)": {
+"tw": "修帝",
+"cn": "修帝",
+"src": "52poke:修帝"
+},
+"trista_(pokemon)": {
+"tw": "紅菫",
+"cn": "红菫",
+"src": "52poke-search:紅菫"
+},
+"tristan_(fate)": {
+"tw": "崔斯坦",
+"cn": "崔斯坦",
+"src": "fgo:122"
+},
+"trung_nhi_(fate)": {
+"tw": "徵氏姐妹",
+"cn": "征氏姐妹",
+"src": "fgo:337"
+},
+"trung_trac_(fate)": {
+"tw": "徵氏姐妹",
+"cn": "征氏姐妹",
+"src": "fgo:337"
+},
+"tuber_(pokemon)": {
+"tw": "泳圈男孩",
+"cn": "泳圈男孩",
+"src": "52poke-search:泳圈男孩"
+},
+"tulip_(pokemon)": {
+"tw": "莉普",
+"cn": "莉普",
+"src": "52poke:莉普"
+},
+"tutankhamun_(fate)": {
+"tw": "圖坦卡門",
+"cn": "图坦卡蒙",
+"src": "fgo:427"
+},
+"twins_(pokemon)": {
+"tw": "雙胞胎",
+"cn": "双胞胎",
+"src": "52poke:双胞胎"
+},
+"tyme_(pokemon)": {
+"tw": "泰姆",
+"cn": "泰姆",
+"src": "52poke:泰姆"
+},
+"typhon_ephemeros_(fate)": {
+"tw": "堤豐·厄斐墨洛斯",
+"cn": "堤丰·厄斐墨洛斯",
+"src": "fgo:441"
+},
+"u-olga_marie": {
+"tw": "Ｕ－奧爾加瑪麗",
+"cn": "Ｕ－奥尔加玛丽",
+"src": "fgo:444"
+},
+"uesugi_kenshin_(first_ascension)_(fate)": {
+"tw": "上杉謙信",
+"cn": "上杉谦信",
+"src": "fgo:400"
+},
+"uesugi_kenshin_(second_ascension)_(fate)": {
+"tw": "上杉謙信",
+"cn": "上杉谦信",
+"src": "fgo:400"
+},
+"uesugi_kenshin_(third_ascension)_(fate)": {
+"tw": "上杉謙信",
+"cn": "上杉谦信",
+"src": "fgo:400"
+},
+"ulu_(pokemon)": {
+"tw": "烏魯",
+"cn": "乌鲁",
+"src": "52poke-search:烏魯"
+},
+"urbain_(pokemon)": {
+"tw": "蓋伊",
+"cn": "盖伊",
+"src": "52poke-search:蓋伊"
+},
+"ursula_(pokemon)": {
+"tw": "烏拉拉",
+"cn": "乌拉拉",
+"src": "52poke:烏拉拉"
+},
+"ushi_gozen_(avenger)_(fate)": {
+"tw": "源賴光／丑御前",
+"cn": "源赖光／丑御前",
+"src": "fgo:403"
+},
+"ushiwakamaru_(corrupted)_(fate)": {
+"tw": "牛若丸",
+"cn": "牛若丸",
+"src": "fgo:27"
+},
+"ushiwakamaru_(fate)": {
+"tw": "牛若丸",
+"cn": "牛若丸",
+"src": "fgo:27"
+},
+"ushiwakamaru_(swimsuit_assassin)_(first_ascension)_(fate)": {
+"tw": "牛若丸",
+"cn": "牛若丸",
+"src": "fgo:27"
+},
+"ushiwakamaru_(swimsuit_assassin)_(second_ascension)_(fate)": {
+"tw": "牛若丸",
+"cn": "牛若丸",
+"src": "fgo:27"
+},
+"ushiwakamaru_(swimsuit_assassin)_(third_ascension)_(fate)": {
+"tw": "牛若丸",
+"cn": "牛若丸",
+"src": "fgo:27"
+},
+"utsumi_erice": {
+"tw": "宇津見繪里世",
+"cn": "宇津见绘里濑",
+"src": "fgo:283"
+},
+"utsumi_erice_(lancer)": {
+"tw": "宇津見繪里世",
+"cn": "宇津见绘里濑",
+"src": "fgo:283"
+},
+"valerie_(pokemon)": {
+"tw": "瑪綉",
+"cn": "玛绣",
+"src": "52poke:瑪綉"
+},
+"valkyrie_(fate)": {
+"tw": "瓦爾基麗",
+"cn": "瓦尔基里",
+"src": "fgo:214"
+},
+"van_gogh_(fate)": {
+"tw": "梵谷",
+"cn": "梵高",
+"src": "fgo:295"
+},
+"van_gogh_(miner)_(fate)": {
+"tw": "梵谷〔礦工〕",
+"cn": "梵高〔矿工〕",
+"src": "fgo:428"
+},
+"veteran_(pokemon)": {
+"tw": "資深訓練家",
+"cn": "资深训练家",
+"src": "52poke:资深训练家"
+},
+"victor_(pokemon)": {
+"tw": "小勝",
+"cn": "小胜",
+"src": "52poke:小勝"
+},
+"vinnie_(pokemon)": {
+"tw": "馬斯卡托",
+"cn": "马斯卡托",
+"src": "52poke-search:馬斯卡托"
+},
+"viola_(pokemon)": {
+"tw": "紫羅蘭",
+"cn": "紫罗兰",
+"src": "52poke:紫羅蘭"
+},
+"virgil_(pokemon)": {
+"tw": "巴吉爾",
+"cn": "巴吉尔",
+"src": "52poke:巴吉爾"
+},
+"vlad_iii_(fate/apocrypha)": {
+"tw": "弗拉德三世",
+"cn": "弗拉德三世",
+"src": "fgo:52"
+},
+"void_shiki": {
+"tw": "兩儀式",
+"cn": "两仪式",
+"src": "fgo:91"
+},
+"volkner_(pokemon)": {
+"tw": "電次",
+"cn": "电次",
+"src": "52poke-search:电次"
+},
+"volo_(pokemon)": {
+"tw": "望羅",
+"cn": "望罗",
+"src": "52poke:望羅"
+},
+"voyager_(fate)": {
+"tw": "航海家",
+"cn": "旅行者",
+"src": "fgo:281"
+},
+"vritra_(fate)": {
+"tw": "弗栗多",
+"cn": "弗栗多",
+"src": "fgo:300"
+},
+"waiter_(pokemon)": {
+"tw": "服務生",
+"cn": "服务生",
+"src": "52poke:服务生"
+},
+"wallace_(pokemon)": {
+"tw": "米可利",
+"cn": "米可利",
+"src": "52poke:米可利"
+},
+"wally_(pokemon)": {
+"tw": "滿充",
+"cn": "满充",
+"src": "52poke:滿充"
+},
+"wandjina_(fate)": {
+"tw": "旺吉娜",
+"cn": "旺吉娜",
+"src": "fgo:393"
+},
+"watanabe_no_tsuna_(fate)": {
+"tw": "渡邊綱",
+"cn": "渡边纲",
+"src": "fgo:298"
+},
+"wattson_(pokemon)": {
+"tw": "鐵旋",
+"cn": "铁旋",
+"src": "52poke:鐵旋"
+},
+"wendy_(pokemon)": {
+"tw": "壬媞",
+"cn": "壬媞",
+"src": "52poke-search:壬媞"
+},
+"wes_(pokemon)": {
+"tw": "雷歐",
+"cn": "雷欧",
+"src": "52poke-search:雷歐"
+},
+"whitney_(pokemon)": {
+"tw": "小茜",
+"cn": "小茜",
+"src": "52poke:小茜"
+},
+"wicke_(pokemon)": {
+"tw": "碧珂",
+"cn": "碧珂",
+"src": "52poke:碧珂"
+},
+"wikstrom_(pokemon)": {
+"tw": "雁鎧",
+"cn": "雁铠",
+"src": "52poke:雁鎧"
+},
+"william_shakespeare_(fate)": {
+"tw": "威廉．莎士比亞",
+"cn": "威廉·莎士比亚",
+"src": "fgo:34"
+},
+"william_tell_(fate)": {
+"tw": "威廉．泰爾",
+"cn": "威廉·退尔",
+"src": "fgo:246"
+},
+"winona_(pokemon)": {
+"tw": "娜琪",
+"cn": "娜琪",
+"src": "52poke:娜琪"
+},
+"wolfgang_amadeus_mozart_(fate)": {
+"tw": "沃夫岡．阿瑪迪斯．莫札特",
+"cn": "沃尔夫冈·阿马德乌斯·莫扎特",
+"src": "fgo:36"
+},
+"wormadam_(plant)": {
+"tw": "結草貴婦",
+"cn": "结草贵妇",
+"src": "52poke:结草贵妇"
+},
+"wu_zetian_(fate)": {
+"tw": "武則天",
+"cn": "周照",
+"src": "fgo:170"
+},
+"wu_zetian_(swimsuit_caster)_(fate)": {
+"tw": "武則天",
+"cn": "周照",
+"src": "fgo:170"
+},
+"wulfric_(pokemon)": {
+"tw": "得撫",
+"cn": "得抚",
+"src": "52poke:得撫"
+},
+"xerosic_(pokemon)": {
+"tw": "庫瑟洛斯奇",
+"cn": "库瑟洛斯奇",
+"src": "52poke:庫瑟洛斯奇"
+},
+"xiang_yu_(fate)": {
+"tw": "項羽",
+"cn": "重瞳",
+"src": "fgo:226"
+},
+"xu_fu_(fate)": {
+"tw": "徐福",
+"cn": "方巿",
+"src": "fgo:352"
+},
+"xu_fu_(swimsuit_avenger)_(first_ascension)_(fate)": {
+"tw": "徐福",
+"cn": "方巿",
+"src": "fgo:352"
+},
+"xu_fu_(swimsuit_avenger)_(second_ascension)_(fate)": {
+"tw": "徐福",
+"cn": "方巿",
+"src": "fgo:352"
+},
+"xuangzang_sanzang_(fate)": {
+"tw": "玄奘三藏",
+"cn": "西行者",
+"src": "fgo:113"
+},
+"yagyuu_munenori_(fate)": {
+"tw": "柳生但馬守宗矩",
+"cn": "柳生但马守宗矩",
+"src": "fgo:187"
+},
+"yamanami_keisuke_(fate)": {
+"tw": "山南敬助",
+"cn": "山南敬助",
+"src": "fgo:363"
+},
+"yamato_takeru_(fate)": {
+"tw": "日本武尊",
+"cn": "大和武尊",
+"src": "fgo:402"
+},
+"yan_qing_(fate)": {
+"tw": "燕青",
+"cn": "燕青",
+"src": "fgo:159"
+},
+"yancy_(pokemon)": {
+"tw": "琉璃",
+"cn": "琉璃",
+"src": "52poke:琉璃"
+},
+"yang_guifei_(fate)": {
+"tw": "楊貴妃",
+"cn": "琰女",
+"src": "fgo:275"
+},
+"yellow_(pokemon)": {
+"tw": "小黃",
+"cn": "小黄",
+"src": "52poke:小黄"
+},
+"youngster_(pokemon)": {
+"tw": "短褲小子",
+"cn": "短裤小子",
+"src": "52poke:短裤小子"
+},
+"yu_mei-ren_(fate)": {
+"tw": "虞美人",
+"cn": "雏罂",
+"src": "fgo:230"
+},
+"yu_mei-ren_(swimsuit_lancer)_(fate)": {
+"tw": "虞美人",
+"cn": "雏罂",
+"src": "fgo:230"
+},
+"yui_shousetsu_(fate)": {
+"tw": "由井正雪",
+"cn": "由井正雪",
+"src": "fgo:404"
+},
+"yukito_(pokemon)": {
+"tw": "雪忠",
+"cn": "雪忠",
+"src": "52poke-search:雪忠"
+},
+"zenobia_(fate)": {
+"tw": "潔諾比亞",
+"cn": "芝诺比阿",
+"src": "fgo:325"
+},
+"zero_(pokemon)": {
+"tw": "傑洛",
+"cn": "杰洛",
+"src": "52poke-search:杰洛"
+},
+"zhang_jue_(fate)": {
+"tw": "張角",
+"cn": "张角",
+"src": "fgo:348"
+},
+"zinnia_(pokemon)": {
+"tw": "希嘉娜",
+"cn": "希嘉娜",
+"src": "52poke:希嘉娜"
+},
+"zipp_(pokemon)": {
+"tw": "吉普",
+"cn": "吉普",
+"src": "52poke-search:吉普"
+},
+"zirc_(pokemon)": {
+"tw": "吉爾",
+"cn": "吉尔",
+"src": "52poke-search:吉爾"
+},
+"zisu_(pokemon)": {
+"tw": "貝里菈",
+"cn": "贝里菈",
+"src": "52poke-search:貝里菈"
+},
+"zoey_(pokemon)": {
+"tw": "小望",
+"cn": "小望",
+"src": "52poke:小望"
+},
+"zossie_(pokemon)": {
+"tw": "阿瑪茉",
+"cn": "阿玛茉",
+"src": "52poke-search:阿瑪茉"
+},
+"lovely_labrynth_of_the_silver_castle": {
+"tw": "白銀城的迷宮主・拉比麗斯",
+"cn": "白银城的迷宫主・拉比丽斯",
+"src": "ygocdb:md"
+},
+"evil_twin_ki-sikil": {
+"tw": "邪惡★雙子 姬絲吉爾",
+"cn": "邪恶★双子 姬丝吉尔",
+"src": "ygocdb:md"
+},
+"evil_twin_ki-sikil_(alternate_art)": {
+"tw": "邪惡★雙子 姬絲吉爾",
+"cn": "邪恶★双子 姬丝吉尔",
+"src": "ygocdb:md"
+},
+"ki-sikil_(yu-gi-oh!)": {
+"tw": "姬絲吉爾",
+"cn": "姬丝吉尔",
+"src": "ygocdb:md"
+},
+"lil-la_(yu-gi-oh!)": {
+"tw": "璃拉",
+"cn": "璃拉",
+"src": "ygocdb:md"
+},
+"evil_twin_lil-la": {
+"tw": "邪惡★雙子 璃拉",
+"cn": "邪恶★双子 璃拉",
+"src": "ygocdb:md"
+},
+"evil_twin_lil-la_(alternate_art)": {
+"tw": "邪惡★雙子 璃拉",
+"cn": "邪恶★双子 璃拉",
+"src": "ygocdb:md"
+},
+"live_twin_lil-la": {
+"tw": "直播☆雙子 璃拉",
+"cn": "直播☆双子 璃拉",
+"src": "ygocdb:md"
+},
+"live_twin_ki-sikil": {
+"tw": "直播☆雙子 姬絲吉爾",
+"cn": "直播☆双子 姬丝吉尔",
+"src": "ygocdb:md"
+},
+"laundry_dragonmaid": {
+"tw": "龍女僕・清掃龍女",
+"cn": "龙女仆・清扫龙女",
+"src": "ygocdb:md"
+},
+"goblin_attack_force": {
+"tw": "格布林突擊部隊",
+"cn": "格布林突击部队",
+"src": "ygocdb:md"
+},
+"goblin_of_greed": {
+"tw": "強欲格布林",
+"cn": "强欲格布林",
+"src": "ygocdb:md"
+},
+"ariane_the_labrynth_servant": {
+"tw": "拉比麗斯的僕從 亞莉安努",
+"cn": "拉比丽斯的仆从 亚莉安努",
+"src": "ygocdb:md"
+},
+"arianna_the_labrynth_servant": {
+"tw": "拉比麗斯的僕從 亞莉安娜",
+"cn": "拉比丽斯的仆从 亚莉安娜",
+"src": "ygocdb:md"
+},
+"eradicator_epidemic_virus": {
+"tw": "暗之牌組破壞病毒",
+"cn": "暗之牌组破坏病毒",
+"src": "ygocdb:md"
+},
+"called_by_the_grave": {
+"tw": "墓穴指名者",
+"cn": "墓穴指名者",
+"src": "ygocdb:md"
+},
+"crossout_designator": {
+"tw": "抹殺之指名者",
+"cn": "抹杀之指名者",
+"src": "ygocdb:md"
+},
+"maxx_c": {
+"tw": "增殖的G",
+"cn": "增殖的G",
+"src": "ygocdb:md"
+},
+"dinomorphia_kentregina": {
+"tw": "恐啡肽駭龍・肯特萊釘娜",
+"cn": "恐啡肽骇龙・肯特莱钉娜",
+"src": "ygocdb:md"
+},
+"tearlaments_scheiren": {
+"tw": "淚冠哀歌・賽蓮",
+"cn": "泪冠哀歌・赛莲",
+"src": "ygocdb:md"
+},
+"tearlaments_kitkallos": {
+"tw": "淚冠哀歌・琪多卡洛斯",
+"cn": "泪冠哀歌・琪多卡洛斯",
+"src": "ygocdb:md"
+},
+"kitkallos_(yu-gi-oh!)": {
+"tw": "琪多卡洛斯",
+"cn": "琪多卡洛斯",
+"src": "ygocdb:md"
+},
+"s-force_rappa_chiyomaru": {
+"tw": "超元特防隊 亂破小夜丸",
+"cn": "超元特防队 乱破小夜丸",
+"src": "ygocdb:md"
+},
+"exosister_martha": {
+"tw": "驅魔姐妹・瑪爾法",
+"cn": "驱魔姐妹・玛尔法",
+"src": "ygocdb:md"
+},
+"ecclesia_(yu-gi-oh!)": {
+"tw": "艾克利西亞",
+"cn": "艾克利西亚",
+"src": "ygocdb:md"
+},
+"diabellze_the_original_sinkeeper": {
+"tw": "原罪的迪亞貝爾賽",
+"cn": "原罪的迪亚贝尔赛",
+"src": "ygocdb:md"
+},
+"herald_of_ultimateness": {
+"tw": "崇光之宣告者",
+"cn": "崇光之宣告者",
+"src": "ygocdb:md"
+},
+"gameciel_the_sea_turtle_kaiju": {
+"tw": "海龜壞獸加美希爾",
+"cn": "海龟坏兽加美希尔",
+"src": "ygocdb:md"
+},
+"lava_golem_(yu-gi-oh!)": {
+"tw": "熔岩魔神・岩漿魔像",
+"cn": "熔岩魔神・岩浆魔像",
+"src": "ygocdb:md"
+},
+"mystical_elf": {
+"tw": "聖精靈",
+"cn": "圣精灵",
+"src": "ygocdb:md"
+},
+"apprentice_illusion_magician": {
+"tw": "幻想見習魔導師",
+"cn": "幻想见习魔导师",
+"src": "ygocdb:md"
+},
+"sora_(nikke)": {
+"tw": "索拉",
+"cn": "索拉",
+"src": "nikke:cn"
+},
+"bready_(nikke)": {
+"tw": "布蕾德",
+"cn": "布蕾德",
+"src": "nikke:cn"
+},
+"velvet_(nikke)": {
+"tw": "薇爾維特",
+"cn": "薇尔维特",
+"src": "nikke:cn"
+},
+"mekami_shifty_(nikke)": {
+"tw": "機甲謝芙蒂",
+"cn": "机甲谢芙蒂",
+"src": "nikke:cn"
+},
+"mihara_(nikke)": {
+"tw": "米哈拉",
+"cn": "米哈拉",
+"src": "nikke:cn"
+},
+"noise_(nikke)": {
+"tw": "諾伊斯",
+"cn": "诺伊斯",
+"src": "nikke:cn"
+},
+"sakura_(nikke)": {
+"tw": "櫻花",
+"cn": "樱花",
+"src": "nikke:cn"
+},
+"trina_(nikke)": {
+"tw": "特蕾娜",
+"cn": "特蕾娜",
+"src": "nikke:cn"
+},
+"arcana_(nikke)": {
+"tw": "阿爾卡娜",
+"cn": "阿尔卡娜",
+"src": "nikke:cn"
+},
+"flora_(nikke)": {
+"tw": "芙羅拉",
+"cn": "芙罗拉",
+"src": "nikke:cn"
+},
+"guilty_(nikke)": {
+"tw": "吉爾提",
+"cn": "吉尔提",
+"src": "nikke:cn"
+},
+"liliweiss_(nikke)": {
+"tw": "莉莉維絲",
+"cn": "莉莉维丝",
+"src": "nikke:cn"
+},
+"brid_(nikke)": {
+"tw": "布麗德",
+"cn": "布丽德",
+"src": "nikke:cn"
+},
+"rapture_queen_(nikke)": {
+"tw": "女王",
+"cn": "女王",
+"src": "nikke:cn"
+},
+"briar_(league)": {
+"tw": "布蕾爾",
+"cn": "贝蕾亚",
+"src": "ddragon"
+},
+"gwen_(league_of_legends)": {
+"tw": "關",
+"cn": "格温",
+"src": "ddragon"
+},
+"painleve_(azur_lane)": {
+"tw": "伴爾維",
+"cn": "伴尔维",
+"src": "azurlane:599"
+},
+"mirror_maiden_(genshin_impact)": {
+"tw": "藏鏡仕女",
+"cn": "藏镜仕女",
+"src": "genshin:愚人众·藏镜仕女"
+},
+"rei_(pokemon)": {
+"tw": "明耀",
+"cn": "明耀",
+"src": "52poke:明耀"
+},
+"nurse_(pokemon)": {
+"tw": "護士",
+"cn": "护士",
+"src": "52poke:護士"
+},
+"hattrem": {
+"tw": "提布莉姆",
+"cn": "提布莉姆",
+"src": "52poke:提布莉姆"
+},
+"Hattrem": {
+"tw": "提布莉姆",
+"cn": "提布莉姆",
+"src": "52poke:提布莉姆"
+},
+"domina_(overwatch)": {
+"tw": "多米娜",
+"cn": "金驭",
+"src": "overwatch:zh-tw+ow.blizzard.cn"
+},
+"mizuki_(overwatch)": {
+"tw": "瑞稀",
+"cn": "瑞稀",
+"src": "overwatch:zh-tw+ow.blizzard.cn"
+},
+"shion_(overwatch)": {
+"tw": "死怨",
+"cn": "死怨",
+"src": "overwatch:zh-tw+ow.blizzard.cn"
+},
+"may_(guilty_gear)": {
+"tw": "梅",
+"cn": "梅",
+"src": "ggst"
+},
+"lyn_(fire_emblem)": {
+"tw": "琳",
+"cn": "琳",
+"src": "feh"
+},
+"tiki_(fire_emblem)": {
+"tw": "琪姬",
+"cn": "琪姬",
+"src": "feh"
+},
+"tharja_(fire_emblem)": {
+"tw": "撒拉",
+"cn": "撒拉",
+"src": "feh"
+},
+"eirika_(fire_emblem)": {
+"tw": "艾莉可",
+"cn": "艾莉可",
+"src": "feh"
+},
+"roy_(fire_emblem)": {
+"tw": "羅伊",
+"cn": "罗伊",
+"src": "feh"
+},
+"leo_(fire_emblem_fates)": {
+"tw": "里昂",
+"cn": "里昂",
+"src": "feh"
+},
+"julia_(fire_emblem)": {
+"tw": "尤莉亞",
+"cn": "尤莉亚",
+"src": "feh"
+},
+"type_95_(girls'_frontline)": {
+"tw": "95式",
+"cn": "95式",
+"src": "deepghs:gf"
+},
+"nina_(fire_emblem)": {
+"tw": "艾波寧",
+"cn": "艾波宁",
+"src": "feh"
+},
+"celine_(fire_emblem)": {
+"tw": "錫莉奴",
+"cn": "锡莉奴",
+"src": "feh"
+},
+"ophelia_(fire_emblem)": {
+"tw": "歐菲莉亞",
+"cn": "欧菲莉亚",
+"src": "feh"
+},
+"nowi_(fire_emblem)": {
+"tw": "儂儂",
+"cn": "侬侬",
+"src": "feh"
+},
+"anna_(fire_emblem)": {
+"tw": "安娜",
+"cn": "安娜",
+"src": "feh"
+},
+"grizzly_mkv_(girls'_frontline)": {
+"tw": "灰熊MKV",
+"cn": "灰熊MkⅤ",
+"src": "deepghs:gf"
+},
+"vector_(girls'_frontline)": {
+"tw": "維克托",
+"cn": "维克托",
+"src": "deepghs:gf"
+},
+"ninian_(fire_emblem)": {
+"tw": "尼尼安",
+"cn": "尼尼安",
+"src": "feh"
+},
+"type_97_(girls'_frontline)": {
+"tw": "97式",
+"cn": "97式",
+"src": "deepghs:gf"
+},
+"amagi-chan_(azur_lane)": {
+"tw": "小天城",
+"cn": "小天城",
+"src": "azurlanedata"
+},
+"lilina_(fire_emblem)": {
+"tw": "莉莉娜",
+"cn": "莉莉娜",
+"src": "feh"
+},
+"naga_(nikke)": {
+"tw": "娜嘉",
+"cn": "娜嘉",
+"src": "deepghs:nikke"
+},
+"ishtar_(fire_emblem)": {
+"tw": "伊修達爾",
+"cn": "伊修达尔",
+"src": "feh"
+},
+"modernia_(nikke)": {
+"tw": "神罰",
+"cn": "神罚",
+"src": "deepghs:nikke"
+},
+"cordelia_(fire_emblem)": {
+"tw": "蒂亞莫",
+"cn": "蒂亚莫",
+"src": "feh"
+},
+"olivia_(fire_emblem)": {
+"tw": "奧利薇",
+"cn": "奥利薇",
+"src": "feh"
+},
+"lapis_(fire_emblem)": {
+"tw": "菈琵思",
+"cn": "菈琵思",
+"src": "feh"
+},
+"sophia_(fire_emblem)": {
+"tw": "蘇菲亞",
+"cn": "苏菲亚",
+"src": "feh"
+},
+"ephraim_(fire_emblem)": {
+"tw": "艾夫拉姆",
+"cn": "艾夫拉姆",
+"src": "feh"
+},
+"lethe_(fire_emblem)": {
+"tw": "蕾媞",
+"cn": "蕾媞",
+"src": "feh"
+},
+"chloe_(fire_emblem)": {
+"tw": "克蘿艾",
+"cn": "克萝艾",
+"src": "feh"
+},
+"nino_(fire_emblem)": {
+"tw": "妮諾",
+"cn": "妮诺",
+"src": "feh"
+},
+"tia_(nikke)": {
+"tw": "蒂亞",
+"cn": "蒂亚",
+"src": "deepghs:nikke"
+},
+"myrrh_(fire_emblem)": {
+"tw": "梅爾",
+"cn": "梅尔",
+"src": "feh"
+},
+"feh_(fire_emblem_heroes)": {
+"tw": "法",
+"cn": "法",
+"src": "feh"
+},
+"florina_(fire_emblem)": {
+"tw": "芙羅利娜",
+"cn": "芙罗利娜",
+"src": "feh"
+},
+"alfred_(fire_emblem)": {
+"tw": "阿爾弗雷德",
+"cn": "阿尔弗雷德",
+"src": "feh"
+},
+"fae_(fire_emblem)": {
+"tw": "法",
+"cn": "法",
+"src": "feh"
+},
+"drake_(nikke)": {
+"tw": "德雷克",
+"cn": "德雷克",
+"src": "deepghs:nikke"
+},
+"flora_(fire_emblem)": {
+"tw": "芙洛拉",
+"cn": "芙洛拉",
+"src": "feh"
+},
+"hana_(fire_emblem)": {
+"tw": "風花",
+"cn": "风花",
+"src": "feh"
+},
+"freyja_(fire_emblem)": {
+"tw": "弗雷雅",
+"cn": "弗雷雅",
+"src": "feh"
+},
+"maxwell_(nikke)": {
+"tw": "麥斯威爾",
+"cn": "麦斯威尔",
+"src": "deepghs:nikke"
+},
+"selkie_(fire_emblem)": {
+"tw": "絹",
+"cn": "绢",
+"src": "feh"
+},
+"ranulf_(fire_emblem)": {
+"tw": "萊伊",
+"cn": "莱伊",
+"src": "feh"
+},
+"suomi_(girls'_frontline_2)": {
+"tw": "索米",
+"cn": "索米",
+"src": "deepghs:gf"
+},
+"tana_(fire_emblem)": {
+"tw": "塔娜",
+"cn": "塔娜",
+"src": "feh"
+},
+"fartooth_(arknights)": {
+"tw": "遠牙",
+"cn": "远牙",
+"src": "arknightsgamedata"
+},
+"soleil_(fire_emblem)": {
+"tw": "索雷優",
+"cn": "索雷优",
+"src": "feh"
+},
+"moran_(nikke)": {
+"tw": "牡丹",
+"cn": "牡丹",
+"src": "deepghs:nikke"
+},
+"velouria_(fire_emblem)": {
+"tw": "蓓羅亞",
+"cn": "蓓罗亚",
+"src": "feh"
+},
+"ak-alfa_(girls'_frontline)": {
+"tw": "AK-阿爾法",
+"cn": "AK-阿尔法",
+"src": "deepghs:gf"
+},
+"ayra_(fire_emblem)": {
+"tw": "艾伊拉",
+"cn": "艾伊拉",
+"src": "feh"
+},
+"swire_the_elegant_wit_(arknights)": {
+"tw": "琳琅詩懷雅",
+"cn": "琳琅诗怀雅",
+"src": "arknightsgamedata"
+},
+"thompson_(girls'_frontline)": {
+"tw": "湯姆森",
+"cn": "汤姆森",
+"src": "deepghs:gf"
+},
+"super-shorty_(girls'_frontline)": {
+"tw": "超級肖蒂",
+"cn": "超级肖蒂",
+"src": "deepghs:gf"
+},
+"lyre_(fire_emblem)": {
+"tw": "麗蕾",
+"cn": "丽蕾",
+"src": "feh"
+},
+"laegjarn_(fire_emblem)": {
+"tw": "瑞瓦伽倫",
+"cn": "瑞瓦伽伦",
+"src": "feh"
+},
+"regensburg_(azur_lane)": {
+"tw": "雷根斯堡",
+"cn": "雷根斯堡",
+"src": "azurlanedata"
+},
+"carcano_m1891_(girls'_frontline)": {
+"tw": "卡爾卡諾M1891",
+"cn": "卡尔卡诺M1891",
+"src": "deepghs:gf"
+},
+"female_kana_(fire_emblem)": {
+"tw": "神流",
+"cn": "神流",
+"src": "feh"
+},
+"deirdre_(fire_emblem)": {
+"tw": "迪雅朵拉",
+"cn": "迪雅朵拉",
+"src": "feh"
+},
+"sothe_(fire_emblem)": {
+"tw": "薩札",
+"cn": "萨札",
+"src": "feh"
+},
+"i-19_(azur_lane)": {
+"tw": "伊19",
+"cn": "伊19",
+"src": "azurlanedata"
+},
+"igrene_(fire_emblem)": {
+"tw": "伊葛雷努",
+"cn": "伊葛雷努",
+"src": "feh"
+},
+"lute_(fire_emblem)": {
+"tw": "盧特",
+"cn": "卢特",
+"src": "feh"
+},
+"nah_(fire_emblem)": {
+"tw": "恩恩",
+"cn": "恩恩",
+"src": "feh"
+},
+"loki_(fire_emblem)": {
+"tw": "洛基",
+"cn": "洛基",
+"src": "feh"
+},
+"reinhardt_(fire_emblem)": {
+"tw": "萊茵哈特",
+"cn": "莱茵哈特",
+"src": "feh"
+},
+"sonya_(fire_emblem_gaiden)": {
+"tw": "索尼婭",
+"cn": "索尼娅",
+"src": "feh"
+},
+"nerthuz_(fire_emblem)": {
+"tw": "那瑟斯",
+"cn": "那瑟斯",
+"src": "feh"
+},
+"saiga-12_(girls'_frontline)": {
+"tw": "塞伽12型",
+"cn": "塞伽12型",
+"src": "deepghs:gf"
+},
+"ilyana_(fire_emblem)": {
+"tw": "伊蕾思",
+"cn": "伊蕾思",
+"src": "feh"
+},
+"linde_(fire_emblem)": {
+"tw": "琳達",
+"cn": "琳达",
+"src": "feh"
+},
+"miriel_(fire_emblem)": {
+"tw": "米莉艾爾",
+"cn": "米莉艾尔",
+"src": "feh"
+},
+"tibarn_(fire_emblem)": {
+"tw": "狄邦",
+"cn": "狄邦",
+"src": "feh"
+},
+"yorktown_ii_(azur_lane)": {
+"tw": "約克鎮II",
+"cn": "约克城II",
+"src": "azurlanedata"
+},
+"golden_hind_(azur_lane)": {
+"tw": "金鹿號",
+"cn": "金鹿号",
+"src": "azurlanedata"
+},
+"serra_(fire_emblem)": {
+"tw": "賽拉",
+"cn": "赛拉",
+"src": "feh"
+},
+"cherche_(fire_emblem)": {
+"tw": "塞爾裘",
+"cn": "塞尔裘",
+"src": "feh"
+},
+"fir_(fire_emblem)": {
+"tw": "菲爾",
+"cn": "菲尔",
+"src": "feh"
+},
+"l'arachel_(fire_emblem)": {
+"tw": "拉切爾",
+"cn": "拉切尔",
+"src": "feh"
+},
+"selena_(fire_emblem_fates)": {
+"tw": "露娜",
+"cn": "露娜",
+"src": "feh"
+},
+"noire_(fire_emblem)": {
+"tw": "諾瓦爾",
+"cn": "诺瓦尔",
+"src": "feh"
+},
+"marth_(fire_emblem_awakening)": {
+"tw": "馬爾斯",
+"cn": "马尔斯",
+"src": "feh"
+},
+"gunnthra_(fire_emblem)": {
+"tw": "斯利茲",
+"cn": "斯利兹",
+"src": "feh"
+},
+"gullveig_(fire_emblem)": {
+"tw": "古爾維格",
+"cn": "古尔维格",
+"src": "feh"
+},
+"leif_(fire_emblem)": {
+"tw": "里弗",
+"cn": "里弗",
+"src": "feh"
+},
+"mae_(fire_emblem)": {
+"tw": "梅伊",
+"cn": "梅伊",
+"src": "feh"
+},
+"eir_(fire_emblem)": {
+"tw": "埃爾",
+"cn": "埃尔",
+"src": "feh"
+},
+"sumia_(fire_emblem)": {
+"tw": "絲米亞",
+"cn": "丝米亚",
+"src": "feh"
+},
+"brigid_(fire_emblem)": {
+"tw": "布麗姬德",
+"cn": "布丽姬德",
+"src": "feh"
+},
+"tailtiu_(fire_emblem)": {
+"tw": "提爾透",
+"cn": "提尔透",
+"src": "feh"
+},
+"plumeria_(fire_emblem)": {
+"tw": "普路梅莉亞",
+"cn": "普路梅莉亚",
+"src": "feh"
+},
+"male_kana_(fire_emblem)": {
+"tw": "神流",
+"cn": "神流",
+"src": "feh"
+},
+"cecilia_(fire_emblem)": {
+"tw": "瑟西莉亞",
+"cn": "瑟西莉亚",
+"src": "feh"
+},
+"subaki_(fire_emblem)": {
+"tw": "椿",
+"cn": "椿",
+"src": "feh"
+},
+"patty_(fire_emblem)": {
+"tw": "帕蒂",
+"cn": "帕蒂",
+"src": "feh"
+},
+"laffey_ii_(azur_lane)": {
+"tw": "拉菲II",
+"cn": "拉菲II",
+"src": "azurlanedata"
+},
+"idunn_(fire_emblem)": {
+"tw": "伊敦",
+"cn": "伊敦",
+"src": "feh"
+},
+"lyon_(fire_emblem)": {
+"tw": "利昂",
+"cn": "利昂",
+"src": "feh"
+},
+"ash_(fire_emblem)": {
+"tw": "艾緒",
+"cn": "艾绪",
+"src": "feh"
+},
+"scathach_(fire_emblem)": {
+"tw": "斯卡薩哈",
+"cn": "斯卡萨哈",
+"src": "feh"
+},
+"boyd_(fire_emblem)": {
+"tw": "博雷",
+"cn": "博雷",
+"src": "feh"
+},
+"lachesis_(fire_emblem)": {
+"tw": "拉克西絲",
+"cn": "拉克西丝",
+"src": "feh"
+},
+"kirin_r_yato_(arknights)": {
+"tw": "麒麟R夜刀",
+"cn": "麒麟R夜刀",
+"src": "arknightsgamedata"
+},
+"maria_(fire_emblem:_shadow_dragon)": {
+"tw": "瑪莉亞",
+"cn": "玛莉亚",
+"src": "feh"
+},
+"anna_(fire_emblem_engage)": {
+"tw": "安娜",
+"cn": "安娜",
+"src": "feh"
+},
+"lilith_(fire_emblem)": {
+"tw": "莉莉絲",
+"cn": "莉莉丝",
+"src": "feh"
+},
+"marisa_(fire_emblem)": {
+"tw": "瑪莉卡",
+"cn": "玛莉卡",
+"src": "feh"
+},
+"cynthia_(fire_emblem)": {
+"tw": "欣西亞",
+"cn": "欣西亚",
+"src": "feh"
+},
+"m1_garand_(girls'_frontline)": {
+"tw": "M1加蘭德",
+"cn": "M1加兰德",
+"src": "deepghs:gf"
+},
+"owain_(fire_emblem)": {
+"tw": "伍德",
+"cn": "伍德",
+"src": "feh"
+},
+"midori_(fire_emblem)": {
+"tw": "翠子",
+"cn": "翠子",
+"src": "feh"
+},
+"carcano_m91/38_(girls'_frontline)": {
+"tw": "卡爾卡諾M91/38",
+"cn": "卡尔卡诺M91/38",
+"src": "deepghs:gf"
+},
+"maribelle_(fire_emblem)": {
+"tw": "瑪利亞貝爾",
+"cn": "玛利亚贝尔",
+"src": "feh"
+},
+"tine_(fire_emblem)": {
+"tw": "媞妮",
+"cn": "媞妮",
+"src": "feh"
+},
+"forrest_(fire_emblem)": {
+"tw": "法雷歐",
+"cn": "法雷欧",
+"src": "feh"
+},
+"type_80_(girls'_frontline)": {
+"tw": "80式",
+"cn": "80式",
+"src": "deepghs:gf"
+},
+"rebecca_(fire_emblem)": {
+"tw": "蕾貝卡",
+"cn": "蕾贝卡",
+"src": "feh"
+},
+"hinata_(fire_emblem)": {
+"tw": "日向",
+"cn": "日向",
+"src": "feh"
+},
+"triandra_(fire_emblem)": {
+"tw": "史卡畢歐薩",
+"cn": "史卡毕欧萨",
+"src": "feh"
+},
+"ursula_(fire_emblem:_the_blazing_blade)": {
+"tw": "烏爾斯拉",
+"cn": "乌尔斯拉",
+"src": "feh"
+},
+"pyrois_(zenless_zone_zero)": {
+"tw": "佩洛伊斯",
+"cn": "佩洛伊斯",
+"src": "enka:zzz"
+},
+"shanna_(fire_emblem)": {
+"tw": "夏妮",
+"cn": "夏妮",
+"src": "feh"
+},
+"i-26_(azur_lane)": {
+"tw": "伊26",
+"cn": "伊26",
+"src": "azurlanedata"
+},
+"laevatein_(fire_emblem)": {
+"tw": "瑞瓦提恩",
+"cn": "瑞瓦提恩",
+"src": "feh"
+},
+"seidr_(fire_emblem)": {
+"tw": "塞慈",
+"cn": "塞慈",
+"src": "feh"
+},
+"kiragi_(fire_emblem)": {
+"tw": "如月",
+"cn": "如月",
+"src": "feh"
+},
+"ylgr_(fire_emblem)": {
+"tw": "優爾格",
+"cn": "优尔格",
+"src": "feh"
+},
+"micro_uzi_(girls'_frontline)": {
+"tw": "微型烏茲",
+"cn": "微型乌兹",
+"src": "deepghs:gf"
+},
+"type_79_(girls'_frontline)": {
+"tw": "79式",
+"cn": "79式",
+"src": "deepghs:gf"
+},
+"leanne_(fire_emblem)": {
+"tw": "莉婭妮",
+"cn": "莉娅妮",
+"src": "feh"
+},
+"clarine_(fire_emblem)": {
+"tw": "克拉莉涅",
+"cn": "克拉莉涅",
+"src": "feh"
+},
+"oscar_(fire_emblem)": {
+"tw": "奧斯卡",
+"cn": "奥斯卡",
+"src": "feh"
+},
+"silas_(fire_emblem)": {
+"tw": "賽萊斯",
+"cn": "赛莱斯",
+"src": "feh"
+},
+"lene_(fire_emblem)": {
+"tw": "琳恩",
+"cn": "琳恩",
+"src": "feh"
+},
+"shigure_(fire_emblem)": {
+"tw": "詩格萊",
+"cn": "诗格莱",
+"src": "feh"
+},
+"fritz_rumey_(azur_lane)": {
+"tw": "弗里茨·魯梅",
+"cn": "弗里茨·鲁梅",
+"src": "azurlanedata"
+},
+"anna_(fire_emblem_awakening)": {
+"tw": "安娜",
+"cn": "安娜",
+"src": "feh"
+},
+"de_zeven_provincien_(azur_lane)": {
+"tw": "七省",
+"cn": "七省",
+"src": "azurlanedata"
+},
+"repulse_(azur_lane)": {
+"tw": "反擊",
+"cn": "反击",
+"src": "azurlanedata"
+},
+"shangri-la_(azur_lane)": {
+"tw": "香格里拉",
+"cn": "香格里拉",
+"src": "azurlanedata"
+},
+"friedrich_carl_(azur_lane)": {
+"tw": "腓特烈·卡爾",
+"cn": "腓特烈·卡尔",
+"src": "azurlanedata"
+},
+"mordecai_(fire_emblem)": {
+"tw": "摩迪",
+"cn": "摩迪",
+"src": "feh"
+},
+"black_knight_(fire_emblem)": {
+"tw": "漆黑騎士",
+"cn": "漆黑骑士",
+"src": "feh"
+},
+"jill_(fire_emblem)": {
+"tw": "吉爾",
+"cn": "吉尔",
+"src": "feh"
+},
+"astrid_(fire_emblem)": {
+"tw": "史黛拉",
+"cn": "史黛拉",
+"src": "feh"
+},
+"embla_(fire_emblem)": {
+"tw": "恩布拉",
+"cn": "恩布拉",
+"src": "feh"
+},
+"henry_(fire_emblem)": {
+"tw": "亨利",
+"cn": "亨利",
+"src": "feh"
+},
+"shinon_(fire_emblem)": {
+"tw": "席諾",
+"cn": "席诺",
+"src": "feh"
+},
+"erinys_(fire_emblem)": {
+"tw": "菲莉",
+"cn": "菲莉",
+"src": "feh"
+},
+"shiro_(fire_emblem)": {
+"tw": "東雲",
+"cn": "东云",
+"src": "feh"
+},
+"marcia_(fire_emblem)": {
+"tw": "瑪夏",
+"cn": "玛夏",
+"src": "feh"
+},
+"priscilla_(fire_emblem)": {
+"tw": "普莉西亞",
+"cn": "普莉西亚",
+"src": "feh"
+},
+"ethlyn_(fire_emblem)": {
+"tw": "艾絲琳",
+"cn": "艾丝琳",
+"src": "feh"
+},
+"dwyer_(fire_emblem)": {
+"tw": "迪亞",
+"cn": "迪亚",
+"src": "feh"
+},
+"gaius_(fire_emblem)": {
+"tw": "蓋亞",
+"cn": "盖亚",
+"src": "feh"
+},
+"frederick_(fire_emblem)": {
+"tw": "弗雷德里克",
+"cn": "弗雷德里克",
+"src": "feh"
+},
+"altina_(fire_emblem)": {
+"tw": "歐帝那",
+"cn": "欧帝那",
+"src": "feh"
+},
+"thorr_(fire_emblem)": {
+"tw": "托爾",
+"cn": "托尔",
+"src": "feh"
+},
+"bluecher_(azur_lane)": {
+"tw": "布呂歇爾",
+"cn": "布吕歇尔",
+"src": "azurlanedata"
+},
+"ares_(fire_emblem)": {
+"tw": "阿瑞斯",
+"cn": "阿瑞斯",
+"src": "feh"
+},
+"azama_(fire_emblem)": {
+"tw": "淺間",
+"cn": "浅间",
+"src": "feh"
+},
+"reginn_(fire_emblem)": {
+"tw": "雷金",
+"cn": "雷金",
+"src": "feh"
+},
+"murmansk_(azur_lane)": {
+"tw": "摩爾曼斯克",
+"cn": "摩尔曼斯克",
+"src": "azurlanedata"
+},
+"keaton_(fire_emblem)": {
+"tw": "弗朗諾",
+"cn": "弗朗诺",
+"src": "feh"
+},
+"rhys_(fire_emblem)": {
+"tw": "基爾羅伊",
+"cn": "基尔罗伊",
+"src": "feh"
+},
+"thea_(fire_emblem)": {
+"tw": "蒂特",
+"cn": "蒂特",
+"src": "feh"
+},
+"hrid_(fire_emblem)": {
+"tw": "佛利茲",
+"cn": "佛利兹",
+"src": "feh"
+},
+"type_97_shotgun_(girls'_frontline)": {
+"tw": "97式霰",
+"cn": "97式霰",
+"src": "deepghs:gf"
+},
+"katarina_(fire_emblem)": {
+"tw": "卡達麗娜",
+"cn": "卡达丽娜",
+"src": "feh"
+},
+"shannan_(fire_emblem)": {
+"tw": "夏南",
+"cn": "夏南",
+"src": "feh"
+},
+"aversa_(fire_emblem)": {
+"tw": "茵巴絲",
+"cn": "茵巴丝",
+"src": "feh"
+},
+"nifl_(fire_emblem)": {
+"tw": "尼福爾",
+"cn": "尼福尔",
+"src": "feh"
+},
+"indiana_(azur_lane)": {
+"tw": "印第安納",
+"cn": "印第安纳",
+"src": "azurlanedata"
+},
+"fancy_(azur_lane)": {
+"tw": "幻想號",
+"cn": "幻想号",
+"src": "azurlanedata"
+},
+"kaden_(fire_emblem)": {
+"tw": "錦",
+"cn": "锦",
+"src": "feh"
+},
+"lon'qu_(fire_emblem)": {
+"tw": "隆克",
+"cn": "隆克",
+"src": "feh"
+},
+"thrasir_(fire_emblem)": {
+"tw": "史菈希爾",
+"cn": "史菈希尔",
+"src": "feh"
+},
+"panne_(fire_emblem)": {
+"tw": "貝爾貝特",
+"cn": "贝尔贝特",
+"src": "feh"
+},
+"sten_mkii_(girls'_frontline)": {
+"tw": "司登MkII",
+"cn": "司登MkⅡ",
+"src": "deepghs:gf"
+},
+"fiora_(fire_emblem)": {
+"tw": "菲奧拉",
+"cn": "菲奥拉",
+"src": "feh"
+},
+"sigrun_(fire_emblem)": {
+"tw": "希葛倫",
+"cn": "希葛伦",
+"src": "feh"
+},
+"rolf_(fire_emblem)": {
+"tw": "優法",
+"cn": "优法",
+"src": "feh"
+},
+"sonia_(fire_emblem:_the_blazing_blade)": {
+"tw": "索妮婭",
+"cn": "索妮娅",
+"src": "feh"
+},
+"say'ri_(fire_emblem)": {
+"tw": "彩莉",
+"cn": "彩莉",
+"src": "feh"
+},
+"haar_(fire_emblem)": {
+"tw": "哈魯",
+"cn": "哈鲁",
+"src": "feh"
+},
+"karla_(fire_emblem)": {
+"tw": "卡菈",
+"cn": "卡菈",
+"src": "feh"
+},
+"lucius_(fire_emblem)": {
+"tw": "魯塞亞",
+"cn": "鲁塞亚",
+"src": "feh"
+},
+"seth_(fire_emblem)": {
+"tw": "賽特",
+"cn": "赛特",
+"src": "feh"
+},
+"zelgius_(fire_emblem)": {
+"tw": "塞爾吉烏斯",
+"cn": "塞尔吉乌斯",
+"src": "feh"
+},
+"maggiore_baracca_(azur_lane)": {
+"tw": "巴拉卡少校",
+"cn": "巴拉卡少校",
+"src": "azurlanedata"
+},
+"little_illustrious_(azur_lane)": {
+"tw": "小光輝",
+"cn": "小光辉",
+"src": "azurlanedata"
+},
+"arval_(fire_emblem)": {
+"tw": "拉魯瓦",
+"cn": "拉鲁瓦",
+"src": "feh"
+},
+"admiral_zenker_(azur_lane)": {
+"tw": "曾克爾將軍",
+"cn": "曾克海军上将",
+"src": "azurlanedata"
+},
+"caineghis_(fire_emblem)": {
+"tw": "凱內基斯",
+"cn": "凯内基斯",
+"src": "feh"
+},
+"pearl_(azur_lane)": {
+"tw": "珍珠號",
+"cn": "珍珠号",
+"src": "azurlanedata"
+},
+"boey_(fire_emblem)": {
+"tw": "波伊",
+"cn": "波伊",
+"src": "feh"
+},
+"siegbert_(fire_emblem)": {
+"tw": "齊格貝爾特",
+"cn": "齐格贝尔特",
+"src": "feh"
+},
+"kronya_(fire_emblem)": {
+"tw": "科蘿妮艾",
+"cn": "科萝妮艾",
+"src": "feh"
+},
+"gilliam_(fire_emblem)": {
+"tw": "吉利安姆",
+"cn": "吉利安姆",
+"src": "feh"
+},
+"eitri_(fire_emblem)": {
+"tw": "伊特理",
+"cn": "伊特理",
+"src": "feh"
+},
+"eldigan_(fire_emblem)": {
+"tw": "艾爾多尚",
+"cn": "艾尔多尚",
+"src": "feh"
+},
+"reyson_(fire_emblem)": {
+"tw": "琉希昂",
+"cn": "琉希昂",
+"src": "feh"
+},
+"seydlitz_(azur_lane)": {
+"tw": "塞德利茨",
+"cn": "塞德利茨",
+"src": "azurlanedata"
+},
+"rhajat_(fire_emblem)": {
+"tw": "夏拉",
+"cn": "夏拉",
+"src": "feh"
+},
+"i-13_(azur_lane)": {
+"tw": "伊13",
+"cn": "伊13",
+"src": "azurlanedata"
+},
+"felix_schultz_(azur_lane)": {
+"tw": "菲利克斯·舒爾茨",
+"cn": "菲利克斯·舒尔茨",
+"src": "azurlanedata"
+},
+"bois_belleau_(azur_lane)": {
+"tw": "貝勒森林",
+"cn": "贝劳森林",
+"src": "azurlanedata"
+},
+"sara_(fire_emblem)": {
+"tw": "莎拉",
+"cn": "莎拉",
+"src": "feh"
+},
+"lucia_(fire_emblem)": {
+"tw": "露琪諾",
+"cn": "露琪诺",
+"src": "feh"
+},
+"innes_(fire_emblem)": {
+"tw": "西尼亞斯",
+"cn": "西尼亚斯",
+"src": "feh"
+},
+"caeldori_(fire_emblem)": {
+"tw": "纏",
+"cn": "缠",
+"src": "feh"
+},
+"julius_(fire_emblem)": {
+"tw": "尤利烏斯",
+"cn": "尤利乌斯",
+"src": "feh"
+},
+"gerik_(fire_emblem)": {
+"tw": "吉斯特",
+"cn": "吉斯特",
+"src": "feh"
+},
+"columbia_(azur_lane)": {
+"tw": "哥倫比亞",
+"cn": "哥伦比亚",
+"src": "azurlanedata"
+},
+"bruenhilde_(azur_lane)": {
+"tw": "布倫希爾德",
+"cn": "布伦希尔德",
+"src": "azurlanedata"
+},
+"strasbourg_(azur_lane)": {
+"tw": "史特拉斯堡",
+"cn": "斯特拉斯堡",
+"src": "azurlanedata"
+},
+"ursula_(fire_emblem:_fortune's_weave)": {
+"tw": "烏爾斯拉",
+"cn": "乌尔斯拉",
+"src": "feh"
+},
+"seiros_(fire_emblem)": {
+"tw": "賽羅司",
+"cn": "赛罗司",
+"src": "feh"
+},
+"python_(fire_emblem)": {
+"tw": "帕伊宋",
+"cn": "帕伊宋",
+"src": "feh"
+},
+"muarim_(fire_emblem)": {
+"tw": "穆瓦瑞姆",
+"cn": "穆瓦瑞姆",
+"src": "feh"
+},
+"louise_(fire_emblem)": {
+"tw": "露依絲",
+"cn": "露依丝",
+"src": "feh"
+},
+"type_64_(girls'_frontline)": {
+"tw": "64式",
+"cn": "64式",
+"src": "deepghs:gf"
+},
+"lif_(fire_emblem)": {
+"tw": "利布",
+"cn": "利布",
+"src": "feh"
+},
+"arthur_(fire_emblem_fates)": {
+"tw": "哈洛德",
+"cn": "哈洛德",
+"src": "feh"
+},
+"falcon_(girls'_frontline)": {
+"tw": "隼",
+"cn": "隼",
+"src": "deepghs:gf"
+},
+"lexington_ii_(azur_lane)": {
+"tw": "列星頓II",
+"cn": "列克星敦II",
+"src": "azurlanedata"
+},
+"humus_(arknights)": {
+"tw": "休謨斯",
+"cn": "休谟斯",
+"src": "arknightsgamedata"
+},
+"arthur_(fire_emblem:_genealogy_of_the_holy_war)": {
+"tw": "亞瑟",
+"cn": "亚瑟",
+"src": "feh"
+},
+"amelia_(fire_emblem)": {
+"tw": "亞美利雅",
+"cn": "亚美利雅",
+"src": "feh"
+},
+"px4_storm_(girls'_frontline)": {
+"tw": "Px4 風暴",
+"cn": "Px4 风暴",
+"src": "deepghs:gf"
+},
+"bruno_(fire_emblem)": {
+"tw": "布魯諾",
+"cn": "布鲁诺",
+"src": "feh"
+},
+"gerome_(fire_emblem)": {
+"tw": "傑洛姆",
+"cn": "杰洛姆",
+"src": "feh"
+},
+"naesala_(fire_emblem)": {
+"tw": "涅沙羅",
+"cn": "涅沙罗",
+"src": "feh"
+},
+"larum_(fire_emblem)": {
+"tw": "拉菈姆",
+"cn": "拉菈姆",
+"src": "feh"
+},
+"joshua_(fire_emblem)": {
+"tw": "約書亞",
+"cn": "约书亚",
+"src": "feh"
+},
+"kersaint_(azur_lane)": {
+"tw": "凱爾聖",
+"cn": "凯尔圣",
+"src": "azurlanedata"
+},
+"wolt_(fire_emblem)": {
+"tw": "伍爾特",
+"cn": "伍尔特",
+"src": "feh"
+},
+"agent_416_(girls'_frontline)": {
+"tw": "特工416",
+"cn": "特工416",
+"src": "deepghs:gf"
+},
+"raigh_(fire_emblem)": {
+"tw": "雷伊",
+"cn": "雷伊",
+"src": "feh"
+},
+"dagr_(fire_emblem)": {
+"tw": "達古",
+"cn": "达古",
+"src": "feh"
+},
+"michalis_(fire_emblem)": {
+"tw": "米謝爾",
+"cn": "米谢尔",
+"src": "feh"
+},
+"altena_(fire_emblem)": {
+"tw": "阿爾緹娜",
+"cn": "阿尔缇娜",
+"src": "feh"
+},
+"helbindi_(fire_emblem)": {
+"tw": "赫爾賓迪",
+"cn": "赫尔宾迪",
+"src": "feh"
+},
+"berkut_(fire_emblem)": {
+"tw": "貝爾克特",
+"cn": "贝尔克特",
+"src": "feh"
+},
+"gatrie_(fire_emblem)": {
+"tw": "嘉德列",
+"cn": "嘉德列",
+"src": "feh"
+},
+"vanessa_(fire_emblem)": {
+"tw": "凡妮莎",
+"cn": "凡妮莎",
+"src": "feh"
+},
+"naga_(fire_emblem)": {
+"tw": "那迦",
+"cn": "那迦",
+"src": "feh"
+},
+"olwen_(fire_emblem)": {
+"tw": "歐爾玟",
+"cn": "欧尔玟",
+"src": "feh"
+},
+"anna_(fire_emblem_heroes)": {
+"tw": "安娜",
+"cn": "安娜",
+"src": "feh"
+},
+"selena_(fire_emblem:_the_sacred_stones)": {
+"tw": "瑟萊娜",
+"cn": "瑟莱娜",
+"src": "feh"
+},
+"liverpool_(azur_lane)": {
+"tw": "利物浦",
+"cn": "利物浦",
+"src": "azurlanedata"
+},
+"lugh_(fire_emblem)": {
+"tw": "魯格",
+"cn": "鲁格",
+"src": "feh"
+},
+"miyuki_(azur_lane)": {
+"tw": "深雪",
+"cn": "深雪",
+"src": "azurlanedata"
+},
+"cath_(fire_emblem)": {
+"tw": "凱絲",
+"cn": "凯丝",
+"src": "feh"
+},
+"devonshire_(azur_lane)": {
+"tw": "德文郡",
+"cn": "德文郡",
+"src": "azurlanedata"
+},
+"ced_(fire_emblem)": {
+"tw": "賽提",
+"cn": "赛提",
+"src": "feh"
+},
+"phina_(fire_emblem)": {
+"tw": "菲娜",
+"cn": "菲娜",
+"src": "feh"
+},
+"eitr_(fire_emblem)": {
+"tw": "艾特",
+"cn": "艾特",
+"src": "feh"
+},
+"nailah_(fire_emblem)": {
+"tw": "妮凱",
+"cn": "妮凯",
+"src": "feh"
+},
+"forsyth_(fire_emblem)": {
+"tw": "弗魯斯",
+"cn": "弗鲁斯",
+"src": "feh"
+},
+"sue_(fire_emblem)": {
+"tw": "蘇",
+"cn": "苏",
+"src": "feh"
+},
+"duisburg_(azur_lane)": {
+"tw": "杜伊斯堡",
+"cn": "杜伊斯堡",
+"src": "azurlanedata"
+},
+"attilio_regolo_(azur_lane)": {
+"tw": "阿蒂利奧·雷戈洛",
+"cn": "阿蒂利奥·雷戈洛",
+"src": "azurlanedata"
+},
+"anna_(fire_emblem_fates)": {
+"tw": "安娜",
+"cn": "安娜",
+"src": "feh"
+},
+"askr_(fire_emblem)": {
+"tw": "亞斯克",
+"cn": "亚斯克",
+"src": "feh"
+},
+"lukas_(fire_emblem)": {
+"tw": "盧卡",
+"cn": "卢卡",
+"src": "feh"
+},
+"virion_(fire_emblem)": {
+"tw": "維沃爾",
+"cn": "维沃尔",
+"src": "feh"
+},
+"fee_(fire_emblem)": {
+"tw": "霏",
+"cn": "霏",
+"src": "feh"
+},
+"honey_badger_(girls'_frontline)": {
+"tw": "蜜獾",
+"cn": "蜜獾",
+"src": "deepghs:gf"
+},
+"kansas_(azur_lane)": {
+"tw": "堪薩斯",
+"cn": "堪萨斯",
+"src": "azurlanedata"
+},
+"duma_(fire_emblem)": {
+"tw": "多瑪",
+"cn": "多玛",
+"src": "feh"
+},
+"gray_(fire_emblem)": {
+"tw": "格萊",
+"cn": "格莱",
+"src": "feh"
+},
+"vika_(fire_emblem)": {
+"tw": "碧潔",
+"cn": "碧洁",
+"src": "feh"
+},
+"yarne_(fire_emblem)": {
+"tw": "夏布雷",
+"cn": "夏布雷",
+"src": "feh"
+},
+"mirabilis_(fire_emblem)": {
+"tw": "露琵娜斯",
+"cn": "露琵娜斯",
+"src": "feh"
+},
+"clarisse_(fire_emblem)": {
+"tw": "克萊涅",
+"cn": "克莱涅",
+"src": "feh"
+},
+"silvia_(fire_emblem)": {
+"tw": "希薇雅",
+"cn": "希薇雅",
+"src": "feh"
+},
+"louisville_(azur_lane)": {
+"tw": "路易斯維爾",
+"cn": "路易斯维尔",
+"src": "azurlanedata"
+},
+"kvasir_(fire_emblem)": {
+"tw": "庫瓦希爾",
+"cn": "库瓦希尔",
+"src": "feh"
+},
+"henriette_(fire_emblem)": {
+"tw": "亨莉葉特",
+"cn": "亨莉叶特",
+"src": "feh"
+},
+"gepard_m1_(girls'_frontline)": {
+"tw": "獵豹M1",
+"cn": "猎豹M1",
+"src": "deepghs:gf"
+},
+"emmeryn_(fire_emblem)": {
+"tw": "艾美莉娜",
+"cn": "艾美莉娜",
+"src": "feh"
+},
+"mary_celeste_(azur_lane)": {
+"tw": "瑪麗·賽勒斯特號",
+"cn": "玛丽·西莱斯特号",
+"src": "azurlanedata"
+},
+"nils_(fire_emblem)": {
+"tw": "尼爾斯",
+"cn": "尼尔斯",
+"src": "feh"
+},
+"shinano-chan_(azur_lane)": {
+"tw": "小信濃",
+"cn": "小信浓",
+"src": "azurlanedata"
+},
+"pelleas_(fire_emblem)": {
+"tw": "佩雷亞斯",
+"cn": "佩雷亚斯",
+"src": "feh"
+},
+"raven_(fire_emblem)": {
+"tw": "瑞文",
+"cn": "瑞文",
+"src": "feh"
+},
+"dorcas_(fire_emblem)": {
+"tw": "多爾卡斯",
+"cn": "多尔卡斯",
+"src": "feh"
+},
+"massena_(azur_lane)": {
+"tw": "馬塞納",
+"cn": "马塞纳",
+"src": "azurlanedata"
+},
+"little_prinz_eugen_(azur_lane)": {
+"tw": "小歐根",
+"cn": "小欧根",
+"src": "azurlanedata"
+},
+"howa_type_64_(girls'_frontline)": {
+"tw": "64式自",
+"cn": "64式自",
+"src": "deepghs:gf"
+},
+"little_enterprise_(azur_lane)": {
+"tw": "小企業",
+"cn": "小企业",
+"src": "azurlanedata"
+},
+"hornet_ii_(azur_lane)": {
+"tw": "大黃蜂II",
+"cn": "大黄蜂II",
+"src": "azurlanedata"
+},
+"xane_(fire_emblem)": {
+"tw": "切尼",
+"cn": "切尼",
+"src": "feh"
+},
+"tanith_(fire_emblem)": {
+"tw": "塔妮絲",
+"cn": "塔妮丝",
+"src": "feh"
+},
+"dieck_(fire_emblem)": {
+"tw": "迪克",
+"cn": "迪克",
+"src": "feh"
+},
+"howa_type_89_(girls'_frontline)": {
+"tw": "89式自",
+"cn": "89式自",
+"src": "deepghs:gf"
+},
+"surtr_(fire_emblem)": {
+"tw": "斯爾特",
+"cn": "斯尔特",
+"src": "feh"
+},
+"type_56-1_(girls'_frontline)": {
+"tw": "56-1式",
+"cn": "56-1式",
+"src": "deepghs:gf"
+},
+"volke_(fire_emblem)": {
+"tw": "弗爾加",
+"cn": "弗尔加",
+"src": "feh"
+},
+"echidna_(fire_emblem)": {
+"tw": "艾基德娜",
+"cn": "艾基德娜",
+"src": "feh"
+},
+"matthew_(fire_emblem)": {
+"tw": "馬修",
+"cn": "马修",
+"src": "feh"
+},
+"oklahoma_(azur_lane)": {
+"tw": "奧克拉荷馬",
+"cn": "俄克拉荷马",
+"src": "azurlanedata"
+},
+"ameli_(girls'_frontline)": {
+"tw": "阿梅利",
+"cn": "阿梅利",
+"src": "deepghs:gf"
+},
+"i-168_(azur_lane)": {
+"tw": "伊168",
+"cn": "伊168",
+"src": "azurlanedata"
+},
+"mila_(fire_emblem)": {
+"tw": "美拉",
+"cn": "美拉",
+"src": "feh"
+},
+"rutger_(fire_emblem)": {
+"tw": "路特加",
+"cn": "路特加",
+"src": "feh"
+},
+"fomortiis_(fire_emblem)": {
+"tw": "弗德斯",
+"cn": "弗德斯",
+"src": "feh"
+},
+"marseillaise_(azur_lane)": {
+"tw": "馬賽曲",
+"cn": "马赛曲",
+"src": "azurlanedata"
+},
+"suffren_(azur_lane)": {
+"tw": "蘇弗朗",
+"cn": "絮弗伦",
+"src": "azurlanedata"
+},
+"francesco_caracciolo_(azur_lane)": {
+"tw": "弗朗切斯科·卡拉喬洛",
+"cn": "弗朗西斯科·卡拉乔洛",
+"src": "azurlanedata"
+},
+"sain_(fire_emblem)": {
+"tw": "塞因",
+"cn": "塞因",
+"src": "feh"
+},
+"kursk_(azur_lane)": {
+"tw": "庫斯克",
+"cn": "库尔斯克",
+"src": "azurlanedata"
+},
+"spitfire_(girls'_frontline)": {
+"tw": "噴火",
+"cn": "喷火",
+"src": "deepghs:gf"
+},
+"penelope_(azur_lane)": {
+"tw": "佩內洛珀",
+"cn": "佩内洛珀",
+"src": "azurlanedata"
+},
+"erk_(fire_emblem)": {
+"tw": "艾爾克",
+"cn": "艾尔克",
+"src": "feh"
+},
+"sully_(fire_emblem)": {
+"tw": "索瓦蕾",
+"cn": "索瓦蕾",
+"src": "feh"
+},
+"tsukinogi_(arknights)": {
+"tw": "月禾",
+"cn": "月禾",
+"src": "arknightsgamedata"
+},
+"nagi_(fire_emblem)": {
+"tw": "娜琪",
+"cn": "娜琪",
+"src": "feh"
+},
+"tethys_(fire_emblem)": {
+"tw": "特媞絲",
+"cn": "特媞丝",
+"src": "feh"
+},
+"yuubari_(azur_lane)": {
+"tw": "夕張",
+"cn": "夕张",
+"src": "azurlanedata"
+},
+"kent_(fire_emblem)": {
+"tw": "肯特",
+"cn": "肯特",
+"src": "feh"
+},
+"i-25_(azur_lane)": {
+"tw": "伊25",
+"cn": "伊25",
+"src": "azurlanedata"
+},
+"prototype_bulin_mkii_(azur_lane)": {
+"tw": "試作型布里MKII",
+"cn": "试作型布里MKII",
+"src": "azurlanedata"
+},
+"kjelle_(fire_emblem)": {
+"tw": "丹裘爾",
+"cn": "丹裘尔",
+"src": "feh"
+},
+"moskva_(azur_lane)": {
+"tw": "莫斯科",
+"cn": "莫斯科",
+"src": "azurlanedata"
+},
+"syrene_(fire_emblem)": {
+"tw": "席琳妮",
+"cn": "席琳妮",
+"src": "feh"
+},
+"fargo_(azur_lane)": {
+"tw": "法戈",
+"cn": "法戈",
+"src": "azurlanedata"
+},
+"exeter_(azur_lane)": {
+"tw": "埃克塞特",
+"cn": "埃克塞特",
+"src": "azurlanedata"
+},
+"foote_(azur_lane)": {
+"tw": "富特",
+"cn": "富特",
+"src": "azurlanedata"
+},
+"neimi_(fire_emblem)": {
+"tw": "奈彌",
+"cn": "奈弥",
+"src": "feh"
+},
+"natasha_(fire_emblem)": {
+"tw": "娜塔夏",
+"cn": "娜塔夏",
+"src": "feh"
+},
+"kitakaze_(azur_lane)": {
+"tw": "北風",
+"cn": "北风",
+"src": "azurlanedata"
+},
+"bartre_(fire_emblem)": {
+"tw": "巴多爾",
+"cn": "巴多尔",
+"src": "feh"
+},
+"halford_(azur_lane)": {
+"tw": "哈爾福德",
+"cn": "哈尔福德",
+"src": "azurlanedata"
+},
+"simonov_(girls'_frontline)": {
+"tw": "西蒙諾夫",
+"cn": "西蒙诺夫",
+"src": "deepghs:gf"
+},
+"artur_(fire_emblem)": {
+"tw": "阿斯雷",
+"cn": "阿斯雷",
+"src": "feh"
+},
+"dmitri_donskoi_(azur_lane)": {
+"tw": "德米特里·頓斯科伊",
+"cn": "迪米特里·顿斯科伊",
+"src": "azurlanedata"
+},
+"donnel_(fire_emblem)": {
+"tw": "多尼",
+"cn": "多尼",
+"src": "feh"
+},
+"portsmouth_adventure_(azur_lane)": {
+"tw": "樸茨茅斯冒險號",
+"cn": "朴茨茅斯冒险号",
+"src": "azurlanedata"
+},
+"kazan_(azur_lane)": {
+"tw": "喀山",
+"cn": "喀山",
+"src": "azurlanedata"
+},
+"bogatyr_(azur_lane)": {
+"tw": "博加特里",
+"cn": "博加特里",
+"src": "azurlanedata"
+},
+"new_orleans_(azur_lane)": {
+"tw": "紐奧良",
+"cn": "新奥尔良",
+"src": "azurlanedata"
+},
+"stahl_(fire_emblem)": {
+"tw": "索爾",
+"cn": "索尔",
+"src": "feh"
+},
+"hanyang_type_88_(girls'_frontline)": {
+"tw": "漢陽造88式",
+"cn": "汉阳造88式",
+"src": "deepghs:gf"
+},
+"evertsen_(azur_lane)": {
+"tw": "埃佛森",
+"cn": "埃佛森",
+"src": "azurlanedata"
+},
+"l'audacieux_(azur_lane)": {
+"tw": "大膽",
+"cn": "果敢",
+"src": "azurlanedata"
+},
+"norne_(fire_emblem)": {
+"tw": "諾倫",
+"cn": "诺伦",
+"src": "feh"
+},
+"juno_(fire_emblem)": {
+"tw": "優諾",
+"cn": "优诺",
+"src": "feh"
+},
+"guinevere_(fire_emblem)": {
+"tw": "姬妮薇雅",
+"cn": "姬妮薇雅",
+"src": "feh"
+},
+"hawkeye_(fire_emblem)": {
+"tw": "霍克艾",
+"cn": "霍克艾",
+"src": "feh"
+},
+"brunnya_(fire_emblem)": {
+"tw": "碧爾妮婭",
+"cn": "碧尔妮娅",
+"src": "feh"
+},
+"ognevoy_(azur_lane)": {
+"tw": "火力",
+"cn": "火力",
+"src": "azurlanedata"
+},
+"duguay-trouin_(azur_lane)": {
+"tw": "迪蓋·特魯安",
+"cn": "迪盖·特鲁因",
+"src": "azurlanedata"
+},
+"santa_fe_(azur_lane)": {
+"tw": "聖塔菲",
+"cn": "圣塔菲",
+"src": "azurlanedata"
+},
+"dorothy_(fire_emblem)": {
+"tw": "桃樂絲",
+"cn": "桃乐丝",
+"src": "feh"
+},
+"klein_(fire_emblem)": {
+"tw": "克萊因",
+"cn": "克莱因",
+"src": "feh"
+},
+"heidr_(fire_emblem)": {
+"tw": "海慈",
+"cn": "海慈",
+"src": "feh"
+},
+"farina_(fire_emblem)": {
+"tw": "法麗娜",
+"cn": "法丽娜",
+"src": "feh"
+},
+"william_d._porter_(azur_lane)": {
+"tw": "威廉·D·波特",
+"cn": "威廉·D·波特",
+"src": "azurlanedata"
+},
+"ross_(fire_emblem)": {
+"tw": "羅斯",
+"cn": "罗斯",
+"src": "feh"
+},
+"lex_(fire_emblem)": {
+"tw": "雷克斯",
+"cn": "雷克斯",
+"src": "feh"
+},
+"dupleix_(azur_lane)": {
+"tw": "杜布雷",
+"cn": "迪普莱克斯",
+"src": "azurlanedata"
+},
+"chkalov_(azur_lane)": {
+"tw": "契卡洛夫",
+"cn": "契卡洛夫",
+"src": "azurlanedata"
+},
+"melady_(fire_emblem)": {
+"tw": "密蕾蒂",
+"cn": "密蕾蒂",
+"src": "feh"
+},
+"ymir_(fire_emblem_heroes)": {
+"tw": "優彌爾",
+"cn": "优弥尔",
+"src": "feh"
+},
+"san_jacinto_(azur_lane)": {
+"tw": "聖哈辛托",
+"cn": "圣哈辛托",
+"src": "azurlanedata"
+},
+"geoffrey_(fire_emblem)": {
+"tw": "喬弗雷",
+"cn": "乔弗雷",
+"src": "feh"
+},
+"linus_(fire_emblem)": {
+"tw": "萊納斯",
+"cn": "莱纳斯",
+"src": "feh"
+},
+"whydah_(azur_lane)": {
+"tw": "維達號",
+"cn": "维达号",
+"src": "azurlanedata"
+},
+"herring_(azur_lane)": {
+"tw": "鯡魚",
+"cn": "鲱鱼",
+"src": "azurlanedata"
+},
+"theseus_(azur_lane)": {
+"tw": "忒修斯",
+"cn": "忒修斯",
+"src": "azurlanedata"
+},
+"draug_(fire_emblem)": {
+"tw": "多加",
+"cn": "多加",
+"src": "feh"
+},
+"death_knight_(fire_emblem)": {
+"tw": "死神騎士",
+"cn": "死神骑士",
+"src": "feh"
+},
+"ricken_(fire_emblem)": {
+"tw": "里希特",
+"cn": "里希特",
+"src": "feh"
+},
+"arkhangelsk_(azur_lane)": {
+"tw": "阿爾漢格爾斯克",
+"cn": "阿尔汉格尔斯克",
+"src": "azurlanedata"
+},
+"cormag_(fire_emblem)": {
+"tw": "庫格",
+"cn": "库格",
+"src": "feh"
+},
+"narcian_(fire_emblem)": {
+"tw": "拿榭恩",
+"cn": "拿榭恩",
+"src": "feh"
+},
+"nott_(fire_emblem)": {
+"tw": "諾特",
+"cn": "诺特",
+"src": "feh"
+},
+"brady_(fire_emblem)": {
+"tw": "布萊迪",
+"cn": "布莱迪",
+"src": "feh"
+},
+"asama_(azur_lane)": {
+"tw": "淺間",
+"cn": "浅间",
+"src": "azurlanedata"
+},
+"lloyd_(fire_emblem)": {
+"tw": "洛伊德",
+"cn": "洛伊德",
+"src": "feh"
+},
+"gatekeeper_(fire_emblem)": {
+"tw": "門衛",
+"cn": "门卫",
+"src": "feh"
+},
+"zihark_(fire_emblem)": {
+"tw": "吉哈克",
+"cn": "吉哈克",
+"src": "feh"
+},
+"ena_(fire_emblem)": {
+"tw": "伊娜",
+"cn": "伊娜",
+"src": "feh"
+},
+"anna_(fire_emblem:_three_houses)": {
+"tw": "安娜",
+"cn": "安娜",
+"src": "feh"
+},
+"leila_(fire_emblem)": {
+"tw": "蕾拉",
+"cn": "蕾拉",
+"src": "feh"
+},
+"libra_(fire_emblem)": {
+"tw": "利貝拉",
+"cn": "利贝拉",
+"src": "feh"
+},
+"gwendolyn_(fire_emblem)": {
+"tw": "溫蒂",
+"cn": "温蒂",
+"src": "feh"
+},
+"zephiel_(fire_emblem)": {
+"tw": "賽菲爾",
+"cn": "赛菲尔",
+"src": "feh"
+},
+"pasadena_(azur_lane)": {
+"tw": "帕沙第納",
+"cn": "帕萨迪纳",
+"src": "azurlanedata"
+},
+"flasher_(azur_lane)": {
+"tw": "松鯛",
+"cn": "松鲷",
+"src": "azurlanedata"
+},
+"rathalos_s_noir_corne_(arknights)": {
+"tw": "火龍S黑角",
+"cn": "火龙S黑角",
+"src": "arknightsgamedata"
+},
+"athena_(fire_emblem)": {
+"tw": "雅典娜",
+"cn": "雅典娜",
+"src": "feh"
+},
+"cain_(fire_emblem:_shadow_dragon)": {
+"tw": "凱因",
+"cn": "凯因",
+"src": "feh"
+},
+"le_hardi_(azur_lane)": {
+"tw": "大膽",
+"cn": "大胆",
+"src": "azurlanedata"
+},
+"taihou-chan_(azur_lane)": {
+"tw": "小大鳳",
+"cn": "小大凤",
+"src": "azurlanedata"
+},
+"flavia_(fire_emblem)": {
+"tw": "芙拉維亞",
+"cn": "芙拉维亚",
+"src": "feh"
+},
+"jeorge_(fire_emblem)": {
+"tw": "喬爾裘",
+"cn": "乔尔裘",
+"src": "feh"
+},
+"nubian_(azur_lane)": {
+"tw": "努比亞",
+"cn": "努比亚人",
+"src": "azurlanedata"
+},
+"kurthnaga_(fire_emblem)": {
+"tw": "克魯托納嘉",
+"cn": "克鲁托纳嘉",
+"src": "feh"
+},
+"valbar_(fire_emblem)": {
+"tw": "巴爾博",
+"cn": "巴尔博",
+"src": "feh"
+},
+"arashio_(azur_lane)": {
+"tw": "荒潮",
+"cn": "荒潮",
+"src": "azurlanedata"
+},
+"oleg_(azur_lane)": {
+"tw": "奧列格",
+"cn": "奥列格",
+"src": "azurlanedata"
+},
+"amity_(azur_lane)": {
+"tw": "和睦號",
+"cn": "和睦号",
+"src": "azurlanedata"
+},
+"fortune_(azur_lane)": {
+"tw": "命運女神",
+"cn": "命运女神",
+"src": "azurlanedata"
+},
+"defender_(girls'_frontline)": {
+"tw": "防衛者",
+"cn": "防卫者",
+"src": "deepghs:gf"
+},
+"emanuele_pessagno_(azur_lane)": {
+"tw": "埃曼努埃爾·佩薩格諾",
+"cn": "埃曼努埃尔·佩萨格诺",
+"src": "azurlanedata"
+},
+"gustav_(fire_emblem)": {
+"tw": "古斯塔夫",
+"cn": "古斯塔夫",
+"src": "feh"
+},
+"sephiran_(fire_emblem)": {
+"tw": "瑟菲蘭",
+"cn": "瑟菲兰",
+"src": "feh"
+},
+"little_renown_(azur_lane)": {
+"tw": "小聲望",
+"cn": "小声望",
+"src": "azurlanedata"
+},
+"specialized_bulin_mkiii_(azur_lane)": {
+"tw": "特裝型布里MKIII",
+"cn": "特装型布里MKIII",
+"src": "azurlanedata"
+},
+"houston_(azur_lane)": {
+"tw": "休士頓",
+"cn": "休斯敦",
+"src": "azurlanedata"
+},
+"magdeburg_(azur_lane)": {
+"tw": "馬德堡",
+"cn": "马格德堡",
+"src": "azurlanedata"
+},
+"atlanta_(azur_lane)": {
+"tw": "亞特蘭大",
+"cn": "亚特兰大",
+"src": "azurlanedata"
+},
+"bailey_(azur_lane)": {
+"tw": "貝利",
+"cn": "贝利",
+"src": "azurlanedata"
+},
+"aoba_(azur_lane)": {
+"tw": "青葉",
+"cn": "青叶",
+"src": "azurlanedata"
+},
+"anankos_(fire_emblem)": {
+"tw": "海卓拉",
+"cn": "海卓拉",
+"src": "feh"
+},
+"hammann_ii_(azur_lane)": {
+"tw": "哈曼II",
+"cn": "哈曼II",
+"src": "azurlanedata"
+},
+"abel_(fire_emblem)": {
+"tw": "阿貝爾",
+"cn": "阿贝尔",
+"src": "feh"
+},
+"clive_(fire_emblem)": {
+"tw": "克雷貝",
+"cn": "克雷贝",
+"src": "feh"
+},
+"heath_(fire_emblem)": {
+"tw": "希斯",
+"cn": "希斯",
+"src": "feh"
+},
+"northampton_ii_(azur_lane)": {
+"tw": "北安普敦II",
+"cn": "北安普敦II",
+"src": "azurlanedata"
+},
+"sheena_(fire_emblem)": {
+"tw": "希瑪",
+"cn": "希玛",
+"src": "feh"
+},
+"wrys_(fire_emblem)": {
+"tw": "利夫",
+"cn": "利夫",
+"src": "feh"
+},
+"duessel_(fire_emblem)": {
+"tw": "迪賽爾",
+"cn": "迪赛尔",
+"src": "feh"
+},
+"svirepy_(azur_lane)": {
+"tw": "兇猛",
+"cn": "凶猛",
+"src": "azurlanedata"
+},
+"nyna_(fire_emblem)": {
+"tw": "妮娜",
+"cn": "妮娜",
+"src": "feh"
+},
+"malice_(fire_emblem)": {
+"tw": "瑪麗絲",
+"cn": "玛丽丝",
+"src": "feh"
+},
+"colt_m1851n_(girls'_frontline)": {
+"tw": "柯爾特M1851N",
+"cn": "柯尔特M1851N",
+"src": "deepghs:gf"
+},
+"bayard_(azur_lane)": {
+"tw": "貝亞德",
+"cn": "贝亚德",
+"src": "azurlanedata"
+},
+"legault_(fire_emblem)": {
+"tw": "拉加爾托",
+"cn": "拉加尔托",
+"src": "feh"
+},
+"ashnard_(fire_emblem)": {
+"tw": "亞修納德",
+"cn": "亚修纳德",
+"src": "feh"
+},
+"kyza_(fire_emblem)": {
+"tw": "奇薩",
+"cn": "奇萨",
+"src": "feh"
+},
+"royal_james_(azur_lane)": {
+"tw": "皇家詹姆斯號",
+"cn": "皇家詹姆斯号",
+"src": "azurlanedata"
+},
+"fang_the_fire-sharpened_(arknights)": {
+"tw": "歷陣銳槍芬",
+"cn": "历阵锐枪芬",
+"src": "arknightsgamedata"
+},
+"cx4_storm_(girls'_frontline)": {
+"tw": "Cx4 風暴",
+"cn": "Cx4 风暴",
+"src": "deepghs:gf"
+},
+"fleuret_(azur_lane)": {
+"tw": "鈍劍",
+"cn": "花剑",
+"src": "azurlanedata"
+},
+"bren_(girls'_frontline)": {
+"tw": "布倫",
+"cn": "布伦",
+"src": "deepghs:gf"
+},
+"fafnir_(fire_emblem)": {
+"tw": "法夫納",
+"cn": "法夫纳",
+"src": "feh"
+},
+"canas_(fire_emblem)": {
+"tw": "卡納斯",
+"cn": "卡纳斯",
+"src": "feh"
+},
+"ugolino_vivaldi_(azur_lane)": {
+"tw": "烏戈里諾·維瓦爾迪",
+"cn": "乌戈里诺·维瓦尔迪",
+"src": "azurlanedata"
+},
+"pent_(fire_emblem)": {
+"tw": "龐托",
+"cn": "庞托",
+"src": "feh"
+},
+"rafiel_(fire_emblem)": {
+"tw": "拉菲魯",
+"cn": "拉菲鲁",
+"src": "feh"
+},
+"petrine_(fire_emblem)": {
+"tw": "普拉哈",
+"cn": "普拉哈",
+"src": "feh"
+},
+"chad_(fire_emblem)": {
+"tw": "查德",
+"cn": "查德",
+"src": "feh"
+},
+"arete_(fire_emblem)": {
+"tw": "萱玫",
+"cn": "萱玫",
+"src": "feh"
+},
+"de_lisle_(girls'_frontline)": {
+"tw": "德利爾",
+"cn": "德利尔",
+"src": "deepghs:gf"
+},
+"pennsylvania_(azur_lane)": {
+"tw": "賓夕法尼亞",
+"cn": "宾夕法尼亚",
+"src": "azurlanedata"
+},
+"type_88_(girls'_frontline)": {
+"tw": "88式",
+"cn": "88式",
+"src": "deepghs:gf"
+},
+"dolphin_(azur_lane)": {
+"tw": "海豚號",
+"cn": "海豚号",
+"src": "azurlanedata"
+},
+"eremiya_(fire_emblem)": {
+"tw": "艾蕾米雅",
+"cn": "艾蕾米雅",
+"src": "feh"
+},
+"minerva_(fire_emblem_awakening)": {
+"tw": "米奈娃",
+"cn": "米奈娃",
+"src": "feh"
+},
+"elm_(fire_emblem)": {
+"tw": "埃爾姆",
+"cn": "埃尔姆",
+"src": "feh"
+},
+"spectre_m4_(girls'_frontline)": {
+"tw": "幽靈M4",
+"cn": "幽灵M4",
+"src": "deepghs:gf"
+},
+"guy_(fire_emblem)": {
+"tw": "基",
+"cn": "基",
+"src": "feh"
+},
+"royal_oak_(azur_lane)": {
+"tw": "皇家橡樹",
+"cn": "皇家橡树",
+"src": "azurlanedata"
+},
+"little_formidable_(azur_lane)": {
+"tw": "小可畏",
+"cn": "小可畏",
+"src": "azurlanedata"
+},
+"basilio_(fire_emblem)": {
+"tw": "巴基里奧",
+"cn": "巴基里奥",
+"src": "feh"
+},
+"valter_(fire_emblem)": {
+"tw": "瓦爾達",
+"cn": "瓦尔达",
+"src": "feh"
+},
+"type_63_(girls'_frontline)": {
+"tw": "63式",
+"cn": "63式",
+"src": "deepghs:gf"
+},
+"sao_martinho_(azur_lane)": {
+"tw": "聖馬丁號",
+"cn": "圣马丁号",
+"src": "azurlanedata"
+},
+"oliver_(fire_emblem)": {
+"tw": "奧利瓦",
+"cn": "奥利瓦",
+"src": "feh"
+},
+"reserve_operator_medic_(arknights)": {
+"tw": "預備幹員-醫療",
+"cn": "预备干员-医疗",
+"src": "arknightsgamedata"
+},
+"ewan_(fire_emblem)": {
+"tw": "尤安",
+"cn": "尤安",
+"src": "feh"
+},
+"febail_(fire_emblem)": {
+"tw": "法巴魯",
+"cn": "法巴鲁",
+"src": "feh"
+},
+"nautilus_(azur_lane)": {
+"tw": "鸚鵡螺",
+"cn": "鹦鹉螺",
+"src": "azurlanedata"
+},
+"giosue_carducci_(azur_lane)": {
+"tw": "焦蘇埃·卡爾杜奇",
+"cn": "焦苏埃·卡尔杜齐",
+"src": "azurlanedata"
+},
+"saul_(fire_emblem)": {
+"tw": "薩沃爾",
+"cn": "萨沃尔",
+"src": "feh"
+},
+"gregor_(fire_emblem)": {
+"tw": "固雷格",
+"cn": "固雷格",
+"src": "feh"
+},
+"urakaze_(azur_lane)": {
+"tw": "浦風",
+"cn": "浦风",
+"src": "azurlanedata"
+},
+"myoukou_(azur_lane)": {
+"tw": "妙高",
+"cn": "妙高",
+"src": "azurlanedata"
+},
+"philae_(arknights)": {
+"tw": "菲萊",
+"cn": "菲莱",
+"src": "arknightsgamedata"
+},
+"lusa_(girls'_frontline)": {
+"tw": "盧薩",
+"cn": "卢萨",
+"src": "deepghs:gf"
+},
+"hel_(fire_emblem)": {
+"tw": "赫爾",
+"cn": "赫尔",
+"src": "feh"
+},
+"ozornoy_(azur_lane)": {
+"tw": "頑皮",
+"cn": "顽皮",
+"src": "azurlanedata"
+},
+"walhart_(fire_emblem)": {
+"tw": "瓦爾哈爾特",
+"cn": "瓦尔哈尔特",
+"src": "feh"
+},
+"ashera_(fire_emblem)": {
+"tw": "亞絲塔爾蒂",
+"cn": "亚丝塔尔蒂",
+"src": "feh"
+},
+"andrea_doria_(azur_lane)": {
+"tw": "安德烈亞·多里亞",
+"cn": "安德烈亚·多利亚",
+"src": "azurlanedata"
+},
+"muspell_(fire_emblem)": {
+"tw": "穆斯貝爾",
+"cn": "穆斯贝尔",
+"src": "feh"
+},
+"elice_(fire_emblem)": {
+"tw": "艾莉絲",
+"cn": "艾莉丝",
+"src": "feh"
+},
+"alberto_di_giussano_(azur_lane)": {
+"tw": "阿爾貝托·迪·朱薩諾",
+"cn": "阿尔贝托·迪·朱塞诺",
+"src": "azurlanedata"
+},
+"jamke_(fire_emblem)": {
+"tw": "嘉姆卡",
+"cn": "嘉姆卡",
+"src": "feh"
+},
+"karel_(fire_emblem)": {
+"tw": "卡列爾",
+"cn": "卡列尔",
+"src": "feh"
+},
+"karin_(fire_emblem)": {
+"tw": "花凜",
+"cn": "花凛",
+"src": "feh"
+},
+"barst_(fire_emblem)": {
+"tw": "巴茲",
+"cn": "巴兹",
+"src": "feh"
+},
+"type_92_(girls'_frontline)": {
+"tw": "92式",
+"cn": "92式",
+"src": "deepghs:gf"
+},
+"aulick_(azur_lane)": {
+"tw": "奧利克",
+"cn": "奥利克",
+"src": "azurlanedata"
+},
+"lyme_(azur_lane)": {
+"tw": "萊姆號",
+"cn": "莱姆号",
+"src": "azurlanedata"
+},
+"legion_(fire_emblem)": {
+"tw": "羅羅",
+"cn": "罗罗",
+"src": "feh"
+},
+"julian_(fire_emblem)": {
+"tw": "朱利安",
+"cn": "朱利安",
+"src": "feh"
+},
+"hugh_(fire_emblem)": {
+"tw": "脩",
+"cn": "修",
+"src": "feh"
+},
+"annand_(fire_emblem)": {
+"tw": "瑪妮婭",
+"cn": "玛妮娅",
+"src": "feh"
+},
+"anna_(fire_emblem_warriors)": {
+"tw": "安娜",
+"cn": "安娜",
+"src": "feh"
+},
+"noah_(fire_emblem)": {
+"tw": "諾亞",
+"cn": "诺亚",
+"src": "feh"
+},
+"justice_knight_(arknights)": {
+"tw": "正義騎士號",
+"cn": "正义骑士号",
+"src": "arknightsgamedata"
+},
+"figurino_(arknights)": {
+"tw": "裁度",
+"cn": "裁度",
+"src": "arknightsgamedata"
+},
+"epee_(azur_lane)": {
+"tw": "銳劍",
+"cn": "重剑",
+"src": "azurlanedata"
+},
+"tabuk_(girls'_frontline)": {
+"tw": "塔布克",
+"cn": "塔布克",
+"src": "deepghs:gf"
+},
+"scout_(girls'_frontline)": {
+"tw": "偵察者",
+"cn": "侦察者",
+"src": "deepghs:gf"
+},
+"anna_(fire_emblem:_fortune's_weave)": {
+"tw": "安娜",
+"cn": "安娜",
+"src": "feh"
+},
+"bartolomeo_colleoni_(azur_lane)": {
+"tw": "巴托洛梅奧·科萊奧尼",
+"cn": "巴托洛梅奥·科莱奥尼",
+"src": "azurlanedata"
+},
+"saleh_(fire_emblem)": {
+"tw": "塞勒夫",
+"cn": "塞勒夫",
+"src": "feh"
+},
+"deen_(fire_emblem_gaiden)": {
+"tw": "迪恩",
+"cn": "迪恩",
+"src": "feh"
+},
+"colm_(fire_emblem)": {
+"tw": "寇馬",
+"cn": "寇马",
+"src": "feh"
+},
+"oite_(azur_lane)": {
+"tw": "追風",
+"cn": "追风",
+"src": "azurlanedata"
+},
+"little_aegir_(azur_lane)": {
+"tw": "小埃吉爾",
+"cn": "小埃吉尔",
+"src": "azurlanedata"
+},
+"ullr_(fire_emblem)": {
+"tw": "烏勒爾",
+"cn": "乌勒尔",
+"src": "feh"
+},
+"ballista_(girls'_frontline)": {
+"tw": "芭莉斯塔",
+"cn": "芭莉斯塔",
+"src": "deepghs:gf"
+},
+"shipka_(girls'_frontline)": {
+"tw": "希普卡",
+"cn": "希普卡",
+"src": "deepghs:gf"
+},
+"dozla_(fire_emblem)": {
+"tw": "多茲拉",
+"cn": "多兹拉",
+"src": "feh"
+},
+"fletcher_(azur_lane)": {
+"tw": "佛萊契爾",
+"cn": "弗莱彻",
+"src": "azurlanedata"
+},
+"miller_(azur_lane)": {
+"tw": "米勒",
+"cn": "米勒",
+"src": "azurlanedata"
+},
+"bell_(azur_lane)": {
+"tw": "貝爾",
+"cn": "贝尔",
+"src": "azurlanedata"
+},
+"hadiya_(arknights)": {
+"tw": "哈蒂婭",
+"cn": "哈蒂娅",
+"src": "arknightsgamedata"
+},
+"beowulf_(girls'_frontline)": {
+"tw": "貝奧武夫",
+"cn": "贝奥武夫",
+"src": "deepghs:gf"
+},
+"iago_(fire_emblem)": {
+"tw": "馬克白",
+"cn": "马克白",
+"src": "feh"
+},
+"ganglot_(fire_emblem)": {
+"tw": "甘葛蕾特",
+"cn": "甘葛蕾特",
+"src": "feh"
+},
+"jagen_(fire_emblem)": {
+"tw": "傑剛",
+"cn": "杰刚",
+"src": "feh"
+},
+"type_56_carbine_(girls'_frontline)": {
+"tw": "56式半",
+"cn": "56式半",
+"src": "deepghs:gf"
+},
+"magal_(girls'_frontline)": {
+"tw": "馬蓋爾",
+"cn": "马盖尔",
+"src": "deepghs:gf"
+},
+"bastian_(fire_emblem)": {
+"tw": "尤里西斯",
+"cn": "尤里西斯",
+"src": "feh"
+},
+"eskimo_(azur_lane)": {
+"tw": "愛斯基摩",
+"cn": "爱斯基摩人",
+"src": "azurlanedata"
+},
+"letizia_(fire_emblem)": {
+"tw": "萊蒂西亞",
+"cn": "莱蒂西亚",
+"src": "feh"
+},
+"ingraham_(azur_lane)": {
+"tw": "英格拉罕",
+"cn": "英格拉罕",
+"src": "azurlanedata"
+},
+"poltava_(azur_lane)": {
+"tw": "波爾塔瓦",
+"cn": "波尔塔瓦",
+"src": "azurlanedata"
+},
+"rennac_(fire_emblem)": {
+"tw": "雷納克",
+"cn": "雷纳克",
+"src": "feh"
+},
+"little_anchorage_(azur_lane)": {
+"tw": "小安克拉治",
+"cn": "小安克雷奇",
+"src": "azurlanedata"
+},
+"gangrel_(fire_emblem)": {
+"tw": "岡雷爾",
+"cn": "冈雷尔",
+"src": "feh"
+},
+"adventure_galley_(azur_lane)": {
+"tw": "冒險加利號",
+"cn": "加里冒险号",
+"src": "azurlanedata"
+},
+"chauchat_(girls'_frontline)": {
+"tw": "紹沙",
+"cn": "绍沙",
+"src": "deepghs:gf"
+},
+"miranda_(fire_emblem)": {
+"tw": "米蘭達",
+"cn": "米兰达",
+"src": "feh"
+},
+"terra_research_commission_(arknights)": {
+"tw": "泰拉大陸調查團",
+"cn": "泰拉大陆调查团",
+"src": "arknightsgamedata"
+},
+"fernand_(fire_emblem)": {
+"tw": "費爾南",
+"cn": "费尔南",
+"src": "feh"
+},
+"trinidad_(azur_lane)": {
+"tw": "千里達",
+"cn": "特立尼达",
+"src": "azurlanedata"
+},
+"lyon_(azur_lane)": {
+"tw": "里昂",
+"cn": "里昂",
+"src": "azurlanedata"
+},
+"cairn_(arknights)": {
+"tw": "響石",
+"cn": "响石",
+"src": "arknightsgamedata"
+},
+"asbel_(fire_emblem)": {
+"tw": "亞斯貝爾",
+"cn": "亚斯贝尔",
+"src": "feh"
+},
+"bolzano_(azur_lane)": {
+"tw": "博爾扎諾",
+"cn": "博尔扎诺",
+"src": "azurlanedata"
+},
+"natori_(azur_lane)": {
+"tw": "名取",
+"cn": "名取",
+"src": "azurlanedata"
+},
+"sevastopol_(azur_lane)": {
+"tw": "塞瓦斯托波爾",
+"cn": "塞瓦斯托波尔",
+"src": "azurlanedata"
+},
+"otr_(fire_emblem)": {
+"tw": "歐特爾",
+"cn": "欧特尔",
+"src": "feh"
+},
+"akkord_(arknights)": {
+"tw": "協律",
+"cn": "协律",
+"src": "arknightsgamedata"
+},
+"knoll_(fire_emblem)": {
+"tw": "諾爾",
+"cn": "诺尔",
+"src": "feh"
+},
+"little_friedrich_(azur_lane)": {
+"tw": "小腓特烈",
+"cn": "小腓特烈",
+"src": "azurlanedata"
+},
+"hans_(fire_emblem)": {
+"tw": "甘茲",
+"cn": "甘兹",
+"src": "feh"
+},
+"adventure_(azur_lane)": {
+"tw": "冒險號",
+"cn": "冒险号",
+"src": "azurlanedata"
+},
+"perceval_(fire_emblem)": {
+"tw": "帕西巴爾",
+"cn": "帕西巴尔",
+"src": "feh"
+},
+"liberator_(girls'_frontline)": {
+"tw": "解放者",
+"cn": "解放者",
+"src": "deepghs:gf"
+},
+"houston_ii_(azur_lane)": {
+"tw": "休士頓II",
+"cn": "休斯敦II",
+"src": "azurlanedata"
+},
+"roderick_(fire_emblem)": {
+"tw": "羅迪",
+"cn": "罗迪",
+"src": "feh"
+},
+"shirayuki_(azur_lane)": {
+"tw": "白雪",
+"cn": "白雪",
+"src": "azurlanedata"
+},
+"i-58_(azur_lane)": {
+"tw": "伊58",
+"cn": "伊58",
+"src": "azurlanedata"
+},
+"type_59_(girls'_frontline)": {
+"tw": "59式",
+"cn": "59式",
+"src": "deepghs:gf"
+},
+"galle_(fire_emblem)": {
+"tw": "蓋爾",
+"cn": "盖尔",
+"src": "feh"
+},
+"bantu_(fire_emblem)": {
+"tw": "巴努托",
+"cn": "巴努托",
+"src": "feh"
+},
+"sedgar_(fire_emblem)": {
+"tw": "札卡羅",
+"cn": "札卡罗",
+"src": "feh"
+},
+"merlinus_(fire_emblem)": {
+"tw": "馬利納斯",
+"cn": "马利纳斯",
+"src": "feh"
+},
+"limstella_(fire_emblem)": {
+"tw": "莉姆思黛拉",
+"cn": "莉姆思黛拉",
+"src": "feh"
+},
+"travant_(fire_emblem)": {
+"tw": "托拉邦特",
+"cn": "托拉邦特",
+"src": "feh"
+},
+"gonzalez_(fire_emblem)": {
+"tw": "岡薩雷斯",
+"cn": "冈萨雷斯",
+"src": "feh"
+},
+"kiyonami_(azur_lane)": {
+"tw": "清波",
+"cn": "清波",
+"src": "azurlanedata"
+},
+"i-56_(azur_lane)": {
+"tw": "伊56",
+"cn": "伊56",
+"src": "azurlanedata"
+},
+"m2_(girls'_frontline)": {
+"tw": "維涅龍M2",
+"cn": "维涅龙M2",
+"src": "deepghs:gf"
+},
+"clarence_k._bronson_(azur_lane)": {
+"tw": "克拉倫斯·K·布朗森",
+"cn": "克拉伦斯·K·布朗森",
+"src": "azurlanedata"
+},
+"fedorov_(girls'_frontline)": {
+"tw": "菲德洛夫",
+"cn": "菲德洛夫",
+"src": "deepghs:gf"
+},
+"chicago_(azur_lane)": {
+"tw": "芝加哥",
+"cn": "芝加哥",
+"src": "azurlanedata"
+},
+"osian_(fire_emblem)": {
+"tw": "奧辛",
+"cn": "奥辛",
+"src": "feh"
+},
+"observer_zero_(azur_lane)": {
+"tw": "觀察者-零",
+"cn": "观察者-零",
+"src": "azurlanedata"
+},
+"luke_(fire_emblem)": {
+"tw": "路克",
+"cn": "路克",
+"src": "feh"
+},
+"tanya_(fire_emblem)": {
+"tw": "塔妮婭",
+"cn": "塔妮娅",
+"src": "feh"
+},
+"freyr_(fire_emblem)": {
+"tw": "佛羅金",
+"cn": "佛罗金",
+"src": "feh"
+},
+"vyland_(fire_emblem)": {
+"tw": "比拉克",
+"cn": "比拉克",
+"src": "feh"
+},
+"dithorba_(fire_emblem)": {
+"tw": "蒂托芭",
+"cn": "蒂托芭",
+"src": "feh"
+},
+"nemesis_(fire_emblem)": {
+"tw": "涅梅希斯",
+"cn": "涅梅希斯",
+"src": "feh"
+},
+"rudolf_(fire_emblem)": {
+"tw": "魯道夫",
+"cn": "鲁道夫",
+"src": "feh"
+},
+"melanite_(arknights)": {
+"tw": "玫拉",
+"cn": "玫拉",
+"src": "arknightsgamedata"
+},
+"saias_(fire_emblem)": {
+"tw": "賽亞斯",
+"cn": "赛亚斯",
+"src": "feh"
+},
+"wasp_(azur_lane)": {
+"tw": "胡蜂",
+"cn": "胡蜂",
+"src": "azurlanedata"
+},
+"roshea_(fire_emblem)": {
+"tw": "羅榭",
+"cn": "罗榭",
+"src": "feh"
+},
+"bobbing_(arknights)": {
+"tw": "波卜",
+"cn": "波卜",
+"src": "arknightsgamedata"
+},
+"yen'fay_(fire_emblem)": {
+"tw": "濂葉",
+"cn": "濂叶",
+"src": "feh"
+},
+"priam_(fire_emblem)": {
+"tw": "巴利斯",
+"cn": "巴利斯",
+"src": "feh"
+},
+"geese_(fire_emblem)": {
+"tw": "奇斯",
+"cn": "奇斯",
+"src": "feh"
+},
+"robin_(fire_emblem)": {
+"tw": "魯弗萊",
+"cn": "鲁弗莱",
+"src": "feh"
+},
+"salem_(fire_emblem)": {
+"tw": "塞拉姆",
+"cn": "塞拉姆",
+"src": "feh"
+},
+"murdock_(fire_emblem)": {
+"tw": "墨德克",
+"cn": "墨德克",
+"src": "feh"
+},
+"duquesne_(azur_lane)": {
+"tw": "杜肯",
+"cn": "迪凯纳",
+"src": "azurlanedata"
+},
+"lifis_(fire_emblem)": {
+"tw": "利菲斯",
+"cn": "利菲斯",
+"src": "feh"
+},
+"linda_(fire_emblem:_genealogy_of_the_holy_war)": {
+"tw": "琳達",
+"cn": "琳达",
+"src": "feh"
+},
+"arion_(fire_emblem)": {
+"tw": "阿利翁",
+"cn": "阿利翁",
+"src": "feh"
+},
+"fuga_(fire_emblem)": {
+"tw": "楓賀",
+"cn": "枫贺",
+"src": "feh"
+},
+"gotoh_(fire_emblem)": {
+"tw": "迦圖",
+"cn": "迦图",
+"src": "feh"
+},
+"darros_(fire_emblem)": {
+"tw": "達羅斯",
+"cn": "达罗斯",
+"src": "feh"
+},
+"frost_(arknights)": {
+"tw": "霜華",
+"cn": "霜华",
+"src": "arknightsgamedata"
+},
+"deen_(fire_emblem:_thracia_776)": {
+"tw": "迪恩",
+"cn": "迪恩",
+"src": "feh"
+},
+"wolf_(fire_emblem)": {
+"tw": "烏爾夫",
+"cn": "乌尔夫",
+"src": "feh"
+},
+"compiler_(azur_lane)": {
+"tw": "構建者",
+"cn": "构建者",
+"src": "azurlanedata"
+},
+"astram_(fire_emblem)": {
+"tw": "阿斯托利亞",
+"cn": "阿斯托利亚",
+"src": "feh"
+},
+"maria_(fire_emblem:_fortune's_weave)": {
+"tw": "瑪莉亞",
+"cn": "玛莉亚",
+"src": "feh"
+},
+"hilda_(fire_emblem:_genealogy_of_the_holy_war)": {
+"tw": "希爾妲",
+"cn": "希尔妲",
+"src": "feh"
+},
+"vigarde_(fire_emblem)": {
+"tw": "維加爾多",
+"cn": "维加尔多",
+"src": "feh"
+},
+"raleigh_(azur_lane)": {
+"tw": "羅利",
+"cn": "罗利",
+"src": "azurlanedata"
+},
+"type_03_(girls'_frontline)": {
+"tw": "03式",
+"cn": "03式",
+"src": "deepghs:gf"
+},
+"diamante_(arknights)": {
+"tw": "折光",
+"cn": "折光",
+"src": "arknightsgamedata"
+},
+"hero_(azur_lane)": {
+"tw": "英雄",
+"cn": "英雄",
+"src": "azurlanedata"
+},
+"rickard_(fire_emblem)": {
+"tw": "理卡德",
+"cn": "理卡德",
+"src": "feh"
+},
+"niime_(fire_emblem)": {
+"tw": "尼伊玫",
+"cn": "尼伊玫",
+"src": "feh"
+},
+"echo_(azur_lane)": {
+"tw": "回聲",
+"cn": "回声",
+"src": "azurlanedata"
+},
+"galzus_(fire_emblem)": {
+"tw": "嘉爾札斯",
+"cn": "嘉尔札斯",
+"src": "feh"
+},
+"phila_(fire_emblem)": {
+"tw": "菲蓮",
+"cn": "菲莲",
+"src": "feh"
+},
+"little_spee_(azur_lane)": {
+"tw": "小施佩",
+"cn": "小斯佩",
+"src": "azurlanedata"
+},
+"zinogre_s_catapult_(arknights)": {
+"tw": "雷狼龍S空爆",
+"cn": "雷狼龙S空爆",
+"src": "arknightsgamedata"
+},
+"hsm10_(girls'_frontline)": {
+"tw": "高標10型",
+"cn": "高标10型",
+"src": "deepghs:gf"
+},
+"bertram_(fire_emblem)": {
+"tw": "貝佛雷斯",
+"cn": "贝佛雷斯",
+"src": "feh"
+},
+"ronan_(fire_emblem)": {
+"tw": "羅南",
+"cn": "罗南",
+"src": "feh"
+},
+"solon_(fire_emblem)": {
+"tw": "索龍",
+"cn": "索龙",
+"src": "feh"
+},
+"konoka_(blue_archive)": {
+"tw": "志真木乃香",
+"cn": "志真木乃香",
+"src": "schaledb"
+},
+"shimiko_(blue_archive)": {
+"tw": "圓堂志美子",
+"cn": "圆堂志美子",
+"src": "schaledb"
+},
+"niya_(blue_archive)": {
+"tw": "天地仁耶",
+"cn": "天地尼娅",
+"src": "schaledb"
+},
+"male_byleth_(fire_emblem)": {
+"tw": "貝雷特",
+"cn": "贝雷特",
+"src": "feh"
+},
+"reijo_(blue_archive)": {
+"tw": "鹿山令女",
+"cn": "鹿山丽情",
+"src": "schaledb"
+},
+"reisa_(blue_archive)": {
+"tw": "宇澤澪紗",
+"cn": "宇泽玲纱",
+"src": "schaledb"
+},
+"camilla_(fire_emblem)": {
+"tw": "卡美拉",
+"cn": "卡美拉",
+"src": "feh"
+},
+"fuuka_(blue_archive)": {
+"tw": "愛清風華",
+"cn": "爱清枫香",
+"src": "schaledb"
+},
+"rosaria_(genshin_impact)": {
+"tw": "蘿莎莉亞",
+"cn": "罗莎莉亚",
+"src": "enka:gi"
+},
+"seliph_(fire_emblem)": {
+"tw": "賽列斯",
+"cn": "赛列斯",
+"src": "feh"
+},
+"larcei_(fire_emblem)": {
+"tw": "拉克榭",
+"cn": "拉克榭",
+"src": "feh"
+},
+"rumi_(blue_archive)": {
+"tw": "朱城瑠美",
+"cn": "朱城瑠美",
+"src": "schaledb"
+},
+"soren_(fire_emblem)": {
+"tw": "塞涅里歐",
+"cn": "塞涅里欧",
+"src": "feh"
+},
+"junko_(blue_archive)": {
+"tw": "赤司淳子",
+"cn": "赤司纯子",
+"src": "schaledb"
+},
+"yukari_(blue_archive)": {
+"tw": "勘解由小路紫",
+"cn": "勘解由小路紫草",
+"src": "schaledb"
+},
+"hanae_(blue_archive)": {
+"tw": "朝顏花繪",
+"cn": "朝颜花江",
+"src": "schaledb"
+},
+"utaha_(blue_archive)": {
+"tw": "白石詠葉",
+"cn": "白石歌原",
+"src": "schaledb"
+},
+"negev_(girls'_frontline)": {
+"tw": "內蓋夫",
+"cn": "内格夫",
+"src": "deepghs:gf"
+},
+"rena_(blue_archive)": {
+"tw": "衣斐玲奈",
+"cn": "衣斐丽奈",
+"src": "schaledb"
+},
+"hinoka_(fire_emblem)": {
+"tw": "火乃香",
+"cn": "火乃香",
+"src": "feh"
+},
+"sena_(blue_archive)": {
+"tw": "氷室瀨奈",
+"cn": "冰室濑名",
+"src": "schaledb"
+},
+"z46_(azur_lane)": {
+"tw": "Z46",
+"cn": "Z46",
+"src": "azurlanedata"
+},
+"felicia_(fire_emblem)": {
+"tw": "菲利西亞",
+"cn": "菲利西亚",
+"src": "feh"
+},
+"palla_(fire_emblem)": {
+"tw": "帕奧拉",
+"cn": "帕奥拉",
+"src": "feh"
+},
+"mina_(blue_archive)": {
+"tw": "近衛美奈",
+"cn": "近卫弥奈",
+"src": "schaledb"
+},
+"catria_(fire_emblem)": {
+"tw": "卡秋雅",
+"cn": "卡秋雅",
+"src": "feh"
+},
+"umika_(blue_archive)": {
+"tw": "里濱海花",
+"cn": "里浜海香",
+"src": "schaledb"
+},
+"juri_(blue_archive)": {
+"tw": "牛牧茱莉",
+"cn": "牛牧茱莉",
+"src": "schaledb"
+},
+"niles_(fire_emblem)": {
+"tw": "零",
+"cn": "零",
+"src": "feh"
+},
+"jakob_(fire_emblem)": {
+"tw": "喬克",
+"cn": "乔克",
+"src": "feh"
+},
+"rabu_(blue_archive)": {
+"tw": "河駒風良舞",
+"cn": "河驹风兰舞",
+"src": "schaledb"
+},
+"alm_(fire_emblem)": {
+"tw": "阿雷武",
+"cn": "阿雷武",
+"src": "feh"
+},
+"sigurd_(fire_emblem)": {
+"tw": "西格爾特",
+"cn": "西格尔特",
+"src": "feh"
+},
+"charlotte_(fire_emblem)": {
+"tw": "夏洛特",
+"cn": "夏洛特",
+"src": "feh"
+},
+"minerva_(fire_emblem)": {
+"tw": "米奈娃",
+"cn": "米奈娃",
+"src": "feh"
+},
+"minori_(blue_archive)": {
+"tw": "安守實里",
+"cn": "安守实里",
+"src": "schaledb"
+},
+"meru_(blue_archive)": {
+"tw": "姬木愛瑠",
+"cn": "姬木芽瑠",
+"src": "schaledb"
+},
+"seteth_(fire_emblem)": {
+"tw": "西提司",
+"cn": "西提司",
+"src": "feh"
+},
+"est_(fire_emblem)": {
+"tw": "愛絲特",
+"cn": "爱丝特",
+"src": "feh"
+},
+"rei_(blue_archive)": {
+"tw": "野正莉",
+"cn": "野正丽",
+"src": "schaledb"
+},
+"yakumo_(blue_archive)": {
+"tw": "荒槇八雲",
+"cn": "荒槙八云",
+"src": "schaledb"
+},
+"beruka_(fire_emblem)": {
+"tw": "貝爾卡",
+"cn": "贝尔卡",
+"src": "feh"
+},
+"lumera_(fire_emblem)": {
+"tw": "琉彌艾爾",
+"cn": "琉弥艾尔",
+"src": "feh"
+},
+"saizo_(fire_emblem)": {
+"tw": "彩造",
+"cn": "彩造",
+"src": "feh"
+},
+"orochi_(fire_emblem)": {
+"tw": "遠呂智",
+"cn": "远吕智",
+"src": "feh"
+},
+"rinkah_(fire_emblem)": {
+"tw": "凜火",
+"cn": "凛火",
+"src": "feh"
+},
+"jaffar_(fire_emblem)": {
+"tw": "賈法爾",
+"cn": "贾法尔",
+"src": "feh"
+},
+"odin_(fire_emblem)": {
+"tw": "奧丁",
+"cn": "奥丁",
+"src": "feh"
+},
+"laslow_(fire_emblem)": {
+"tw": "拉茲沃德",
+"cn": "拉兹沃德",
+"src": "feh"
+},
+"finn_(fire_emblem)": {
+"tw": "芬恩",
+"cn": "芬恩",
+"src": "feh"
+},
+"u-110_(azur_lane)": {
+"tw": "U-110",
+"cn": "U-110",
+"src": "azurlanedata"
+},
+"sakawa_(azur_lane)": {
+"tw": "酒匂",
+"cn": "酒匂",
+"src": "azurlanedata"
+},
+"z52_(azur_lane)": {
+"tw": "Z52",
+"cn": "Z52",
+"src": "azurlanedata"
+},
+"mikoto_(fire_emblem)": {
+"tw": "水琴",
+"cn": "水琴",
+"src": "feh"
+},
+"ogma_(fire_emblem)": {
+"tw": "奧古馬",
+"cn": "奥古马",
+"src": "feh"
+},
+"tatiana_(fire_emblem)": {
+"tw": "蒂塔",
+"cn": "蒂塔",
+"src": "feh"
+},
+"gunter_(fire_emblem)": {
+"tw": "君特",
+"cn": "君特",
+"src": "feh"
+},
+"navarre_(fire_emblem)": {
+"tw": "拿巴爾",
+"cn": "拿巴尔",
+"src": "feh"
+},
+"azelle_(fire_emblem)": {
+"tw": "艾澤爾",
+"cn": "艾泽尔",
+"src": "feh"
+},
+"hardin_(fire_emblem)": {
+"tw": "哈汀",
+"cn": "哈汀",
+"src": "feh"
+},
+"arden_(fire_emblem)": {
+"tw": "亞丹",
+"cn": "亚丹",
+"src": "feh"
+},
+"rath_(fire_emblem)": {
+"tw": "勒斯",
+"cn": "勒斯",
+"src": "feh"
+},
+"u-410_(azur_lane)": {
+"tw": "U-410",
+"cn": "U-410",
+"src": "azurlanedata"
+},
+"z16_(azur_lane)": {
+"tw": "Z16",
+"cn": "Z16",
+"src": "azurlanedata"
+},
+"manhattan_cafe_(umamusume)": {
+"tw": "曼哈頓咖啡",
+"cn": "曼城茶座",
+"src": "gametora:zh_tw+bwiki"
+},
+"silence_suzuka_(umamusume)": {
+"tw": "無聲鈴鹿",
+"cn": "无声铃鹿",
+"src": "gametora:zh_tw+bwiki"
+},
+"nice_nature_(umamusume)": {
+"tw": "優秀素質",
+"cn": "优秀素质",
+"src": "gametora:zh_tw+bwiki"
+},
+"curren_chan_(umamusume)": {
+"tw": "真機伶",
+"cn": "真机伶",
+"src": "gametora:zh_tw+bwiki"
+},
+"cheval_grand_(umamusume)": {
+"tw": "高尚駿逸",
+"cn": "高尚骏逸",
+"src": "gametora:zh_tw+bwiki"
+},
+"tamamo_cross_(umamusume)": {
+"tw": "玉藻十字",
+"cn": "玉藻十字",
+"src": "gametora:zh_tw+bwiki"
+},
+"admire_vega_(umamusume)": {
+"tw": "愛慕織姬",
+"cn": "爱慕织姬",
+"src": "gametora:zh_tw+bwiki"
+},
+"mihono_bourbon_(umamusume)": {
+"tw": "美浦波旁",
+"cn": "美浦波旁",
+"src": "gametora:zh_tw+bwiki"
+},
+"t.m._opera_o_(umamusume)": {
+"tw": "好歌劇",
+"cn": "好歌剧",
+"src": "gametora:zh_tw+bwiki"
+},
+"mayano_top_gun_(umamusume)": {
+"tw": "重砲",
+"cn": "摩耶重炮",
+"src": "gametora:zh_tw+bwiki"
+},
+"seiun_sky_(umamusume)": {
+"tw": "青雲天空",
+"cn": "青云天空",
+"src": "gametora:zh_tw+bwiki"
+},
+"vodka_(umamusume)": {
+"tw": "伏特加",
+"cn": "伏特加",
+"src": "gametora:zh_tw+bwiki"
+},
+"eishin_flash_(umamusume)": {
+"tw": "榮進閃耀",
+"cn": "荣进闪耀",
+"src": "gametora:zh_tw+bwiki"
+},
+"agnes_digital_(umamusume)": {
+"tw": "愛麗數碼",
+"cn": "爱丽数码",
+"src": "gametora:zh_tw+bwiki"
+},
+"twin_turbo_(umamusume)": {
+"tw": "雙渦輪",
+"cn": "双涡轮",
+"src": "gametora:zh_tw+bwiki"
+},
+"jungle_pocket_(umamusume)": {
+"tw": "叢林口袋",
+"cn": "森林宝穴",
+"src": "gametora:zh_tw+bwiki"
+},
+"sirius_symboli_(umamusume)": {
+"tw": "天狼星象徵",
+"cn": "天狼星象征",
+"src": "gametora:zh_tw+bwiki"
+},
+"air_groove_(umamusume)": {
+"tw": "氣槽",
+"cn": "气槽",
+"src": "gametora:zh_tw+bwiki"
+},
+"dantsu_flame_(umamusume)": {
+"tw": "緞通烈焰",
+"cn": "烈焰快驹",
+"src": "gametora:zh_tw+bwiki"
+},
+"matikanetannhauser_(umamusume)": {
+"tw": "待兼唐懷瑟",
+"cn": "待兼诗歌剧",
+"src": "gametora:zh_tw+bwiki"
+},
+"grass_wonder_(umamusume)": {
+"tw": "草上飛",
+"cn": "草上飞",
+"src": "gametora:zh_tw+bwiki"
+},
+"orfevre_(umamusume)": {
+"tw": "黃金巨匠",
+"cn": "黄金巨匠",
+"src": "gametora:zh_tw+bwiki"
+},
+"mr._c.b._(umamusume)": {
+"tw": "千明代表",
+"cn": "千明代表",
+"src": "gametora:zh_tw+bwiki"
+},
+"nakayama_festa_(umamusume)": {
+"tw": "中山慶典",
+"cn": "中山庆典",
+"src": "gametora:zh_tw+bwiki"
+},
+"narita_brian_(umamusume)": {
+"tw": "成田白仁",
+"cn": "成田白仁",
+"src": "gametora:zh_tw+bwiki"
+},
+"daitaku_helios_(umamusume)": {
+"tw": "大德太陽",
+"cn": "大拓太阳神",
+"src": "gametora:zh_tw+bwiki"
+},
+"mejiro_ardan_(umamusume)": {
+"tw": "目白阿爾丹",
+"cn": "目白阿尔丹",
+"src": "gametora:zh_tw+bwiki"
+},
+"narita_taishin_(umamusume)": {
+"tw": "成田大進",
+"cn": "成田大进",
+"src": "gametora:zh_tw+bwiki"
+},
+"vivlos_(umamusume)": {
+"tw": "比布魯斯",
+"cn": "强击",
+"src": "gametora:zh_tw+bwiki"
+},
+"verxina_(umamusume)": {
+"tw": "極峰",
+"cn": "极峰",
+"src": "gametora:zh_tw+bwiki"
+},
+"dream_journey_(umamusume)": {
+"tw": "夢之旅",
+"cn": "梦之旅",
+"src": "gametora:zh_tw+bwiki"
+},
+"air_shakur_(umamusume)": {
+"tw": "空中神宮",
+"cn": "空中神宫",
+"src": "gametora:zh_tw+bwiki"
+},
+"matikanefukukitaru_(umamusume)": {
+"tw": "待兼福來",
+"cn": "待兼福来",
+"src": "gametora:zh_tw+bwiki"
+},
+"narita_top_road_(umamusume)": {
+"tw": "成田路",
+"cn": "成田路",
+"src": "gametora:zh_tw+bwiki"
+},
+"katsuragi_ace_(umamusume)": {
+"tw": "葛城榮主",
+"cn": "葛城王牌",
+"src": "gametora:zh_tw+bwiki"
+},
+"smart_falcon_(umamusume)": {
+"tw": "醒目飛鷹",
+"cn": "醒目飞鹰",
+"src": "gametora:zh_tw+bwiki"
+},
+"fine_motion_(umamusume)": {
+"tw": "美妙姿勢",
+"cn": "美妙姿势",
+"src": "gametora:zh_tw+bwiki"
+},
+"mejiro_dober_(umamusume)": {
+"tw": "目白多伯",
+"cn": "目白多伯",
+"src": "gametora:zh_tw+bwiki"
+},
+"biwa_hayahide_(umamusume)": {
+"tw": "琵琶晨光",
+"cn": "琵琶晨光",
+"src": "gametora:zh_tw+bwiki"
+},
+"hishi_miracle_(umamusume)": {
+"tw": "菱奇蹟",
+"cn": "菱钻奇宝",
+"src": "gametora:zh_tw+bwiki"
+},
+"maruzensky_(umamusume)": {
+"tw": "丸善斯基",
+"cn": "丸善斯基",
+"src": "gametora:zh_tw+bwiki"
+},
+"stay_gold_(umamusume)": {
+"tw": "黃金旅程",
+"cn": "黄金旅程",
+"src": "gametora:zh_tw+bwiki"
+},
+"aston_machan_(umamusume)": {
+"tw": "奧斯頓真弓",
+"cn": "真弓快车",
+"src": "gametora:zh_tw+bwiki"
+},
+"hokko_tarumae_(umamusume)": {
+"tw": "北幸樽前",
+"cn": "北港火山",
+"src": "gametora:zh_tw+bwiki"
+},
+"mejiro_palmer_(umamusume)": {
+"tw": "目白善信",
+"cn": "目白善信",
+"src": "gametora:zh_tw+bwiki"
+},
+"taiki_shuttle_(umamusume)": {
+"tw": "大樹快車",
+"cn": "大树快车",
+"src": "gametora:zh_tw+bwiki"
+},
+"sweep_tosho_(umamusume)": {
+"tw": "東商變革",
+"cn": "东商变革",
+"src": "gametora:zh_tw+bwiki"
+},
+"sakura_bakushin_o_(umamusume)": {
+"tw": "櫻花驀進王",
+"cn": "樱花进王",
+"src": "gametora:zh_tw+bwiki"
+},
+"sakura_chiyono_o_(umamusume)": {
+"tw": "櫻花千代王",
+"cn": "樱花千代王",
+"src": "gametora:zh_tw+bwiki"
+},
+"gold_city_(umamusume)": {
+"tw": "黃金城市",
+"cn": "黄金城",
+"src": "gametora:zh_tw+bwiki"
+},
+"fenomeno_(umamusume)": {
+"tw": "超常駿驥",
+"cn": "超常骏骥",
+"src": "gametora:zh_tw+bwiki"
+},
+"el_condor_pasa_(umamusume)": {
+"tw": "神鷹",
+"cn": "神鹰",
+"src": "gametora:zh_tw+bwiki"
+},
+"winning_ticket_(umamusume)": {
+"tw": "勝利獎券",
+"cn": "胜利奖券",
+"src": "gametora:zh_tw+bwiki"
+},
+"daring_tact_(umamusume)": {
+"tw": "謀勇兼備",
+"cn": "谋勇兼备",
+"src": "gametora:zh_tw"
+},
+"copano_rickey_(umamusume)": {
+"tw": "小林歷奇",
+"cn": "小林历奇",
+"src": "gametora:zh_tw+bwiki"
+},
+"win_variation_(umamusume)": {
+"tw": "凱旋芭蕾",
+"cn": "凯旋芭蕾",
+"src": "gametora:zh_tw+bwiki"
+},
+"mejiro_ramonu_(umamusume)": {
+"tw": "目白拉茉奴",
+"cn": "目白高峰",
+"src": "gametora:zh_tw+bwiki"
+},
+"nishino_flower_(umamusume)": {
+"tw": "西野花",
+"cn": "西野花",
+"src": "gametora:zh_tw+bwiki"
+},
+"hishi_amazon_(umamusume)": {
+"tw": "菱亞馬遜",
+"cn": "菱亚马逊",
+"src": "gametora:zh_tw+bwiki"
+},
+"tanino_gimlet_(umamusume)": {
+"tw": "谷水琴蕾",
+"cn": "谷水琴蕾",
+"src": "gametora:zh_tw+bwiki"
+},
+"tosen_jordan_(umamusume)": {
+"tw": "島川喬登",
+"cn": "东瀛佐敦",
+"src": "gametora:zh_tw+bwiki"
+},
+"symboli_kris_s_(umamusume)": {
+"tw": "克莉斯耶絲象徵",
+"cn": "吉兆",
+"src": "gametora:zh_tw+bwiki"
+},
+"ikuno_dictus_(umamusume)": {
+"tw": "生野狄杜斯",
+"cn": "生野狄杜斯",
+"src": "gametora:zh_tw+bwiki"
+},
+"neo_universe_(umamusume)": {
+"tw": "新宇宙",
+"cn": "新宇宙",
+"src": "gametora:zh_tw+bwiki"
+},
+"transcend_(umamusume)": {
+"tw": "創升",
+"cn": "创升",
+"src": "gametora:zh_tw+bwiki"
+},
+"chrono_genesis_(umamusume)": {
+"tw": "時代創世",
+"cn": "创世驹",
+"src": "gametora:zh_tw+bwiki"
+},
+"curren_bouquetd'or_(umamusume)": {
+"tw": "機伶金花",
+"cn": "机伶金花",
+"src": "gametora:zh_tw+bwiki"
+},
+"satono_crown_(umamusume)": {
+"tw": "里見皇冠",
+"cn": "里见皇冠",
+"src": "gametora:zh_tw+bwiki"
+},
+"admire_groove_(umamusume)": {
+"tw": "愛慕律動",
+"cn": "爱慕律动",
+"src": "gametora:zh_tw+bwiki"
+},
+"mejiro_bright_(umamusume)": {
+"tw": "目白光明",
+"cn": "目白光明",
+"src": "gametora:zh_tw+bwiki"
+},
+"buena_vista_(umamusume)": {
+"tw": "迷人景致",
+"cn": "迷人景致",
+"src": "gametora:zh_tw+bwiki"
+},
+"sakura_laurel_(umamusume)": {
+"tw": "櫻花桂冠",
+"cn": "樱花桂冠",
+"src": "gametora:zh_tw+bwiki"
+},
+"cesario_(umamusume)": {
+"tw": "西薩里奧",
+"cn": "西沙里奥",
+"src": "gametora:zh_tw+bwiki"
+},
+"inari_one_(umamusume)": {
+"tw": "稻荷一",
+"cn": "稻荷一",
+"src": "gametora:zh_tw+bwiki"
+},
+"wonder_acute_(umamusume)": {
+"tw": "奇銳駿",
+"cn": "奇锐骏",
+"src": "gametora:zh_tw+bwiki"
+},
+"k.s.miracle_(umamusume)": {
+"tw": "喜嘉奇蹟",
+"cn": "凯斯奇迹",
+"src": "gametora:zh_tw+bwiki"
+},
+"mejiro_ryan_(umamusume)": {
+"tw": "目白雷恩",
+"cn": "目白赖恩",
+"src": "gametora:zh_tw+bwiki"
+},
+"zenno_rob_roy_(umamusume)": {
+"tw": "荒漠英雄",
+"cn": "荒漠英雄",
+"src": "gametora:zh_tw+bwiki"
+},
+"calstone_light_o_(umamusume)": {
+"tw": "浮岩光王",
+"cn": "金镇之光",
+"src": "gametora:zh_tw+bwiki"
+},
+"lucky_lilac_(umamusume)": {
+"tw": "幸運歐丁香",
+"cn": "旺紫丁",
+"src": "gametora:zh_tw+bwiki"
+},
+"hayakawa_tazuna": {
+"tw": "駿川手綱",
+"cn": "骏川手纲",
+"src": "gametora:zh_tw"
+},
+"kawakami_princess_(umamusume)": {
+"tw": "川上公主",
+"cn": "川上公主",
+"src": "gametora:zh_tw+bwiki"
+},
+"durandal_(umamusume)": {
+"tw": "杜蘭達爾",
+"cn": "多旺达",
+"src": "gametora:zh_tw+bwiki"
+},
+"duramente_(umamusume)": {
+"tw": "大鳴大放",
+"cn": "大鸣大放",
+"src": "gametora:zh_tw+bwiki"
+},
+"yamanin_zephyr_(umamusume)": {
+"tw": "山人西風",
+"cn": "也文摄辉",
+"src": "gametora:zh_tw+bwiki"
+},
+"ines_fujin_(umamusume)": {
+"tw": "艾尼風神",
+"cn": "艾尼斯风神",
+"src": "gametora:zh_tw+bwiki"
+},
+"rhein_kraft_(umamusume)": {
+"tw": "萊茵實力",
+"cn": "莱茵力量",
+"src": "gametora:zh_tw+bwiki"
+},
+"loves_only_you_(umamusume)": {
+"tw": "唯獨愛你",
+"cn": "唯独爱你",
+"src": "gametora:zh_tw+bwiki"
+},
+"marvelous_sunday_(umamusume)": {
+"tw": "美麗週日",
+"cn": "美丽周日",
+"src": "gametora:zh_tw+bwiki"
+},
+"yaeno_muteki_(umamusume)": {
+"tw": "八重無敵",
+"cn": "八重无敌",
+"src": "gametora:zh_tw+bwiki"
+},
+"gran_alegria_(umamusume)": {
+"tw": "放聲歡呼",
+"cn": "放声欢呼",
+"src": "gametora:zh_tw+bwiki"
+},
+"yukino_bijin_(umamusume)": {
+"tw": "雪之美人",
+"cn": "雪之美人",
+"src": "gametora:zh_tw+bwiki"
+},
+"hishi_akebono_(umamusume)": {
+"tw": "菱曙",
+"cn": "菱曙",
+"src": "gametora:zh_tw+bwiki"
+},
+"tsurumaru_tsuyoshi_(umamusume)": {
+"tw": "鶴丸強志",
+"cn": "鹤丸刚志",
+"src": "gametora:zh_tw+bwiki"
+},
+"fusaichi_pandora_(umamusume)": {
+"tw": "房一潘朵拉",
+"cn": "房一潘多拉",
+"src": "gametora:zh_tw+bwiki"
+},
+"light_hello_(umamusume)": {
+"tw": "明亮光暈",
+"cn": "明亮光晕",
+"src": "gametora:zh_tw"
+},
+"shinko_windy_(umamusume)": {
+"tw": "新光風",
+"cn": "新光风",
+"src": "gametora:zh_tw+bwiki"
+},
+"bamboo_memory_(umamusume)": {
+"tw": "青竹回憶",
+"cn": "青竹回忆",
+"src": "gametora:zh_tw+bwiki"
+},
+"tap_dance_city_(umamusume)": {
+"tw": "踢踏城市",
+"cn": "跳舞城",
+"src": "gametora:zh_tw+bwiki"
+},
+"north_flight_(umamusume)": {
+"tw": "北方飛翔",
+"cn": "北方飞翔",
+"src": "gametora:zh_tw+bwiki"
+},
+"happy_meek_(umamusume)": {
+"tw": "快樂溫順",
+"cn": "快乐温顺",
+"src": "gametora:zh_tw"
+},
+"gold_ship_(racehorse)": {
+"tw": "黃金船",
+"cn": "黄金船",
+"src": "gametora:zh_tw+bwiki"
+},
+"venus_paques_(umamusume)": {
+"tw": "金星復活節",
+"cn": "金星复活节",
+"src": "gametora:zh_tw"
+},
+"espoir_city_(umamusume)": {
+"tw": "希望城市",
+"cn": "希望之城",
+"src": "gametora:zh_tw+bwiki"
+},
+"sugar_lights_(umamusume)": {
+"tw": "蜜糖燈光",
+"cn": "蜜糖灯光",
+"src": "gametora:zh_tw"
+},
+"biko_pegasus_(umamusume)": {
+"tw": "微光飛駒",
+"cn": "微光飞驹",
+"src": "gametora:zh_tw+bwiki"
+},
+"kashimoto_riko": {
+"tw": "樫本理子",
+"cn": "㭴本理子",
+"src": "gametora:zh_tw"
+},
+"no_reason_(umamusume)": {
+"tw": "無需理由",
+"cn": "莫名其妙",
+"src": "gametora:zh_tw+bwiki"
+},
+"blast_onepiece_(umamusume)": {
+"tw": "疾風裝束",
+"cn": "疾风装束",
+"src": "gametora:zh_tw"
+},
+"sounds_of_earth_(umamusume)": {
+"tw": "萬籟爭鳴",
+"cn": "万籁争鸣",
+"src": "gametora:zh_tw+bwiki"
+},
+"speed_symboli_(umamusume)": {
+"tw": "速度象徵",
+"cn": "速度象征",
+"src": "gametora:zh_tw"
+},
+"daring_heart_(umamusume)": {
+"tw": "勇敢之心",
+"cn": "勇敢之心",
+"src": "gametora:zh_tw+bwiki"
+},
+"little_cocon_(umamusume)": {
+"tw": "小巧圓繭",
+"cn": "小巧圆茧",
+"src": "gametora:zh_tw"
+},
+"believe_(umamusume)": {
+"tw": "信念",
+"cn": "信念",
+"src": "gametora:zh_tw+bwiki"
+},
+"air_messiah_(umamusume)": {
+"tw": "空中彌賽亞",
+"cn": "空中救世主",
+"src": "gametora:zh_tw+bwiki"
+},
+"seeking_the_pearl_(umamusume)": {
+"tw": "採珠",
+"cn": "采珠",
+"src": "gametora:zh_tw+bwiki"
+},
+"bubble_gum_fellow_(umamusume)": {
+"tw": "泡泡糖小子",
+"cn": "吹波糖",
+"src": "gametora:zh_tw+bwiki"
+},
+"furioso_(umamusume)": {
+"tw": "狂熱激昂",
+"cn": "狂怒乐章",
+"src": "gametora:zh_tw+bwiki"
+},
+"royce_and_royce_(umamusume)": {
+"tw": "萊斯萊斯",
+"cn": "莱斯莱斯",
+"src": "gametora:zh_tw+bwiki"
+},
+"godolphin_barb_(umamusume)": {
+"tw": "高多芬柏布",
+"cn": "高多芬柏布",
+"src": "gametora:zh_tw"
+},
+"bitter_glasse_(umamusume)": {
+"tw": "微苦糖漬",
+"cn": "微苦糖渍",
+"src": "gametora:zh_tw"
+},
+"darley_arabian_(umamusume)": {
+"tw": "達利阿拉伯",
+"cn": "达利阿拉伯",
+"src": "gametora:zh_tw"
+},
+"byerley_turk_(umamusume)": {
+"tw": "拜耶爾土耳其",
+"cn": "拜耶尔土耳其",
+"src": "gametora:zh_tw"
+},
+"haiseiko_(umamusume)": {
+"tw": "俳成功",
+"cn": "俳成功",
+"src": "gametora:zh_tw"
+},
+"mecha_umamusume_st-2_(umamusume)": {
+"tw": "ST-2",
+"cn": "ST-2",
+"src": "gametora:zh_tw"
+},
+"montjeu_(umamusume)": {
+"tw": "望族",
+"cn": "望族",
+"src": "gametora:zh_tw"
+},
+"sonon_elfie_(umamusume)": {
+"tw": "索儂愛爾菲",
+"cn": "索侬爱尔菲",
+"src": "gametora:zh_tw"
+},
+"rigantona_(umamusume)": {
+"tw": "偉大女王",
+"cn": "伟大女王",
+"src": "gametora:zh_tw"
+},
+"saint_lite_(umamusume)": {
+"tw": "聖烈特",
+"cn": "圣烈特",
+"src": "gametora:zh_tw"
+},
+"tucker_bryne_(umamusume)": {
+"tw": "塔可拜茵",
+"cn": "塔可拜茵",
+"src": "gametora:zh_tw"
+},
+"lyria_(granblue_fantasy)": {
+"tw": "露莉亞",
+"cn": "露莉亚",
+"src": "relink:cht"
+},
+"vyrn_(granblue_fantasy)": {
+"tw": "碧",
+"cn": "碧",
+"src": "relink:cht"
+},
+"katalina_(granblue_fantasy)": {
+"tw": "卡塔莉娜",
+"cn": "卡塔莉娜",
+"src": "relink:cht"
+},
+"rackam_(granblue_fantasy)": {
+"tw": "拉卡姆",
+"cn": "拉卡姆",
+"src": "relink:cht"
+},
+"io_(granblue_fantasy)": {
+"tw": "伊歐",
+"cn": "伊欧",
+"src": "relink:cht"
+},
+"eugen_(granblue_fantasy)": {
+"tw": "尤金",
+"cn": "尤金",
+"src": "relink:cht"
+},
+"rosetta_(granblue_fantasy)": {
+"tw": "蘿賽塔",
+"cn": "萝赛塔",
+"src": "relink:cht"
+},
+"lancelot_(granblue_fantasy)": {
+"tw": "蘭斯洛特",
+"cn": "兰斯洛特",
+"src": "relink:cht"
+},
+"vane_(granblue_fantasy)": {
+"tw": "范恩",
+"cn": "范恩",
+"src": "relink:cht"
+},
+"percival_(granblue_fantasy)": {
+"tw": "帕西瓦爾",
+"cn": "帕西瓦尔",
+"src": "relink:cht"
+},
+"siegfried_(granblue_fantasy)": {
+"tw": "齊格菲",
+"cn": "齐格菲",
+"src": "relink:cht"
+},
+"charlotta_(granblue_fantasy)": {
+"tw": "夏綠蒂",
+"cn": "夏绿蒂",
+"src": "relink:cht"
+},
+"yodarha_(granblue_fantasy)": {
+"tw": "尤達爾拉哈",
+"cn": "尤达尔拉哈",
+"src": "relink:cht"
+},
+"zeta_(granblue_fantasy)": {
+"tw": "瑟塔",
+"cn": "瑟塔",
+"src": "relink:cht"
+},
+"ferry_(granblue_fantasy)": {
+"tw": "菲莉",
+"cn": "菲莉",
+"src": "relink:cht"
+},
+"seofon_(granblue_fantasy)": {
+"tw": "席耶提",
+"cn": "席耶提",
+"src": "relink:cht"
+},
+"tweyen_(granblue_fantasy)": {
+"tw": "蘇恩",
+"cn": "苏恩",
+"src": "relink:cht"
+},
+"airi_(blue_archive)": {
+"tw": "栗村愛莉",
+"cn": "栗村爱莉",
+"src": "schaledb"
+},
+"akane_(blue_archive)": {
+"tw": "室笠朱音",
+"cn": "室笠茜",
+"src": "schaledb"
+},
+"aru_(blue_archive)": {
+"tw": "陸八魔亞瑠",
+"cn": "陆八魔阿露",
+"src": "schaledb"
+},
+"asuna_(blue_archive)": {
+"tw": "一之瀨明日奈",
+"cn": "一之濑明日奈",
+"src": "schaledb"
+},
+"atsuko_(blue_archive)": {
+"tw": "秤敦子",
+"cn": "秤亚津子",
+"src": "schaledb"
+},
+"bremerton_(azur_lane)": {
+"tw": "布雷默頓",
+"cn": "布莱默顿",
+"src": "azurlanedata"
+},
+"chise_(blue_archive)": {
+"tw": "和樂知世",
+"cn": "和乐千世",
+"src": "schaledb"
+},
+"eimi_(blue_archive)": {
+"tw": "和泉元英美",
+"cn": "和泉元艾米",
+"src": "schaledb"
+},
+"eri_(blue_archive)": {
+"tw": "白尾繪梨",
+"cn": "白尾绘里",
+"src": "schaledb"
+},
+"hare_(blue_archive)": {
+"tw": "小鈎晴",
+"cn": "小钩晴",
+"src": "schaledb"
+},
+"haruka_(blue_archive)": {
+"tw": "伊草遥香",
+"cn": "伊草遥香",
+"src": "schaledb"
+},
+"haruna_(blue_archive)": {
+"tw": "黑館羽留奈",
+"cn": "黑馆晴奈",
+"src": "schaledb"
+},
+"hasumi_(blue_archive)": {
+"tw": "羽川蓮實",
+"cn": "羽川莲见",
+"src": "schaledb"
+},
+"himari_(blue_archive)": {
+"tw": "明星陽葵",
+"cn": "明星日鞠",
+"src": "schaledb"
+},
+"kanna_(blue_archive)": {
+"tw": "尾刃環奈",
+"cn": "尾刃环奈",
+"src": "schaledb"
+},
+"kasumi_(blue_archive)": {
+"tw": "鬼怒川佳澄",
+"cn": "鬼怒川霞",
+"src": "schaledb"
+},
+"kayoko_(blue_archive)": {
+"tw": "鬼方佳世子",
+"cn": "鬼方佳代子",
+"src": "schaledb"
+},
+"kazusa_(blue_archive)": {
+"tw": "杏山千紗",
+"cn": "杏山和纱",
+"src": "schaledb"
+},
+"kisaki_(blue_archive)": {
+"tw": "龍華妃姬",
+"cn": "龙华妃咲",
+"src": "schaledb"
+},
+"kotama_(blue_archive)": {
+"tw": "音瀨小玉",
+"cn": "音濑小玉",
+"src": "schaledb"
+},
+"kotori_(blue_archive)": {
+"tw": "豐見亞都梨",
+"cn": "丰见琴里",
+"src": "schaledb"
+},
+"mashiro_(blue_archive)": {
+"tw": "靜山麻白",
+"cn": "静山真白",
+"src": "schaledb"
+},
+"michiru_(blue_archive)": {
+"tw": "千鳥三千留",
+"cn": "千鸟满",
+"src": "schaledb"
+},
+"miyu_(blue_archive)": {
+"tw": "霞澤美優",
+"cn": "霞泽美游",
+"src": "schaledb"
+},
+"mutsuki_(blue_archive)": {
+"tw": "淺黃無月",
+"cn": "浅黄睦月",
+"src": "schaledb"
+},
+"narmaya_(granblue_fantasy)": {
+"tw": "娜魯梅亞",
+"cn": "娜鲁梅亚",
+"src": "relink"
+},
+"neru_(blue_archive)": {
+"tw": "美甘寧瑠",
+"cn": "美甘尼露",
+"src": "schaledb"
+},
+"niko_(blue_archive)": {
+"tw": "吉野仁子",
+"cn": "吉野妮可",
+"src": "schaledb"
+},
+"noa_(blue_archive)": {
+"tw": "生鹽乃愛",
+"cn": "生盐诺亚",
+"src": "schaledb"
+},
+"nonomi_(blue_archive)": {
+"tw": "十六夜野乃美",
+"cn": "十六夜野宫",
+"src": "schaledb"
+},
+"nozomi_(blue_archive)": {
+"tw": "橘希望",
+"cn": "橘望",
+"src": "schaledb"
+},
+"prince_of_wales_(azur_lane)": {
+"tw": "威爾斯親王",
+"cn": "威尔士亲王",
+"src": "azurlanedata"
+},
+"saki_(blue_archive)": {
+"tw": "空井咲希",
+"cn": "空井咲",
+"src": "schaledb"
+},
+"saori_(blue_archive)": {
+"tw": "錠前沙織",
+"cn": "锭前纱织",
+"src": "schaledb"
+},
+"saya_(blue_archive)": {
+"tw": "藥子沙耶",
+"cn": "药子纱绫",
+"src": "schaledb"
+},
+"serika_(blue_archive)": {
+"tw": "黑見茜香",
+"cn": "黑见芹香",
+"src": "schaledb"
+},
+"serina_(blue_archive)": {
+"tw": "鷲見芹奈",
+"cn": "鹫见芹娜",
+"src": "schaledb"
+},
+"tomoe_(blue_archive)": {
+"tw": "佐城智惠",
+"cn": "佐城智惠",
+"src": "schaledb"
+},
+"tsukuyo_(blue_archive)": {
+"tw": "大野月夜",
+"cn": "大野月咏",
+"src": "schaledb"
+},
+"tsurugi_(blue_archive)": {
+"tw": "劍先弦生",
+"cn": "剑先鹤城",
+"src": "schaledb"
+},
+"ui_(blue_archive)": {
+"tw": "古關憂",
+"cn": "古关忧",
+"src": "schaledb"
+},
+"veronica_(fire_emblem)": {
+"tw": "維洛妮卡",
+"cn": "维洛妮卡",
+"src": "feh"
+},
+"yoshimi_(blue_archive)": {
+"tw": "伊原木喜美",
+"cn": "伊原木好美",
+"src": "schaledb"
+},
+"yuuka_(blue_archive)": {
+"tw": "早瀨優香",
+"cn": "早濑优香",
+"src": "schaledb"
+},
+"acheron_(honkai:_star_rail)": {
+"tw": "黃泉",
+"cn": "黄泉",
+"src": "starrailres"
+},
+"beidou_(genshin_impact)": {
+"tw": "北斗",
+"cn": "北斗",
+"src": "enka:gi"
+},
+"hugo_vlad": {
+"tw": "雨果",
+"cn": "雨果",
+"src": "enka:zzz"
+},
+"admiral_graf_spee_(azur_lane)": {
+"tw": "施佩伯爵將軍",
+"cn": "斯佩伯爵海军上将",
+"src": "azurlanedata"
+},
+"cherino_(blue_archive)": {
+"tw": "聯河潔莉諾",
+"cn": "连河切里诺",
+"src": "schaledb"
+},
+"welrod_mkii_(girls'_frontline)": {
+"tw": "維爾德MkⅡ",
+"cn": "维尔德MkⅡ",
+"src": "deepghs:gf"
+},
+"akari_(blue_archive)": {
+"tw": "鰐淵亞伽里",
+"cn": "鳄渕明里",
+"src": "schaledb"
+},
+"the_dahlia_(honkai:_star_rail)": {
+"tw": "大理花",
+"cn": "大丽花",
+"src": "starrailres"
+},
+"harmonie_(arknights)": {
+"tw": "和絃",
+"cn": "和弦",
+"src": "arknightsgamedata"
+},
+"alsace_(azur_lane)": {
+"tw": "亞爾薩斯",
+"cn": "阿尔萨斯",
+"src": "azurlanedata"
+},
+"numby_(honkai:_star_rail)": {
+"tw": "帳帳",
+"cn": "账账",
+"src": "starrailres"
+},
+"haruka_(arknights)": {
+"tw": "遙",
+"cn": "遥",
+"src": "arknightsgamedata"
+},
+"xinyan_(genshin_impact)": {
+"tw": "辛焱",
+"cn": "辛焱",
+"src": "enka:gi"
+},
+"anchorage_(azur_lane)": {
+"tw": "安克拉治",
+"cn": "安克雷奇",
+"src": "azurlanedata"
+},
+"mutsuki_(azur_lane)": {
+"tw": "睦月",
+"cn": "睦月",
+"src": "azurlanedata"
+},
+"yorktown_(azur_lane)": {
+"tw": "約克鎮",
+"cn": "约克城",
+"src": "azurlanedata"
+},
+"yune_(fire_emblem)": {
+"tw": "藝娜",
+"cn": "芸娜",
+"src": "feh"
+},
+"reno_(azur_lane)": {
+"tw": "雷諾",
+"cn": "里诺",
+"src": "azurlanedata"
+},
+"akagi-chan_(azur_lane)": {
+"tw": "小赤城",
+"cn": "小赤城",
+"src": "azurlanedata"
+},
+"anby_demara_(silver_soldier)": {
+"tw": "零號·安比",
+"cn": "零号·安比",
+"src": "enka:zzz"
+},
+"mosin-nagant_(girls'_frontline)": {
+"tw": "莫辛-納甘",
+"cn": "莫辛-纳甘",
+"src": "deepghs:gf"
+},
+"san_diego_(azur_lane)": {
+"tw": "聖地牙哥",
+"cn": "圣地亚哥",
+"src": "azurlanedata"
+},
+"minneapolis_(azur_lane)": {
+"tw": "明尼亞波利斯",
+"cn": "明尼阿波利斯",
+"src": "azurlanedata"
+},
+"type_100_(girls'_frontline)": {
+"tw": "一〇〇式",
+"cn": "樱花",
+"src": "deepghs:gf"
+},
+"fumizuki_(azur_lane)": {
+"tw": "文月",
+"cn": "文月",
+"src": "azurlanedata"
+},
+"sin_(nikke)": {
+"tw": "森",
+"cn": "森",
+"src": "deepghs:nikke"
+},
+"sovetsky_soyuz_(azur_lane)": {
+"tw": "蘇維埃聯盟",
+"cn": "苏维埃同盟",
+"src": "azurlanedata"
+},
+"cowpens_(azur_lane)": {
+"tw": "考彭斯",
+"cn": "科本斯",
+"src": "azurlanedata"
+},
+"surcouf_(azur_lane)": {
+"tw": "速科夫",
+"cn": "絮库夫",
+"src": "azurlanedata"
+},
+"mutsu_(azur_lane)": {
+"tw": "陸奧",
+"cn": "陆奥",
+"src": "azurlanedata"
+},
+"brest_(azur_lane)": {
+"tw": "布雷斯特",
+"cn": "布雷斯特",
+"src": "azurlanedata"
+},
+"sovetskaya_belorussiya_(azur_lane)": {
+"tw": "蘇維埃白俄羅斯",
+"cn": "苏维埃贝拉罗斯",
+"src": "azurlanedata"
+},
+"royal_fortune_(azur_lane)": {
+"tw": "皇家幸運號",
+"cn": "皇家财富号",
+"src": "azurlanedata"
+},
+"lexington_(azur_lane)": {
+"tw": "列星頓",
+"cn": "列克星敦",
+"src": "azurlanedata"
+},
+"cleopatra_(azur_lane)": {
+"tw": "克麗奧佩脫拉",
+"cn": "克利奥佩特拉",
+"src": "azurlanedata"
+},
+"jervis_(azur_lane)": {
+"tw": "傑維斯",
+"cn": "贾维斯",
+"src": "azurlanedata"
+},
+"bellone_(arknights)": {
+"tw": "貝洛內",
+"cn": "贝洛内",
+"src": "arknightsgamedata"
+},
+"mainz_(azur_lane)": {
+"tw": "美因茲",
+"cn": "美因茨",
+"src": "azurlanedata"
+},
+"trieste_(azur_lane)": {
+"tw": "的里雅斯德",
+"cn": "的里雅斯特",
+"src": "azurlanedata"
+},
+"shiranui_(azur_lane)": {
+"tw": "不知火",
+"cn": "不知火",
+"src": "azurlanedata"
+},
+"lewis_(girls'_frontline)": {
+"tw": "路易士",
+"cn": "刘易斯",
+"src": "deepghs:gf"
+},
+"avrora_(azur_lane)": {
+"tw": "曙光",
+"cn": "阿芙乐尔",
+"src": "azurlanedata"
+},
+"napoli_(azur_lane)": {
+"tw": "拿坡里",
+"cn": "那不勒斯",
+"src": "azurlanedata"
+},
+"nagara_(azur_lane)": {
+"tw": "長良",
+"cn": "长良",
+"src": "azurlanedata"
+},
+"prinz_adalbert_(azur_lane)": {
+"tw": "阿達爾貝特親王",
+"cn": "阿达尔伯特亲王",
+"src": "azurlanedata"
+},
+"mecklenburg_(azur_lane)": {
+"tw": "梅克倫堡",
+"cn": "梅克伦堡",
+"src": "azurlanedata"
+},
+"marblehead_(azur_lane)": {
+"tw": "馬布爾黑德",
+"cn": "马布尔黑德",
+"src": "azurlanedata"
+},
+"clemenceau_(azur_lane)": {
+"tw": "克里蒙梭",
+"cn": "克莱蒙梭",
+"src": "azurlanedata"
+},
+"shouhou_(azur_lane)": {
+"tw": "祥鳳",
+"cn": "祥凤",
+"src": "azurlanedata"
+},
+"allen_m._sumner_(azur_lane)": {
+"tw": "艾倫·M·桑拿",
+"cn": "艾伦·萨姆纳",
+"src": "azurlanedata"
+},
+"hibiki_(azur_lane)": {
+"tw": "響",
+"cn": "响",
+"src": "azurlanedata"
+},
+"leonardo_da_vinci_(azur_lane)": {
+"tw": "李奧納多·達·文西",
+"cn": "莱昂纳多·达·芬奇",
+"src": "azurlanedata"
+},
+"trafalgar_(azur_lane)": {
+"tw": "特拉法加",
+"cn": "特拉法尔加",
+"src": "azurlanedata"
+},
+"torricelli_(azur_lane)": {
+"tw": "托里切利",
+"cn": "托里拆利",
+"src": "azurlanedata"
+},
+"west_virginia_(azur_lane)": {
+"tw": "西維吉尼亞",
+"cn": "西弗吉尼亚",
+"src": "azurlanedata"
+},
+"may_(arknights)": {
+"tw": "梅",
+"cn": "梅",
+"src": "arknightsgamedata"
+},
+"chitose_(azur_lane)": {
+"tw": "千歲",
+"cn": "千岁",
+"src": "azurlanedata"
+},
+"gloucester_(azur_lane)": {
+"tw": "格洛斯特",
+"cn": "格罗斯特",
+"src": "azurlanedata"
+},
+"volga_(azur_lane)": {
+"tw": "窩瓦",
+"cn": "伏尔加",
+"src": "azurlanedata"
+},
+"giuseppe_garibaldi_(azur_lane)": {
+"tw": "朱塞佩·加里波底",
+"cn": "朱塞佩·加里波第",
+"src": "azurlanedata"
+},
+"maille-breze_(azur_lane)": {
+"tw": "馬耶·布雷澤",
+"cn": "马耶·布雷泽",
+"src": "azurlanedata"
+},
+"emile_bertin_(azur_lane)": {
+"tw": "埃米爾•貝爾坦",
+"cn": "埃米尔·贝尔汀",
+"src": "azurlanedata"
+},
+"gorizia_(azur_lane)": {
+"tw": "哥里加",
+"cn": "戈里齐亚",
+"src": "azurlanedata"
+},
+"hamakaze_(azur_lane)": {
+"tw": "濱風",
+"cn": "滨风",
+"src": "azurlanedata"
+},
+"colt_walker_(girls'_frontline)": {
+"tw": "柯爾特沃克",
+"cn": "柯尔特沃克",
+"src": "deepghs:gf"
+},
+"southampton_(azur_lane)": {
+"tw": "南安普敦",
+"cn": "南安普顿",
+"src": "azurlanedata"
+},
+"akatsuki_(azur_lane)": {
+"tw": "曉",
+"cn": "晓",
+"src": "azurlanedata"
+},
+"furutaka_(azur_lane)": {
+"tw": "古鷹",
+"cn": "古鹰",
+"src": "azurlanedata"
+},
+"mondragon_m1908_(girls'_frontline)": {
+"tw": "蒙德拉貢M1908",
+"cn": "蒙德拉贡M1908",
+"src": "deepghs:gf"
+},
+"aylwin_(azur_lane)": {
+"tw": "艾爾文",
+"cn": "艾尔温",
+"src": "azurlanedata"
+},
+"clevelad_(azur_lane)": {
+"tw": "小克里夫蘭",
+"cn": "小克利夫兰",
+"src": "azurlanedata"
+},
+"yuugure_(azur_lane)": {
+"tw": "夕暮",
+"cn": "夕暮",
+"src": "azurlanedata"
+},
+"krasny_kavkaz_(azur_lane)": {
+"tw": "紅色高加索",
+"cn": "红色山脉",
+"src": "azurlanedata"
+},
+"birmingham_(azur_lane)": {
+"tw": "伯明罕",
+"cn": "伯明翰",
+"src": "azurlanedata"
+},
+"benson_(azur_lane)": {
+"tw": "班森",
+"cn": "本森",
+"src": "azurlanedata"
+},
+"michishio_(azur_lane)": {
+"tw": "滿潮",
+"cn": "满潮",
+"src": "azurlanedata"
+},
+"tanikaze_(azur_lane)": {
+"tw": "谷風",
+"cn": "谷风",
+"src": "azurlanedata"
+},
+"matsukaze_(azur_lane)": {
+"tw": "松風",
+"cn": "松风",
+"src": "azurlanedata"
+},
+"ashigara_(azur_lane)": {
+"tw": "足柄",
+"cn": "足柄",
+"src": "azurlanedata"
+},
+"abukuma_(azur_lane)": {
+"tw": "阿武隈",
+"cn": "阿武隈",
+"src": "azurlanedata"
+},
+"richmond_(azur_lane)": {
+"tw": "里奇蒙",
+"cn": "里士满",
+"src": "azurlanedata"
+},
+"ariake_(azur_lane)": {
+"tw": "有明",
+"cn": "有明",
+"src": "azurlanedata"
+},
+"hatakaze_(azur_lane)": {
+"tw": "旗風",
+"cn": "旗风",
+"src": "azurlanedata"
+},
+"bulldog_(azur_lane)": {
+"tw": "大鬥犬",
+"cn": "大斗犬",
+"src": "azurlanedata"
+},
+"nicoloso_da_recco_(azur_lane)": {
+"tw": "尼科洛索·達·雷科",
+"cn": "尼科洛索·达雷科",
+"src": "azurlanedata"
+},
+"kako_(azur_lane)": {
+"tw": "加古",
+"cn": "加古",
+"src": "azurlanedata"
+},
+"jupiter_(azur_lane)": {
+"tw": "丘比特",
+"cn": "丘比特",
+"src": "azurlanedata"
+},
+"sendai_(azur_lane)": {
+"tw": "川內",
+"cn": "川内",
+"src": "azurlanedata"
+},
+"kagerou_(azur_lane)": {
+"tw": "陽炎",
+"cn": "阳炎",
+"src": "azurlanedata"
+},
+"halsey_powell_(azur_lane)": {
+"tw": "海爾賽‧鮑威爾",
+"cn": "哈尔西·鲍威尔",
+"src": "azurlanedata"
+},
+"bush_(azur_lane)": {
+"tw": "布希",
+"cn": "布什",
+"src": "azurlanedata"
+},
+"thatcher_(azur_lane)": {
+"tw": "柴契爾",
+"cn": "撒切尔",
+"src": "azurlanedata"
+},
+"wakaba_(azur_lane)": {
+"tw": "若葉",
+"cn": "若叶",
+"src": "azurlanedata"
+},
+"vincennes_(azur_lane)": {
+"tw": "文森尼斯",
+"cn": "文森斯",
+"src": "azurlanedata"
+},
+"kuroshio_(azur_lane)": {
+"tw": "黑潮",
+"cn": "黑潮",
+"src": "azurlanedata"
+},
+"li'l_sandy_(azur_lane)": {
+"tw": "小聖地牙哥",
+"cn": "小圣地亚哥",
+"src": "azurlanedata"
+},
+"lime_(azur_lane)": {
+"tw": "萊姆號",
+"cn": "莱姆号",
+"src": "azurlanedata"
+},
+"makinami_(azur_lane)": {
+"tw": "卷波",
+"cn": "卷波",
+"src": "azurlanedata"
+},
+"yura_(azur_lane)": {
+"tw": "由良",
+"cn": "由良",
+"src": "azurlanedata"
+}
+}
+}

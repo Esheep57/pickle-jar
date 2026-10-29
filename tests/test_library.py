@@ -394,7 +394,7 @@ def test_display_names_and_series_merge():
     assert names.display("houshou_marine", ["宝鐘マリン", "沈没後悔日記", "宝钟玛琳"], None, "zh") == "寶鍾瑪琳"
     assert names.display("nahida_(genshin_impact)", ["纳西妲", "Nahida", "布耶尔"], None, "zh") == "納西妲"
     assert names.display("ganyu_(genshin_impact)", ["甘雨(原神)", "甘雨"], None, "zh") == "甘雨"
-    assert names.display("kisaki_(blue_archive)", ["竜華キサキ", "妃咲"], None, "zh") == "妃咲"   # 咲 中文音譯名也用（蔚藍檔案台版：龍華妃咲）
+    assert names.display("someone_(blue_archive)", ["竜華キサキ", "妃咲"], None, "zh") == "妃咲"   # 咲 中文音譯名也用（Danbooru 別名；妃咲本人有官方譯名表）
     assert names.display("minato_aqua", ["湊あくあ", "阿夸"], None, "zh") == "阿夸"
     assert names.series_display("genshin_impact", ["原神同人"], None, "zh") == "原神"
     keys = {"fate_(series)", "fate/grand_order", "bang_dream!", "bang_dream!_it's_mygo!!!!!", "blue_archive"}

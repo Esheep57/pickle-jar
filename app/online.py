@@ -633,7 +633,9 @@ class OnlineJobs:
 
     PHASE = {"taginfo": "抓取角色資料", "source": "以圖搜源", "artistscan": "從畫師反推",
              "r34scan": "Rule34 原檔比對", "seriesparent": "查作品的母系列", "sigscan": "讀圖上的簽名",
-             "pixelhash": "像素指紋比對", "seriesname": "查作品譯名", "upgradecheck": "找更高清的版本", "pixivsweep": "Pixiv 畫師作品比對", "xsweep": "X 畫師媒體比對", "zhname": "找中文名（Bangumi）", "rerun": "補跑"}
+             "pixelhash": "像素指紋比對", "seriesname": "查作品譯名", "upgradecheck": "找更高清的版本", "pixivsweep": "Pixiv 畫師作品比對", "xsweep": "X 畫師媒體比對", "zhname": "找中文名（Bangumi）", "rerun": "補跑",
+             "charcat": "下載 Danbooru 角色表", "charcat_cp": "角色表：查熱門角色的作品",
+             "cpshare": "查角色在子作品的比例（再旅角色）"}
 
     def _begin_group(self, item: dict):
         rows = self.q.group_rows(item["grp"])
@@ -712,6 +714,19 @@ class OnlineJobs:
         elif kind == "zhname":
             from . import zhname
             zhname.run(arg, self.state, self.stop_flag.is_set)
+        elif kind == "charcat":
+            from . import charcat
+            res = charcat.download(self.state, self.stop_flag.is_set, (arg or {}).get("min", 10))
+            if not res.get("stopped"):
+                self.state["found"] = res.get("characters", 0)
+                charcat.queue_followups()
+        elif kind == "cpshare":
+            from . import family
+            prog(family.check_shares(arg, self.stop_flag.is_set))
+        elif kind == "charcat_cp":
+            from . import charcat
+            self.state["found"] = (self.state.get("found") or 0) + charcat.sample_copyrights(arg, self.stop_flag.is_set)
+            prog(len(arg))
         elif kind == "pixivsweep":
             from . import sweep
             for a in arg:

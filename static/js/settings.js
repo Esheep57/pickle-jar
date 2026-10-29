@@ -2,8 +2,9 @@
 import { $, $$, ask, S, api, closeModal, esc, modal, store, svg, toast } from "./core.js";
 import { applyTint, go, loadSidebar, openJobs, pollOnce } from "./shell.js";
 import { render } from "./grid.js";
-import { DAN_WHY, folderBrowser, importModal, openBackup, openDiag, openDriveBackup, openPhone } from "./pages.js";
+import { DAN_WHY, folderBrowser, importModal, openBackup, openCharcat, openDiag, openDriveBackup, openPhone } from "./pages.js";
 import { drawSteps } from "./steps.js";
+import { applyMotion, motion } from "./viewer.js";
 /* ============ 設定 ============
    左邊分類、右邊一次一類；上面可以搜尋（輸入「門檻」「帳號」就跳到那幾項）。
    每一項：名稱＋一句說明＋控制項；改過還沒存的會標出來，底部顯示「N 項未儲存」。 */
@@ -75,6 +76,7 @@ export async function openSettings(section, asPage) {
       ${txt("no_char_tags", "不認角色的標籤", "梗圖, 截圖", "有這些標籤的圖不再認角色、不再把候選放進待確認（AI、搜源、你的圖庫都一樣），也不自動上傳以圖搜圖。加上標籤時，還沒決定的候選會拿掉（可以撤銷）；已經確認的角色不動。")}
       ${txt("quick_tags_skip", "加上後離開未識別", "梗圖, 真人, 截圖", "這些快速標籤加上後，圖會離開「未識別」（不用再認角色）。不會刪掉 AI 的角色候選。")}
       ${row("底色", `<span class="seg" id="tint-seg"><button data-t="0" class="${store.get("tint", true) ? "" : "on"}">白（簡潔）</button><button data-t="1" class="${store.get("tint", true) ? "on" : ""}">淡綠</button></span>`, "只影響這個瀏覽器，馬上套用。")}
+      ${row("動畫", `<span class="seg" id="motion-seg">${[["full", "完整"], ["lite", "簡潔"], ["none", "無"]].map(([k, l]) => `<button data-m="${k}" class="${motion() === k ? "on" : ""}">${l}</button>`).join("")}</span>`, "開關大圖的效果。完整：淡入、放大；簡潔：直接出現、一下子變清楚（按下去那一格會縮一點）；無：什麼都不播。只影響這個瀏覽器，馬上套用。")}
       ${row("專注退場", `<span class="seg" id="zen-seg"><button data-z="1" class="${store.get("zen", true) !== false ? "on" : ""}">開</button><button data-z="0" class="${store.get("zen", true) === false ? "on" : ""}">關</button></span>`, "連續按鍵、滑鼠沒動時，側欄、標題、工具列淡出；動一下滑鼠就回來。只影響這個瀏覽器。")}
       ${sel("grid_mode", "格狀排列", [["justified", "依原比例（像相簿）"], ["square", "正方形"]], "圖庫右上也可以隨時切換。")}
       ${sel("general_lang", "一般描述標籤", [["zh", "中文對照（常見的）"], ["raw", "原始英文"]])}
@@ -82,6 +84,7 @@ export async function openSettings(section, asPage) {
     data: `
       ${num("backup_keep", "自動備份保留", 1, "每天自動備份資料庫一次。", "份")}
       ${txt("backup_mirror_dir", "備份另存一份到", "例如 D:\\備份 或 OneDrive 裡的資料夾", "每天的備份再複製一份到另一顆硬碟或雲端資料夾（底下會建 pickle-jar-backups）。只放備份檔，程式本身不要搬進同步資料夾。")}
+      ${row("Danbooru 角色表", `<button class="btn sm" id="s-charcat">下載／更新…</button>`, "加標籤時可以挑圖庫裡還沒有的角色（約 10 萬個，15 MB）；中文名照作品熱度在背景查。")}
       ${row("備份到外接硬碟", `<button class="btn sm" id="s-drive">備份到外接硬碟…</button>`, "圖片、程式、資料庫整份複製到另一顆硬碟；插上按一次，只複製新的。")}
       ${row("備份與還原", `<button class="btn sm" id="s-backup">備份與還原／匯出匯入…</button>`)}
       ${row("系統狀態", `<button class="btn sm" id="s-diag">診斷…</button>`, "模型、GPU、網路、準確率抽查。")}
@@ -137,6 +140,7 @@ export async function openSettings(section, asPage) {
   // 按鈕
   $$("#zen-seg button", m).forEach(b => b.onclick = () => { store.set("zen", b.dataset.z === "1"); $$("#zen-seg button", m).forEach(x => x.classList.toggle("on", x === b)); });
   $$("#zh-seg button", m).forEach(b => b.onclick = () => setZhMode(b.dataset.z));
+  $$("#motion-seg button", m).forEach(b => b.onclick = () => { store.set("motion", b.dataset.m); applyMotion(); $$("#motion-seg button", m).forEach(x => x.classList.toggle("on", x === b)); });
   $$("#tint-seg button", m).forEach(b => b.onclick = () => { store.set("tint", b.dataset.t === "1"); applyTint(); $$("#tint-seg button", m).forEach(x => x.classList.toggle("on", x === b)); });
   const job = (kind, msg) => async () => { await api("/api/jobs", { kind }); toast(msg); };
   $("#j-scan", m).onclick = job("scan", "開始掃描");
@@ -148,6 +152,7 @@ export async function openSettings(section, asPage) {
   $("#s-jobs", m).onclick = () => openJobs();
   $("#s-backup", m).onclick = openBackup;
   $("#s-drive", m).onclick = openDriveBackup;
+  $("#s-charcat", m).onclick = openCharcat;
   $("#s-diag", m).onclick = openDiag;
   $("#s-phone", m).onclick = openPhone;
   $("#s-import", m).onclick = () => importModal();

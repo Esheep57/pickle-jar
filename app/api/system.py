@@ -208,6 +208,10 @@ def post_settings(patch: dict):
         j.submit("scan")
     if new["neg_sim"] != old["neg_sim"]:
         j.submit("sweep")
+    if new.get("charcat_zh") != old.get("charcat_zh"):     # 角色表的中文名：關掉就把排著的拿掉、打開就排
+        from .. import charcat
+        if charcat.status()["count"]:
+            charcat.queue_followups()
     if new.get("zh_mode") != old.get("zh_mode"):
         from .. import nameindex
         nameindex.invalidate()

@@ -81,6 +81,8 @@ JP_ONLY = set("亜悪圧囲壱隠栄営駅円塩応殴桜穏仮価絵拡覚楽�
 # 看起來像標籤、不像名字的字眼（Pixiv 標籤常混在 Danbooru 別名裡）
 # 以前「夢」「百合」「腐」整個字擋掉，連喜多川海夢、博麗靈夢、百合園聖婭都一起擋了 → 只擋標籤用法（夢女、百合向…）
 JUNK = re.compile(r"同人|画师|畫師|绘师|繪師|周榜|榜|排行|合集|本子|R-?18|^腐|腐向|夢女|梦女|夢向|梦向|夢小説|イラ|FA$|FA\b|^百合$|百合向|百合CP|cp|CP|コラボ|版本|表情|差分|系列作")
+# 學校、隊伍名：角色的別名常混著（少女與戰車「繼續高校」「河馬隊」「隊長組」），角色名不用（b110.8；作品名照用：○○戰隊）
+GROUPISH = re.compile(r"(高校|高中|[學学][園园]|[學学]院|隊|队|組|组)$")
 
 
 @lru_cache(maxsize=1)
@@ -104,17 +106,23 @@ def _chinese_ok(n: str) -> bool:
     return True
 
 
-def pick(other_names: list[str], lang: str, variant: bool = False) -> str | None:
-    return _pick(tuple(other_names or ()), lang, variant)
+def pick(other_names: list[str], lang: str, variant: bool = False, char: bool = False) -> str | None:
+    """char：角色名（學校、隊伍名的別名不用，GROUPISH）。"""
+    return _pick(tuple(other_names or ()), lang, variant, char)
 
 
 @lru_cache(maxsize=50000)
-def _pick(other_names: tuple, lang: str, variant: bool) -> str | None:
+def _pick(other_names: tuple, lang: str, variant: bool, char: bool = False) -> str | None:
     """結果只跟輸入有關 → 快取（簡繁轉換很慢，書架一次要算上千個名字）。"""
     names = [n.strip() for n in other_names if n and n.strip()]
+    if char:
+        names = [n for n in names if not GROUPISH.search(n)]
     if lang == "zh":
         han = [n for n in names if HAN_ONLY.match(n) and HAN_CHAR.search(n) and _chinese_ok(n) and not JUNK.search(n)
                and len(n) <= 16]
+        if not han:     # 沒有中文別名：日文漢字名換成中文字形再用（暁 → 曉、鶴 → 鶴；中文圈本來就直接用漢字名）（b109.5）
+            han = [j for j in (jp_to_trad(n) for n in names if HAN_ONLY.match(n) and HAN_CHAR.search(n) and not JUNK.search(n)
+                               and len(n) <= 16 and any(ch in JP_ONLY for ch in n)) if j and _chinese_ok(j)]
         if not variant:  # 「甘雨(原神)」這種帶括號的往後排，先用「甘雨」
             han = [n for n in han if not re.search(r"[（(]", n)] + [n for n in han if re.search(r"[（(]", n)]
         return to_trad(han[0]) if han else None
@@ -124,6 +132,45 @@ def _pick(other_names: tuple, lang: str, variant: bool) -> str | None:
                     and not JUNK.search(n) and not re.fullmatch(r"[・･·\s\-－—]+", n):
                 return n
     return None
+
+
+@lru_cache(maxsize=1)
+def _franchise() -> dict:
+    """作品官方中文名（app/data/franchise_zh.json，b109.6）：FGO 台服／國服、寶可夢人物（52poke）。tag → {tw, cn}。"""
+    from pathlib import Path
+    return _read_json(Path(__file__).parent / "data" / "franchise_zh.json").get("names", {})
+
+
+def franchise_zh(name: str, cn: bool = False) -> str | None:
+    hit = _franchise().get(name or "")
+    if not hit:
+        return None
+    return (hit.get("cn") or to_simp(hit.get("tw") or "")) if cn else (hit.get("tw") or to_trad(hit.get("cn") or ""))
+
+
+@lru_cache(maxsize=1)
+def _jp_map() -> dict:
+    """日本新字體 → 繁體字形（OpenCC 的 JPVariants 反過來：暁 → 曉、桜 → 櫻、竜 → 龍）。"""
+    try:
+        import opencc
+        from pathlib import Path
+        out = {}
+        for line in (Path(opencc.__file__).parent / "dictionary" / "JPVariants.txt").read_text("utf-8").splitlines():
+            if "\t" in line:
+                t, j = line.split("\t", 1)
+                for ch in j.split():
+                    if len(ch) == 1 and len(t) == 1:
+                        out.setdefault(ch, t)
+        return out
+    except Exception:  # noqa  沒裝 opencc：不換
+        return {}
+
+
+def jp_to_trad(n: str) -> str | None:
+    """日文漢字名 → 中文字形；換完還有日文才有的字（字典沒收）就回傳 None。"""
+    m = _jp_map()
+    out = "".join(m.get(ch, ch) for ch in n)
+    return None if any(ch in JP_ONLY for ch in out) else out
 
 
 @lru_cache(maxsize=1)
@@ -248,19 +295,43 @@ def save_local(items: dict[str, str | None]) -> int:
     return len(items)
 
 
+# 變身後的名字（cure_peace、sailor_mercury）：中文資料常只有本名 → 顯示「Cure Peace（黃瀨彌生）」，本名、變身名都看得到（b110.7）
+TRANSFORM = re.compile(r"^(cure_[a-z]+(_[a-z]+)?|dark_precure|(super_|eternal_)?sailor_(moon|chibi_moon|mercury|mars|jupiter|venus|"
+                       r"saturn|uranus|neptune|pluto|star_[a-z]+))$")
+
+
 def display(name: str, other_names: list[str] | None, manual: str | None, lang: str, use_curated: bool = True,
-            cn: bool | None = None) -> str:
+            cn: bool | None = None, series: bool = False) -> str:
+    """顯示名稱（_display_core）＋兩個補充：變身名附本名；不同作品同名（紫苑、梅、背包）時後面加作品名（dupnames）。"""
+    d = _display_core(name, other_names, manual, lang, use_curated, cn, series)
+    if lang != "zh" or manual or series:
+        return d
+    if TRANSFORM.match(name or "") and HAN_CHAR.search(d) and not re.search(r"[A-Za-z]", d):
+        d = f"{pretty_raw(name)}（{d}）"
+    try:
+        from . import dupnames
+        d = dupnames.suffix(name, d, mode() == "cn" if cn is None else cn)
+    except Exception:  # noqa  還沒算好
+        pass
+    return d
+
+
+def _display_core(name: str, other_names: list[str] | None, manual: str | None, lang: str, use_curated: bool = True,
+                  cn: bool | None = None, series: bool = False) -> str:
     """你取的名字 > 校對過的譯名表 > 寶可夢官方譯名 > Bangumi／Wikidata（或造型＝本體＋造型）> Danbooru 中文別名 > 英文。
     中文模式沒有中文名時用英文、不用日文（使用者要求：日文看不懂，英文至少念得出來）。
     簡體模式（zh_mode＝cn）：同樣的順序，換成大陸譯名（_display_cn）。"""
     if lang == "zh" and (mode() == "cn" if cn is None else cn):
-        return _display_cn(name, other_names, manual, use_curated)
+        return _display_cn(name, other_names, manual, use_curated, series)
     if manual:
         return manual
     if lang == "zh":
         cu = curated(name) if use_curated else None
         if cu:
             return cu
+        fz = franchise_zh(name)          # 官方譯名（FGO 台服、寶可夢人物）
+        if fz:
+            return fz
         pk = pokemon_zh(name or "", other_names)
         if pk:
             return pk
@@ -269,7 +340,7 @@ def display(name: str, other_names: list[str] | None, manual: str | None, lang: 
             return au
     if lang in ("zh", "ja"):
         variant = bool(VARIANT.match(name or ""))
-        p = pick(other_names or [], lang, variant)
+        p = pick(other_names or [], lang, variant, char=not series)
         if p:
             return p
     return pretty_raw(name) if lang != "raw" else name
@@ -283,7 +354,8 @@ def _bgm_cn(name: str) -> str | None:
         return None
 
 
-def _display_cn(name: str, other_names: list[str] | None, manual: str | None, use_curated: bool = True) -> str:
+def _display_cn(name: str, other_names: list[str] | None, manual: str | None, use_curated: bool = True,
+                series: bool = False) -> str:
     """簡體模式的角色名：你取的名字（轉簡體字）> 校對過的譯名（Bangumi 原文跟它一樣就用原文，不然轉簡體字）
     > 寶可夢官方簡中譯名 > Bangumi 原文（大陸譯名）> Danbooru 中文別名 > 英文。"""
     if manual:
@@ -292,12 +364,15 @@ def _display_cn(name: str, other_names: list[str] | None, manual: str | None, us
     cu = curated(name) if use_curated else None
     if cu:
         return bgm if bgm and to_trad(bgm) == cu else to_simp(cu)
+    fz = franchise_zh(name, cn=True)     # 官方譯名（FGO 國服、寶可夢人物）
+    if fz:
+        return fz
     pk = pokemon_zh(name or "", other_names, cn=True)
     if pk:
         return pk
     if bgm:
         return bgm
-    p = pick(other_names or [], "zh", bool(VARIANT.match(name or "")))
+    p = pick(other_names or [], "zh", bool(VARIANT.match(name or "")), char=not series)
     return to_simp(p) if p else pretty_raw(name)
 
 
@@ -343,7 +418,7 @@ def series_display(key: str, other_names: list[str] | None, manual: str | None, 
         zh = _series_zh().get(key) or auto
         if zh:
             return zh
-    return display(key, other_names, None, lang, use_curated, cn=False)
+    return display(key, other_names, None, lang, use_curated, cn=False, series=True)
 
 
 @lru_cache(maxsize=1)
@@ -382,7 +457,7 @@ def _series_cn(key: str, other_names: list[str] | None, manual: str | None, use_
         return _wiki_cn(key)
     if tw:
         return to_simp(tw)
-    return _display_cn(key, other_names, None, use_curated)
+    return _display_cn(key, other_names, None, use_curated, series=True)
 
 
 def _base(k: str) -> str:
@@ -408,7 +483,22 @@ def _parent_candidates(keys: frozenset) -> tuple:
     return tuple(out)
 
 
-def series_parent(key: str, keys: set[str]) -> str | None:
+def independent() -> frozenset:
+    """設定成「獨立顯示」的子作品（作品頁開關；預設：明日方舟：終末地）。"""
+    from . import db
+    s = db._settings_cache if db._settings_cache is not None else db.get_settings()
+    return frozenset(s.get("series_independent") or ())
+
+
+def series_parent(key: str, keys: set[str], ignore_independent: bool = False) -> str | None:
+    """（b110）設定成獨立顯示的子作品（終末地）不併入母系列：自己一個作品頁、自己的角色、series: 也只搜自己。
+    ignore_independent：問「本來屬於哪個系列」（作品頁的「相關」連結用）。"""
+    if not ignore_independent and key in independent():
+        return None
+    return _series_parent(key, keys)
+
+
+def _series_parent(key: str, keys: set[str]) -> str | None:
     """同一個系列的子作品 → 母系列（只併到你圖庫裡本來就有的母系列）。保守：
     母系列必須是 xxx_(series) 或上面列出的大系列，子作品要以母系列名開頭（fate/grand_order → fate_(series)、
     bang_dream!_it's_mygo!!!!! → bang_dream!、honkai:_star_rail → honkai_(series)）；
