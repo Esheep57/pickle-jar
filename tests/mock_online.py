@@ -210,6 +210,8 @@ def media_file(key: str):
 def pixiv_pages(pid: int):
     if pid == 55556666:
         return {"error": False, "body": [{"urls": {"original": BASE + f"/img/{pid}_p0.png"}}]}
+    if pid == 55558888:     # 四頁的漫畫（b110.16 存成本子）
+        return {"error": False, "body": [{"urls": {"original": BASE + f"/img/{pid}_p{i}.png"}} for i in range(4)]}
     if pid == 55557777:     # 三頁的作品（新式檔名有雜湊）：測只存其中幾頁
         return {"error": False, "body": [{"urls": {"original": BASE + f"/img/{pid}-{'ab' * 16}_p{i}.png"}} for i in range(3)]}
     return {"error": True, "body": []}
@@ -292,6 +294,9 @@ def pixiv(pid: int):
                 "createDate": "2024-05-01T00:00:00+09:00", "tags": {"tags": [{"tag": "暁山瑞希", "translation": {"en": "Akiyama Mizuki"}}, {"tag": "プロセカ"}]}}}
     if pid == 55556666:
         return {"error": False, "body": {"illustTitle": "t2", "userId": "2", "userName": "マップさん", "xRestrict": 0, "tags": {"tags": [{"tag": "オリジナル"}]}}}
+    if pid == 55558888:
+        return {"error": False, "body": {"illustTitle": "漫画テスト", "userId": "2", "userName": "マップさん", "xRestrict": 0, "illustType": 1,
+                                         "createDate": "2026-10-01T00:00:00+09:00", "tags": {"tags": [{"tag": "オリジナル"}]}}}
     if pid == 55557777:
         return {"error": False, "body": {"illustTitle": "t3", "userId": "2", "userName": "マップさん", "xRestrict": 0, "tags": {"tags": [{"tag": "オリジナル"}]}}}
     if pid == 11223344:

@@ -66,7 +66,9 @@ def groups() -> list[dict]:
                 dual.append(name)
             else:       # 自己的貼文沒有子作品（提豐：終末地的貼文都是堤豐帶上的）——資料卡的主要作品可能還記成子作品
                 other.append(name)
-        out.append({"child": ck, "parent": pk, "natives": nat, "duals": dual, "others": other})
+        # 子作品自己的子標籤（邊緣行者 → 第一季、第二季）沒有另外獨立的：也算子作品的證據（只標了「邊緣行者 2」的圖）
+        csubs = [k for k in allcp if k != ck and k not in ind and names.series_parent(k, {ck}) == ck]
+        out.append({"child": ck, "parent": pk, "natives": nat, "duals": dual, "others": other, "subs": csubs})
     return out
 
 
@@ -99,10 +101,11 @@ def groups_cached() -> list[dict]:
 def child_evidence_sql(g: dict) -> tuple[str, list]:
     """「這張圖算子作品」的 SQL（m.id IN …）。"""
     nat = g["natives"] or ["\0"]
-    ph = ",".join("?" * len(nat))
+    own = [g["child"], *(g.get("subs") or [])]
+    ph, po = ",".join("?" * len(nat)), ",".join("?" * len(own))
     return (f"""m.id IN (SELECT x.media_id FROM media_tags x JOIN tags t ON t.id=x.tag_id
                WHERE x.state=1 AND ((t.category='character' AND t.name IN ({ph}))
-                                    OR (t.name=? AND COALESCE(x.source, '') != 'implied')))""", [*nat, g["child"]])
+                                    OR (t.name IN ({po}) AND COALESCE(x.source, '') != 'implied')))""", [*nat, *own])
 
 
 def parent_only_char_sql(g: dict, subs: list[str]) -> tuple[str, list]:

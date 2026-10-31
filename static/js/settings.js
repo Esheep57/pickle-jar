@@ -67,6 +67,7 @@ export async function openSettings(section, asPage) {
       <div class="snote" style="margin-top:8px">這些帳號資料只存在你電腦的 data/library.db，匯出時不會帶出去。</div>`,
     import: `
       ${txt("import_dir", "匯入的圖存到", "空白＝第一個圖庫資料夾\\匯入", "底下自動分 x、pixiv、danbooru…；不在圖庫資料夾裡會自動加進去。")}
+      ${sel("pixiv_album", "Pixiv 多頁作品", [["manga", "漫畫存成本子（預設）"], ["multi", "多頁都存成本子"], ["off", "不存成本子"]], "存成本子：照頁序整理成一本、整本標上作者，跟同人本一樣不自動認角色、不搜源、不出現在圖庫主畫面。「漫畫」是 Pixiv 上作者標成漫畫的作品。瀏覽器腳本選頁時也可以單獨按「整篇存成本子」。")}
       ${num("gdl_max_posts", "整個帳號只抓最新幾篇", 10, "gallery-dl 匯入（Bluesky、DeviantArt…）貼的是整個帳號、標籤、收藏的網址時。0＝全部。再匯入同一個帳號只會抓新的。", "篇")}
       ${row("瀏覽器按鈕", `<button class="btn sm" id="s-import">安裝／說明…</button>`, "Tampermonkey 腳本：在 X、Pixiv、Danbooru、e621、Rule34 上直接按「⤓ 存到圖庫」。")}`,
     display: `

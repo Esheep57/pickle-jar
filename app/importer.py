@@ -140,7 +140,8 @@ def _items_pixiv(p: dict) -> tuple[list[dict], dict]:
     if not items:
         raise ImportError_("Pixiv 沒有回傳原圖網址（可能需要登入）")
     return items, {"author": info.get("user"), "user_id": info.get("user_id"), "nsfw": info.get("x_restrict", 0) > 0,
-                   "title": info.get("title"), "ai": info.get("ai"), "post_files": len(body)}
+                   "title": info.get("title"), "ai": info.get("ai"), "post_files": len(body), "illust_type": info.get("illust_type", 0),
+                   "date": info.get("date")}
 
 
 def _items_danbooru(p: dict) -> tuple[list[dict], dict]:
@@ -257,8 +258,61 @@ def _download1(url: str, dst: Path, headers: dict | None = None, site: str = "",
                 pass
 
 
-def import_url(url: str, pages: list[int] | None = None, ext: dict | None = None) -> dict:
-    """匯入一篇貼文。pages：Pixiv 只存其中幾頁（0 起算）。回傳 {site, post_url, saved:[路徑], existing:[media id], ...}。"""
+def want_album(site: str, meta: dict, n: int, album: bool | None = None) -> bool:
+    """Pixiv 多頁作品要不要存成本子（b110.16）：這次指定的（瀏覽器腳本「存成本子」）> 設定（預設：Pixiv 標成漫畫的）。"""
+    if site != "pixiv" or n < 2:
+        return False
+    if album is not None:
+        return bool(album)
+    rule = db.get_settings().get("pixiv_album", "manga")
+    return rule == "multi" or (rule == "manga" and meta.get("illust_type") == 1)
+
+
+def pixiv_album(url: str, meta: dict) -> int | None:
+    """Pixiv 多頁作品 → 一本（b110.16）。這篇的頁都標記完才建（還有沒處理完的就等下一批）；已經有就補頁。
+    頁序照 _p0、_p1…；整本的標籤：Pixiv 作者（Danbooru 登記的畫師，沒有就用 Pixiv 暱稱建立）。"""
+    from . import albums
+    c = db.conn()
+    if c.execute("SELECT 1 FROM import_meta WHERE post_url=? AND applied=0", (url,)).fetchone():
+        return None
+    ids = {r[0]: r[1] for r in c.execute("""SELECT m.id, m.path FROM import_meta i JOIN media m ON m.path=i.path
+            WHERE i.post_url=? AND m.status NOT IN ('trashed','missing')""", (url,))}
+    for mid in meta.get("album_existing") or []:
+        r = c.execute("SELECT path FROM media WHERE id=? AND status NOT IN ('trashed','missing')", (mid,)).fetchone()
+        if r:
+            ids[mid] = r[0]
+    if len(ids) < 2 and not c.execute("SELECT 1 FROM albums WHERE source_url=?", (url,)).fetchone():
+        return None
+    page = lambda p: int(m.group(1)) if (m := re.search(r"_p(\d+)\.\w+$", os.path.basename(p))) else 0
+    ordered = [mid for mid, _ in sorted(ids.items(), key=lambda kv: (page(kv[1]), kv[1]))]
+    a = c.execute("SELECT id FROM albums WHERE source_url=?", (url,)).fetchone()
+    if a:
+        albums.add_items(a[0], ordered)
+        albums.reorder(a[0], [r[0] for r in c.execute("SELECT media_id FROM album_items WHERE album_id=?", (a[0],))
+                              if r[0] not in ordered] + ordered)
+        return a[0]
+    tags = []
+    try:
+        from .pixiv import resolve_pixiv_artist
+        artist = resolve_pixiv_artist(meta.get("user_id"), meta.get("author"))
+        if artist:
+            tags.append({"name": artist, "category": "artist"})
+    except Exception as e:  # noqa
+        log.info("Pixiv 本子的作者標籤失敗 %s：%s", url, e)
+    title = meta.get("title") or url.rsplit("/", 1)[-1]
+    note = "Pixiv" + (f"：{meta['author']}" if meta.get("author") else "") + (f"（{meta['date']}）" if meta.get("date") else "")
+    aid = albums.create(title, ordered, "comic" if meta.get("illust_type") == 1 else "artbook", tags, source_url=url,
+                        note=note, keep_order=True)
+    first = c.execute("SELECT path FROM media WHERE id=?", (ordered[0],)).fetchone()[0]
+    with db.write_lock:
+        c.execute("UPDATE albums SET folder=? WHERE id=?", (os.path.dirname(first), aid))
+        c.commit()
+    return aid
+
+
+def import_url(url: str, pages: list[int] | None = None, ext: dict | None = None, album: bool | None = None) -> dict:
+    """匯入一篇貼文。pages：Pixiv 只存其中幾頁（0 起算）。album：Pixiv 多頁存成本子（None＝照設定）。
+    回傳 {site, post_url, saved:[路徑], existing:[media id], ...}。"""
     _ensure()
     p = parse(url)
     if not p:
@@ -280,6 +334,8 @@ def import_url(url: str, pages: list[int] | None = None, ext: dict | None = None
             raise ImportError_("只有 Pixiv 能選頁")
         p["pages"] = sorted({int(x) for x in pages if 0 <= int(x) < 1000})
     items, meta = ITEMS[p["site"]](p)
+    if want_album(p["site"], meta, len(items), album):
+        meta["album"] = True
     base = dest_dir(p["site"])
     # 一篇有好幾個檔案（Pixiv 多頁、X 多張）：收在這篇自己的小資料夾
     d = base / post_folder(p, meta) if (meta.get("post_files") or len(items)) > 1 else base
@@ -310,10 +366,17 @@ def import_url(url: str, pages: list[int] | None = None, ext: dict | None = None
         saved.append(str(dst))
     if existing:            # 本來就在圖庫的圖：馬上補上貼文作者（不用等標記，它們早就標記完了）
         after_processed()
+    if meta.get("album"):       # 本來就在圖庫的頁也進這本（等新的頁標記完一起整理；都是舊的就馬上建）
+        meta["album_existing"] = [x for x in existing if isinstance(x, int)]
     if saved:
         _record(saved, p, meta)
+    elif meta.get("album") and meta["album_existing"]:
+        try:
+            pixiv_album(p["url"], meta)
+        except Exception as e:  # noqa
+            log.warning("Pixiv 存成本子失敗 %s：%s", p["url"], e)
     return {"site": p["site"], "post_url": p["url"], "saved": saved, "existing": existing,
-            "author": meta.get("handle") or meta.get("author"), "count": len(items)}
+            "author": meta.get("handle") or meta.get("author"), "count": len(items), "album": bool(meta.get("album"))}
 
 
 def _record(saved: list[str], p: dict, meta: dict):
@@ -408,6 +471,7 @@ def _apply_rows_locked(rows, candidates, online):
     # 在鎖裡面才查：以前在鎖外查，兩個執行緒會拿到同一批、各做一次（重複搜源、重複查 e621）
     if True:
         search = []
+        pixiv_albums: dict[str, dict] = {}
         for path, site, data, mid in rows:
             meta = json.loads(data or "{}")
             try:
@@ -424,7 +488,9 @@ def _apply_rows_locked(rows, candidates, online):
                     from . import r34
                     if r34.configured():
                         r34.check_one(mid)
-                if site in ("x", "pixiv", "danbooru") or (site or "").startswith("gdl:"):
+                if site == "pixiv" and meta.get("album"):      # 存成本子的 Pixiv 多頁作品：跟同人本一樣不搜源
+                    pixiv_albums[c.execute("SELECT post_url FROM import_meta WHERE path=?", (path,)).fetchone()[0]] = meta
+                elif site in ("x", "pixiv", "danbooru") or (site or "").startswith("gdl:"):
                     search.append(mid)
                 if (site or "").startswith("gdl:"):     # 網站帳號 → Danbooru 登記的畫師
                     from . import gdl
@@ -444,6 +510,11 @@ def _apply_rows_locked(rows, candidates, online):
                             db.conn().commit()
             except Exception as e:  # noqa
                 log.warning("匯入後處理失敗 %s：%s", path, e)
+        for url, meta in pixiv_albums.items():   # Pixiv 多頁作品存成本子
+            try:
+                pixiv_album(url, meta)
+            except Exception as e:  # noqa
+                log.warning("Pixiv 存成本子失敗 %s：%s", url, e)
         gal = {json.loads(data or "{}").get("gallery") for path, site, data, mid in rows if site in ("ehentai", "nhentai")}
         if gal - {None}:            # 整本匯入：全部頁標記完 → 建立作品集、整本的標籤
             from . import galleries

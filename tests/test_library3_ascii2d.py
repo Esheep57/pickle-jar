@@ -89,7 +89,7 @@ def test_ascii2d_flow(client):
 
 def test_userscript_has_ascii2d_mode(client):
     js = client.get("/api/fetch-url/userscript.user.js").text
-    assert "@match        https://ascii2d.net/*" in js and "@version      3.2" in js
+    assert "@match        https://ascii2d.net/*" in js and "@version      3.3" in js
     assert "/api/ascii2d/ext/next" in js and "@updateURL" in js and "__UPDATE__" not in js
 
 
@@ -287,7 +287,7 @@ def test_ascii2d_auto_accept_setting(client):
             db.conn().execute("UPDATE ascii2d SET result=? WHERE media_id=?", (_j.dumps(res), mid))
         assert ascii2d.result(mid).get("auto") != "accept", "比對不上：不自動確認"
         js = client.get("/api/fetch-url/userscript.user.js").text
-        assert "@version      3.2" in js and 'r.auto === "accept"' in js
+        assert "@version      3.3" in js and 'r.auto === "accept"' in js
     finally:
         client.post("/api/settings", json={"ascii2d_auto_accept": "off"})
         with db.write_lock:
@@ -377,7 +377,7 @@ def test_ascii2d_old_script_nag(client):
     try:
         h = {"X-Import-Key": import_key()}
         assert "舊版 1.9" in client.get(f"/api/ascii2d/ext/result/{mid}", headers={**h, "X-Script-Version": "1.9"}).json()["error"]
-        assert "error" not in client.get(f"/api/ascii2d/ext/result/{mid}", headers={**h, "X-Script-Version": "3.2"}).json()
+        assert "error" not in client.get(f"/api/ascii2d/ext/result/{mid}", headers={**h, "X-Script-Version": "3.3"}).json()
     finally:
         with db.write_lock:
             db.conn().execute("DELETE FROM ascii2d WHERE media_id=?", (mid,))

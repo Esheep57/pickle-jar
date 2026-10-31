@@ -88,6 +88,7 @@ DEFAULT_SETTINGS = {
     "gdl_enabled": True,              # 其他網站交給 gallery-dl（b84）
     "gdl_max_posts": 0,               # 貼的是整個帳號／標籤／收藏時只抓最新幾篇（0＝全部）
     "gdl_user_agent": "",             # gallery-dl 的 User-Agent；空白＝gallery-dl 自己的
+    "pixiv_album": "manga",          # Pixiv 多頁作品存成本子：manga＝Pixiv 標成漫畫的／multi＝所有多頁作品／off＝不要
     "import_dir": "",                 # 從網站匯入的圖存到哪（空白＝第一個圖庫資料夾\匯入）；會自動加進圖庫資料夾
     "import_key": "",                 # 瀏覽器「存到圖庫」按鈕的配對金鑰（第一次用時自動產生）
     "r34_user_id": "",                # 選填：Rule34 帳號的 user ID + API key（原檔比對用）

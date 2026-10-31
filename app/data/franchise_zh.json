@@ -1,5 +1,5 @@
 {
-"_source": "FGO：Atlas Academy（台服＝繁中官方、國服＝簡中官方，用從者編號對日服／美服的名字）；寶可夢人物：神奇寶貝百科 52poke（用日文名核對）。scripts/build_franchise_zh.py 產生；英文名沒有導向頁的（新角色）：52poke 站內搜尋，內文的日文名、英文名都對上才收（scripts/build_franchise_zh_search.py）；遊戲王：ygocdb（Master Duel 簡中官方名）；NIKKE：國服譯名；英雄聯盟：Data Dragon zh_TW／zh_CN；碧藍航線、原神：官方簡中；鬥陣特攻：台灣官網＋國服官網（ow.blizzard.cn）；角色表補名（b110.5）：聖火降魔錄＝FEH 台灣官方繁中、碧藍航線＝AzurLaneData 台服／國服、明日方舟＝ArknightsGameData 國服、少女前線／NIKKE＝deepghs game_characters；b110.6 校正：賽馬娘＝GameTora 台服官方名＋BWIKI 國服名；碧藍幻想＝Relink 繁中官網；自動查到的名字跟官方資料不一樣的改用官方（蔚藍檔案改台服譯名）",
+"_source": "FGO：Atlas Academy（台服＝繁中官方、國服＝簡中官方，用從者編號對日服／美服的名字）；寶可夢人物：神奇寶貝百科 52poke（用日文名核對）。scripts/build_franchise_zh.py 產生；英文名沒有導向頁的（新角色）：52poke 站內搜尋，內文的日文名、英文名都對上才收（scripts/build_franchise_zh_search.py）；遊戲王：ygocdb（Master Duel 簡中官方名）；NIKKE：國服譯名；英雄聯盟：Data Dragon zh_TW／zh_CN；碧藍航線、原神：官方簡中；鬥陣特攻：台灣官網＋國服官網（ow.blizzard.cn）；角色表補名（b110.5）：聖火降魔錄＝FEH 台灣官方繁中、碧藍航線＝AzurLaneData 台服／國服、明日方舟＝ArknightsGameData 國服、少女前線／NIKKE＝deepghs game_characters；b110.6 校正：賽馬娘＝GameTora 台服官方名＋BWIKI 國服名；碧藍幻想＝Relink 繁中官網；自動查到的名字跟官方資料不一樣的改用官方（蔚藍檔案改台服譯名）；闇影詩章＝Shadowverse: Worlds Beyond 官網卡表（繁中／簡中）、舊版 shadowverse-portal（繁中）；闇影詩章主戰者＝Worlds Beyond 官網角色頁",
 "_format": "tag → {tw 台灣官方譯名, cn 大陸官方譯名, src}",
 "names": {
 "aaron_(pokemon)": {
@@ -10091,6 +10091,381 @@
 "tw": "由良",
 "cn": "由良",
 "src": "azurlanedata"
+},
+"arisa_(shadowverse)": {
+"tw": "亞里莎",
+"cn": "亚里莎",
+"src": "shadowverse-portal"
+},
+"filene_(shadowverse)": {
+"tw": "菲琳",
+"cn": "菲琳",
+"src": "shadowverse-wb"
+},
+"luna_(shadowverse)": {
+"tw": "露娜",
+"cn": "露娜",
+"src": "shadowverse-portal"
+},
+"eudie_(shadowverse)": {
+"tw": "歐絲",
+"cn": "欧丝",
+"src": "shadowverse-wb:character"
+},
+"isabelle_(shadowverse)": {
+"tw": "伊莎貝爾",
+"cn": "伊莎贝尔",
+"src": "shadowverse-portal"
+},
+"erika_(shadowverse)": {
+"tw": "艾莉卡",
+"cn": "艾莉卡",
+"src": "shadowverse-portal"
+},
+"sephie_(shadowverse)": {
+"tw": "瑟霏",
+"cn": "赛菲",
+"src": "shadowverse-wb"
+},
+"sekka_(shadowverse)": {
+"tw": "雪華",
+"cn": "雪华",
+"src": "shadowverse-portal"
+},
+"lishenna_(shadowverse)": {
+"tw": "里榭娜",
+"cn": "莉洁纳",
+"src": "shadowverse-wb"
+},
+"ralmia_(shadowverse)": {
+"tw": "洛菈米亞",
+"cn": "洛拉米亚",
+"src": "shadowverse-wb"
+},
+"leah_(shadowverse)": {
+"tw": "莉亞",
+"cn": "莉亚",
+"src": "shadowverse-wb"
+},
+"lilanthim_(shadowverse)": {
+"tw": "菈菈安瑟姆",
+"cn": "拉拉安瑟姆",
+"src": "shadowverse-wb"
+},
+"kandima_(shadowverse)": {
+"tw": "坎蒂瑪",
+"cn": "康蒂玛",
+"src": "shadowverse-wb"
+},
+"lumiore_(shadowverse)": {
+"tw": "璐米歐兒",
+"cn": "璐米欧儿",
+"src": "shadowverse-portal"
+},
+"gildaria_(shadowverse)": {
+"tw": "吉露塔利亞",
+"cn": "吉尔达利娅",
+"src": "shadowverse-wb"
+},
+"ladica_(shadowverse)": {
+"tw": "拉緹卡",
+"cn": "拉缇卡",
+"src": "shadowverse-portal"
+},
+"velharia_(shadowverse)": {
+"tw": "薇赫里雅",
+"cn": "蓓哈丽雅",
+"src": "shadowverse-wb"
+},
+"resplendent_phoenix_(shadowverse)": {
+"tw": "萬花鳳凰",
+"cn": "万花凤凰",
+"src": "shadowverse-portal"
+},
+"argente_(shadowverse)": {
+"tw": "雅爾貞特",
+"cn": "雅尔贞特",
+"src": "shadowverse-portal"
+},
+"barbaros_(shadowverse)": {
+"tw": "芭芭蘿絲",
+"cn": "巴巴洛丝",
+"src": "shadowverse-wb"
+},
+"lorena_(shadowverse)": {
+"tw": "蘿蕾娜",
+"cn": "萝蕾娜",
+"src": "shadowverse-portal"
+},
+"galmieux_(shadowverse)": {
+"tw": "嘉魯蜜兒",
+"cn": "嘉尔缪",
+"src": "shadowverse-wb"
+},
+"eris_(shadowverse)": {
+"tw": "伊莉絲",
+"cn": "伊莉丝",
+"src": "shadowverse-portal"
+},
+"ginsetsu_(shadowverse)": {
+"tw": "吟雪",
+"cn": "吟雪",
+"src": "shadowverse-portal"
+},
+"mono_(shadowverse)": {
+"tw": "莫諾",
+"cn": "莫诺",
+"src": "shadowverse-portal"
+},
+"phylene_(shadowverse)": {
+"tw": "霏凜",
+"cn": "菲绫",
+"src": "shadowverse-wb"
+},
+"tidal_gunner_(shadowverse)": {
+"tw": "海潮砲手",
+"cn": "海潮砲手",
+"src": "shadowverse-portal"
+},
+"fairy_(shadowverse)": {
+"tw": "妖精",
+"cn": "妖精",
+"src": "shadowverse-wb"
+},
+"iceschillendrig_(shadowverse)": {
+"tw": "艾希連德凜克",
+"cn": "艾希连德凛克",
+"src": "shadowverse-portal"
+},
+"imari_(shadowverse)": {
+"tw": "伊萬里",
+"cn": "伊鞠",
+"src": "shadowverse-wb"
+},
+"edelweiss_(shadowverse)": {
+"tw": "愛蒂倫瓦思",
+"cn": "艾德薇诗",
+"src": "shadowverse-wb"
+},
+"aether_(shadowverse)": {
+"tw": "埃忒耳",
+"cn": "埃忒耳",
+"src": "shadowverse-wb"
+},
+"adahime_(shadowverse)": {
+"tw": "徒姬",
+"cn": "徒姬",
+"src": "shadowverse-wb"
+},
+"deep-sea_scout_(shadowverse)": {
+"tw": "大洋斥候",
+"cn": "大洋斥候",
+"src": "shadowverse-portal"
+},
+"aria_(shadowverse)": {
+"tw": "阿麗雅",
+"cn": "阿丽雅",
+"src": "shadowverse-wb"
+},
+"alice_(shadowverse)": {
+"tw": "愛麗絲",
+"cn": "爱丽丝",
+"src": "shadowverse-portal"
+},
+"raz_(shadowverse)": {
+"tw": "萊姿",
+"cn": "拉兹",
+"src": "shadowverse-wb"
+},
+"magachiyo_(shadowverse)": {
+"tw": "瑪伽綺耶",
+"cn": "曲千代",
+"src": "shadowverse-wb"
+},
+"almaelys_(shadowverse)": {
+"tw": "愛梅莉婕",
+"cn": "阿尔梅莉洁",
+"src": "shadowverse-wb"
+},
+"gilnelise_(shadowverse)": {
+"tw": "吉魯涅莉婕",
+"cn": "吉尔内莉莎",
+"src": "shadowverse-wb"
+},
+"camiscilla_(shadowverse)": {
+"tw": "卡宓辛菈",
+"cn": "卡密希拉",
+"src": "shadowverse-wb"
+},
+"lulumi_(shadowverse)": {
+"tw": "露露米",
+"cn": "露露米",
+"src": "shadowverse-wb"
+},
+"eleanor_(shadowverse)": {
+"tw": "愛蓮娜",
+"cn": "爱莲娜",
+"src": "shadowverse-portal"
+},
+"wilbert_(shadowverse)": {
+"tw": "維爾伯特",
+"cn": "维尔伯特",
+"src": "shadowverse-wb"
+},
+"rowen_(shadowverse)": {
+"tw": "羅文",
+"cn": "罗文",
+"src": "shadowverse-portal"
+},
+"castelle_(shadowverse)": {
+"tw": "卡詩黛兒",
+"cn": "卡诗黛儿",
+"src": "shadowverse-portal"
+},
+"aenea_(shadowverse)": {
+"tw": "安鎳兒",
+"cn": "安镍儿",
+"src": "shadowverse-portal"
+},
+"buller_(shadowverse)": {
+"tw": "布菈",
+"cn": "布菈",
+"src": "shadowverse-portal"
+},
+"urias_(shadowverse)": {
+"tw": "尤里亞斯",
+"cn": "尤里亚斯",
+"src": "shadowverse-portal"
+},
+"kuon_(shadowverse)": {
+"tw": "久苑",
+"cn": "久苑",
+"src": "shadowverse-wb"
+},
+"aiela_(shadowverse)": {
+"tw": "艾拉",
+"cn": "艾拉",
+"src": "shadowverse-portal"
+},
+"tetra_(shadowverse)": {
+"tw": "坦忒菈",
+"cn": "坦忒菈",
+"src": "shadowverse-portal"
+},
+"gremory_(shadowverse)": {
+"tw": "格莫瑞",
+"cn": "格莫瑞",
+"src": "shadowverse-wb"
+},
+"piercye_(shadowverse)": {
+"tw": "皮雅希",
+"cn": "皮雅希",
+"src": "shadowverse-portal"
+},
+"liza_(shadowverse)": {
+"tw": "莉莎",
+"cn": "莉莎",
+"src": "shadowverse-portal"
+},
+"valdain_(shadowverse)": {
+"tw": "拜迪",
+"cn": "拜迪",
+"src": "shadowverse-portal"
+},
+"amaryllis_(shadowverse)": {
+"tw": "阿瑪麗麗絲",
+"cn": "阿玛丽丽丝",
+"src": "shadowverse-portal"
+},
+"beast_dominator_(shadowverse)": {
+"tw": "魔獸支配者",
+"cn": "魔兽支配者",
+"src": "shadowverse-portal"
+},
+"wingy_(shadowverse_flame)": {
+"tw": "玟奇",
+"cn": "玟奇",
+"src": "shadowverse-portal"
+},
+"rola_(shadowverse)": {
+"tw": "洛樂",
+"cn": "洛乐",
+"src": "shadowverse-portal"
+},
+"orthrus_(shadowverse)": {
+"tw": "歐特魯斯",
+"cn": "欧特鲁斯",
+"src": "shadowverse-wb"
+},
+"queen_vampire_(shadowverse)": {
+"tw": "吸血鬼女王",
+"cn": "吸血鬼女王",
+"src": "shadowverse-portal"
+},
+"little_miss_bonemancer_(shadowverse)": {
+"tw": "役骨少女",
+"cn": "白骨少女",
+"src": "shadowverse-wb"
+},
+"miriam_(shadowverse)": {
+"tw": "米莉亞姆",
+"cn": "米莉亚姆",
+"src": "shadowverse-wb"
+},
+"mistolina_(shadowverse)": {
+"tw": "米絲特莉娜",
+"cn": "米丝特莉娜",
+"src": "shadowverse-portal"
+},
+"motherly_forestdweller": {
+"tw": "慈育的森林住民",
+"cn": "慈育的森民",
+"src": "shadowverse-wb"
+},
+"sham-nacha_(shadowverse)": {
+"tw": "夏姆‧娜可亞",
+"cn": "莎木·纳克雅",
+"src": "shadowverse-wb"
+},
+"dreizehn_(shadowverse)": {
+"tw": "黛芮采",
+"cn": "德莱茨茵",
+"src": "shadowverse-wb:character"
+},
+"esperanza_(shadowverse)": {
+"tw": "葉斯佩蘭紗",
+"cn": "埃斯佩兰莎",
+"src": "shadowverse-wb:character"
+},
+"marie_malisse_(shadowverse)": {
+"tw": "瑪莉亞‧瑪利斯",
+"cn": "玛莉亚·玛丽丝",
+"src": "shadowverse-wb:character"
+},
+"lovesign_(shadowverse)": {
+"tw": "拉卜桑",
+"cn": "拉卜赛因",
+"src": "shadowverse-wb:character"
+},
+"galan_(shadowverse)": {
+"tw": "伽藍",
+"cn": "伽蓝",
+"src": "shadowverse-wb:character"
+},
+"diawl_(shadowverse)": {
+"tw": "狄奧羅亞雷",
+"cn": "迪亚洛杰莱",
+"src": "shadowverse-wb:character"
+},
+"yuihara_kaori": {
+"tw": "歪原火織",
+"cn": "歪原火织",
+"src": "shadowverse-wb:character"
+},
+"yuihara_kaori_(shadowverse)": {
+"tw": "歪原火織",
+"cn": "歪原火织",
+"src": "shadowverse-wb:character"
 }
 }
 }

@@ -1,0 +1,41 @@
+# 版本發布：推上版本標籤（v1.4 這種）時自動建立 GitHub Release，內文用 docs/CHANGELOG.md 裡那一版的段落。
+# 手動執行（Actions › 發布 › Run workflow）：替所有還沒有 Release 的版本標籤補建（舊版本用）。
+name: 發布
+
+on:
+  push:
+    tags: ["v*"]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          ref: main            # 變更紀錄一律讀最新的（舊版本的標籤上還沒有這個流程）
+          fetch-depth: 0
+      - name: 建立 Release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          if [ "$GITHUB_EVENT_NAME" = "push" ]; then tags="$GITHUB_REF_NAME"; else tags="$(git tag -l 'v*' --sort=version:refname)"; fi
+          for tag in $tags; do
+            if gh release view "$tag" >/dev/null 2>&1; then echo "$tag 已經有 Release"; continue; fi
+            ver="${tag#v}"
+            awk -v v="$ver" '
+              /^## / { if (found) exit; if (index($0, "## " v "（") == 1 || $0 == "## " v) { found = 1; next } }
+              found { print }
+            ' docs/CHANGELOG.md > notes.md
+            if [ ! -s notes.md ]; then echo "變更紀錄裡沒有 $ver 這一版" > notes.md; fi
+            base="https://github.com/$GITHUB_REPOSITORY/blob/$tag"
+            # 變更紀錄裡的相對連結（../README.md、USER_GUIDE.md）在 Release 頁上會壞：換成這一版的完整網址
+            sed -i "s#](\.\./README.md#]($base/README.md#g; s#](\([A-Z_]*\.md\)#]($base/docs/\1#g" notes.md
+            printf '\n---\n完整變更紀錄：%s/docs/CHANGELOG.md　安裝方式：%s/README.md#安裝與啟動\n' "$base" "$base" >> notes.md
+            latest=""; [ "$tag" = "$(git tag -l 'v*' --sort=version:refname | tail -1)" ] || latest="--latest=false"
+            gh release create "$tag" --title "Pickle Jar $ver" --notes-file notes.md --verify-tag $latest
+            echo "建立了 $tag"
+          done

@@ -19,7 +19,11 @@
 
 </div>
 
-> **English summary** — Pickle Jar is a local-first organizer for anime-style illustration libraries (thousands to tens of thousands of images on your own disk). It tags images on your machine with WD Tagger v3 / PixAI Tagger (ONNX, GPU optional), finds sources on Danbooru, Pixiv and others, and suggests characters, artists and series — but nothing counts until you confirm it. FastAPI + SQLite backend, vanilla ES-module frontend, Windows-first (macOS/Linux work). The UI and docs are in Traditional Chinese. Licensed under GPL-3.0.
+> **English** — Pickle Jar is a local-first organizer for anime-style illustration libraries (thousands to tens of thousands of images on your own disk). It tags images on your machine with WD Tagger v3 / PixAI Tagger (ONNX, GPU optional), finds sources on Danbooru, Pixiv and others, and suggests characters, artists and series — but nothing counts until you confirm it. The UI and docs are in Traditional Chinese (a Simplified Chinese mode is built in). Licensed under GPL-3.0.
+>
+> **Highlights**: confirm-first review queue (batch / focus / grid modes) · source finding by MD5, pixel fingerprint, Pixiv/X IDs, IQDB and semi-automatic ascii2d · character shelf, series pages, artist cards, albums for doujinshi and Pixiv manga · official Chinese character names for major games · import from X, Pixiv, Danbooru, e621, Rule34, E-Hentai, nhentai and any site [gallery-dl](https://github.com/mikf/gallery-dl) supports · keyboard-first, Ctrl+K command palette · read-only phone view on your LAN.
+>
+> **Quick start**: Python 3.12 → download or `git clone` this repo → run `start.bat` (Windows) or `./start.sh` (macOS / Linux) → open http://127.0.0.1:7860 and add your image folders. The first run downloads the tagger model (~1.2 GB). FastAPI + SQLite backend, vanilla ES-module frontend; Windows-first, macOS and Linux supported. Bug reports and questions in English are welcome.
 
 Pickle Jar 管理的是存在你自己硬碟裡的幾千到幾萬張圖：手機從 X 存下來的同人圖、Pixiv 收藏、Danbooru 原圖、同人本、梗圖、截圖、照片和影片。它用 [WD Tagger v3](https://huggingface.co/SmilingWolf/wd-eva02-large-tagger-v3) 和 PixAI Tagger v1.0 在本機自動打標籤、認角色，再到 Danbooru、Pixiv 等網站找出處，把角色、創作者、作品整理出來。
 
@@ -102,7 +106,8 @@ Pickle Jar 管理的是存在你自己硬碟裡的幾千到幾萬張圖：手機
 - **重複**：只算「看起來一模一樣」的圖和局部截圖，改了表情或對話的差分不算
 - **標籤蘊含**：「A 也代表 B」（造型 ⇒ 本體、表情包 ⇒ 梗圖）：確認 A 自動帶上 B；Danbooru 的規則自動抓，自己也能訂、能關
 - **換成高清版**：出處有同一張、而且比較大的版本時提醒你；換之前逐像素確認是同一張
-- **中文名**：角色、作品的台灣譯名來自 Bangumi、Wikidata、維基百科，沒有中文時顯示英文
+- **中文名**：遊戲角色優先用官方譯名（FGO、寶可夢、聖火降魔錄、碧藍航線、蔚藍檔案、賽馬娘、明日方舟、少女前線、NIKKE、原神、星穹鐵道、絕區零、遊戲王、碧藍幻想、闇影詩章、英雄聯盟、鬥陣特攻…，台灣／大陸各自的官方名），其他來自 Bangumi、Wikidata、維基百科；沒有中文時顯示英文。不同作品同名的角色名字後面加作品名（紫苑（碧藍幻想））；變身名附本名（Cure Peace（黃瀨彌生））
+- **子作品分開顯示**：Danbooru 上被歸成子標籤的作品（明日方舟：終末地、電馭叛客的遊戲和動畫各季）可以各自一個作品頁；角色照 Danbooru 上的比例判斷屬於哪邊，兩邊都有的兩邊都列
 - **操作紀錄**：每個改資料的操作都記一筆、一直留著（撤銷只留最後 100 筆），看得到每天做了什麼、最常做的動作、用鍵盤還是滑鼠，可以下載 CSV
 
 ### 瀏覽
@@ -110,8 +115,10 @@ Pickle Jar 管理的是存在你自己硬碟裡的幾千到幾萬張圖：手機
 - **搜尋語法**：`hatsune_miku -tag:梗圖 date:2024 w:>=1920 chars:>=2 is:multi series:blue_archive`，中日英文名、簡繁體都查得到
 - **角色書架、作品頁、創作者拼貼卡**、本子書封、智慧相簿（存起來的搜尋）、指令面板（Ctrl+K）
 - **NSFW**：隱藏／模糊／顯示三段切換，隱藏時連側欄數字、封面都不會出現
-- **從網站匯入**：油猴腳本在 X、Pixiv（可以只選其中幾頁）、Danbooru、e621、Rule34 的貼文上加一顆按鈕，下載原圖並記下出處和作者；E-Hentai、nhentai 整本匯入並自動建立本子；其他網站（Bluesky、DeviantArt、Gelbooru…）交給 [gallery-dl](https://github.com/mikf/gallery-dl)
+- **從網站匯入**：油猴腳本在 X、Pixiv（可以只選其中幾頁）、Danbooru、e621、Rule34 的貼文上加一顆按鈕，下載原圖並記下出處和作者；Pixiv 的多頁漫畫自動存成本子；E-Hentai、nhentai 整本匯入並自動建立本子；其他網站（Bluesky、DeviantArt、Gelbooru…）交給 [gallery-dl](https://github.com/mikf/gallery-dl)
 - **匯出訓練集**：選的圖複製到資料夾，每張旁邊一個 `.txt` 標註（你確認過的角色、作品、創作者＋描述標籤），給 LoRA 訓練用
+- **Danbooru 角色表**：下載 Danbooru 上的角色清單（約 10 萬個），加標籤時也挑得到圖庫裡還沒有的角色；中文名照作品熱度在背景查
+- **繁體／简体**：設定裡一鍵切換简体模式——不只簡繁轉換，介面用大陸用語、角色和作品用大陸譯名
 - **手機／平板**：同一個 Wi-Fi 下輸入 PIN，可以看圖庫（只能看，滑動換張、兩指縮放）和上傳
 
 ---
@@ -339,6 +346,8 @@ GitHub Actions 每次 push 都會跑全部測試（`.github/workflows/tests.yml`
 | [變更紀錄](docs/CHANGELOG.md) | 使用者 | 各版本有什麼改變 |
 | [開發文件](docs/DEVELOPMENT.md) | 開發者 | 模組、資料表、處理流程、安全、測試、經驗教訓 |
 | [設計系統](DESIGN.md) | 改介面的人 | 顏色、字型、元件規則 |
+| [參與開發](CONTRIBUTING.md) | 想回報問題、送 PR 的人 | 怎麼回報、怎麼跑測試、程式和 commit 的寫法 |
+| [安全性](SECURITY.md) | 發現安全問題的人 | 怎麼私下回報、哪些算安全問題 |
 
 ---
 
@@ -359,6 +368,7 @@ GitHub Actions 每次 push 都會跑全部測試（`.github/workflows/tests.yml`
 - [Danbooru](https://danbooru.donmai.us/)、[IQDB](https://iqdb.org/)、[e621](https://e621.net/)、[Rule34](https://rule34.xxx/)、[Pixiv](https://www.pixiv.net/)、[ascii2d](https://ascii2d.net/)、[E-Hentai](https://e-hentai.org/)：出處與標籤資料
 - [FxTwitter](https://github.com/FixTweet/FxTwitter)、[Bangumi](https://bgm.tv/)、[Wikidata](https://www.wikidata.org/)、[gallery-dl](https://github.com/mikf/gallery-dl)（nhentai 的做法參考）
 - [Xenova/clip-vit-base-patch32](https://huggingface.co/Xenova/clip-vit-base-patch32)（CLIP，媒材判斷）、[RapidOCR](https://github.com/RapidAI/RapidOCR)（簽名辨識）、[OpenCC](https://github.com/BYVoid/OpenCC)（簡繁轉換）、[Noto Sans／Serif TC](https://fonts.google.com/noto)（字型，OFL）
+- 官方中文譯名的資料：[Atlas Academy](https://atlasacademy.io/)（FGO）、[神奇寶貝百科](https://wiki.52poke.com/)、[feh-assets-json](https://github.com/HertzDevil/feh-assets-json)、[AzurLaneData](https://github.com/AzurLaneTools/AzurLaneData)、[ArknightsGameData](https://github.com/Kengxxiao/ArknightsGameData)、[SchaleDB](https://schaledb.com/)、[GameTora](https://gametora.com/)、[EnkaNetwork API-docs](https://github.com/EnkaNetwork/API-docs)、[StarRailRes](https://github.com/Mar-7th/StarRailRes)、[deepghs/game_characters](https://huggingface.co/datasets/deepghs/game_characters)、[百鴿 ygocdb](https://ygocdb.com/)、[Data Dragon](https://developer.riotgames.com/docs/lol#data-dragon)、各遊戲官網（闇影詩章、碧藍幻想 Relink、鬥陣特攻）、[萌娘百科](https://zh.moegirl.org.cn/)、[BWIKI](https://wiki.biligame.com/)
 - [uv](https://github.com/astral-sh/uv)、[FastAPI](https://fastapi.tiangolo.com/)、[ONNX Runtime](https://onnxruntime.ai/)
 
 模型不包含在這個 repo 裡：第一次使用時從 Hugging Face 下載，各模型的授權請見它們各自的頁面。

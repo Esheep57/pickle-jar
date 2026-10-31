@@ -368,7 +368,45 @@ def test_pixiv_import_pick_pages(client):
         client.post("/api/settings", json={"online_enabled": False})
         wait_idle(client)
     js = client.get("/api/fetch-url/userscript.user.js").text
-    assert "@version      3.2" in js and "pickPages(" in js and "存這張" in js
+    assert "@version      3.3" in js and "pickPages(" in js and "存這張" in js and "整篇存成本子" in js
+
+
+def test_pixiv_manga_import_as_album(client):
+    """b110.16：Pixiv 標成漫畫的多頁作品（預設）匯入後整理成一本：照頁序、整本標上作者；插畫多頁照舊（除非指定 album）。"""
+    import os
+    from tests.conftest import wait_idle
+    from app import db
+    client.post("/api/settings", json={"online_enabled": True})
+    try:
+        r = client.post("/api/fetch-url", json={"url": "https://www.pixiv.net/artworks/55558888"}).json()
+        assert r["ok"] and r["album"] and len(r["saved"]) == 4, r
+        wait_idle(client)
+        import time as _t
+        c = db.conn()
+        for _ in range(100):            # 標記完、匯入後處理（背景）才建
+            a = c.execute("SELECT id, title, kind FROM albums WHERE source_url='https://www.pixiv.net/artworks/55558888'").fetchone()
+            if a and c.execute("SELECT COUNT(*) FROM album_items WHERE album_id=?", (a["id"],)).fetchone()[0] == 4:
+                break
+            _t.sleep(0.2)
+        assert a and a["title"] == "漫画テスト" and a["kind"] == "comic", a
+        pages = [os.path.basename(r[0]) for r in c.execute("""SELECT m.path FROM album_items i JOIN media m ON m.id=i.media_id
+                                                              WHERE i.album_id=? ORDER BY i.pos""", (a["id"],))]
+        assert pages == [f"55558888_p{i}.png" for i in range(4)], pages
+        # 插畫的多頁（55557777，illustType 0）：預設不建；明確指定 album 才建
+        r = client.post("/api/fetch-url", json={"url": "https://www.pixiv.net/artworks/55557777", "album": True}).json()
+        assert r["ok"] and r["album"], r
+        wait_idle(client)
+        for _ in range(100):
+            if c.execute("SELECT 1 FROM albums WHERE source_url='https://www.pixiv.net/artworks/55557777'").fetchone():
+                break
+            _t.sleep(0.2)
+        assert c.execute("SELECT 1 FROM albums WHERE source_url='https://www.pixiv.net/artworks/55557777'").fetchone()
+    finally:
+        client.post("/api/settings", json={"online_enabled": False})
+        wait_idle(client)
+        from app import albums       # 後面的測試挑「最新的圖」：本子裡的圖是隔絕的，拿掉
+        for (aid,) in db.conn().execute("SELECT id FROM albums WHERE source_url LIKE 'https://www.pixiv.net/artworks/5555%'").fetchall():
+            albums.delete(aid)
 
 
 def test_merge_artist_two_identities(client):

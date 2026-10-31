@@ -16,11 +16,12 @@ class ImportReq(BaseModel):
     url: str
     pages: list[int] | None = None      # Pixiv：只存這幾頁（0 起算）
     nhentai: dict | None = None         # nhentai：腳本在網頁上解析好的 {info, pages:[網址]}（只接受 i*.nhentai.net/galleries/…）
+    album: bool | None = None           # Pixiv 多頁：存成本子（None＝照設定 pixiv_album）
 
 
-def _run(url: str, pages: list[int] | None = None, ext: dict | None = None) -> dict:
+def _run(url: str, pages: list[int] | None = None, ext: dict | None = None, album: bool | None = None) -> dict:
     try:
-        return {"ok": True, **importer.import_url(url, pages, ext)}
+        return {"ok": True, **importer.import_url(url, pages, ext, album)}
     except importer.ImportError_ as e:
         return {"ok": False, "error": str(e), "url": url}
     except Exception as e:  # noqa
@@ -30,7 +31,7 @@ def _run(url: str, pages: list[int] | None = None, ext: dict | None = None) -> d
 @router.post("/api/fetch-url")
 def import_one(body: ImportReq):
     """app 裡貼上的網址（一次一個，畫面上逐一顯示進度）。"""
-    return _run(body.url, body.pages)
+    return _run(body.url, body.pages, album=body.album)
 
 
 @router.get("/api/fetch-url/parse")
@@ -44,7 +45,7 @@ def import_ext(body: ImportReq, x_import_key: str | None = Header(default=None))
     """瀏覽器按鈕用：要帶配對金鑰（server.py 的跨站檢查只對這個網址、而且金鑰正確時放行）。"""
     if not importer.check_key(x_import_key):
         raise HTTPException(403, "配對金鑰不正確：請到 設定 › 從網站匯入 重新安裝腳本")
-    return _run(body.url, body.pages, body.nhentai)
+    return _run(body.url, body.pages, body.nhentai, body.album)
 
 
 @router.get("/api/fetch-url/galleries")
@@ -103,7 +104,7 @@ def import_key_reset():
 USERSCRIPT = r"""// ==UserScript==
 // @name         Pickle Jar：存到圖庫
 // @namespace    pickle-jar-local
-// @version      3.2
+// @version      3.3
 // @description  在 X、Pixiv、Danbooru、e621、Rule34、E-Hentai、nhentai 的貼文或縮圖上按一下，原圖和資料直接存進本機的 Pickle Jar；ascii2d 半自動找出處
 // @match        https://x.com/*
 // @match        https://twitter.com/*
@@ -156,7 +157,7 @@ USERSCRIPT = r"""// ==UserScript==
         } else if (r.status === 200 && d.ok) {
           if (pages) pages.forEach(n => saved.add(keyOf(url) + ":p" + n)); else saved.add(keyOf(url));
           if (done) done();
-          toast(d.saved.length ? `已存到圖庫 ${d.saved.length} ${"張"}` + (d.existing.length ? `（${d.existing.length} 張本來就有）` : "") : "圖庫裡已經有了", true);
+          toast(d.saved.length ? `已存到圖庫 ${d.saved.length} ${"張"}` + (d.existing.length ? `（${d.existing.length} 張本來就有）` : "") + (d.album ? "，標記完會整理成一本" : "") : "圖庫裡已經有了", true);
         } else toast("存檔失敗：" + (d.error || d.detail || ("HTTP " + r.status)), false);
       },
       onerror: () => { reset(); toast("連不到 Pickle Jar（程式有開著嗎？）", false); },
@@ -227,8 +228,8 @@ USERSCRIPT = r"""// ==UserScript==
     });
     const foot = document.createElement("div");
     foot.style.cssText = "display:flex;gap:10px;justify-content:flex-end;flex-wrap:wrap";
-    const bCancel = mk("取消", "#444"), bWhole = mk(`整篇存（${pages.length} 張）`, "#555"), bGo = mk("", "#3a7d44");
-    foot.append(bCancel, bWhole, bGo);
+    const bCancel = mk("取消", "#444"), bWhole = mk(`整篇存（${pages.length} 張）`, "#555"), bBook = mk("整篇存成本子", "#5a4a8a"), bGo = mk("", "#3a7d44");
+    foot.append(bCancel, bWhole, bBook, bGo);
     panel.append(head, grid, foot); box.appendChild(panel);
     const paint = () => {
       cells.forEach((c, i) => { c.style.outlineColor = sel.has(i) ? "#5cc26a" : "transparent"; c.style.opacity = sel.size && !sel.has(i) ? ".55" : "1"; });
@@ -246,6 +247,7 @@ USERSCRIPT = r"""// ==UserScript==
     bNone.onclick = () => { sel.clear(); paint(); };
     bCancel.onclick = close;
     bWhole.onclick = () => { close(); send(url, btn, done); };
+    bBook.onclick = () => { close(); send(url, btn, done, null, { album: true }); };    // 3.3：整篇存成一本（照頁序，整本的標籤是作者）
     bGo.onclick = () => { if (!sel.size) return; const ps = [...sel].sort((a, b) => a - b); close(); send(url, btn, done, ps); };
     paint();
     document.documentElement.appendChild(box);
@@ -271,7 +273,7 @@ USERSCRIPT = r"""// ==UserScript==
       const bad = e => { if (!doneFlag) { doneFlag = true; clearTimeout(t); bad0(e); } };
       const t = setTimeout(() => bad(netErr("圖庫沒有回應（逾時）")), window.__a2dReqTimeout || 100000);
       GM_xmlhttpRequest({
-      method, url: BASE + path, headers: body ? { "X-Import-Key": KEY, "X-Script-Version": "3.2", "Content-Type": "application/json" } : { "X-Import-Key": KEY, "X-Script-Version": "3.2" },
+      method, url: BASE + path, headers: body ? { "X-Import-Key": KEY, "X-Script-Version": "3.3", "Content-Type": "application/json" } : { "X-Import-Key": KEY, "X-Script-Version": "3.3" },
       data: body ? JSON.stringify(body) : undefined, responseType: type || "text", timeout: 90000,
       onload: r => {
         if (r.status >= 400) { let d = {}; try { d = JSON.parse(r.responseText); } catch (e) {} return bad(new Error(d.detail || ("HTTP " + r.status))); }
@@ -598,7 +600,7 @@ USERSCRIPT = r"""// ==UserScript==
   if (IS_X) {
     const BASE = API.replace(/\/api\/.*$/, "");
     const gx = (path, body) => new Promise((ok, bad) => GM_xmlhttpRequest({
-      method: "POST", url: BASE + path, headers: { "X-Import-Key": KEY, "X-Script-Version": "3.2", "Content-Type": "application/json" },
+      method: "POST", url: BASE + path, headers: { "X-Import-Key": KEY, "X-Script-Version": "3.3", "Content-Type": "application/json" },
       data: JSON.stringify(body || {}), timeout: 60000,
       onload: r => { let d = {}; try { d = JSON.parse(r.responseText || "{}"); } catch (e) {} r.status >= 400 ? bad(new Error(d.detail || ("HTTP " + r.status))) : ok(d); },
       onerror: () => bad(new Error("連不到 Pickle Jar（程式有開著嗎？）")), ontimeout: () => bad(new Error("逾時")),

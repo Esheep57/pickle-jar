@@ -63,6 +63,7 @@ def fetch_pixiv(pid: int) -> dict:
         "id": pid, "title": b.get("illustTitle") or b.get("title"), "user": b.get("userName"), "user_id": b.get("userId"),
         "x_restrict": int(b.get("xRestrict") or 0), "ai": int(b.get("aiType") or 0) == 2,
         "date": (b.get("createDate") or "")[:10],
+        "illust_type": int(b.get("illustType") or 0),       # 0 插畫、1 漫畫、2 動圖
         "tags": [{"tag": t.get("tag"), "en": (t.get("translation") or {}).get("en")} for t in (b.get("tags") or {}).get("tags", [])],
         "url": f"https://www.pixiv.net/artworks/{pid}",
     }

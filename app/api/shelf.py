@@ -48,11 +48,13 @@ def series_detail(key: str, nsfw: str = "hide", noalbum: bool = False):
                                                         ti["display_name"] if ti else None, lang, wikiname.cached([key]).get(key))
     if g is None and ti is not None:
         nf = (f" AND {NSFW}=0" if nsfw == "hide" else "") + (ALB if noalbum else "")
-        tn, rc = c.execute(f"""SELECT COUNT(*), COALESCE(SUM(m.added_at >= ?), 0) FROM media_tags mt
-            JOIN media m ON m.id=mt.media_id WHERE mt.tag_id=? AND mt.state=1 AND m.status='done'{nf}""",
-                           (time.time() - d["days"] * 86400, ti["id"])).fetchone()
-        cov = [r[0] for r in c.execute(f"""SELECT m.id FROM media_tags mt JOIN media m ON m.id=mt.media_id
-            WHERE mt.tag_id=? AND mt.state=1 AND m.status='done'{nf} ORDER BY COALESCE(m.mtime, m.added_at) DESC LIMIT 3""", (ti["id"],))]
+        # 跟 series: 搜尋同一套規則（b110.13：母系列的子作品都獨立顯示時，母系列頁不能把子作品的圖算進來）
+        sq, sp = query._series_sql([key])
+        tn, rc = c.execute(f"""SELECT COUNT(*), COALESCE(SUM(m.added_at >= ?), 0) FROM media m
+            WHERE m.status='done' AND COALESCE(m.excluded,0)=0{nf} AND {sq}""",
+                           (time.time() - d["days"] * 86400, *sp)).fetchone()
+        cov = [r[0] for r in c.execute(f"""SELECT m.id FROM media m WHERE m.status='done' AND COALESCE(m.excluded,0)=0{nf}
+            AND {sq} ORDER BY COALESCE(m.mtime, m.added_at) DESC LIMIT 3""", sp)]
         if ti["cover"]:
             cov = [ti["cover"]] + [x for x in cov if x != ti["cover"]][:2]
         g = {"n": tn, "recent": rc, "covers": cov, "custom_cover": ti["cover"]}
