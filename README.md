@@ -115,7 +115,7 @@ Pickle Jar 管理的是存在你自己硬碟裡的幾千到幾萬張圖：手機
 - **搜尋語法**：`hatsune_miku -tag:梗圖 date:2024 w:>=1920 chars:>=2 is:multi series:blue_archive`，中日英文名、簡繁體都查得到
 - **角色書架、作品頁、創作者拼貼卡**、本子書封、智慧相簿（存起來的搜尋）、指令面板（Ctrl+K）
 - **NSFW**：隱藏／模糊／顯示三段切換，隱藏時連側欄數字、封面都不會出現
-- **從網站匯入**：油猴腳本在 X、Pixiv（可以只選其中幾頁）、Danbooru、e621、Rule34 的貼文上加一顆按鈕，下載原圖並記下出處和作者；Pixiv 的多頁漫畫自動存成本子；E-Hentai、nhentai 整本匯入並自動建立本子；其他網站（Bluesky、DeviantArt、Gelbooru…）交給 [gallery-dl](https://github.com/mikf/gallery-dl)
+- **從網站匯入**：油猴腳本在 X、Pixiv（可以只選其中幾頁）、Danbooru、e621、Rule34 的貼文上加一顆按鈕，下載原圖並記下出處和作者；Pixiv 的多頁作品可以一鍵存成本子；E-Hentai、nhentai 整本匯入並自動建立本子；其他網站（Bluesky、DeviantArt、Gelbooru…）交給 [gallery-dl](https://github.com/mikf/gallery-dl)
 - **匯出訓練集**：選的圖複製到資料夾，每張旁邊一個 `.txt` 標註（你確認過的角色、作品、創作者＋描述標籤），給 LoRA 訓練用
 - **Danbooru 角色表**：下載 Danbooru 上的角色清單（約 10 萬個），加標籤時也挑得到圖庫裡還沒有的角色；中文名照作品熱度在背景查
 - **繁體／简体**：設定裡一鍵切換简体模式——不只簡繁轉換，介面用大陸用語、角色和作品用大陸譯名

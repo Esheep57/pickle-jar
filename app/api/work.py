@@ -44,6 +44,19 @@ def pages_of(pid: int) -> list[dict]:
     return out
 
 
+@router.post("/api/pixiv-work/{mid}/album")
+def work_album(mid: int):
+    """整篇存成本子（b110.17）：大圖的按鈕。"""
+    from .. import importer
+    pid = _work_of(mid)
+    if not pid:
+        raise HTTPException(404, "這張不是 Pixiv 作品（或還不知道是哪一篇）")
+    try:
+        return {"ok": True, **importer.pixiv_work_album(pid)}
+    except importer.ImportError_ as e:
+        raise HTTPException(400, str(e))
+
+
 @router.get("/api/pixiv-work/{mid}")
 def work(mid: int):
     """這張圖所屬的 Pixiv 作品：每一頁、作品裡出現過的角色、每一格目前的狀態（1 是、-1 不是、0 候選、null 沒有）。"""

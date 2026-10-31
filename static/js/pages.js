@@ -896,7 +896,13 @@ export function importModal(prefill = "") {
         if (r.ok && r.queued) { $(".st", row).innerHTML = `<span class="okc">⤓ ${esc(IMPORT_SITES[r.site] || r.label || r.site)}</span>`;
           $(".u", row).textContent = r.kind === "gdl" ? `${r.label}：gallery-dl 下載中…` : `${r.title || ""}：背景下載 ${r.count} 頁…`; galleryWatch(m, row, r.post_url); continue; }
         if (r.ok) { saved += r.saved.length; $(".st", row).innerHTML = `<span class="okc">✓ ${IMPORT_SITES[r.site] || r.site}</span>`;
-          $(".u", row).textContent = `${r.saved.length ? `存了 ${r.saved.length} 張` : "圖庫裡已經有了"}${r.existing.length && r.saved.length ? `（${r.existing.length} 張本來就有）` : ""}${r.author ? ` · ${r.author}` : ""}`; }
+          $(".u", row).textContent = `${r.saved.length ? `存了 ${r.saved.length} 張` : "圖庫裡已經有了"}${r.existing.length && r.saved.length ? `（${r.existing.length} 張本來就有）` : ""}${r.author ? ` · ${r.author}` : ""}${r.album ? "，標記完會整理成一本" : ""}`;
+          if (r.site === "pixiv" && r.count > 1 && !r.album) {      // b110.17：多頁作品自己決定要不要存成本子
+            const b = document.createElement("a"); b.className = "lnk"; b.textContent = "存成本子"; b.style.marginLeft = "8px";
+            b.onclick = async () => { b.remove();
+              const a = await api("/api/fetch-url/pixiv-album", { url: r.post_url }).catch(e => ({ ok: false, error: e.message }));
+              $(".u", row).textContent += !a.ok ? `（存成本子失敗：${a.error}）` : a.pending ? "，標記完會整理成一本" : "，已存成本子"; };
+            row.appendChild(b); } }
         else { fail++; $(".st", row).innerHTML = `<span class="warnc">✕ 失敗</span>`; $(".u", row).textContent = r.error; }
       } catch (e) { fail++; $(".st", row).innerHTML = `<span class="warnc">✕ 失敗</span>`; $(".u", row).textContent = e.message; }
     }

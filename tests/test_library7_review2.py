@@ -372,37 +372,47 @@ def test_pixiv_import_pick_pages(client):
 
 
 def test_pixiv_manga_import_as_album(client):
-    """b110.16：Pixiv 標成漫畫的多頁作品（預設）匯入後整理成一本：照頁序、整本標上作者；插畫多頁照舊（除非指定 album）。"""
+    """b110.16／17：Pixiv 多頁作品自己決定要不要存成本子（預設不自動）：匯入結果按「存成本子」、腳本帶 album、
+    或設定改成自動（漫畫／多頁）。照頁序、整本標上作者。"""
     import os
+    import time as _t
     from tests.conftest import wait_idle
-    from app import db
-    client.post("/api/settings", json={"online_enabled": True})
-    try:
-        r = client.post("/api/fetch-url", json={"url": "https://www.pixiv.net/artworks/55558888"}).json()
-        assert r["ok"] and r["album"] and len(r["saved"]) == 4, r
-        wait_idle(client)
-        import time as _t
+    from app import db, importer
+
+    def album_of(url, n=None):
         c = db.conn()
         for _ in range(100):            # 標記完、匯入後處理（背景）才建
-            a = c.execute("SELECT id, title, kind FROM albums WHERE source_url='https://www.pixiv.net/artworks/55558888'").fetchone()
-            if a and c.execute("SELECT COUNT(*) FROM album_items WHERE album_id=?", (a["id"],)).fetchone()[0] == 4:
-                break
+            a = c.execute("SELECT id, title, kind FROM albums WHERE source_url=?", (url,)).fetchone()
+            if a and (n is None or c.execute("SELECT COUNT(*) FROM album_items WHERE album_id=?", (a["id"],)).fetchone()[0] == n):
+                return a
             _t.sleep(0.2)
+        return None
+
+    assert importer.want_album("pixiv", {"illust_type": 1}, 4) is False          # 預設不自動
+    client.post("/api/settings", json={"online_enabled": True})
+    try:
+        url = "https://www.pixiv.net/artworks/55558888"
+        r = client.post("/api/fetch-url", json={"url": url}).json()
+        assert r["ok"] and not r["album"] and len(r["saved"]) == 4, r
+        wait_idle(client)
+        assert not db.conn().execute("SELECT 1 FROM albums WHERE source_url=?", (url,)).fetchone()
+        a = client.post("/api/fetch-url/pixiv-album", json={"url": url}).json()       # 匯入結果上的「存成本子」
+        assert a["ok"], a
+        wait_idle(client)
+        a = album_of(url, 4)
         assert a and a["title"] == "漫画テスト" and a["kind"] == "comic", a
-        pages = [os.path.basename(r[0]) for r in c.execute("""SELECT m.path FROM album_items i JOIN media m ON m.id=i.media_id
-                                                              WHERE i.album_id=? ORDER BY i.pos""", (a["id"],))]
+        pages = [os.path.basename(r[0]) for r in db.conn().execute("""SELECT m.path FROM album_items i JOIN media m ON m.id=i.media_id
+                                                                       WHERE i.album_id=? ORDER BY i.pos""", (a["id"],))]
         assert pages == [f"55558888_p{i}.png" for i in range(4)], pages
-        # 插畫的多頁（55557777，illustType 0）：預設不建；明確指定 album 才建
+        # 腳本「整篇存成本子」（album: true）
         r = client.post("/api/fetch-url", json={"url": "https://www.pixiv.net/artworks/55557777", "album": True}).json()
         assert r["ok"] and r["album"], r
         wait_idle(client)
-        for _ in range(100):
-            if c.execute("SELECT 1 FROM albums WHERE source_url='https://www.pixiv.net/artworks/55557777'").fetchone():
-                break
-            _t.sleep(0.2)
-        assert c.execute("SELECT 1 FROM albums WHERE source_url='https://www.pixiv.net/artworks/55557777'").fetchone()
+        assert album_of("https://www.pixiv.net/artworks/55557777")
+        client.post("/api/settings", json={"pixiv_album": "manga"})
+        assert importer.want_album("pixiv", {"illust_type": 1}, 4) and not importer.want_album("pixiv", {"illust_type": 0}, 4)
     finally:
-        client.post("/api/settings", json={"online_enabled": False})
+        client.post("/api/settings", json={"online_enabled": False, "pixiv_album": "off"})
         wait_idle(client)
         from app import albums       # 後面的測試挑「最新的圖」：本子裡的圖是隔絕的，拿掉
         for (aid,) in db.conn().execute("SELECT id FROM albums WHERE source_url LIKE 'https://www.pixiv.net/artworks/5555%'").fetchall():

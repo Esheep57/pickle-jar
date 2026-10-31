@@ -264,8 +264,41 @@ def want_album(site: str, meta: dict, n: int, album: bool | None = None) -> bool
         return False
     if album is not None:
         return bool(album)
-    rule = db.get_settings().get("pixiv_album", "manga")
+    rule = db.get_settings().get("pixiv_album", "off")
     return rule == "multi" or (rule == "manga" and meta.get("illust_type") == 1)
+
+
+def pixiv_work_album(pid: int) -> dict:
+    """你按「整篇存成本子」（大圖、匯入結果）：這篇 Pixiv 作品在圖庫裡的頁整理成一本（b110.17）。
+    還有頁沒標記完：記下來，標記完自動建。回傳 {album_id} 或 {pending: True}。"""
+    from .api.work import pages_of
+    _ensure()
+    c = db.conn()
+    url = f"https://www.pixiv.net/artworks/{int(pid)}"
+    rows = c.execute("SELECT path, data, applied FROM import_meta WHERE post_url=?", (url,)).fetchall()
+    meta = next((json.loads(r[1] or "{}") for r in rows if r[1] and r[1] not in ("", "{}")), {})
+    if not meta.get("title"):
+        try:
+            from .pixiv import fetch_pixiv
+            info = fetch_pixiv(int(pid))
+            meta.update({k: v for k, v in {"title": info.get("title"), "author": info.get("user"), "user_id": info.get("user_id"),
+                                           "illust_type": info.get("illust_type"), "date": info.get("date")}.items() if v is not None})
+        except Exception as e:  # noqa  離線、作品刪了：用作品 ID 當書名，作者之後自己加
+            log.info("Pixiv 作品資料讀不到 %s：%s", pid, e)
+    meta["album"] = True
+    meta["album_existing"] = [p["id"] for p in pages_of(int(pid))]
+    if rows:        # 匯入紀錄記下「要存成本子」：還沒標記完的頁標完會自己整理進來
+        with db.write_lock:
+            for path, data, _ in rows:
+                d = json.loads(data or "{}")
+                d["album"] = True
+                c.execute("UPDATE import_meta SET data=? WHERE path=?", (json.dumps(d, ensure_ascii=False), path))
+            c.commit()
+    if any(r[2] == 0 for r in rows):
+        return {"pending": True}
+    if len(meta["album_existing"]) < 2:
+        raise ImportError_("圖庫裡這篇作品不到兩頁，不用存成本子")
+    return {"album_id": pixiv_album(url, meta)}
 
 
 def pixiv_album(url: str, meta: dict) -> int | None:

@@ -74,7 +74,7 @@ export async function openViewer(id) {
   const idbar = `<div class="idbar cap${noIdent ? " empty" : ""}" id="v-id">
     <div class="capline">${left}${cands ? `${left ? DOT : ""}<span class="candbox">${cands}</span>` : ""}${right ? `<span class="dash">—</span>${right}` : ""}${noIdent ? `<span class="capnone">還沒有身分</span>` : ""}
       <span class="capadd"><button class="addc" data-vadd="character" title="加角色（A）">＋角色</button><button class="addc" data-vadd="artist" title="加創作者（R）">＋創作者</button><button class="addc" data-vadd="copyright" title="加作品">＋作品</button><button class="addc" data-vadd="custom" title="編輯標籤（G）">＋標籤</button></span></div>
-    <div class="capsub">${byCat.cand.length ? `<span class="ckeys">第一個候選：<kbd>Enter</kbd> 是 <kbd>⌫</kbd> 不是${byCat.cand.length > 1 ? `　第 N 個：<kbd>Shift</kbd>+數字 是 <kbd>Alt</kbd>+數字 不是` : ""}${byCat.cand.length > 1 ? `　<button class="lnkb" id="v-allyes" title="這張的候選全部確認（多人圖一次標完）"><kbd>Shift</kbd>+<kbd>Enter</kbd> 全部是</button>` : ""}</span>` : ""}${qonList.length ? `<span class="capq" title="快速標籤（數字鍵加上／拿掉）">${qonList.map(esc).join("、")}</span>` : ""}${crowdRow(d)}${artistRow(d, byCat)}${d.pixiv_work?.pages >= 2 ? `<button class="lnkb vwork" id="v-work" title="Pixiv 的標籤是整篇共用的：多頁作品每一頁都會被標上全部角色。在這裡一頁一頁改">整篇貼文 ${d.pixiv_work.pages} 頁：逐頁標角色</button>` : ""}</div>
+    <div class="capsub">${byCat.cand.length ? `<span class="ckeys">第一個候選：<kbd>Enter</kbd> 是 <kbd>⌫</kbd> 不是${byCat.cand.length > 1 ? `　第 N 個：<kbd>Shift</kbd>+數字 是 <kbd>Alt</kbd>+數字 不是` : ""}${byCat.cand.length > 1 ? `　<button class="lnkb" id="v-allyes" title="這張的候選全部確認（多人圖一次標完）"><kbd>Shift</kbd>+<kbd>Enter</kbd> 全部是</button>` : ""}</span>` : ""}${qonList.length ? `<span class="capq" title="快速標籤（數字鍵加上／拿掉）">${qonList.map(esc).join("、")}</span>` : ""}${crowdRow(d)}${artistRow(d, byCat)}${d.pixiv_work?.pages >= 2 ? `<button class="lnkb vwork" id="v-work" title="Pixiv 的標籤是整篇共用的：多頁作品每一頁都會被標上全部角色。在這裡一頁一頁改">整篇貼文 ${d.pixiv_work.pages} 頁：逐頁標角色</button>${(d.albums || []).length ? "" : `<button class="lnkb vwork" id="v-work-album" title="這篇在圖庫裡的頁照頁序整理成一本、整本標上作者（本子裡的圖不自動認角色、不搜源）">整篇存成本子</button>`}` : ""}</div>
   </div>`;
   const qrow = (S.quick || []).length ? `<section class="vcard"><div class="dch"><b>快速標籤</b><span>按 1–${S.quick.length} 加上／拿掉</span></div><div class="qrow">${S.quick.map((q, i) => `<button class="qt ${qon.has(q.name) ? "on" : ""}" data-qt="${i}" title="按 ${i + 1} 加上／拿掉">${qon.has(q.name) ? "✓ " : ""}${esc(q.name)} <kbd>${i + 1}</kbd></button>`).join("")}</div></section>` : "";
   vw.classList.toggle("drawer", store.get("vDrawer", false));
@@ -246,6 +246,14 @@ export async function openViewer(id) {
   };
   const ay = $("#v-allyes", vw); if (ay) ay.onclick = () => vKey("allyes");
   const vwk = $("#v-work", vw); if (vwk) vwk.onclick = () => workModal(id, () => { markDirty(); if (V?.id === id) openViewer(id); });
+  const vwa = $("#v-work-album", vw); if (vwa) vwa.onclick = async () => {      // b110.17：自己決定要不要存成本子
+    vwa.disabled = true;
+    try {
+      const r = await api(`/api/pixiv-work/${id}/album`, {});
+      if (r.pending) toast("還有頁在標記：標完會自動整理成一本");
+      else { toast("已存成本子", { label: "打開", fn: () => { closeViewer(); go("album", r.album_id); } }); markDirty(); if (V?.id === id) openViewer(id); }
+    } catch (e) { toast(e.message); vwa.disabled = false; }
+  };
   $(".info", vw).addEventListener("click", chipClick);
   $("#v-id", vw).addEventListener("click", chipClick);
   $$("[data-vadd]", vw).forEach(b => b.onclick = () => pickTag({ title: `這張加上${catName(b.dataset.vadd)}…`, category: b.dataset.vadd, ids: [id] }, async t => {

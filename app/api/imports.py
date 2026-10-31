@@ -34,6 +34,22 @@ def import_one(body: ImportReq):
     return _run(body.url, body.pages, album=body.album)
 
 
+class AlbumReq(BaseModel):
+    url: str
+
+
+@router.post("/api/fetch-url/pixiv-album")
+def import_pixiv_album(body: AlbumReq):
+    """匯入結果上按「存成本子」（b110.17）：這篇 Pixiv 作品整理成一本（還沒標記完的頁，標完自動加進去）。"""
+    p = importer.parse(body.url)
+    if not p or p["site"] != "pixiv":
+        return {"ok": False, "error": "不是 Pixiv 作品網址"}
+    try:
+        return {"ok": True, **importer.pixiv_work_album(int(p["id"]))}
+    except importer.ImportError_ as e:
+        return {"ok": False, "error": str(e)}
+
+
 @router.get("/api/fetch-url/parse")
 def import_parse(url: str):
     p = importer.parse(url)
